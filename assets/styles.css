@@ -1,0 +1,123 @@
+:root {
+  --card-radius: 20px;
+  --default-radius: 15px;
+  --button-radius: calc(20px * 0.4);
+  --field-radius: calc(20px * 0.4);
+  --table-radius: calc(20px * 0.4);
+
+  --field-height: 40px;
+  --button-height: 40px;
+
+  --body-background: #f3f4f7;
+  --primary: #7b8be9;
+  --primary-light: #bfc7f4;
+  --secondary: #d3d3d3;
+  --success: #61b197;
+  --info: #118bef;
+  --warning: #ffc107;
+  --danger: #ff3f3f;
+  --light: #f0f2f5;
+  --dark: #32325d;
+  --primary-soft: #eeeffc;
+  --danger-soft: #ff3f3f1c;
+  --success-soft: #61b1971c;
+  --white-soft: #ffffff;
+
+  --default-transition: all ease-in 300ms;
+
+  --default-border: 1px solid #f3f4f7;
+  --container-padding: 2rem;
+  --default-font-size: 14px;
+  --small-font-size: 12px;
+}
+
+@media screen and (max-width: 998px) {
+  :root {
+    --container-padding: 10px;
+    --default-font-size: 12px;
+    --small-font-size: 10px;
+    --body-background: white;
+  }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--body-background);
+  color: var(--dark);
+  font-size: var(--default-font-size);
+}
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  max-height: 350px;
+}
+@media (min-width: 768px) {
+  .chart-container {
+    height: 320px;
+  }
+}
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.faq-question {
+  cursor: pointer;
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.faq-arrow {
+  transition: transform 0.3s ease;
+}
+.faq-question.open .faq-arrow {
+  transform: rotate(180deg);
+}
+.table-check {
+  color: var(--success);
+  font-weight: bold;
+}
+.table-cross {
+  color: var(--secondary);
+}
+.pos-tab.active {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--primary-soft);
+}
+.modal-enter {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+.modal-leave {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

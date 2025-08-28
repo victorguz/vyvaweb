@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vyva | El POS que Transforma tu Negocio con Suscripciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="assets/images/Vyva_favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body class="antialiased overflow-x-hidden">
+    <!-- Header / Navigation -->
+    <header
+      id="header"
+      class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm"
+    >
+      <nav
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="#" class="font-bold text-xl text-[var(--primary)]">
+          <img
+            src="assets/images/vyva_logo_black.svg"
+            alt="Vyva Logo"
+            class="h-7"
+          />
+        </a>
+        <div class="hidden md:flex space-x-6 items-center">
+          <div class="relative" id="features-dropdown-container">
+            <button
+              id="features-button"
+              class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors flex items-center"
+            >
+              Características
+              <span class="ml-1 text-xs">&#9662;</span>
+            </button>
+            <div
+              id="features-menu"
+              class="hidden absolute mt-2 w-48 bg-white rounded-[var(--default-radius)] shadow-xl z-20"
+            >
+              <a
+                href="#pos"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Punto de Venta</a
+              >
+              <a
+                href="#subscriptions"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Suscripciones</a
+              >
+            </div>
+          </div>
+          <a
+            href="#use-cases"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            >Casos de Uso</a
+          >
+          <a
+            href="#precios"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            >Precios</a
+          >
+          <a
+            href="#faq"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            >FAQ</a
+          >
+          <a
+            href="#final-cta"
+            class="bg-[var(--primary)] text-white px-4 py-2 rounded-[var(--button-radius)] hover:brightness-90 transition-all"
+            >Empezar Gratis</a
+          >
+        </div>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded-[var(--button-radius)] text-[var(--dark)]/80 hover:bg-[var(--light)]"
+        >
+          <span class="text-2xl">☰</span>
+        </button>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-6 py-4">
+          <a href="#">
+            <img
+              src="assets/images/vyva_logo_black.svg"
+              alt="Vyva Logo"
+              class="h-7"
+            />
+          </a>
+        </div>
+        <a
+          href="#pos"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Punto de Venta</a
+        >
+        <a
+          href="#subscriptions"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Suscripciones</a
+        >
+        <a
+          href="#use-cases"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Casos de Uso</a
+        >
+        <a
+          href="#precios"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Precios</a
+        >
+        <a
+          href="#faq"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >FAQ</a
+        >
+        <a
+          href="#final-cta"
+          class="block py-3 px-6 text-center bg-[var(--primary-soft)] text-[var(--primary)] font-semibold hover:bg-[var(--primary-light)]"
+          >Empezar Gratis</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- Section 1: Hero -->
+      <section
+        class="relative text-center py-24 sm:py-32 px-6 bg-white overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-[radial-gradient(40%_50%_at_50%_30%,#eeeffc_0%,#f8fafc_100%)] -z-10"
+        ></div>
+        <div class="container mx-auto">
+          <h1
+            class="text-4xl md:text-6xl font-extrabold text-[var(--dark)] tracking-tight"
+          >
+            Más que un Punto de Venta, <br class="hidden md:block" />
+            tu Motor de
+            <span class="text-[var(--primary)]">Crecimiento Recurrente.</span>
+          </h1>
+          <p class="mt-6 max-w-3xl mx-auto text-lg text-[var(--dark)]/80">
+            Vyva es el sistema POS que te da las herramientas para gestionar tu
+            día a día y la capacidad única de transformarlo en ingresos
+            predecibles con suscripciones.
+          </p>
+          <div class="mt-8 flex justify-center gap-4">
+            <a
+              href="#precios"
+              class="bg-[var(--primary)] text-white px-8 py-3 rounded-[var(--button-radius)] font-semibold text-lg hover:brightness-90 transition-transform hover:scale-105 shadow-lg"
+            >
+              Descubre los Planes
+            </a>
+          </div>
+          <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <a href="#pos" class="animate-bounce text-[var(--primary)] text-4xl"
+              >↓</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: POS First -->
+      <section id="pos" class="py-20 sm:py-24 px-6 bg-white">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <span class="text-[var(--primary)] font-semibold"
+              >TU CENTRO DE OPERACIONES</span
+            >
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Un Punto de Venta Robusto y Fácil de Usar
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Todo lo que necesitas para administrar tu negocio de manera
+              eficiente, centralizado en una sola plataforma intuitiva y
+              accesible desde cualquier dispositivo.
+            </p>
+          </div>
+          <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Gestión de Ventas
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Procesa ventas rápidamente, acepta múltiples métodos de pago y
+                mantén tu flujo de caja organizado.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Control de Inventario
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Lleva un registro preciso de tus productos, recibe alertas de
+                stock bajo y optimiza tus compras.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Base de Clientes
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Crea perfiles de clientes, analiza su historial de compras y
+                fortalece la relación con ellos.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Links de Pago
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Envía enlaces de pago directamente al correo de tus clientes
+                para facilitar las ventas a distancia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Why Subscriptions? -->
+      <section class="py-20 sm:py-24 px-6">
+        <div
+          class="container mx-auto grid md:grid-cols-2 gap-12 items-center animated-section"
+        >
+          <div class="text-center md:text-left">
+            <h2
+              class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              ¿Por qué un POS con Gestión de Suscripciones?
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Porque el mercado ha cambiado. Ya no basta con registrar una
+              venta; el éxito está en construir relaciones y asegurar ingresos a
+              futuro. Un modelo de suscripción es la forma más efectiva de
+              lograrlo.
+            </p>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Con Vyva, no solo gestionas tu presente, inviertes en un futuro
+              financiero estable y predecible.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-6">
+            <div
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg text-center"
+            >
+              <p class="text-4xl font-extrabold text-[var(--primary)]">5x</p>
+              <p class="mt-1 font-semibold text-[var(--dark)]/90">
+                Más caro adquirir un cliente nuevo que retener uno existente.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg text-center"
+            >
+              <p class="text-4xl font-extrabold text-[var(--primary)]">+40%</p>
+              <p class="mt-1 font-semibold text-[var(--dark)]/90">
+                Aumenta el Valor de Vida del Cliente (LTV) con modelos de
+                recurrencia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: The Subscription Feature -->
+      <section
+        id="subscriptions"
+        class="py-20 sm:py-24 px-6 bg-white overflow-hidden"
+      >
+        <div
+          class="container mx-auto grid md:grid-cols-2 gap-12 items-center animated-section"
+        >
+          <div class="relative">
+            <div
+              class="w-full max-w-xs mx-auto bg-black rounded-[40px] shadow-2xl p-2 border-8 border-black relative"
+            >
+              <div class="bg-white rounded-[32px] p-4 flex flex-col h-[550px]">
+                <div
+                  class="flex justify-between items-center mb-4 border-b pb-2"
+                >
+                  <h4 class="font-bold text-lg text-[var(--dark)]">
+                    Nuevo Pedido
+                  </h4>
+                  <span class="text-xs font-mono text-[var(--secondary)]"
+                    >#VYVA-001</span
+                  >
+                </div>
+                <div
+                  id="pos-cart-items"
+                  class="flex-grow space-y-3 overflow-y-auto pr-2"
+                >
+                  <p class="text-[var(--secondary)] text-center pt-16">
+                    El carrito está vacío...
+                  </p>
+                </div>
+                <div class="border-t pt-4 mt-4">
+                  <div class="flex justify-between font-bold text-xl">
+                    <span>Total:</span>
+                    <span id="pos-cart-total">$0</span>
+                  </div>
+                  <button
+                    id="pos-send-link"
+                    class="w-full bg-[var(--primary)] text-white p-3 rounded-[var(--button-radius)] mt-4 font-semibold hover:brightness-90 disabled:bg-[var(--primary-light)] disabled:animate-none animate-pulse"
+                  >
+                    Enviar Link de Pago
+                  </button>
+                </div>
+              </div>
+              <div
+                id="pos-modal"
+                class="absolute inset-2 bg-black bg-opacity-20 flex items-center justify-center rounded-[32px] hidden modal-enter"
+              >
+                <div
+                  class="bg-white p-6 rounded-[var(--default-radius)] shadow-xl text-center mx-4"
+                >
+                  <div class="text-5xl mb-4">✅</div>
+                  <p class="font-semibold text-[var(--dark)] text-lg">
+                    ¡Link de pago enviado!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center md:text-left">
+            <span class="text-[var(--primary)] font-semibold"
+              >LA VENTAJA VYVA</span
+            >
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Experimenta la Fluidez de Nuestro POS
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Observa cómo nuestro sistema simplifica una venta. Añade productos
+              y suscripciones al carrito, ajusta cantidades y envía el link de
+              pago con un solo clic. Todo en una interfaz limpia y rápida.
+            </p>
+            <p class="mt-2 text-[var(--dark)]/60 text-sm">
+              (La demostración se ejecuta automáticamente, pero puedes
+              interactuar con ella en cualquier momento).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Reminders -->
+      <section class="py-20 sm:py-24 px-6">
+        <div class="container mx-auto text-center max-w-4xl animated-section">
+          <h2
+            class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+          >
+            Comunicación Automática que Fideliza
+          </h2>
+          <p class="mt-4 text-lg text-[var(--dark)]/80">
+            Mantén a tus clientes informados en cada paso del proceso de pago
+            sin mover un dedo.
+          </p>
+          <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
+            <div
+              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+            >
+              <h4 class="font-bold text-xl text-[var(--dark)]">
+                Recordatorios de Pago
+              </h4>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Notifica a tus clientes antes de cada cobro para evitar
+                sorpresas y fallos.
+              </p>
+            </div>
+            <div
+              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+            >
+              <h4 class="font-bold text-xl text-[var(--dark)]">
+                Confirmaciones de Éxito
+              </h4>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Envía un recibo y agradecimiento automático después de cada pago
+                exitoso.
+              </p>
+            </div>
+            <div
+              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+            >
+              <h4 class="font-bold text-xl text-[var(--dark)]">
+                Alertas de Fallo
+              </h4>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Si un pago falla, el sistema notifica al cliente para que pueda
+                actualizar su método de pago.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Dashboard -->
+      <section id="dashboard" class="py-20 sm:py-24 px-6 bg-white">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Tu Negocio, en Tiempo Real
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Interactúa con nuestro dashboard de demostración para ver cómo
+              Vyva te da una visión clara y completa del rendimiento de tu
+              negocio.
+            </p>
+          </div>
+
+          <div
+            class="mt-16 bg-white p-6 sm:p-8 rounded-[var(--card-radius)] shadow-2xl border border-slate-200"
+          >
+            <div
+              class="flex flex-wrap justify-between items-center gap-4 mb-6 border-b pb-4"
+            >
+              <h3 class="text-xl font-bold text-[var(--dark)]">
+                Dashboard de Ventas
+              </h3>
+              <div id="chart-controls" class="flex gap-2" role="group">
+                <button
+                  data-period="30"
+                  class="chart-btn active bg-[var(--primary)] text-white px-4 py-2 rounded-[var(--button-radius)] font-semibold text-sm transition-colors"
+                >
+                  Últimos 30 días
+                </button>
+                <button
+                  data-period="90"
+                  class="chart-btn bg-white text-[var(--dark)]/90 px-4 py-2 rounded-[var(--button-radius)] font-semibold text-sm border hover:bg-[var(--light)] transition-colors"
+                >
+                  Últimos 90 días
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 text-center"
+            >
+              <div
+                class="bg-[var(--light)] p-4 rounded-[var(--default-radius)]"
+              >
+                <span class="text-sm text-[var(--dark)]/60 font-medium"
+                  >Ingresos Totales</span
+                >
+                <p
+                  id="total-revenue-kpi"
+                  class="text-2xl font-bold text-[var(--primary)]"
+                >
+                  $7,100,000
+                </p>
+              </div>
+              <div
+                class="bg-[var(--light)] p-4 rounded-[var(--default-radius)]"
+              >
+                <span class="text-sm text-[var(--dark)]/60 font-medium"
+                  >Nuevos Clientes</span
+                >
+                <p
+                  id="new-customers-kpi"
+                  class="text-2xl font-bold text-[var(--primary)]"
+                >
+                  42
+                </p>
+              </div>
+              <div
+                class="bg-[var(--light)] p-4 rounded-[var(--default-radius)]"
+              >
+                <span class="text-sm text-[var(--dark)]/60 font-medium"
+                  >Ingreso Prom./Cliente</span
+                >
+                <p
+                  id="avg-revenue-kpi"
+                  class="text-2xl font-bold text-[var(--primary)]"
+                >
+                  $169,047
+                </p>
+              </div>
+            </div>
+
+            <div class="md:hidden flex justify-center gap-2 mb-4 border-b pb-4">
+              <button
+                id="mobile-tab-sales"
+                class="mobile-chart-btn bg-[var(--primary)] text-white px-4 py-2 rounded-[var(--button-radius)] font-semibold text-sm w-full"
+              >
+                Ingresos
+              </button>
+              <button
+                id="mobile-tab-category"
+                class="mobile-chart-btn bg-white text-[var(--dark)]/90 px-4 py-2 rounded-[var(--button-radius)] font-semibold text-sm border w-full"
+              >
+                Categorías
+              </button>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-8">
+              <div id="sales-chart-wrapper" class="md:col-span-3">
+                <h4
+                  class="text-lg font-semibold text-center mb-4 text-[var(--dark)]/90"
+                >
+                  Evolución de Ingresos
+                </h4>
+                <div class="chart-container">
+                  <canvas id="salesChart"></canvas>
+                </div>
+              </div>
+              <div
+                id="category-chart-wrapper"
+                class="md:col-span-2 hidden md:block"
+              >
+                <h4
+                  class="text-lg font-semibold text-center mb-4 text-[var(--dark)]/90"
+                >
+                  Ventas por Categoría
+                </h4>
+                <div class="chart-container">
+                  <canvas id="categoryChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Use Cases -->
+      <section id="use-cases" class="py-20 sm:py-24 px-6">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <h2
+              class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Perfecto para tu Tipo de Negocio
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Vyva se adapta a ti. Descubre cómo diferentes industrias potencian
+              sus ingresos con suscripciones.
+            </p>
+          </div>
+          <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">🏋️</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Gimnasios</h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Ofrece membresías mensuales, trimestrales o anuales con cobro
+                automático. Vende paquetes de clases o sesiones de entrenamiento
+                personal.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">🍽️</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Restaurantes</h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Crea un "Club del Café" con recargas mensuales, ofrece kits de
+                comida semanales o menús de degustación exclusivos para
+                suscriptores.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">👕</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Tiendas de Ropa
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Lanza una "Caja de Estilo" mensual, ofrece acceso anticipado a
+                nuevas colecciones o un club de descuentos VIP para miembros.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">💆‍♀️</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Estéticas Faciales
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Vende paquetes de tratamientos faciales mensuales, suscripciones
+                a productos de cuidado de la piel o planes de mantenimiento.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">🦷</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Odontología</h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Ofrece planes de higiene dental semestrales, paquetes de
+                blanqueamiento con seguimiento o planes familiares con cobertura
+                básica.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">💡</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Y Muchos Más...
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Academias, spas, servicios de limpieza, consultorías... Si tu
+                servicio se puede repetir, se puede suscribir con Vyva.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Pricing -->
+      <section id="precios" class="py-20 sm:py-24 bg-white">
+        <div class="container mx-auto animated-section px-6">
+          <div class="text-center max-w-3xl mx-auto">
+            <h2
+              class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Un plan para cada etapa de tu negocio.
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Empieza con lo esencial y escala a medida que tu negocio crece.
+              Simple y transparente.
+            </p>
+          </div>
+          <div
+            class="mt-16 grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto items-start"
+          >
+            <div
+              class="bg-white p-8 rounded-[var(--card-radius)] shadow-lg border border-slate-200 flex flex-col h-full transition-transform duration-300 hover:scale-105"
+            >
+              <h3 class="text-xl font-bold text-[var(--primary)]">Esencial</h3>
+              <p class="mt-2 text-[var(--dark)]/60 flex-grow">
+                Perfecto para negocios que empiezan o facturan hasta $45M al
+                mes.
+              </p>
+              <div class="mt-6">
+                <span class="text-4xl font-extrabold text-[var(--dark)]">
+                  Gratis
+                </span>
+                <span class="text-[var(--dark)]/60">0/mes</span>
+              </div>
+              <p class="text-sm text-[var(--dark)]/60 mt-2">
+                Tarifa del <strong class="text-[var(--dark)]/90">5%</strong>
+                por transacción.
+              </p>
+              <a
+                href="#"
+                class="mt-8 block w-full text-center bg-[var(--light)] text-[var(--dark)]/90 px-6 py-3 rounded-[var(--button-radius)] font-semibold hover:bg-slate-200 transition-colors"
+                >Agendar una Demo</a
+              >
+            </div>
+            <div
+              class="relative bg-[var(--primary)] text-white p-8 rounded-[var(--card-radius)] shadow-2xl ring-4 ring-[var(--primary-light)] flex flex-col h-full transition-transform duration-300 hover:scale-105"
+            >
+              <div
+                class="absolute top-0 -translate-y-1/2 w-full flex justify-center"
+              >
+                <span
+                  class="bg-[var(--primary-light)] text-[var(--primary)] text-xs font-bold px-3 py-1 rounded-full uppercase"
+                  >Más Popular</span
+                >
+              </div>
+              <h3 class="text-xl font-bold">Premium</h3>
+              <p class="mt-2 text-white/80 flex-grow">
+                Ideal para negocios en crecimiento que facturan entre $45M y
+                $80M al mes.
+              </p>
+              <div class="mt-6">
+                <span class="text-3xl font-extrabold">Tarifas Especiales</span>
+              </div>
+              <p class="text-sm text-white/80 mt-2">
+                Condiciones preferenciales adaptadas a tu volumen.
+              </p>
+              <a
+                href="#"
+                class="mt-8 block w-full text-center bg-white text-[var(--primary)] px-6 py-3 rounded-[var(--button-radius)] font-semibold hover:bg-indigo-50 transition-colors"
+                >Agendar una Demo</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 9: Features Table -->
+      <section id="features-comparison" class="py-20 sm:py-24 px-6">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <h2
+              class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Todas las funcionalidades, sin sorpresas
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Compara los detalles y elige el plan que impulse tu negocio al
+              siguiente nivel.
+            </p>
+          </div>
+          <div class="mt-12 overflow-x-auto">
+            <div
+              class="bg-white shadow-xl rounded-[var(--card-radius)] p-2 inline-block min-w-full"
+            >
+              <table class="min-w-full text-sm text-center">
+                <thead>
+                  <tr>
+                    <th
+                      class="p-4 text-left text-base font-bold text-[var(--dark)]"
+                    >
+                      Características
+                    </th>
+                    <th
+                      class="p-4 text-base font-bold text-[var(--primary)] w-1/3"
+                    >
+                      Esencial
+                    </th>
+                    <th
+                      class="p-4 text-base font-bold text-[var(--primary)] w-1/3"
+                    >
+                      Premium
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <tr class="bg-[var(--light)]">
+                    <td
+                      colspan="3"
+                      class="p-3 font-semibold text-left text-[var(--dark)]/80"
+                    >
+                      Transacciones
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Comisión Vyva
+                    </td>
+                    <td class="p-4 font-medium">5%</td>
+                    <td class="p-4 font-medium text-[var(--success)]">
+                      Tarifas Especiales
+                    </td>
+                  </tr>
+                  <tr class="bg-[var(--light)]">
+                    <td
+                      colspan="3"
+                      class="p-3 font-semibold text-left text-[var(--dark)]/80"
+                    >
+                      Funciones Esenciales
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Punto de Venta (POS)
+                    </td>
+                    <td class="p-4 table-check">✓</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Gestión de Suscripciones
+                    </td>
+                    <td class="p-4 table-check">✓</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Dashboard de Métricas
+                    </td>
+                    <td class="p-4 table-check">✓</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Gestión de Clientes
+                    </td>
+                    <td class="p-4 table-check">✓</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr class="bg-[var(--light)]">
+                    <td
+                      colspan="3"
+                      class="p-3 font-semibold text-left text-[var(--dark)]/80"
+                    >
+                      Funciones Avanzadas
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Múltiples usuarios/sucursales
+                    </td>
+                    <td class="p-4 table-cross">-</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Acceso a API para developers
+                    </td>
+                    <td class="p-4 table-cross">-</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr class="bg-[var(--light)]">
+                    <td
+                      colspan="3"
+                      class="p-3 font-semibold text-left text-[var(--dark)]/80"
+                    >
+                      Soporte y Personalización
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Soporte por email
+                    </td>
+                    <td class="p-4 table-check">✓</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Soporte con ejecutivo de cuenta
+                    </td>
+                    <td class="p-4 table-cross">-</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 text-left text-[var(--dark)]/90">
+                      Condiciones personalizadas
+                    </td>
+                    <td class="p-4 table-cross">-</td>
+                    <td class="p-4 table-check">✓</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 10: FAQ -->
+      <section id="faq" class="py-20 sm:py-24 bg-white">
+        <div class="container mx-auto max-w-3xl px-6 animated-section">
+          <h2 class="text-3xl font-bold text-center text-[var(--dark)]">
+            Preguntas Frecuentes
+          </h2>
+          <div class="mt-12 space-y-4">
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Puedo cambiar de plan en cualquier momento?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    ¡Sí! Puedes subir o bajar de plan cuando lo necesites
+                    directamente desde tu panel de control. Los cambios se
+                    aplicarán en tu siguiente ciclo de facturación.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Qué tan seguros están los datos de mis clientes?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    La seguridad es nuestra máxima prioridad. Utilizamos
+                    procesadores de pago que cumplen con los más altos
+                    estándares de seguridad PCI DSS. La información de las
+                    tarjetas de tus clientes está encriptada y nunca se almacena
+                    en nuestros servidores.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Necesito conocimientos técnicos para empezar?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    Para nada. Vyva está diseñado para ser increíblemente
+                    intuitivo. Puedes configurar tus planes y empezar a vender
+                    en minutos, sin necesidad de configuraciones complejas: crea
+                    tu suscripción, genera el link y comparte.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Necesito comprar algún equipo especial para usar el POS?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    No. El Punto de Venta de Vyva funciona en cualquier
+                    dispositivo con un navegador web: tu computador, una tablet
+                    o incluso tu celular. No necesitas invertir en hardware
+                    costoso.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿La comisión por transacción incluye el costo de la pasarela
+                  de pagos?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    No, la comisión de Vyva es adicional a las tarifas que cobra
+                    el procesador de pagos. Actualmente utilizamos Epayco como
+                    nuestra pasarela de pagos, próximamente se integrarán otras
+                    opciones. Nuestros planes con tarifas especiales eliminan o
+                    reducen nuestro costo, pero aún se aplican las tarifas de la
+                    pasarela.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 11: Final CTA -->
+      <section id="final-cta" class="py-20 sm:py-24">
+        <div
+          class="container mx-auto text-center max-w-3xl px-6 animated-section"
+        >
+          <h2
+            class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+          >
+            ¿Listo para empezar a vender y construir ingresos recurrentes?
+          </h2>
+          <p class="mt-4 text-lg text-[var(--dark)]/80">
+            Únete a los negocios que ya están asegurando su futuro con ingresos
+            recurrentes. La configuración es rápida y nuestro equipo está listo
+            para ayudarte en cada paso.
+          </p>
+          <div class="mt-8">
+            <a
+              href="#"
+              class="bg-[var(--primary)] text-white px-10 py-4 rounded-[var(--button-radius)] font-semibold text-xl hover:brightness-90 transition-transform hover:scale-105 shadow-lg inline-block"
+            >
+              Agendar una llamada
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[var(--dark)] text-white">
+      <div
+        class="container mx-auto px-6 py-8 flex justify-between items-center"
+      >
+        <a href="#">
+          <img
+            src="assets/images/vyva_logo_white.svg"
+            alt="Vyva Logo"
+            class="h-7"
+          />
+        </a>
+        <p class="text-sm text-slate-400">
+          © 2024 Vyva. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/scripts.js"></script>
+  </body>
+</html>
