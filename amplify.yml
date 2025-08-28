@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "No build process required for static HTML site"
+    build:
+      commands:
+        - echo "Building static HTML application"
+        - echo "No compilation needed - serving static files"
+    postBuild:
+      commands:
+        - echo "Post-build phase completed"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths: []
