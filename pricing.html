@@ -8,7 +8,7 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Descubre los planes de Vyva POS. Desde el plan Esencial gratuito hasta Premium con tarifas especiales. Todas las características incluidas para hacer crecer tu negocio."
+      content="Descubre los planes de Vyva POS. Desde el plan Essential gratuito hasta Premium con tarifas especiales. Todas las características incluidas para hacer crecer tu negocio."
     />
     <meta
       name="keywords"
@@ -25,7 +25,7 @@
     />
     <meta
       property="og:description"
-      content="Descubre los planes de Vyva POS. Desde el plan Esencial gratuito hasta Premium con tarifas especiales."
+      content="Descubre los planes de Vyva POS. Desde el plan Essential gratuito hasta Premium con tarifas especiales."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vyvapos.com/pricing" />
@@ -44,7 +44,7 @@
     />
     <meta
       name="twitter:description"
-      content="Descubre los planes de Vyva POS. Desde el plan Esencial gratuito hasta Premium con tarifas especiales."
+      content="Descubre los planes de Vyva POS. Desde el plan Essential gratuito hasta Premium con tarifas especiales."
     />
     <meta
       name="twitter:image"
@@ -262,7 +262,7 @@
                     href="https://calendly.com/victorguzber/conoce-vyva-pos"
                     target="_blank"
                     class="underline font-semibold hover:text-blue-900"
-                    >contacta a Ventas</a
+                    >Contacta a Ventas</a
                   >. Todas las otras funcionalidades siguen vigentes.
                 </p>
               </div>
@@ -275,13 +275,13 @@
       <section class="py-12 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
           <div class="grid lg:grid-cols-3 gap-8 items-start">
-            <!-- Plan Esencial -->
+            <!-- Plan Essential -->
             <div
               class="bg-white p-8 rounded-[var(--card-radius)] shadow-lg border border-slate-200 relative"
             >
               <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold text-[var(--dark)] mb-2">
-                  Esencial
+                  Essential
                 </h3>
                 <p class="text-[var(--dark)]/60 mb-6">Perfecto para empezar</p>
                 <div class="mb-4">
@@ -439,7 +439,7 @@
                     name="checkmark-circle"
                     class="text-green-300 text-xl mr-3"
                   ></ion-icon>
-                  <span class="text-white/90">Todo lo de Esencial</span>
+                  <span class="text-white/90">Todo lo de Essential</span>
                 </div>
                 <div class="flex items-center">
                   <ion-icon
@@ -620,7 +620,7 @@
                 <thead class="bg-[var(--dark)] text-white">
                   <tr>
                     <th class="p-6 text-left font-semibold">Características</th>
-                    <th class="p-6 text-center font-semibold">Esencial</th>
+                    <th class="p-6 text-center font-semibold">Essential</th>
                     <th class="p-6 text-center font-semibold">Premium</th>
                     <th class="p-6 text-center font-semibold">Enterprise</th>
                   </tr>
@@ -961,7 +961,7 @@
               </h3>
               <p class="text-[var(--dark)]/80">
                 Las comisiones cubren el uso de la plataforma Vyva POS,
-                incluyendo todas las funcionalidades del plan Esencial. Las
+                incluyendo todas las funcionalidades del plan Essential. Las
                 tarifas incluyen el cobro de la pasarela de pagos. Los detalles
                 específicos de comisiones se muestran arriba en nuestros planes.
               </p>
@@ -1019,7 +1019,7 @@
                 ¿Puedo probar el servicio antes de comprometerme?
               </h3>
               <p class="text-[var(--dark)]/80">
-                Absolutamente. El plan Esencial es completamente gratuito y
+                Absolutamente. El plan Essential es completamente gratuito y
                 puedes usarlo sin límite de tiempo. También ofrecemos demos
                 personalizadas para que conozcas todas las funcionalidades antes
                 de decidir.
@@ -1053,7 +1053,7 @@
                       >WordPress + Plugins</span
                     >
                     <span class="text-red-800 font-bold" id="wordpress-price"
-                      >$15-50/mes</span
+                      >$20,000-95,000 COP/mes</span
                     >
                   </div>
                   <div
@@ -1061,7 +1061,7 @@
                   >
                     <span class="text-red-800 font-medium">Shopify</span>
                     <span class="text-red-800 font-bold" id="shopify-price"
-                      >$29-299/mes</span
+                      >$95,000-1,495,000 COP/mes</span
                     >
                   </div>
                   <div
@@ -1077,7 +1077,7 @@
                   >
                     <span class="text-red-800 font-medium">Fresha</span>
                     <span class="text-red-800 font-bold" id="fresha-price"
-                      >$20-200/mes</span
+                      >$99,750-997,500 COP/mes</span
                     >
                   </div>
                   <div
@@ -1139,10 +1139,12 @@
                   Ahorro estimado mensual
                 </h4>
                 <div class="text-4xl font-extrabold text-[var(--primary)] mb-2">
-                  <span id="savings-amount">$12,000+</span>
+                  <span id="savings-amount">$322,000+</span>
                 </div>
                 <p class="text-[var(--dark)]/60 text-sm">
-                  <span id="savings-description">Promedio vs competencia</span>
+                  <span id="savings-description"
+                    >Ahorro vs promedio competencia</span
+                  >
                 </p>
               </div>
             </div>
@@ -1211,63 +1213,109 @@
     </footer>
 
     <script src="assets/scripts.js"></script>
-
-    <!-- Debug Script -->
+    
+    <!-- Working Toggle Script -->
     <script>
-      console.log("=== PRICING PAGE DEBUG ===");
-      console.log("DOM loaded");
-
-      setTimeout(() => {
-        const copToggle = document.getElementById("cop-toggle");
-        const usdToggle = document.getElementById("usd-toggle");
-        const premiumPrice = document.getElementById("premium-price");
-        const premiumAnnual = document.getElementById("premium-annual");
-
-        console.log("Elements found:", {
-          copToggle: !!copToggle,
-          usdToggle: !!usdToggle,
-          premiumPrice: !!premiumPrice,
-          premiumAnnual: !!premiumAnnual,
-        });
-
-        if (copToggle && usdToggle && premiumPrice && premiumAnnual) {
-          console.log("All elements found, testing click");
-
-          // Initialize state - COP is selected by default
-          let currentCurrency = "COP";
-
-          // Test click
-          copToggle.addEventListener("click", () => {
-            if (currentCurrency === "USD") {
-              console.log("COP clicked from inline script - switching to COP");
+      document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOM loaded - setting up toggle");
+        
+        setTimeout(() => {
+          const copToggle = document.getElementById("cop-toggle");
+          const usdToggle = document.getElementById("usd-toggle");
+          const premiumPrice = document.getElementById("premium-price");
+          const premiumAnnual = document.getElementById("premium-annual");
+          const wordpressPrice = document.getElementById("wordpress-price");
+          const shopifyPrice = document.getElementById("shopify-price");
+          const tiendanubePrice = document.getElementById("tiendanube-price");
+          const freshaPrice = document.getElementById("fresha-price");
+          const vyvaPremiumPrice = document.getElementById("vyva-premium-price");
+          const savingsAmount = document.getElementById("savings-amount");
+          const savingsDescription = document.getElementById("savings-description");
+          
+          console.log("Elements found:", {
+            copToggle: !!copToggle,
+            usdToggle: !!usdToggle,
+            premiumPrice: !!premiumPrice,
+            premiumAnnual: !!premiumAnnual
+          });
+          
+          if (copToggle && usdToggle) {
+            console.log("Setting up working toggle");
+            
+            let currentCurrency = "COP";
+            
+            // Price data
+            const prices = {
+              COP: {
+                wordpress: "$20,000-95,000 COP/mes",
+                shopify: "$95,000-1,495,000 COP/mes",
+                tiendanube: "$24,900-149,900 COP/mes",
+                fresha: "$99,750-997,500 COP/mes",
+                vyvaPremium: "$50,000 COP/mes",
+                vyvaPremiumAnnual: "$40,000 COP/mes",
+              },
+              USD: {
+                wordpress: "$4-19/mes",
+                shopify: "$19-299/mes",
+                tiendanube: "$5-30/mes",
+                fresha: "$19.95-199.50/mes",
+                vyvaPremium: "$10/mes",
+                vyvaPremiumAnnual: "$8/mes",
+              },
+            };
+            
+            // Update all prices
+            function updatePrices(currency) {
+              const priceData = prices[currency];
+              
+              if (wordpressPrice) wordpressPrice.textContent = priceData.wordpress;
+              if (shopifyPrice) shopifyPrice.textContent = priceData.shopify;
+              if (tiendanubePrice) tiendanubePrice.textContent = priceData.tiendanube;
+              if (freshaPrice) freshaPrice.textContent = priceData.fresha;
+              if (vyvaPremiumPrice) vyvaPremiumPrice.textContent = priceData.vyvaPremium;
+              if (premiumPrice) premiumPrice.textContent = priceData.vyvaPremium.replace("/mes", "");
+              if (premiumAnnual) premiumAnnual.textContent = priceData.vyvaPremiumAnnual.replace("/mes", "");
+              
+              // Update savings
+              if (currency === "COP") {
+                if (savingsAmount) savingsAmount.textContent = "$322,000+";
+                if (savingsDescription) savingsDescription.textContent = "Ahorro vs promedio competencia";
+              } else {
+                if (savingsAmount) savingsAmount.textContent = "$64+";
+                if (savingsDescription) savingsDescription.textContent = "Ahorro vs promedio competencia";
+              }
+            }
+            
+            copToggle.addEventListener("click", function() {
+              console.log("COP clicked - switching to COP");
               currentCurrency = "COP";
-
+              
               copToggle.classList.add("bg-[var(--primary)]", "text-white");
               copToggle.classList.remove("text-[var(--dark)]/80");
               usdToggle.classList.remove("bg-[var(--primary)]", "text-white");
               usdToggle.classList.add("text-[var(--dark)]/80");
-
-              premiumPrice.textContent = "$100,000";
-              premiumAnnual.textContent = "$50,000";
-            }
-          });
-
-          usdToggle.addEventListener("click", () => {
-            if (currentCurrency === "COP") {
-              console.log("USD clicked from inline script - switching to USD");
+              
+              updatePrices("COP");
+            });
+            
+            usdToggle.addEventListener("click", function() {
+              console.log("USD clicked - switching to USD");
               currentCurrency = "USD";
-
+              
               usdToggle.classList.add("bg-[var(--primary)]", "text-white");
               usdToggle.classList.remove("text-[var(--dark)]/80");
               copToggle.classList.remove("bg-[var(--primary)]", "text-white");
               copToggle.classList.add("text-[var(--dark)]/80");
-
-              premiumPrice.textContent = "$20";
-              premiumAnnual.textContent = "$10";
-            }
-          });
-        }
-      }, 1000);
+              
+              updatePrices("USD");
+            });
+            
+            // Initialize with COP
+            updatePrices("COP");
+            console.log("Toggle setup complete");
+          }
+        }, 1000);
+      });
     </script>
   </body>
 </html>

@@ -517,18 +517,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Price data
     const prices = {
       COP: {
-        wordpress: "$15-50/mes",
-        shopify: "$29-299/mes",
+        wordpress: "$20,000-95,000 COP/mes",
+        shopify: "$95,000-1,495,000 COP/mes",
         tiendanube: "$24,900-149,900 COP/mes",
-        fresha: "$20-200/mes",
-        vyvaPremium: "$50,000/mes",
-        vyvaPremiumAnnual: "$40,000/mes",
+        fresha: "$99,750-997,500 COP/mes",
+        vyvaPremium: "$50,000 COP/mes",
+        vyvaPremiumAnnual: "$40,000 COP/mes",
       },
       USD: {
-        wordpress: "$15-50/mes",
-        shopify: "$29-299/mes",
+        wordpress: "$4-19/mes",
+        shopify: "$19-299/mes",
         tiendanube: "$5-30/mes",
-        fresha: "$20-200/mes",
+        fresha: "$19.95-199.50/mes",
         vyvaPremium: "$10/mes",
         vyvaPremiumAnnual: "$8/mes",
       },
@@ -537,20 +537,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calculate average savings
     function calculateSavings(currency) {
       if (currency === "COP") {
-        // Average of competition in COP: (50 + 299 + 149900 + 200) / 4 = 37,612 COP
+        // WordPress: $4-19 USD = promedio $11.5 USD = 57,500 COP
+        // Shopify: $19-299 USD = promedio $159 USD = 795,000 COP
+        // Tienda Nube: $24,900-149,900 COP = promedio 87,400 COP
+        // Fresha: $19.95-199.50 USD = promedio $109.73 USD = 548,650 COP
+        // Average: (57,500 + 795,000 + 87,400 + 548,650) / 4 = 372,137 COP
         // Vyva Premium: 50,000 COP
-        // Savings: 50,000 - 37,612 = 12,388 COP
+        // Savings: 372,137 - 50,000 = 322,137 COP (Vyva saves this much)
         return {
-          amount: "$12,000+",
-          description: "Promedio vs competencia",
+          amount: "$322,000+",
+          description: "Ahorro vs promedio competencia",
         };
       } else {
-        // Average of competition in USD: (50 + 299 + 30 + 200) / 4 = 144.75 USD
+        // Average of competition in USD: (11.5 + 159 + 17.48 + 109.73) / 4 = 74.43 USD
         // Vyva Premium: 10 USD
-        // Savings: 10 - 144.75 = -134.75 (much more economical)
+        // Savings: 74.43 - 10 = 64.43 USD (Vyva saves this much)
         return {
-          amount: "$135+",
-          description: "Más económico que promedio",
+          amount: "$64+",
+          description: "Ahorro vs promedio competencia",
         };
       }
     }
@@ -582,8 +586,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     copToggle.addEventListener("click", () => {
-      if (currentCurrency === "USD") {
-        console.log("COP toggle clicked - switching to COP");
+      console.log("COP clicked - current currency:", currentCurrency);
+      if (currentCurrency !== "COP") {
+        console.log("Switching to COP");
         currentCurrency = "COP";
 
         // Switch to COP
@@ -599,8 +604,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     usdToggle.addEventListener("click", () => {
-      if (currentCurrency === "COP") {
-        console.log("USD toggle clicked - switching to USD");
+      console.log("USD clicked - current currency:", currentCurrency);
+      if (currentCurrency !== "USD") {
+        console.log("Switching to USD");
         currentCurrency = "USD";
 
         // Switch to USD
