@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preguntas Frecuentes | Vyva POS</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Preguntas frecuentes sobre Vyva POS. Resuelve todas tus dudas sobre nuestra plataforma de punto de venta y gestión de suscripciones."
+    />
+    <meta
+      name="keywords"
+      content="FAQ Vyva POS, preguntas frecuentes, ayuda POS, soporte suscripciones, dudas plataforma"
+    />
+    <meta name="author" content="Vyva" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://vyvapos.com/faq" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Preguntas Frecuentes | Vyva POS" />
+    <meta
+      property="og:description"
+      content="Preguntas frecuentes sobre Vyva POS. Resuelve todas tus dudas sobre nuestra plataforma."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vyvapos.com/faq" />
+    <meta
+      property="og:image"
+      content="https://vyvapos.com/assets/images/vyva-og-image.jpg"
+    />
+    <meta property="og:site_name" content="Vyva POS" />
+    <meta property="og:locale" content="es_CO" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Preguntas Frecuentes | Vyva POS" />
+    <meta
+      name="twitter:description"
+      content="Preguntas frecuentes sobre Vyva POS. Resuelve todas tus dudas sobre nuestra plataforma."
+    />
+    <meta
+      name="twitter:image"
+      content="https://vyvapos.com/assets/images/vyva-og-image.jpg"
+    />
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Vyva POS" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="assets/images/Vyva_favicon.svg"
+      type="image/svg+xml"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+
+    <!-- FAQ Styles -->
+    <style>
+      .faq-question {
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .faq-question:hover {
+        background-color: rgba(123, 139, 233, 0.05);
+      }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+      }
+      .faq-arrow {
+        transition: transform 0.3s ease;
+      }
+      .faq-question.open .faq-arrow {
+        transform: rotate(180deg);
+      }
+    </style>
+
+    <!-- Ionicons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body class="antialiased overflow-x-hidden">
+    <!-- Header / Navigation -->
+    <header
+      id="header"
+      class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm"
+    >
+      <nav
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="font-bold text-xl text-[var(--primary)]">
+          <img
+            src="assets/images/vyva_logo_black.svg"
+            alt="Vyva Logo"
+            class="h-7"
+          />
+        </a>
+        <div class="hidden md:flex space-x-6 items-center">
+          <div class="relative" id="features-dropdown-container">
+            <button
+              id="features-button"
+              class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors flex items-center"
+            >
+              Características
+              <span class="ml-1 text-xs">&#9662;</span>
+            </button>
+            <div
+              id="features-menu"
+              class="hidden absolute mt-2 w-48 bg-white rounded-[var(--default-radius)] shadow-xl z-20"
+            >
+              <a
+                href="index.html#pos"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Punto de Venta</a
+              >
+              <a
+                href="index.html#subscriptions"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Suscripciones</a
+              >
+            </div>
+          </div>
+          <a
+            href="index.html#use-cases"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            >Casos de Uso</a
+          >
+          <a
+            href="pricing.html"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            >Precios</a
+          >
+          <a href="faq.html" class="text-[var(--primary)] font-semibold">FAQ</a>
+          <a
+            href="https://app.vyvapos.com"
+            target="_blank"
+            class="ml-5 text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            title="Iniciar Sesión"
+          >
+            <ion-icon name="person-outline" class="text-xl"></ion-icon>
+          </a>
+          <a
+            href="#final-cta"
+            class="bg-[var(--primary)] text-white px-4 py-2 rounded-[var(--button-radius)] hover:brightness-90 transition-all"
+            >Empezar Gratis</a
+          >
+        </div>
+        <div class="flex items-center space-x-3 md:hidden">
+          <a
+            href="https://app.vyvapos.com"
+            target="_blank"
+            class="text-[var(--dark)]/80 hover:text-[var(--primary)] transition-colors"
+            title="Iniciar Sesión"
+          >
+            <ion-icon name="person-outline" class="text-xl"></ion-icon>
+          </a>
+          <button
+            id="mobile-menu-button"
+            class="p-2 rounded-[var(--button-radius)] text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >
+            <ion-icon name="menu-outline" class="text-2xl"></ion-icon>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-6 py-4">
+          <a href="index.html">
+            <img
+              src="assets/images/vyva_logo_black.svg"
+              alt="Vyva Logo"
+              class="h-7"
+            />
+          </a>
+        </div>
+        <a
+          href="index.html#pos"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Punto de Venta</a
+        >
+        <a
+          href="index.html#subscriptions"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Suscripciones</a
+        >
+        <a
+          href="index.html#use-cases"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Casos de Uso</a
+        >
+        <a
+          href="pricing.html"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Precios</a
+        >
+        <a
+          href="faq.html"
+          class="block py-2 px-6 text-[var(--primary)] font-semibold"
+          >FAQ</a
+        >
+        <a
+          href="#final-cta"
+          class="block py-3 px-6 text-center bg-[var(--primary-soft)] text-[var(--primary)] font-semibold hover:bg-[var(--primary-light)]"
+          >Empezar Gratis</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- FAQ Hero Section -->
+      <section class="py-20 sm:py-24 px-6 bg-white">
+        <div class="container mx-auto text-center max-w-4xl">
+          <h1 class="text-4xl md:text-6xl font-bold text-[var(--dark)] mb-6">
+            Preguntas
+            <span class="text-[var(--primary)]">Frecuentes</span>
+          </h1>
+          <p class="text-xl text-[var(--dark)]/80 mb-8">
+            Encuentra respuestas a las preguntas más comunes sobre Vyva POS
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ Content -->
+      <section class="py-12 px-6 bg-white">
+        <div class="container mx-auto max-w-4xl">
+          <!-- General Questions -->
+          <div class="mb-16">
+            <h2 class="text-3xl font-bold text-[var(--dark)] mb-8 text-center">
+              Preguntas Generales
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué es Vyva POS?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Vyva POS es una plataforma integral que combina un punto
+                      de venta tradicional con gestión de suscripciones. Te
+                      permite manejar ventas diarias y crear ingresos
+                      recurrentes a través de suscripciones, todo en una sola
+                      herramienta.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Cómo funciona el sistema de suscripciones?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Puedes crear planes de suscripción con diferentes
+                      frecuencias (mensual, trimestral, anual). El sistema cobra
+                      automáticamente a tus clientes y envía recordatorios de
+                      pago. También gestiona fallos de pago y permite pausar o
+                      cancelar suscripciones fácilmente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Necesito conocimientos técnicos para usar Vyva?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      No necesitas conocimientos técnicos. Vyva está diseñado
+                      para ser increíblemente intuitivo. Puedes configurar tus
+                      productos, crear suscripciones y empezar a vender en
+                      minutos. Nuestro equipo de soporte está disponible para
+                      ayudarte en cada paso.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué tipos de negocios pueden usar Vyva?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Vyva es perfecto para cualquier negocio que quiera crear
+                      ingresos recurrentes: gimnasios, restaurantes, tiendas de
+                      ropa, estéticas, odontología, academias, spas, servicios
+                      de limpieza, consultorías y muchos más. Si tu servicio se
+                      puede repetir, se puede suscribir con Vyva.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing Questions -->
+          <div class="mb-16">
+            <h2 class="text-3xl font-bold text-[var(--dark)] mb-8 text-center">
+              Precios y Planes
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Cuáles son los precios de Vyva?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Vyva ofrece diferentes planes para adaptarse a tu negocio.
+                      Para conocer todos los precios, comisiones y
+                      características detalladas de cada plan, visita nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Puedo cambiar de plan en cualquier momento?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      ¡Sí! Puedes subir o bajar de plan cuando lo necesites
+                      directamente desde tu panel de control. Los cambios se
+                      aplicarán en tu siguiente ciclo de facturación. Si subes
+                      de plan, tendrás acceso inmediato a las nuevas
+                      características.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Por qué se cobran comisiones?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Las comisiones cubren el uso de la plataforma Vyva POS,
+                      incluyendo todas las funcionalidades del plan que tengas.
+                      Las tarifas incluyen el cobro de la pasarela de pagos.
+                      Para conocer los detalles específicos de comisiones,
+                      visita nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Hay costos ocultos o tarifas adicionales?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      No hay costos ocultos. Solo pagas la comisión por
+                      transacción y las tarifas estándar del procesador de
+                      pagos. No cobramos por configuración, mantenimiento
+                      mensual o tarifas de cancelación. Para conocer todos los
+                      costos detallados, visita nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Ofrecen descuentos por pago anual?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Sí, ofrecemos descuentos por pago anual en algunos de
+                      nuestros planes. Para conocer los descuentos específicos y
+                      las condiciones, visita nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Questions -->
+          <div class="mb-16">
+            <h2 class="text-3xl font-bold text-[var(--dark)] mb-8 text-center">
+              Características y Funcionalidades
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué incluye el plan Esencial?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      El plan Esencial incluye características básicas como una
+                      sola sede, página de venta personalizada, clientes
+                      ilimitados, productos ilimitados, servicios ilimitados,
+                      suscripciones ilimitadas, ventas ilimitadas, agendamientos
+                      ilimitados, usuarios ilimitados y resúmenes por correo
+                      para pagos online. Para conocer todos los detalles y
+                      comparar planes, visita nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué diferencia hay entre el plan Premium y Esencial?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      El plan Premium incluye todo lo del Esencial, pero permite
+                      hasta 3 sedes y envía resúmenes por correo para todos los
+                      tipos de pagos (no solo online). También incluye soporte
+                      prioritario y características avanzadas de gestión. Para
+                      una comparación detallada de todos los planes, visita
+                      nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué incluye el plan Enterprise?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      El plan Enterprise incluye todo lo anterior más: sedes
+                      ilimitadas, acceso a APIs, configuración de dominio
+                      personalizado, sitio web público personalizado, soporte
+                      prioritario 24/7 y capacitación dedicada. Para conocer
+                      todos los detalles y precios del plan Enterprise, visita
+                      nuestra
+                      <a
+                        href="pricing.html"
+                        class="text-[var(--primary)] hover:underline"
+                        >página de precios</a
+                      >.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Puedo tener múltiples sedes?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Sí, pero depende de tu plan: El plan Esencial permite una
+                      sola sede, el Premium permite hasta 3 sedes, y el
+                      Enterprise permite sedes ilimitadas. Cada sede puede tener
+                      sus propios productos, precios y configuraciones.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Cómo funciona la página de venta *tutienda*.vyvapos.com?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Cada cuenta tiene su propia página web donde los clientes
+                      pueden ver tus productos y servicios, hacer compras y
+                      suscribirse. La URL será *tutienda*.vyvapos.com donde
+                      *tutienda* es el nombre que elijas para tu negocio.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Puedo personalizar mi dominio y sitio web?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Solo el plan Enterprise permite configuración de dominio
+                      personalizado y sitio web público personalizado. Los
+                      planes Esencial y Premium usan el subdominio
+                      *tutienda*.vyvapos.com con plantillas predefinidas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Las suscripciones están disponibles en todos los países?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Las suscripciones están disponibles únicamente para
+                      Colombia. Para cobrar en otros países, debes contactar a
+                      nuestro equipo de ventas. Todas las otras funcionalidades
+                      (POS, productos, servicios, etc.) siguen vigentes
+                      independientemente del país.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Questions -->
+          <div class="mb-16">
+            <h2 class="text-3xl font-bold text-[var(--dark)] mb-8 text-center">
+              Aspectos Técnicos
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Necesito comprar algún equipo especial para usar el POS?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      No. El Punto de Venta de Vyva funciona en cualquier
+                      dispositivo con un navegador web: tu computador, una
+                      tablet o incluso tu celular. No necesitas invertir en
+                      hardware costoso.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué tan seguros están los datos de mis clientes?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      La seguridad es nuestra máxima prioridad. Utilizamos
+                      procesadores de pago que cumplen con los más altos
+                      estándares de seguridad PCI DSS. La información de las
+                      tarjetas de tus clientes está encriptada y nunca se
+                      almacena en nuestros servidores.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué procesadores de pago están disponibles?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Actualmente utilizamos MercadoPago como nuestra pasarela
+                      de pagos principal. Estamos trabajando para integrar más
+                      opciones en el futuro. MercadoPago acepta tarjetas de
+                      crédito, débito, PSE y otros métodos de pago populares en
+                      Colombia.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Tienen API disponible?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Sí, pero solo está disponible en el plan Enterprise. La
+                      API te permite integrar Vyva con otros sistemas,
+                      automatizar procesos y crear integraciones personalizadas
+                      según las necesidades de tu negocio.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Cómo funciona el sistema de respaldos?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Todos los datos se respaldan automáticamente en la nube
+                      con múltiples copias de seguridad. Los respaldos se
+                      realizan diariamente y se mantienen por períodos
+                      extendidos para garantizar la recuperación de datos en
+                      caso de cualquier incidente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Support Questions -->
+          <div class="mb-16">
+            <h2 class="text-3xl font-bold text-[var(--dark)] mb-8 text-center">
+              Soporte y Ayuda
+            </h2>
+            <div class="space-y-6">
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Qué tipo de soporte ofrecen?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Todos los planes incluyen soporte por email. El plan
+                      Premium incluye ejecutivo de cuenta dedicado. El plan
+                      Enterprise incluye soporte prioritario 24/7 y capacitación
+                      dedicada.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Puedo probar el servicio antes de comprometerme?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Absolutamente. El plan Esencial es completamente gratuito
+                      y puedes usarlo sin límite de tiempo. También ofrecemos
+                      demos personalizadas para que conozcas todas las
+                      funcionalidades antes de decidir.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Cómo puedo contactar soporte?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Puedes contactarnos por email a contact@solaradev.com o a
+                      través de nuestro sitio web. También puedes agendar una
+                      demo personalizada para resolver dudas específicas sobre
+                      tu negocio.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+              >
+                <button
+                  class="faq-question p-6 w-full flex justify-between items-center text-left"
+                >
+                  <h3 class="font-semibold text-lg text-[var(--dark)]">
+                    ¿Ofrecen capacitación para mi equipo?
+                  </h3>
+                  <span class="faq-arrow text-2xl text-[var(--primary)]"
+                    >↓</span
+                  >
+                </button>
+                <div class="faq-answer">
+                  <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                    <p>
+                      Sí, todos los planes incluyen capacitación básica. El plan
+                      Premium incluye capacitación estándar, y el plan
+                      Enterprise incluye capacitación dedicada personalizada
+                      para tu equipo y necesidades específicas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div
+            class="text-center bg-[var(--primary-soft)] p-8 rounded-[var(--card-radius)]"
+          >
+            <h2 class="text-2xl font-bold text-[var(--dark)] mb-4">
+              ¿No encontraste la respuesta que buscabas?
+            </h2>
+            <p class="text-[var(--dark)]/80 mb-6">
+              Nuestro equipo está listo para ayudarte con cualquier pregunta
+              específica
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="mailto:contact@solaradev.com"
+                class="bg-[var(--primary)] text-white px-6 py-3 rounded-[var(--button-radius)] font-semibold hover:brightness-90 transition-colors"
+              >
+                Contactar Soporte
+              </a>
+              <a
+                href="https://calendly.com/victorguzber/conoce-vyva-pos"
+                target="_blank"
+                class="bg-white text-[var(--primary)] px-6 py-3 rounded-[var(--button-radius)] font-semibold border-2 border-[var(--primary)] hover:bg-[var(--primary-soft)] transition-colors"
+              >
+                Agendar Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section id="final-cta" class="py-20 px-6 bg-white">
+        <div class="container mx-auto text-center max-w-3xl">
+          <h2 class="text-3xl md:text-4xl font-bold text-[var(--dark)] mb-6">
+            ¿Listo para Empezar?
+          </h2>
+          <p class="text-lg text-[var(--dark)]/80 mb-8">
+            Únete a cientos de negocios que ya están transformando sus ingresos
+            con Vyva POS. Empieza gratis hoy mismo.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://calendly.com/victorguzber/conoce-vyva-pos"
+              target="_blank"
+              class="bg-[var(--primary)] text-white px-8 py-4 rounded-[var(--button-radius)] font-semibold text-lg hover:brightness-90 transition-transform hover:scale-105 shadow-lg"
+            >
+              Empezar Gratis Ahora
+            </a>
+            <a
+              href="https://calendly.com/victorguzber/conoce-vyva-pos"
+              target="_blank"
+              class="bg-white text-[var(--primary)] px-8 py-4 rounded-[var(--button-radius)] font-semibold text-lg border-2 border-[var(--primary)] hover:bg-[var(--primary-soft)] transition-colors"
+            >
+              Agendar Demo
+            </a>
+          </div>
+
+          <p class="text-sm text-[var(--dark)]/60 mt-6">
+            Sin compromisos • Configuración en minutos • Soporte incluido
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-[var(--dark)] text-white">
+      <div
+        class="container mx-auto px-6 py-8 flex justify-between items-center"
+      >
+        <a href="index.html">
+          <img
+            src="assets/images/vyva_logo_white.svg"
+            alt="Vyva Logo"
+            class="h-7"
+          />
+        </a>
+        <div class="flex space-x-6 text-sm text-slate-400">
+          <a href="privacy.html" class="hover:text-white transition-colors">
+            Política de Privacidad
+          </a>
+          <a href="terms.html" class="hover:text-white transition-colors">
+            Términos de Servicio
+          </a>
+        </div>
+        <p class="text-sm text-slate-400">
+          © 2024 Vyva. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="assets/scripts.js"></script>
+
+    <!-- Debug Script -->
+    <script>
+      console.log("=== FAQ PAGE DEBUG ===");
+      console.log("DOM loaded");
+
+      setTimeout(() => {
+        const faqItems = document.querySelectorAll(".faq-item");
+        console.log("FAQ items found:", faqItems.length);
+
+        faqItems.forEach((item, index) => {
+          const question = item.querySelector(".faq-question");
+          const answer = item.querySelector(".faq-answer");
+
+          console.log(`FAQ item ${index}:`, {
+            question: !!question,
+            answer: !!answer,
+          });
+
+          if (question && answer) {
+            question.addEventListener("click", (e) => {
+              e.preventDefault();
+              console.log(
+                "FAQ clicked from inline script:",
+                question.textContent.trim()
+              );
+
+              const isOpen = question.classList.contains("open");
+
+              // Close all other FAQ items
+              faqItems.forEach((otherItem) => {
+                if (otherItem !== item) {
+                  const otherQuestion =
+                    otherItem.querySelector(".faq-question");
+                  const otherAnswer = otherItem.querySelector(".faq-answer");
+                  if (otherQuestion && otherAnswer) {
+                    otherQuestion.classList.remove("open");
+                    otherAnswer.style.maxHeight = null;
+                  }
+                }
+              });
+
+              // Toggle current FAQ item
+              if (!isOpen) {
+                question.classList.add("open");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                console.log(
+                  "FAQ opened from inline script, maxHeight:",
+                  answer.style.maxHeight
+                );
+              } else {
+                question.classList.remove("open");
+                answer.style.maxHeight = null;
+                console.log("FAQ closed from inline script");
+              }
+            });
+          }
+        });
+      }, 1000);
+    </script>
+  </body>
+</html>

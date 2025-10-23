@@ -59,28 +59,50 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // FAQ Accordion
+  console.log("=== FAQ DEBUG ===");
   const faqItems = document.querySelectorAll(".faq-item");
-  faqItems.forEach((item) => {
+  console.log("FAQ items found:", faqItems.length);
+
+  faqItems.forEach((item, index) => {
     const question = item.querySelector(".faq-question");
     const answer = item.querySelector(".faq-answer");
-    question.addEventListener("click", () => {
-      const isOpen = question.classList.contains("open");
 
-      faqItems.forEach((otherItem) => {
-        if (otherItem !== item) {
-          otherItem.querySelector(".faq-question").classList.remove("open");
-          otherItem.querySelector(".faq-answer").style.maxHeight = null;
+    console.log(`FAQ item ${index}:`, {
+      question: !!question,
+      answer: !!answer,
+    });
+
+    if (question && answer) {
+      question.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("FAQ clicked:", question.textContent.trim());
+
+        const isOpen = question.classList.contains("open");
+
+        // Close all other FAQ items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherQuestion = otherItem.querySelector(".faq-question");
+            const otherAnswer = otherItem.querySelector(".faq-answer");
+            if (otherQuestion && otherAnswer) {
+              otherQuestion.classList.remove("open");
+              otherAnswer.style.maxHeight = null;
+            }
+          }
+        });
+
+        // Toggle current FAQ item
+        if (!isOpen) {
+          question.classList.add("open");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          console.log("FAQ opened, maxHeight:", answer.style.maxHeight);
+        } else {
+          question.classList.remove("open");
+          answer.style.maxHeight = null;
+          console.log("FAQ closed");
         }
       });
-
-      if (!isOpen) {
-        question.classList.add("open");
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      } else {
-        question.classList.remove("open");
-        answer.style.maxHeight = null;
-      }
-    });
+    }
   });
 
   // Chart.js Interactive Dashboard
@@ -454,5 +476,169 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     renderCart();
+  }
+
+  // Currency Toggle
+  console.log("=== CURRENCY TOGGLE DEBUG ===");
+  const copToggle = document.getElementById("cop-toggle");
+  const usdToggle = document.getElementById("usd-toggle");
+  const premiumPrice = document.getElementById("premium-price");
+  const premiumAnnual = document.getElementById("premium-annual");
+
+  // Competition prices elements
+  const wordpressPrice = document.getElementById("wordpress-price");
+  const shopifyPrice = document.getElementById("shopify-price");
+  const tiendanubePrice = document.getElementById("tiendanube-price");
+  const freshaPrice = document.getElementById("fresha-price");
+  const vyvaPremiumPrice = document.getElementById("vyva-premium-price");
+  const savingsAmount = document.getElementById("savings-amount");
+  const savingsDescription = document.getElementById("savings-description");
+
+  console.log("Currency elements found:", {
+    copToggle: !!copToggle,
+    usdToggle: !!usdToggle,
+    premiumPrice: !!premiumPrice,
+    premiumAnnual: !!premiumAnnual,
+    wordpressPrice: !!wordpressPrice,
+    shopifyPrice: !!shopifyPrice,
+    tiendanubePrice: !!tiendanubePrice,
+    freshaPrice: !!freshaPrice,
+    vyvaPremiumPrice: !!vyvaPremiumPrice,
+    savingsAmount: !!savingsAmount,
+    savingsDescription: !!savingsDescription,
+  });
+
+  if (copToggle && usdToggle && premiumPrice && premiumAnnual) {
+    console.log("All currency elements found, adding event listeners");
+
+    // Initialize state - COP is selected by default
+    let currentCurrency = "COP";
+
+    // Price data
+    const prices = {
+      COP: {
+        wordpress: "$15-50/mes",
+        shopify: "$29-299/mes",
+        tiendanube: "$24,900-149,900 COP/mes",
+        fresha: "$20-200/mes",
+        vyvaPremium: "$50,000/mes",
+        vyvaPremiumAnnual: "$40,000/mes",
+      },
+      USD: {
+        wordpress: "$15-50/mes",
+        shopify: "$29-299/mes",
+        tiendanube: "$5-30/mes",
+        fresha: "$20-200/mes",
+        vyvaPremium: "$10/mes",
+        vyvaPremiumAnnual: "$8/mes",
+      },
+    };
+
+    // Calculate average savings
+    function calculateSavings(currency) {
+      if (currency === "COP") {
+        // Average of competition in COP: (50 + 299 + 149900 + 200) / 4 = 37,612 COP
+        // Vyva Premium: 50,000 COP
+        // Savings: 50,000 - 37,612 = 12,388 COP
+        return {
+          amount: "$12,000+",
+          description: "Promedio vs competencia",
+        };
+      } else {
+        // Average of competition in USD: (50 + 299 + 30 + 200) / 4 = 144.75 USD
+        // Vyva Premium: 10 USD
+        // Savings: 10 - 144.75 = -134.75 (much more economical)
+        return {
+          amount: "$135+",
+          description: "Más económico que promedio",
+        };
+      }
+    }
+
+    // Update all prices
+    function updatePrices(currency) {
+      const priceData = prices[currency];
+
+      // Update competition prices
+      if (wordpressPrice) wordpressPrice.textContent = priceData.wordpress;
+      if (shopifyPrice) shopifyPrice.textContent = priceData.shopify;
+      if (tiendanubePrice) tiendanubePrice.textContent = priceData.tiendanube;
+      if (freshaPrice) freshaPrice.textContent = priceData.fresha;
+      if (vyvaPremiumPrice)
+        vyvaPremiumPrice.textContent = priceData.vyvaPremium;
+
+      // Update Vyva Premium prices
+      premiumPrice.textContent = priceData.vyvaPremium.replace("/mes", "");
+      premiumAnnual.textContent = priceData.vyvaPremiumAnnual.replace(
+        "/mes",
+        ""
+      );
+
+      // Update savings
+      const savings = calculateSavings(currency);
+      if (savingsAmount) savingsAmount.textContent = savings.amount;
+      if (savingsDescription)
+        savingsDescription.textContent = savings.description;
+    }
+
+    copToggle.addEventListener("click", () => {
+      if (currentCurrency === "USD") {
+        console.log("COP toggle clicked - switching to COP");
+        currentCurrency = "COP";
+
+        // Switch to COP
+        copToggle.classList.add("bg-[var(--primary)]", "text-white");
+        copToggle.classList.remove("text-[var(--dark)]/80");
+        usdToggle.classList.remove("bg-[var(--primary)]", "text-white");
+        usdToggle.classList.add("text-[var(--dark)]/80");
+
+        // Update all prices
+        updatePrices("COP");
+        console.log("Prices updated to COP");
+      }
+    });
+
+    usdToggle.addEventListener("click", () => {
+      if (currentCurrency === "COP") {
+        console.log("USD toggle clicked - switching to USD");
+        currentCurrency = "USD";
+
+        // Switch to USD
+        usdToggle.classList.add("bg-[var(--primary)]", "text-white");
+        usdToggle.classList.remove("text-[var(--dark)]/80");
+        copToggle.classList.remove("bg-[var(--primary)]", "text-white");
+        copToggle.classList.add("text-[var(--dark)]/80");
+
+        // Update all prices
+        updatePrices("USD");
+        console.log("Prices updated to USD");
+      }
+    });
+
+    // Initialize with COP prices
+    updatePrices("COP");
+  } else {
+    console.log("Some currency elements not found");
+  }
+});
+
+// Cost Details Toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const costDetailsToggle = document.getElementById("cost-details-toggle");
+  const costDetails = document.getElementById("cost-details");
+  const costDetailsArrow = document.getElementById("cost-details-arrow");
+
+  if (costDetailsToggle && costDetails && costDetailsArrow) {
+    costDetailsToggle.addEventListener("click", function () {
+      const isHidden = costDetails.classList.contains("hidden");
+
+      if (isHidden) {
+        costDetails.classList.remove("hidden");
+        costDetailsArrow.textContent = "↑";
+      } else {
+        costDetails.classList.add("hidden");
+        costDetailsArrow.textContent = "↓";
+      }
+    });
   }
 });
