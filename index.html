@@ -3,16 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vyva | El POS que Transforma tu Negocio con Suscripciones</title>
+    <title>
+      Vyva | Sistema de Agendamiento y Gestión para Salones y Estéticas
+    </title>
 
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Vyva es el sistema POS que te da las herramientas para gestionar tu día a día y la capacidad única de transformarlo en ingresos predecibles con suscripciones. Planes desde 5% por transacción."
+      content="Vyva es el sistema de agendamiento y gestión diseñado para salones de belleza, estéticas, spas y clínicas. Gestiona citas, clientes, pagos y reportes desde una sola plataforma. Integración con Google Calendar."
     />
     <meta
       name="keywords"
-      content="POS, punto de venta, suscripciones, ingresos recurrentes, negocio, Epayco, pasarela de pagos, Colombia"
+      content="sistema agendamiento, gestión salón belleza, agenda citas, POS salón, Google Calendar, estética, spa, barbería, clínica estética, Colombia"
     />
     <meta name="author" content="Vyva" />
     <meta name="robots" content="index, follow" />
@@ -21,11 +23,11 @@
     <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
-      content="Vyva | El POS que Transforma tu Negocio con Suscripciones"
+      content="Vyva | Sistema de Agendamiento y Gestión para Salones y Estéticas"
     />
     <meta
       property="og:description"
-      content="Vyva es el sistema POS que te da las herramientas para gestionar tu día a día y la capacidad única de transformarlo en ingresos predecibles con suscripciones."
+      content="Sistema de agendamiento y gestión para salones de belleza, estéticas, spas y clínicas. Reservas online, Google Calendar, gestión de clientes y pagos en una sola plataforma."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vyvapos.com" />
@@ -40,11 +42,11 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Vyva | El POS que Transforma tu Negocio con Suscripciones"
+      content="Vyva | Sistema de Agendamiento y Gestión para Salones y Estéticas"
     />
     <meta
       name="twitter:description"
-      content="Vyva es el sistema POS que te da las herramientas para gestionar tu día a día y la capacidad única de transformarlo en ingresos predecibles con suscripciones."
+      content="Sistema de agendamiento y gestión para salones de belleza, estéticas, spas y clínicas. Reservas online, Google Calendar, gestión de clientes y pagos."
     />
     <meta
       name="twitter:image"
@@ -113,14 +115,24 @@
               class="hidden absolute mt-2 w-48 bg-white rounded-[var(--default-radius)] shadow-xl z-20"
             >
               <a
+                href="#agendamiento"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Agendamiento</a
+              >
+              <a
+                href="#clientes"
+                class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
+                >Gestión de Clientes</a
+              >
+              <a
                 href="#pos"
                 class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
                 >Punto de Venta</a
               >
               <a
-                href="#subscriptions"
+                href="#dashboard"
                 class="block px-4 py-2 text-[var(--dark)]/80 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)]"
-                >Suscripciones</a
+                >Dashboard</a
               >
             </div>
           </div>
@@ -182,14 +194,24 @@
           </a>
         </div>
         <a
+          href="#agendamiento"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Agendamiento</a
+        >
+        <a
+          href="#clientes"
+          class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
+          >Gestión de Clientes</a
+        >
+        <a
           href="#pos"
           class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
           >Punto de Venta</a
         >
         <a
-          href="#subscriptions"
+          href="#dashboard"
           class="block py-2 px-6 text-[var(--dark)]/80 hover:bg-[var(--light)]"
-          >Suscripciones</a
+          >Dashboard</a
         >
         <a
           href="#use-cases"
@@ -227,267 +249,354 @@
           <h1
             class="text-4xl md:text-6xl font-extrabold text-[var(--dark)] tracking-tight"
           >
-            Más que un Punto de Venta, <br class="hidden md:block" />
-            tu Motor de
-            <span class="text-[var(--primary)]">Crecimiento Recurrente.</span>
+            Sistema de Agendamiento y Gestión <br class="hidden md:block" />
+            para tu
+            <span class="text-[var(--primary)] text-capitalize"
+              >Servicio de Belleza y Bienestar</span
+            >
           </h1>
           <p class="mt-6 max-w-3xl mx-auto text-lg text-[var(--dark)]/80">
-            Vyva es el sistema POS que te da las herramientas para gestionar tu
-            día a día y la capacidad única de transformarlo en ingresos
-            predecibles con suscripciones.
+            Gestiona tus citas, atiende a tus clientes y haz crecer tu negocio
+            con una plataforma todo-en-uno diseñada para servicios de belleza y
+            bienestar.
           </p>
+          <div
+            class="mt-8 flex flex-wrap justify-center gap-6 max-w-3xl mx-auto"
+          >
+            <div class="flex items-center gap-2 text-[var(--dark)]/80">
+              <span class="text-[var(--primary)] text-xl">✓</span>
+              <span class="font-medium">Agenda online 24/7</span>
+            </div>
+            <div class="flex items-center gap-2 text-[var(--dark)]/80">
+              <span class="text-[var(--primary)] text-xl">✓</span>
+              <span class="font-medium">Google Calendar</span>
+            </div>
+            <div class="flex items-center gap-2 text-[var(--dark)]/80">
+              <span class="text-[var(--primary)] text-xl">✓</span>
+              <span class="font-medium">Gestión de clientes</span>
+            </div>
+            <div class="flex items-center gap-2 text-[var(--dark)]/80">
+              <span class="text-[var(--primary)] text-xl">✓</span>
+              <span class="font-medium">Punto de venta</span>
+            </div>
+            <div class="flex items-center gap-2 text-[var(--dark)]/80">
+              <span class="text-[var(--primary)] text-xl">✓</span>
+              <span class="font-medium">Reportes en tiempo real</span>
+            </div>
+          </div>
           <div class="mt-8 flex justify-center gap-4">
             <a
-              href="#precios"
+              href="https://app.vyvapos.com/plans/essential"
+              target="_blank"
               class="bg-[var(--primary)] text-white px-8 py-3 rounded-[var(--button-radius)] font-semibold text-lg hover:brightness-90 transition-transform hover:scale-105 shadow-lg"
             >
-              Descubre los Planes
+              Empezar Gratis
             </a>
           </div>
           <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <a href="#pos" class="animate-bounce text-[var(--primary)] text-4xl"
+            <a
+              href="#agendamiento"
+              class="animate-bounce text-[var(--primary)] text-4xl"
               >↓</a
             >
           </div>
         </div>
       </section>
 
-      <!-- Section 2: POS First -->
-      <section id="pos" class="py-20 sm:py-24 px-6 bg-white">
+      <!-- Section 2: Agendamiento Online -->
+      <section id="agendamiento" class="py-20 sm:py-24 px-6 bg-white">
         <div class="container mx-auto animated-section">
           <div class="text-center max-w-3xl mx-auto">
             <span class="text-[var(--primary)] font-semibold"
-              >TU CENTRO DE OPERACIONES</span
+              >AGENDA INTELIGENTE</span
             >
             <h2
               class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
             >
-              Un Punto de Venta Robusto y Fácil de Usar
+              Tus Clientes Reservan, Tú te Enfocas en Atenderlos
             </h2>
             <p class="mt-4 text-lg text-[var(--dark)]/80">
-              Todo lo que necesitas para administrar tu negocio de manera
-              eficiente, centralizado en una sola plataforma intuitiva y
-              accesible desde cualquier dispositivo.
+              Sistema completo de agendamiento online que permite a tus clientes
+              reservar citas 24/7, mientras tú mantienes el control total de tu
+              agenda.
+            </p>
+          </div>
+          <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">📅</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Página de Reservas Personalizada
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Comparte tu link único y recibe reservas automáticamente. Tu
+                página personalizada con tu marca y servicios.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">🔄</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Sincronización con Google Calendar
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Mantén todos tus calendarios actualizados automáticamente. Las
+                citas de Vyva aparecen en tu Google Calendar.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">👥</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Gestión de Equipo
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Asigna citas a cada miembro de tu equipo según su especialidad y
+                disponibilidad.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">⏰</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Horarios Flexibles
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Configura tu disponibilidad por día, empleado y servicio.
+                Control total sobre tu tiempo.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">📧</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Recordatorios Automáticos
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Reduce las ausencias con notificaciones automáticas por email
+                antes de cada cita.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">📱</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Totalmente Responsive
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Tus clientes pueden reservar desde cualquier dispositivo: móvil,
+                tablet o computador.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Gestión de Clientes -->
+      <section id="clientes" class="py-20 sm:py-24 px-6">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <span class="text-[var(--primary)] font-semibold"
+              >CONSTRUYE LEALTAD</span
+            >
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
+            >
+              Conoce a tus Clientes, Construye Lealtad
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Una base de datos completa de tus clientes con historial de citas
+              y compras. Todo lo que necesitas para fidelizar y ofrecer un
+              servicio personalizado.
             </p>
           </div>
           <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div
               class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
             >
+              <div class="text-3xl mb-3">📊</div>
               <h3 class="font-bold text-lg text-[var(--dark)]">
-                Gestión de Ventas
+                Base de Datos Completa
               </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Procesa ventas rápidamente, acepta múltiples métodos de pago y
-                mantén tu flujo de caja organizado.
+                Información de contacto, preferencias y notas personalizadas de
+                cada cliente.
               </p>
             </div>
             <div
               class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
             >
+              <div class="text-3xl mb-3">📜</div>
               <h3 class="font-bold text-lg text-[var(--dark)]">
-                Control de Inventario
+                Historial de Citas
               </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Lleva un registro preciso de tus productos, recibe alertas de
-                stock bajo y optimiza tus compras.
+                Ve qué servicios ha tomado cada cliente, cuándo fue su última
+                visita y más.
               </p>
             </div>
             <div
               class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
             >
+              <div class="text-3xl mb-3">💰</div>
               <h3 class="font-bold text-lg text-[var(--dark)]">
-                Base de Clientes
+                Historial de Compras
               </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Crea perfiles de clientes, analiza su historial de compras y
-                fortalece la relación con ellos.
+                Conoce el valor de cada cliente y qué productos o servicios
+                prefiere.
               </p>
             </div>
             <div
               class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
             >
-              <h3 class="font-bold text-lg text-[var(--dark)]">
-                Links de Pago
-              </h3>
+              <div class="text-3xl mb-3">📈</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Estadísticas</h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Envía enlaces de pago directamente al correo de tus clientes
-                para facilitar las ventas a distancia.
+                Clientes nuevos, recurrentes, promedio de gasto y más métricas
+                importantes.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Section 3: Why Subscriptions? -->
-      <section class="py-20 sm:py-24 px-6">
-        <div
-          class="container mx-auto grid md:grid-cols-2 gap-12 items-center animated-section"
-        >
-          <div class="text-center md:text-left">
-            <h2
-              class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
-            >
-              ¿Por qué un POS con Gestión de Suscripciones?
-            </h2>
-            <p class="mt-4 text-lg text-[var(--dark)]/80">
-              Porque el mercado ha cambiado. Ya no basta con registrar una
-              venta; el éxito está en construir relaciones y asegurar ingresos a
-              futuro. Un modelo de suscripción es la forma más efectiva de
-              lograrlo.
-            </p>
-            <p class="mt-4 text-lg text-[var(--dark)]/80">
-              Con Vyva, no solo gestionas tu presente, inviertes en un futuro
-              financiero estable y predecible.
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-6">
-            <div
-              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg text-center"
-            >
-              <p class="text-4xl font-extrabold text-[var(--primary)]">5x</p>
-              <p class="mt-1 font-semibold text-[var(--dark)]/90">
-                Más caro adquirir un cliente nuevo que retener uno existente.
-              </p>
-            </div>
-            <div
-              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg text-center"
-            >
-              <p class="text-4xl font-extrabold text-[var(--primary)]">+40%</p>
-              <p class="mt-1 font-semibold text-[var(--dark)]/90">
-                Aumenta el Valor de Vida del Cliente (LTV) con modelos de
-                recurrencia.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 4: The Subscription Feature -->
-      <section
-        id="subscriptions"
-        class="py-20 sm:py-24 px-6 bg-white overflow-hidden"
-      >
-        <div
-          class="container mx-auto grid md:grid-cols-2 gap-12 items-center animated-section"
-        >
-          <div class="relative">
-            <div
-              class="w-full max-w-xs mx-auto bg-black rounded-[40px] shadow-2xl p-2 border-8 border-black relative"
-            >
-              <div class="bg-white rounded-[32px] p-4 flex flex-col h-[550px]">
-                <div
-                  class="flex justify-between items-center mb-4 border-b pb-2"
-                >
-                  <h4 class="font-bold text-lg text-[var(--dark)]">
-                    Nuevo Pedido
-                  </h4>
-                  <span class="text-xs font-mono text-[var(--secondary)]"
-                    >#VYVA-001</span
-                  >
-                </div>
-                <div
-                  id="pos-cart-items"
-                  class="flex-grow space-y-3 overflow-y-auto pr-2"
-                >
-                  <p class="text-[var(--secondary)] text-center pt-16">
-                    El carrito está vacío...
-                  </p>
-                </div>
-                <div class="border-t pt-4 mt-4">
-                  <div class="flex justify-between font-bold text-xl">
-                    <span>Total:</span>
-                    <span id="pos-cart-total">$0</span>
-                  </div>
-                  <button
-                    id="pos-send-link"
-                    class="w-full bg-[var(--primary)] text-white p-3 rounded-[var(--button-radius)] mt-4 font-semibold hover:brightness-90 disabled:bg-[var(--primary-light)] disabled:animate-none animate-pulse"
-                  >
-                    Enviar Link de Pago
-                  </button>
-                </div>
-              </div>
-              <div
-                id="pos-modal"
-                class="absolute inset-2 bg-black bg-opacity-20 flex items-center justify-center rounded-[32px] hidden modal-enter"
-              >
-                <div
-                  class="bg-white p-6 rounded-[var(--default-radius)] shadow-xl text-center mx-4"
-                >
-                  <div class="text-5xl mb-4">✅</div>
-                  <p class="font-semibold text-[var(--dark)] text-lg">
-                    ¡Link de pago enviado!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center md:text-left">
+      <!-- Section 4: Punto de Venta -->
+      <section id="pos" class="py-20 sm:py-24 px-6 bg-white">
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
             <span class="text-[var(--primary)] font-semibold"
-              >LA VENTAJA VYVA</span
+              >PAGOS Y VENTAS</span
             >
             <h2
               class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
             >
-              Experimenta la Fluidez de Nuestro POS
+              Cobra Fácil, Vende Más
             </h2>
             <p class="mt-4 text-lg text-[var(--dark)]/80">
-              Observa cómo nuestro sistema simplifica una venta. Añade productos
-              y suscripciones al carrito, ajusta cantidades y envía el link de
-              pago con un solo clic. Todo en una interfaz limpia y rápida.
+              Punto de venta integrado para procesar pagos, vender productos y
+              servicios, todo desde una sola plataforma.
             </p>
-            <p class="mt-2 text-[var(--dark)]/60 text-sm">
-              (La demostración se ejecuta automáticamente, pero puedes
-              interactuar con ella en cualquier momento).
-            </p>
+          </div>
+          <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">💳</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Gestión de ventas
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Procesa las ventas de tus servicios y productos de manera rápida
+                y segura.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">🛒</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Carrito Integrado
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Vende productos y servicios juntos. Combina tratamientos con
+                productos fácilmente.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">🧾</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Facturación</h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Gestión completa de órdenes de venta y facturación para tu
+                negocio.
+              </p>
+            </div>
+            <div
+              class="bg-[var(--light)] p-6 rounded-[var(--default-radius)] border border-slate-200"
+            >
+              <div class="text-3xl mb-3">📊</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Control Total
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Registra todas tus transacciones y mantén control sobre tu flujo
+                de caja.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Section 5: Reminders -->
+      <!-- Section 5: Gestión de Equipo -->
       <section class="py-20 sm:py-24 px-6">
-        <div class="container mx-auto text-center max-w-4xl animated-section">
-          <h2
-            class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
-          >
-            Comunicación Automática que Fideliza
-          </h2>
-          <p class="mt-4 text-lg text-[var(--dark)]/80">
-            Mantén a tus clientes informados en cada paso del proceso de pago
-            sin mover un dedo.
-          </p>
-          <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
-            <div
-              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+        <div class="container mx-auto animated-section">
+          <div class="text-center max-w-3xl mx-auto">
+            <span class="text-[var(--primary)] font-semibold">TU EQUIPO</span>
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
             >
-              <h4 class="font-bold text-xl text-[var(--dark)]">
-                Recordatorios de Pago
-              </h4>
+              Coordina tu Equipo sin Complicaciones
+            </h2>
+            <p class="mt-4 text-lg text-[var(--dark)]/80">
+              Gestiona a todo tu equipo desde una sola plataforma. Asigna citas,
+              controla permisos y haz seguimiento del desempeño.
+            </p>
+          </div>
+          <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg border border-slate-200"
+            >
+              <div class="text-3xl mb-3">👨‍💼</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Perfiles de Empleados
+              </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Notifica a tus clientes antes de cada cobro para evitar
-                sorpresas y fallos.
+                Crea perfiles con fotos, especialidades y horarios de cada
+                miembro del equipo.
               </p>
             </div>
             <div
-              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg border border-slate-200"
             >
-              <h4 class="font-bold text-xl text-[var(--dark)]">
-                Confirmaciones de Éxito
-              </h4>
+              <div class="text-3xl mb-3">📅</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Asignación de Citas
+              </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Envía un recibo y agradecimiento automático después de cada pago
-                exitoso.
+                Distribuye el trabajo equitativamente y asigna especialistas
+                según el servicio.
               </p>
             </div>
             <div
-              class="border-t-4 border-[var(--primary)] bg-white p-6 rounded-[var(--default-radius)] shadow-lg"
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg border border-slate-200"
             >
-              <h4 class="font-bold text-xl text-[var(--dark)]">
-                Alertas de Fallo
-              </h4>
+              <div class="text-3xl mb-3">🔐</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Roles y Permisos
+              </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Si un pago falla, el sistema notifica al cliente para que pueda
-                actualizar su método de pago.
+                Controla quién ve y hace qué. Define permisos según el rol de
+                cada empleado.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg border border-slate-200"
+            >
+              <div class="text-3xl mb-3">📊</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Seguimiento de Desempeño
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Citas atendidas, ventas generadas y desempeño de cada miembro
+                del equipo.
               </p>
             </div>
           </div>
@@ -630,69 +739,70 @@
             <h2
               class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
             >
-              Perfecto para tu Tipo de Negocio
+              Diseñado para Negocios como el Tuyo
             </h2>
             <p class="mt-4 text-lg text-[var(--dark)]/80">
-              Vyva se adapta a ti. Descubre cómo diferentes industrias potencian
-              sus ingresos con suscripciones.
+              Vyva está especializado en servicios de belleza y bienestar.
+              Descubre cómo optimizar tu negocio con agendamiento inteligente.
             </p>
           </div>
           <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
-              <div class="text-3xl mb-3">🏋️</div>
-              <h3 class="font-bold text-lg text-[var(--dark)]">Gimnasios</h3>
-              <p class="mt-2 text-[var(--dark)]/80">
-                Ofrece membresías mensuales, trimestrales o anuales con cobro
-                automático. Vende paquetes de clases o sesiones de entrenamiento
-                personal.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
-              <div class="text-3xl mb-3">🍽️</div>
-              <h3 class="font-bold text-lg text-[var(--dark)]">Restaurantes</h3>
-              <p class="mt-2 text-[var(--dark)]/80">
-                Crea un "Club del Café" con recargas mensuales, ofrece kits de
-                comida semanales o menús de degustación exclusivos para
-                suscriptores.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
-              <div class="text-3xl mb-3">👕</div>
+              <div class="text-3xl mb-3">💇‍♀️</div>
               <h3 class="font-bold text-lg text-[var(--dark)]">
-                Tiendas de Ropa
+                Salones de Belleza
               </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Lanza una "Caja de Estilo" mensual, ofrece acceso anticipado a
-                nuevas colecciones o un club de descuentos VIP para miembros.
+                Gestiona cortes, tintes y peinados. Asigna estilistas según
+                especialidad y mantén tu agenda llena con reservas online.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">✨</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Estéticas Faciales
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Agenda tratamientos faciales, lleva el historial completo de
+                cada cliente y vende productos de cuidado de la piel.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">🧖‍♀️</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Spas y Centros de Bienestar
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Masajes, tratamientos corporales, múltiples salas y terapeutas.
+                Coordina todo desde una sola plataforma.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">💉</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">
+                Clínicas Estéticas
+              </h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Consultas, procedimientos y seguimiento de tratamientos.
+                Gestiona tu clínica con herramientas profesionales.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
+              <div class="text-3xl mb-3">💈</div>
+              <h3 class="font-bold text-lg text-[var(--dark)]">Barberías</h3>
+              <p class="mt-2 text-[var(--dark)]/80">
+                Cortes y arreglos de barba. Gestión de turnos rápidos y base de
+                datos de clientes recurrentes.
               </p>
             </div>
             <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
               <div class="text-3xl mb-3">💆‍♀️</div>
               <h3 class="font-bold text-lg text-[var(--dark)]">
-                Estéticas Faciales
+                Centros de Masajes
               </h3>
               <p class="mt-2 text-[var(--dark)]/80">
-                Vende paquetes de tratamientos faciales mensuales, suscripciones
-                a productos de cuidado de la piel o planes de mantenimiento.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
-              <div class="text-3xl mb-3">🦷</div>
-              <h3 class="font-bold text-lg text-[var(--dark)]">Odontología</h3>
-              <p class="mt-2 text-[var(--dark)]/80">
-                Ofrece planes de higiene dental semestrales, paquetes de
-                blanqueamiento con seguimiento o planes familiares con cobertura
-                básica.
-              </p>
-            </div>
-            <div class="bg-white p-6 rounded-[var(--default-radius)] shadow-lg">
-              <div class="text-3xl mb-3">💡</div>
-              <h3 class="font-bold text-lg text-[var(--dark)]">
-                Y Muchos Más...
-              </h3>
-              <p class="mt-2 text-[var(--dark)]/80">
-                Academias, spas, servicios de limpieza, consultorías... Si tu
-                servicio se puede repetir, se puede suscribir con Vyva.
+                Diferentes tipos de masajes, duración variable de sesiones y
+                terapeutas especializados en una sola agenda.
               </p>
             </div>
           </div>
@@ -713,22 +823,81 @@
                 class="faq-question p-6 w-full flex justify-between items-center text-left"
               >
                 <h3 class="font-semibold text-lg text-[var(--dark)]">
-                  ¿Puedo cambiar de plan en cualquier momento?
+                  ¿Mis clientes pueden reservar citas online?
                 </h3>
                 <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
               </button>
               <div class="faq-answer">
                 <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
                   <p>
-                    ¡Sí! Puedes subir o bajar de plan cuando lo necesites
-                    directamente desde tu panel de control. Los cambios se
-                    aplicarán en tu siguiente ciclo de facturación. Para conocer
-                    todos los planes disponibles, visita nuestra
-                    <a
-                      href="pricing.html"
-                      class="text-[var(--primary)] hover:underline"
-                      >página de precios</a
-                    >.
+                    ¡Sí! Tienes una página de reservas personalizada con tu
+                    marca. Comparte tu link único y tus clientes pueden reservar
+                    citas 24/7 desde cualquier dispositivo. Tú mantienes el
+                    control total de tu agenda.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Se sincroniza con mi Google Calendar?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    Sí. Las citas que se crean en Vyva se sincronizan
+                    automáticamente con tu Google Calendar. Puedes ver todas tus
+                    citas en un solo lugar y mantener tus calendarios siempre
+                    actualizados.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Puedo agregar a todos los miembros de mi equipo?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    Sí. Puedes agregar a todos los miembros de tu equipo, crear
+                    sus perfiles con fotos y especialidades, asignarles citas y
+                    controlar sus permisos de acceso según su rol.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="faq-item bg-[var(--light)] rounded-[var(--default-radius)]"
+            >
+              <button
+                class="faq-question p-6 w-full flex justify-between items-center text-left"
+              >
+                <h3 class="font-semibold text-lg text-[var(--dark)]">
+                  ¿Cómo funcionan los recordatorios de citas?
+                </h3>
+                <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
+              </button>
+              <div class="faq-answer">
+                <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
+                  <p>
+                    Vyva envía automáticamente recordatorios por email a tus
+                    clientes antes de cada cita. Esto ayuda a reducir las
+                    ausencias y mantiene a tus clientes informados.
                   </p>
                 </div>
               </div>
@@ -747,11 +916,10 @@
               <div class="faq-answer">
                 <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
                   <p>
-                    La seguridad es nuestra máxima prioridad. Utilizamos
-                    procesadores de pago que cumplen con los más altos
-                    estándares de seguridad PCI DSS. La información de las
-                    tarjetas de tus clientes está encriptada y nunca se almacena
-                    en nuestros servidores.
+                    La seguridad es nuestra máxima prioridad. Todos los datos
+                    están encriptados y almacenados de forma segura. La
+                    información de tus clientes está protegida con los más altos
+                    estándares de seguridad.
                   </p>
                 </div>
               </div>
@@ -763,17 +931,16 @@
                 class="faq-question p-6 w-full flex justify-between items-center text-left"
               >
                 <h3 class="font-semibold text-lg text-[var(--dark)]">
-                  ¿Necesito conocimientos técnicos para empezar?
+                  ¿Puedo personalizar mi página de reservas?
                 </h3>
                 <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
               </button>
               <div class="faq-answer">
                 <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
                   <p>
-                    Para nada. Vyva está diseñado para ser increíblemente
-                    intuitivo. Puedes configurar tus planes y empezar a vender
-                    en minutos, sin necesidad de configuraciones complejas: crea
-                    tu suscripción, genera el link y comparte.
+                    Sí. Puedes personalizar los colores de tu marca, agregar tu
+                    logo y fotos de tu negocio. Tu página de reservas reflejará
+                    la identidad de tu salón, estética o spa.
                   </p>
                 </div>
               </div>
@@ -785,17 +952,16 @@
                 class="faq-question p-6 w-full flex justify-between items-center text-left"
               >
                 <h3 class="font-semibold text-lg text-[var(--dark)]">
-                  ¿Necesito comprar algún equipo especial para usar el POS?
+                  ¿Qué reportes puedo ver?
                 </h3>
                 <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
               </button>
               <div class="faq-answer">
                 <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
                   <p>
-                    No. El Punto de Venta de Vyva funciona en cualquier
-                    dispositivo con un navegador web: tu computador, una tablet
-                    o incluso tu celular. No necesitas invertir en hardware
-                    costoso.
+                    Puedes ver reportes de ventas, citas completadas, clientes
+                    nuevos, ingresos por empleado, métodos de pago y más. Todo
+                    en tiempo real desde tu dashboard.
                   </p>
                 </div>
               </div>
@@ -807,22 +973,17 @@
                 class="faq-question p-6 w-full flex justify-between items-center text-left"
               >
                 <h3 class="font-semibold text-lg text-[var(--dark)]">
-                  ¿Por qué se cobran comisiones?
+                  ¿Necesito descargar algo o es web?
                 </h3>
                 <span class="faq-arrow text-2xl text-[var(--primary)]">↓</span>
               </button>
               <div class="faq-answer">
                 <div class="px-6 pt-0 pb-4 text-[var(--dark)]/80">
                   <p>
-                    Las comisiones cubren el uso de la plataforma Vyva POS. Las
-                    tarifas incluyen el cobro de la pasarela de pagos. Para
-                    conocer los detalles específicos de comisiones y tarifas,
-                    visita nuestra
-                    <a
-                      href="pricing.html"
-                      class="text-[var(--primary)] hover:underline"
-                      >página de precios</a
-                    >.
+                    Es 100% web. No necesitas descargar ni instalar nada.
+                    Funciona en cualquier navegador desde tu computador, tablet
+                    o celular. Siempre actualizado y accesible desde cualquier
+                    lugar.
                   </p>
                 </div>
               </div>
@@ -839,12 +1000,12 @@
           <h2
             class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--dark)]"
           >
-            ¿Listo para empezar a vender y construir ingresos recurrentes?
+            ¿Listo para llevar tu salón al siguiente nivel?
           </h2>
           <p class="mt-4 text-lg text-[var(--dark)]/80">
-            Únete a los negocios que ya están asegurando su futuro con ingresos
-            recurrentes. La configuración es rápida y nuestro equipo está listo
-            para ayudarte en cada paso.
+            Únete a los salones, estéticas y spas que ya están optimizando su
+            gestión con Vyva. La configuración es rápida y nuestro equipo está
+            listo para ayudarte en cada paso.
           </p>
           <div class="mt-8">
             <a
@@ -852,7 +1013,7 @@
               target="_blank"
               class="bg-[var(--primary)] text-white px-10 py-4 rounded-[var(--button-radius)] font-semibold text-xl hover:brightness-90 transition-transform hover:scale-105 shadow-lg inline-block"
             >
-              Empieza a vender
+              Empezar Gratis
             </a>
           </div>
         </div>
