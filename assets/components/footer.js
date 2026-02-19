@@ -21,7 +21,7 @@ function createFooter() {
         </a>
       </div>
       <p class="text-sm text-slate-400 order-2 md:order-none">
-        © 2024 Vyva. Todos los derechos reservados.
+        © 2024 Vyva POS, LLC. Todos los derechos reservados.
       </p>
     </div>
   `;
