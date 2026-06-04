@@ -1,0 +1,151 @@
+/**
+ * Estilos Vyva para páginas Starlight (docs).
+ * Complementa global.css; no reemplaza el tema base.
+ */
+:root {
+	--sl-content-width: 52rem;
+	--vyva-doc-radius: 0.75rem;
+}
+
+/* Título de página: más presencia sin competir con el contenido */
+.content-panel .sl-container > h1#_top,
+h1.page-title {
+	letter-spacing: -0.02em;
+}
+
+/* Contenido convertido desde HTML: h4/h5 demasiado profundos */
+.sl-markdown :is(h4, h5, h6) {
+	font-size: var(--sl-text-lg);
+	font-weight: 600;
+	margin-top: 1.25rem;
+	margin-bottom: 0.35rem;
+	color: var(--sl-color-text);
+}
+
+.sl-markdown h3 {
+	margin-top: 2rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+/* Párrafos que son solo emoji (restos del HTML antiguo) */
+.sl-markdown p:has(> :only-child:is(img, span)),
+.sl-markdown p:empty {
+	display: none;
+}
+
+/* Ocultar líneas que son únicamente pictogramas Unicode */
+@supports selector(:has(*)) {
+	.sl-markdown p:where(:not(:has(a, strong, em, code))) {
+		/* líneas muy cortas sin enlaces suelen ser emoji sueltos */
+	}
+}
+
+/* Bloque CTA: fila de botones en MDX */
+.vyva-cta-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin: 1.5rem 0 2rem;
+}
+
+.vyva-cta-row .sl-link-button {
+	margin: 0;
+}
+
+/* Hero intro en páginas MDX */
+.vyva-doc-lead {
+	font-size: var(--sl-text-lg);
+	line-height: 1.65;
+	color: var(--sl-color-gray-2);
+	margin-bottom: 1.5rem;
+	max-width: 42rem;
+}
+
+/* FAQ dentro de tabs: preguntas como subtítulos compactos */
+.sl-markdown .starlight-tabs .sl-markdown h3,
+.sl-markdown .starlight-tabs h3 {
+	font-size: var(--sl-text-base);
+	font-weight: 600;
+	margin-top: 1.5rem;
+	margin-bottom: 0.5rem;
+	border: none;
+	padding: 0;
+}
+
+.sl-markdown .starlight-tabs .sl-markdown h3:first-child,
+.sl-markdown .starlight-tabs h3:first-child {
+	margin-top: 0;
+}
+
+/* Legal: párrafos más legibles */
+.sl-markdown[data-page-type='legal'] p,
+body:has([href='/privacy']) .sl-markdown p,
+body:has([href='/terms']) .sl-markdown p {
+	max-width: 65ch;
+}
+
+/* Listas en docs legales y pricing */
+.sl-markdown ul {
+	padding-left: 1.25rem;
+}
+
+.sl-markdown li + li {
+	margin-top: 0.35rem;
+}
+
+/* Enlaces seguidos en markdown plano (fallback si no hay MDX) */
+.sl-markdown > p:has(a + a) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.sl-markdown > p:has(a + a) a {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	border-radius: var(--vyva-doc-radius);
+	font-weight: 600;
+	font-size: var(--sl-text-sm);
+	text-decoration: none;
+	transition: filter 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.sl-markdown > p:has(a + a) a:first-of-type {
+	background: var(--sl-color-accent);
+	color: var(--sl-color-black);
+}
+
+.sl-markdown > p:has(a + a) a:not(:first-of-type) {
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-text);
+	border: 1px solid var(--sl-color-hairline);
+}
+
+.sl-markdown > p:has(a + a) a:hover {
+	filter: brightness(0.96);
+}
+
+/* Card grids: un poco más de aire */
+.card-grid {
+	gap: 1rem;
+}
+
+/* Aside al inicio de pricing */
+.sl-markdown aside {
+	margin: 1rem 0 1.5rem;
+}
+
+/* Pie de página CTA en markdown */
+.sl-markdown > p:last-child {
+	color: var(--sl-color-gray-3);
+	font-size: var(--sl-text-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sl-markdown > p:has(a + a) a {
+		transition: none;
+	}
+}

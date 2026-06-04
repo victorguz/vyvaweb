@@ -1,0 +1,25 @@
+---
+interface Props {
+	variant?: 'tip' | 'note';
+	title: string;
+}
+
+const { variant = 'tip', title } = Astro.props;
+
+const styles = {
+	tip: 'border-brand-200 bg-brand-50 text-brand-950',
+	note: 'border-slate-200 bg-slate-50 text-slate-800',
+};
+---
+
+<aside
+	class:list={[
+		'my-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed',
+		styles[variant],
+	]}
+>
+	<p class="font-semibold">{title}</p>
+	<div class="mt-2 text-slate-700 [&_a]:font-medium [&_a]:text-brand-700 [&_a]:underline">
+		<slot />
+	</div>
+</aside>

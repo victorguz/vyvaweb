@@ -1,0 +1,22 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Astro 6 requiere Node >= 22.12
+        - nvm install 22
+        - nvm use 22
+        - corepack enable
+        - corepack prepare pnpm@latest --activate
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .astro/**/*

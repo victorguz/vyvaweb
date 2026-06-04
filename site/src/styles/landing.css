@@ -1,0 +1,97 @@
+/* Tailwind for the marketing pages (with Preflight), kept separate from
+   Starlight's compatibility layer per Starlight's multi-config guidance. */
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+	/* Vyva brand accent (periwinkle / indigo) — locked, single accent */
+	--color-brand-50: #eef0fc;
+	--color-brand-100: #dfe3f9;
+	--color-brand-200: #c4cbf3;
+	--color-brand-300: #a6b0ec;
+	--color-brand-400: #8a96e8;
+	--color-brand-500: #7b8be9;
+	--color-brand-600: #5d6cd6;
+	--color-brand-700: #4a56b8;
+	--color-brand-800: #3c4791;
+	--color-brand-900: #343c73;
+	--color-brand-950: #1f2348;
+
+	--color-ink: #2a2a4a;
+}
+
+/* Strong custom easing curves (per Emil Kowalski's design-eng guidance).
+   Built-in CSS easings are too weak for intentional UI motion. */
+:root {
+	--ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+/* Scroll-reveal: elements start slightly offset and settle in.
+   GSAP drives this when JS is available; this is the no-JS / pre-hydration
+   resting state so content is never hidden from crawlers. */
+[data-reveal] {
+	opacity: 1;
+}
+
+.js [data-reveal] {
+	opacity: 0;
+	transform: translateY(16px);
+}
+
+/* Pressable feel: instant tactile feedback on interactive elements. */
+.btn-press {
+	transition: transform 160ms var(--ease-out-strong), filter 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+	.btn-press:hover {
+		filter: brightness(0.96);
+	}
+}
+.btn-press:active {
+	transform: scale(0.97);
+}
+
+/* Páginas de marketing internas (pricing, faq, legal futuro) */
+.page-hero {
+	padding-top: 4rem;
+	padding-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+	.page-hero {
+		padding-top: 5rem;
+		padding-bottom: 4rem;
+	}
+}
+
+.section-heading {
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+	.section-heading {
+		font-size: 1.875rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	.js [data-reveal] {
+		opacity: 1;
+		transform: none;
+	}
+}

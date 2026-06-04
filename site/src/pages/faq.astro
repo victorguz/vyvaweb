@@ -1,0 +1,96 @@
+---
+import Landing from '../layouts/Landing.astro';
+import Nav from '../components/Nav.svelte';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import FaqPage from '../components/FaqPage.svelte';
+
+const SIGNUP = 'https://app.vyvapos.com/plans/essential';
+const SALES = 'https://calendly.com/victorguzber/conoce-vyva-pos';
+---
+
+<Landing
+	title="Preguntas frecuentes | Vyva"
+	description="Resolvemos las dudas más comunes sobre Vyva: planes, funcionalidades, aspectos técnicos y soporte."
+>
+	<Nav client:load />
+
+	<main>
+		<section class="page-hero relative overflow-hidden bg-white">
+			<div
+				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_50%_0%,var(--color-brand-100),transparent_70%)]"
+			>
+			</div>
+			<div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
+				<h1 data-reveal class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+					Preguntas frecuentes
+				</h1>
+				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
+					Respuestas sobre Vyva: planes, funcionalidades, aspectos técnicos y soporte.
+				</p>
+			</div>
+		</section>
+
+		<section class="pb-16 sm:pb-20">
+			<div class="mx-auto max-w-3xl px-5 sm:px-8">
+				<div data-reveal>
+					<FaqPage client:load />
+				</div>
+
+				<div
+					data-reveal
+					class="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center"
+				>
+					<p class="font-semibold text-ink">¿No encontraste tu respuesta?</p>
+					<p class="mt-2 text-sm text-slate-600">
+						Nuestro equipo puede ayudarte con preguntas específicas de tu negocio.
+					</p>
+					<div class="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+						<a
+							href="mailto:contact@solaradev.com"
+							class="btn-press rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700"
+						>
+							Contactar soporte
+						</a>
+						<a
+							href={SALES}
+							class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white"
+						>
+							Agendar demo
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="px-5 pb-24 sm:px-8">
+			<div
+				class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12"
+			>
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-white">
+					¿Listo para empezar?
+				</h2>
+				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+					<a
+						href={SIGNUP}
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
+					>
+						Empezar gratis
+						<Icon name="arrow-right" size={18} />
+					</a>
+					<a
+						href="/pricing"
+						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10"
+					>
+						Ver planes
+					</a>
+				</div>
+				<p data-reveal class="mt-6 text-sm text-brand-200">
+					Sin compromisos · Configuración en minutos · Soporte incluido
+				</p>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Landing>

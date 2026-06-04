@@ -1,0 +1,22 @@
+---
+import Icon from '../Icon.astro';
+
+interface Props {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	icon: any;
+	title: string;
+	body: string;
+}
+
+const { icon, title, body } = Astro.props;
+---
+
+<article
+	class="rounded-2xl border border-slate-200 bg-white p-5 transition-colors duration-300 hover:border-brand-300"
+>
+	<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700">
+		<Icon name={icon} size={22} />
+	</span>
+	<h3 class="mt-4 font-semibold text-ink">{title}</h3>
+	<p class="mt-1.5 text-sm leading-relaxed text-slate-600">{body}</p>
+</article>

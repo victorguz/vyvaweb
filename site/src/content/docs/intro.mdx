@@ -1,0 +1,61 @@
+---
+title: Introducción
+description: Qué es Vyva y cómo empezar con el sistema de agendamiento y gestión para servicios de belleza y bienestar.
+---
+
+import {
+	Aside,
+	Card,
+	CardGrid,
+	LinkButton,
+	LinkCard,
+} from '@astrojs/starlight/components';
+
+<p class="vyva-doc-lead">
+	Vyva es el sistema <strong>todo-en-uno de agendamiento y gestión</strong> para salones de belleza,
+	estéticas, spas, barberías y clínicas estéticas. Reservas online, clientes, punto de venta y
+	reportes en una sola plataforma.
+</p>
+
+<CardGrid stagger>
+	<Card title="Agendamiento 24/7" icon="clock">
+		Página de reservas con tu marca y sincronización con Google Calendar.
+	</Card>
+	<Card title="Gestión de clientes" icon="information">
+		Historial de citas, compras y métricas para fidelizar a tu base.
+	</Card>
+	<Card title="Punto de venta" icon="approve-check">
+		Cobra servicios y productos con carrito, facturación y control de caja.
+	</Card>
+	<Card title="Reportes" icon="open-book">
+		Ingresos, clientes nuevos y rendimiento del negocio en tiempo real.
+	</Card>
+</CardGrid>
+
+## Empezar en tres pasos
+
+1. Crea tu cuenta (incluye prueba gratuita).
+2. Configura servicios, horarios y equipo.
+3. Comparte tu página de reservas y recibe citas.
+
+<div class="vyva-cta-row">
+	<LinkButton href="https://app.vyvapos.com/plans/essential" variant="primary">
+		Empezar gratis
+	</LinkButton>
+	<LinkButton href="/pricing" variant="secondary">
+		Ver planes
+	</LinkButton>
+</div>
+
+<Aside type="tip" title="¿Dudas?">
+	Consulta las <a href="/faq">preguntas frecuentes</a> o los detalles en{' '}
+	<a href="/pricing">planes y precios</a>.
+</Aside>
+
+## Más recursos
+
+<CardGrid>
+	<LinkCard title="Planes y precios" href="/pricing" />
+	<LinkCard title="Preguntas frecuentes" href="/faq" />
+	<LinkCard title="Política de privacidad" href="/privacy" />
+</CardGrid>
