@@ -3,24 +3,23 @@ frontend:
   phases:
     preBuild:
       commands:
-        # Astro 6 requiere Node >= 22.12 (.nvmrc en la raíz del repo)
         - nvm install 22
         - nvm use 22
         - node -v
         - corepack enable
         - corepack prepare pnpm@9.15.9 --activate
         - pnpm -v
+        - pnpm config set store-dir .pnpm-store
         - pnpm install --frozen-lockfile
     build:
       commands:
         - pnpm run build
   artifacts:
-    # Salida de `astro build` en la raíz (ya no en site/)
     baseDirectory: dist
     files:
       - '**/*'
   cache:
     paths:
       - node_modules/**/*
-      - ~/.pnpm-store/**/*
+      - .pnpm-store/**/*
       - .astro/**/*
