@@ -1,5 +1,6 @@
 ---
 import '../styles/landing.css';
+import MicrosoftClarity from '../components/MicrosoftClarity.astro';
 
 interface Props {
 	title?: string;
@@ -48,6 +49,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 			// sin ocultar el contenido cuando JS está deshabilitado (SEO friendly).
 			document.documentElement.classList.add('js');
 		</script>
+		<MicrosoftClarity />
 	</head>
 	<body class="bg-white text-ink antialiased">
 		<slot />

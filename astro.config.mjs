@@ -5,6 +5,7 @@ import svelte from '@astrojs/svelte';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
+import { CLARITY_SCRIPT } from './src/lib/clarity.mjs';
 
 const SITE = 'https://vyvapos.com';
 
@@ -13,6 +14,13 @@ export default defineConfig({
 	site: SITE,
 	integrations: [
 		starlight({
+			head: [
+				{
+					tag: 'script',
+					attrs: { type: 'text/javascript' },
+					content: CLARITY_SCRIPT,
+				},
+			],
 			title: 'Vyva',
 			description:
 				'Documentación y recursos de Vyva, el sistema de agendamiento y gestión para servicios de belleza y bienestar.',
