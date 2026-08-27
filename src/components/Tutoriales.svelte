@@ -33,13 +33,15 @@
 			href={`/tutoriales/${item.slug}`}
 			class="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition-shadow duration-200 hover:shadow-lg"
 		>
-			<div class="relative aspect-video bg-slate-100">
+			<div class="relative aspect-video overflow-hidden bg-slate-100">
 				<img
 					src={`/tutoriales/${item.slug}.jpg`}
 					alt=""
 					loading="lazy"
 					decoding="async"
-					class="h-full w-full object-cover"
+					class="h-full w-full"
+					class:object-cover={!item.vertical}
+					class:object-contain={item.vertical}
 				/>
 				<span
 					class="absolute inset-0 flex items-center justify-center bg-ink/0 transition-colors duration-200 group-hover:bg-ink/10"

@@ -20,743 +20,846 @@
   "tutoriales": [
     {
       "slug": "vyva-configurar-negocio",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "primeros-pasos",
       "titulo": "Configurar tu negocio",
       "descripcion": "Datos públicos, enlace de reserva y qué se muestra a tus clientes.",
-      "duracion": "0:50",
-      "segundos": 49.6,
+      "duracion": "0:49",
+      "segundos": 48.7,
       "pasos": [
         {
           "n": 1,
           "texto": "Configura los datos públicos de tu negocio",
-          "t": 3.9
+          "t": 3.1
         },
         {
           "n": 2,
-          "texto": "Entra en Configuración, Mi Negocio",
-          "t": 8.5
+          "texto": "Abre el menú",
+          "t": 6
         },
         {
           "n": 3,
-          "texto": "Aquí van el nombre y el identificador de tu página",
-          "t": 12
+          "texto": "Pulsa el nombre de tu negocio y entras en su configuración",
+          "t": 8.1
         },
         {
           "n": 4,
-          "texto": "Este es el enlace que compartes para que te reserven",
-          "t": 16.3
+          "texto": "Empieza por el logo, que es tu cara ante el cliente",
+          "t": 12
         },
         {
           "n": 5,
-          "texto": "Añade un eslogan: lo verán tus clientes",
-          "t": 20.3
+          "texto": "Ajusta el encuadre y confirma",
+          "t": 16
         },
         {
           "n": 6,
-          "texto": "En Perfil público decides qué se muestra",
-          "t": 25.4
+          "texto": "Aquí van el nombre y el identificador de tu página",
+          "t": 20.9
         },
         {
           "n": 7,
-          "texto": "Agendamiento online es lo que permite reservar",
-          "t": 29
+          "texto": "Y este es el enlace que compartes para que te reserven",
+          "t": 24.4
         },
         {
           "n": 8,
-          "texto": "Y con Tienda online muestras tu catálogo",
-          "t": 33
+          "texto": "Añade un eslogan: lo verán tus clientes",
+          "t": 27.9
         },
         {
           "n": 9,
-          "texto": "Guarda la información",
-          "t": 36.3
+          "texto": "En Perfil público, el agendamiento en línea es lo que permite reservar",
+          "t": 31.9
         },
         {
           "n": 10,
+          "texto": "Guarda la información",
+          "t": 36.4
+        },
+        {
+          "n": 11,
           "texto": "Tu negocio ya está listo para recibir reservas",
-          "t": 44.1
+          "t": 43.7
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-login",
+      "ancho": 1280,
+      "alto": 800,
+      "vertical": false,
       "grupo": "primeros-pasos",
       "titulo": "Iniciar sesión",
       "descripcion": "Entra a Vyva desde cualquier navegador.",
-      "duracion": "0:21",
-      "segundos": 21.1,
+      "duracion": "0:17",
+      "segundos": 17.2,
       "pasos": [
         {
           "n": 1,
           "texto": "Entra a Vyva desde tu navegador",
-          "t": 1.9
+          "t": 1.5
         },
         {
           "n": 2,
           "texto": "Lo más rápido: continuar con Google",
-          "t": 4.8
+          "t": 3.9
         },
         {
           "n": 3,
           "texto": "O usa tu correo electrónico",
-          "t": 8.5
+          "t": 7
         },
         {
           "n": 4,
           "texto": "Pulsa Continuar y te pedirá tu contraseña",
-          "t": 15
+          "t": 12.4
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-registrar-negocio",
+      "ancho": 1280,
+      "alto": 800,
+      "vertical": false,
       "grupo": "primeros-pasos",
       "titulo": "Registrar tu negocio",
       "descripcion": "Los cinco pasos del asistente: nombre, qué ofreces, área y punto físico.",
-      "duracion": "0:59",
-      "segundos": 58.8,
+      "duracion": "0:48",
+      "segundos": 48.1,
       "pasos": [
         {
           "n": 1,
           "texto": "Registra tu negocio en Vyva en cinco pasos",
-          "t": 3
+          "t": 2.4
         },
         {
           "n": 2,
           "texto": "Primero, el nombre que verán tus clientes; si ya hay uno puesto, cámbialo",
-          "t": 6.7
+          "t": 5.5
         },
         {
           "n": 3,
           "texto": "Elige si vendes productos, servicios con cita, o ambos",
-          "t": 15.2
+          "t": 12.4
         },
         {
           "n": 4,
           "texto": "El área ajusta la app a tu tipo de negocio",
-          "t": 22.8
+          "t": 18.7
         },
         {
           "n": 5,
           "texto": "Si atiendes en un local, aquí va la dirección",
-          "t": 28.8
+          "t": 23.5
         },
         {
           "n": 6,
           "texto": "En este ejemplo atendemos en línea",
-          "t": 32.6
+          "t": 26.8
         },
         {
           "n": 7,
           "texto": "Por último el logo y las fotos de portada, que puedes dejar para más tarde",
-          "t": 38.2
+          "t": 31.3
         },
         {
           "n": 8,
           "texto": "Tu negocio ya está creado y listo para usar",
-          "t": 53
+          "t": 43.5
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-registro-cliente",
+      "ancho": 1280,
+      "alto": 800,
+      "vertical": false,
       "grupo": "primeros-pasos",
       "titulo": "Crear tu cuenta",
       "descripcion": "Regístrate con tu correo o con Google en menos de un minuto.",
-      "duracion": "0:39",
-      "segundos": 39.1,
+      "duracion": "0:34",
+      "segundos": 34.4,
       "pasos": [
         {
           "n": 1,
           "texto": "Crea tu cuenta de cliente en Vyva",
-          "t": 2.4
+          "t": 1.9
         },
         {
           "n": 2,
           "texto": "Lo más rápido es continuar con Google",
-          "t": 5.2
+          "t": 4.3
         },
         {
           "n": 3,
           "texto": "O escribe tu correo electrónico",
-          "t": 8.7
+          "t": 7.1
         },
         {
           "n": 4,
           "texto": "Vyva comprueba si ya tienes cuenta",
-          "t": 12.9
+          "t": 10.6
         },
         {
           "n": 5,
           "texto": "Si eres nuevo, te pide los datos para crear la cuenta",
-          "t": 16.6
+          "t": 15.7
         },
         {
           "n": 6,
           "texto": "Tu nombre completo",
-          "t": 21
+          "t": 19.3
         },
         {
           "n": 7,
           "texto": "Y tu teléfono, para las confirmaciones de cita",
-          "t": 24.3
+          "t": 22
         },
         {
           "n": 8,
           "texto": "Elige una contraseña que solo tú conozcas",
-          "t": 28.2
+          "t": 25.3
         },
         {
           "n": 9,
           "texto": "Acepta la política de privacidad y pulsa Continuar",
-          "t": 32.1
+          "t": 28.5
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-crear-formulario",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "catalogo",
       "titulo": "Crear un formulario",
       "descripcion": "Capta clientes con un enlace público, partiendo de una plantilla.",
-      "duracion": "0:38",
-      "segundos": 38.5,
+      "duracion": "0:32",
+      "segundos": 31.5,
       "pasos": [
         {
           "n": 1,
           "texto": "Crea un formulario para captar clientes",
-          "t": 2.1
+          "t": 1.7
         },
         {
           "n": 2,
           "texto": "Pulsa Nuevo formulario",
-          "t": 5.5
+          "t": 4.5
         },
         {
           "n": 3,
           "texto": "Parte de una plantilla para no empezar de cero",
-          "t": 8.4
+          "t": 6.8
         },
         {
           "n": 4,
           "texto": "Continúa al editor",
-          "t": 12
+          "t": 9.7
         },
         {
           "n": 5,
           "texto": "Ponle un nombre que reconozcas",
-          "t": 15.1
+          "t": 12.1
         },
         {
           "n": 6,
           "texto": "La plantilla ya trae nombre, correo y teléfono",
-          "t": 19
+          "t": 15.3
         },
         {
           "n": 7,
           "texto": "Cada campo elige su tipo y si es obligatorio",
-          "t": 23.2
+          "t": 18.8
         },
         {
           "n": 8,
           "texto": "Guarda el formulario",
-          "t": 26.7
+          "t": 21.7
         },
         {
           "n": 9,
           "texto": "Ya puedes compartir su enlace público",
-          "t": 33.5
+          "t": 27.3
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-crear-producto",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "catalogo",
       "titulo": "Crear un producto",
       "descripcion": "Igual que un servicio, pero con control de inventario.",
-      "duracion": "0:45",
-      "segundos": 45.4,
+      "duracion": "0:36",
+      "segundos": 36,
       "pasos": [
         {
           "n": 1,
           "texto": "Añade un producto a tu tienda",
-          "t": 3.9
+          "t": 3.2
         },
         {
           "n": 2,
           "texto": "Abre el menú",
-          "t": 6.6
+          "t": 5.5
         },
         {
           "n": 3,
           "texto": "Entra en Tienda",
-          "t": 9.4
+          "t": 7.5
         },
         {
           "n": 4,
-          "texto": "Pulsa Añadir un producto",
-          "t": 13.4
+          "texto": "Pulsa Nuevo producto",
+          "t": 9.9
         },
         {
           "n": 5,
           "texto": "Nombre y precio",
-          "t": 16.2
+          "t": 12.1
         },
         {
           "n": 6,
           "texto": "Describe el producto",
-          "t": 22.2
+          "t": 16.7
         },
         {
           "n": 7,
           "texto": "A diferencia de un servicio, un producto lleva stock",
-          "t": 24.7
+          "t": 18.8
         },
         {
           "n": 8,
           "texto": "Activa el control de inventario",
-          "t": 28.9
+          "t": 22.3
         },
         {
           "n": 9,
           "texto": "Y pon cuántas unidades tienes",
-          "t": 31.6
+          "t": 24.6
         },
         {
           "n": 10,
           "texto": "Guarda el producto",
-          "t": 34.7
+          "t": 27
         },
         {
           "n": 11,
           "texto": "Ya está a la venta en tu tienda",
-          "t": 41
+          "t": 32.2
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-crear-servicio",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "catalogo",
       "titulo": "Crear un servicio",
       "descripcion": "Precio y duración, que es lo que define los huecos de tu agenda.",
-      "duracion": "0:41",
-      "segundos": 41.1,
+      "duracion": "0:33",
+      "segundos": 33.2,
       "pasos": [
         {
           "n": 1,
           "texto": "Añade un servicio a tu catálogo",
-          "t": 1.9
+          "t": 1.5
         },
         {
           "n": 2,
-          "texto": "Pulsa Añadir un servicio",
-          "t": 5
+          "texto": "Pulsa Añadir servicio",
+          "t": 4.1
         },
         {
           "n": 3,
           "texto": "Ponle nombre",
-          "t": 7.9
+          "t": 6.3
         },
         {
           "n": 4,
           "texto": "Y su precio",
-          "t": 11.5
+          "t": 8.9
         },
         {
           "n": 5,
           "texto": "Describe en qué consiste",
-          "t": 14.2
+          "t": 11.1
         },
         {
           "n": 6,
           "texto": "En Opciones adicionales está la duración",
-          "t": 16.9
+          "t": 13.3
         },
         {
           "n": 7,
           "texto": "La duración define los huecos de tu agenda",
-          "t": 20.4
+          "t": 16.2
         },
         {
           "n": 8,
           "texto": "Guarda y listo",
-          "t": 31.4
+          "t": 25.3
         },
         {
           "n": 9,
           "texto": "El servicio ya está en tu catálogo",
-          "t": 36.7
+          "t": 29.6
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-publicar-servicios",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "catalogo",
       "titulo": "Publicar tus servicios",
       "descripcion": "Haz que tu catálogo se vea en tu página pública de reservas.",
-      "duracion": "0:42",
-      "segundos": 42,
+      "duracion": "0:35",
+      "segundos": 34.8,
       "pasos": [
         {
           "n": 1,
           "texto": "Haz que tus servicios se vean en tu página pública",
-          "t": 3.4
+          "t": 2.8
         },
         {
           "n": 2,
           "texto": "Este interruptor publica todo tu catálogo de una vez",
-          "t": 7.1
+          "t": 5.9
         },
         {
           "n": 3,
-          "texto": "También puedes revisarlo servicio por servicio",
-          "t": 11.3
+          "texto": "Y puedes revisar servicio por servicio",
+          "t": 9.4
         },
         {
           "n": 4,
           "texto": "En Opciones adicionales están los ajustes de visibilidad",
-          "t": 16.8
+          "t": 13.8
         },
         {
           "n": 5,
           "texto": "El estado Publicado es lo que lo hace visible",
-          "t": 21.2
+          "t": 17.5
         },
         {
           "n": 6,
           "texto": "Y el nombre público es el que leerán tus clientes",
-          "t": 24.9
+          "t": 20.6
         },
         {
           "n": 7,
           "texto": "Guarda los cambios",
-          "t": 29.6
+          "t": 24.3
         },
         {
           "n": 8,
           "texto": "Listo: tu servicio ya se puede reservar en línea",
-          "t": 36
+          "t": 29.6
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-agendar-cita",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "dia-a-dia",
       "titulo": "Agendar una cita",
       "descripcion": "Desde el calendario: hueco libre, servicio, cliente y listo.",
-      "duracion": "0:55",
-      "segundos": 55.2,
+      "duracion": "0:46",
+      "segundos": 45.7,
       "pasos": [
         {
           "n": 1,
           "texto": "Agenda una cita en el calendario",
-          "t": 3.9
+          "t": 3.2
         },
         {
           "n": 2,
           "texto": "Abre el menú y entra en Calendario",
-          "t": 6.9
+          "t": 5.7
         },
         {
           "n": 3,
           "texto": "Cada especialista tiene su propia columna",
-          "t": 15.1
+          "t": 11.8
         },
         {
           "n": 4,
           "texto": "Pulsa el hueco libre que quieras ocupar",
-          "t": 18.8
+          "t": 14.8
         },
         {
           "n": 5,
           "texto": "Elige Agendar cita",
-          "t": 21.9
+          "t": 17.4
         },
         {
           "n": 6,
           "texto": "Escoge el servicio: su duración fija el horario",
-          "t": 25.1
+          "t": 19.9
         },
         {
           "n": 7,
           "texto": "Continúa al resumen",
-          "t": 29.2
+          "t": 23.3
         },
         {
           "n": 8,
           "texto": "Falta decir quién viene",
-          "t": 32.5
+          "t": 25.9
         },
         {
           "n": 9,
           "texto": "Elige el cliente",
-          "t": 36.4
+          "t": 29.1
         },
         {
           "n": 10,
           "texto": "Apunta lo que haga falta recordar",
-          "t": 40.2
+          "t": 32.1
         },
         {
           "n": 11,
           "texto": "Finaliza y la cita queda en la agenda",
-          "t": 43.2
+          "t": 34.6
         },
         {
           "n": 12,
           "texto": "Cita agendada",
-          "t": 50.1
+          "t": 40.2
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-carrito-venta",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "dia-a-dia",
       "titulo": "Vender desde la tienda",
       "descripcion": "Carrito, cliente, métodos de pago, cobro y recibo.",
-      "duracion": "0:59",
-      "segundos": 58.7,
+      "duracion": "0:49",
+      "segundos": 48.9,
       "pasos": [
         {
           "n": 1,
           "texto": "Vender desde la tienda, de principio a fin",
-          "t": 3.9
+          "t": 3.2
         },
         {
           "n": 2,
           "texto": "Abre el menú y entra en Tienda",
-          "t": 7.7
+          "t": 6.3
         },
         {
           "n": 3,
           "texto": "Toca un producto para añadirlo al carrito",
-          "t": 13.3
+          "t": 10.8
         },
         {
           "n": 4,
           "texto": "Tócalo otra vez para sumar unidades",
-          "t": 16.7
+          "t": 13.6
         },
         {
           "n": 5,
           "texto": "El total se recalcula solo",
-          "t": 20.1
+          "t": 16.4
         },
         {
           "n": 6,
           "texto": "Asigna la venta a un cliente",
-          "t": 23.2
+          "t": 19
         },
         {
           "n": 7,
           "texto": "Elige quién compra y vuelve solo al carrito",
-          "t": 26.2
+          "t": 21.3
         },
         {
           "n": 8,
           "texto": "Cuando esté listo, recibe el pago",
-          "t": 30
+          "t": 24.5
         },
         {
           "n": 9,
           "texto": "Efectivo, transferencia, datáfono o link de pago",
-          "t": 33.4
+          "t": 27.3
         },
         {
           "n": 10,
           "texto": "El monto ya viene con el total de la venta",
-          "t": 38
+          "t": 31.2
         },
         {
           "n": 11,
           "texto": "Confirma el cobro",
-          "t": 41.5
+          "t": 34.1
         },
         {
           "n": 12,
           "texto": "Venta registrada, con su número de orden",
-          "t": 48.8
+          "t": 40.5
         },
         {
           "n": 13,
           "texto": "Puedes imprimir el recibo o compartirlo con el cliente",
-          "t": 52.7
+          "t": 43.7
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-crear-cliente",
+      "ancho": 1440,
+      "alto": 900,
+      "vertical": false,
       "grupo": "dia-a-dia",
       "titulo": "Añadir un cliente",
       "descripcion": "Con etiquetas para segmentar tus campañas.",
-      "duracion": "0:34",
-      "segundos": 34.4,
+      "duracion": "0:28",
+      "segundos": 28.1,
       "pasos": [
         {
           "n": 1,
           "texto": "Añade un cliente a tu comunidad",
-          "t": 1.9
+          "t": 1.5
         },
         {
           "n": 2,
           "texto": "En Clientes, pulsa Nuevo cliente",
-          "t": 4.9
+          "t": 4
         },
         {
           "n": 3,
           "texto": "Nombre y apellido",
-          "t": 8.3
+          "t": 6.8
         },
         {
           "n": 4,
           "texto": "El correo le llegan las confirmaciones de cita",
-          "t": 13.3
+          "t": 10.7
         },
         {
           "n": 5,
           "texto": "Y el teléfono, para avisarle por WhatsApp",
-          "t": 17
+          "t": 13.7
         },
         {
           "n": 6,
           "texto": "Las etiquetas te sirven para segmentar campañas",
-          "t": 20.7
+          "t": 16.7
         },
         {
           "n": 7,
           "texto": "Guarda el cliente",
-          "t": 24.6
+          "t": 20
         },
         {
           "n": 8,
           "texto": "Ya está en tu comunidad",
-          "t": 30.3
+          "t": 24.7
+        }
+      ],
+      "tiemposFiables": true
+    },
+    {
+      "slug": "vyva-agenda-negocio",
+      "ancho": 430,
+      "alto": 932,
+      "vertical": true,
+      "grupo": "tus-clientes",
+      "titulo": "La agenda del negocio",
+      "descripcion": "Cómo llegan las reservas al negocio y dónde se consultan.",
+      "duracion": "0:55",
+      "segundos": 55.4,
+      "pasos": [
+        {
+          "n": 1,
+          "texto": "Así ve el negocio las citas que le reservan",
+          "t": 4
+        },
+        {
+          "n": 2,
+          "texto": "Abre el menú",
+          "t": 6.9
+        },
+        {
+          "n": 3,
+          "texto": "Entra en Citas",
+          "t": 9
+        },
+        {
+          "n": 4,
+          "texto": "Cierra el menú para ver la agenda",
+          "t": 15.4
+        },
+        {
+          "n": 5,
+          "texto": "Aquí aparecen las reservas con su cliente, hora y estado",
+          "t": 25.2
+        },
+        {
+          "n": 6,
+          "texto": "Puedes filtrar por fechas y buscar por cliente o servicio",
+          "t": 29
+        },
+        {
+          "n": 7,
+          "texto": "Y en el calendario las ves por especialista y franja horaria",
+          "t": 32.8
+        },
+        {
+          "n": 8,
+          "texto": "Toda la agenda del negocio, desde el celular",
+          "t": 47.1
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-agendamiento-publico",
+      "ancho": 430,
+      "alto": 932,
+      "vertical": true,
       "grupo": "tus-clientes",
       "titulo": "Agendamiento público",
       "descripcion": "El recorrido completo desde el enlace que compartes con tus clientes.",
-      "duracion": "0:54",
-      "segundos": 53.9,
+      "duracion": "0:48",
+      "segundos": 47.8,
       "pasos": [
         {
           "n": 1,
           "texto": "Este es el enlace de reserva que compartes con tus clientes",
-          "t": 4.4
+          "t": 3.6
         },
         {
           "n": 2,
-          "texto": "Tu cliente ve tus servicios publicados, con precio y duración",
-          "t": 8.8
+          "texto": "Tu cliente ve tu catálogo con precio y duración",
+          "t": 7.2
         },
         {
           "n": 3,
-          "texto": "Elige el que quiere",
-          "t": 13.5
+          "texto": "Elige el primer servicio",
+          "t": 10.3
         },
         {
           "n": 4,
-          "texto": "Vyva calcula los huecos libres según la duración del servicio",
-          "t": 19.6
+          "texto": "Y puede sumar los que quiera en la misma cita",
+          "t": 12.8
         },
         {
           "n": 5,
-          "texto": "Elige día y hora",
-          "t": 24.1
+          "texto": "Vyva calcula los huecos libres sumando la duración de todo",
+          "t": 18.5
         },
         {
           "n": 6,
-          "texto": "Revisa el resumen antes de confirmar",
-          "t": 30.2
+          "texto": "Elige día y hora",
+          "t": 22
         },
         {
           "n": 7,
-          "texto": "Y confirma la reserva",
-          "t": 33.3
+          "texto": "Revisa el resumen con los dos servicios y el total",
+          "t": 27.2
         },
         {
           "n": 8,
-          "texto": "Cita reservada, sin llamadas ni mensajes de por medio",
-          "t": 47.2
+          "texto": "Y confirma la reserva",
+          "t": 30.4
+        },
+        {
+          "n": 9,
+          "texto": "Queda registrada en Mis Citas, sin llamadas ni mensajes",
+          "t": 41.3
         }
       ],
       "tiemposFiables": true
     },
     {
       "slug": "vyva-cliente-reservar",
+      "ancho": 1280,
+      "alto": 800,
+      "vertical": false,
       "grupo": "tus-clientes",
       "titulo": "Reservar desde la app",
       "descripcion": "Cómo reserva un cliente que ya tiene cuenta en Vyva.",
-      "duracion": "1:01",
-      "segundos": 61.4,
+      "duracion": "0:51",
+      "segundos": 51.2,
       "pasos": [
         {
           "n": 1,
           "texto": "Así reserva una cita tu cliente desde Vyva",
-          "t": 3.9
+          "t": 3.2
         },
         {
           "n": 2,
           "texto": "Al entrar ve los negocios donde puede reservar",
-          "t": 7.6
+          "t": 6.3
         },
         {
           "n": 3,
           "texto": "Elige el negocio",
-          "t": 11.1
+          "t": 9.2
         },
         {
           "n": 4,
           "texto": "En su perfil entra en Agendamiento online",
-          "t": 14.4
+          "t": 12
         },
         {
           "n": 5,
           "texto": "Escoge el servicio que necesita",
-          "t": 17.9
+          "t": 14.8
         },
         {
           "n": 6,
           "texto": "Vyva le muestra solo los huecos libres del negocio",
-          "t": 23.6
+          "t": 19.6
         },
         {
           "n": 7,
           "texto": "Elige día y hora",
-          "t": 27.5
+          "t": 22.8
         },
         {
           "n": 8,
           "texto": "Revisa el resumen: servicio, fecha y precio",
-          "t": 33.1
+          "t": 27.5
         },
         {
           "n": 9,
           "texto": "Y confirma la reserva",
-          "t": 37.5
+          "t": 31.1
         },
         {
           "n": 10,
           "texto": "Y la encuentra en Mis Citas",
-          "t": 51.2
+          "t": 42.6
         },
         {
           "n": 11,
           "texto": "Reservado, sin llamadas ni mensajes",
-          "t": 55.4
+          "t": 46.1
         }
       ],
       "tiemposFiables": true

@@ -23,12 +23,16 @@
 	}
 </script>
 
-<div class="overflow-hidden rounded-2xl border border-slate-200 bg-black">
+<div
+	class="mx-auto overflow-hidden rounded-2xl border border-slate-200 bg-black"
+	style={tutorial.vertical ? `max-width:${Math.round(tutorial.ancho * 0.62)}px` : ""}
+>
 	<!-- svelte-ignore a11y_media_has_caption -->
 	<video
 		bind:this={video}
 		ontimeupdate={alAvanzar}
-		class="aspect-[16/10] w-full"
+		class="w-full"
+		style={`aspect-ratio:${tutorial.ancho}/${tutorial.alto}`}
 		src={`/tutoriales/${tutorial.slug}.mp4`}
 		poster={`/tutoriales/${tutorial.slug}.jpg`}
 		controls
