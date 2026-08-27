@@ -4,8 +4,8 @@ import Nav from '../components/Nav.svelte';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import FaqPage from '../components/FaqPage.svelte';
+import Tutoriales from '../components/Tutoriales.svelte';
 
-const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 const SALES = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 ---
 
@@ -28,6 +28,34 @@ const SALES = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
 					Respuestas sobre Vyva: planes, funcionalidades, aspectos técnicos y soporte.
 				</p>
+				<p data-reveal class="mt-6">
+					<a
+						href="#tutoriales"
+						class="btn-press inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white"
+					>
+						Ver tutoriales en video
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M8 5v14l11-7z" />
+						</svg>
+					</a>
+				</p>
+			</div>
+		</section>
+
+		<section id="tutoriales" class="scroll-mt-24 pb-16 sm:pb-20">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<div data-reveal class="text-center">
+					<h2 class="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+						Tutoriales en video
+					</h2>
+					<p class="mx-auto mt-3 max-w-2xl text-slate-600">
+						Menos de un minuto cada uno, narrados paso a paso. Si prefieres verlo antes que
+						leerlo, empieza por aquí.
+					</p>
+				</div>
+				<div data-reveal class="mt-10">
+					<Tutoriales client:visible />
+				</div>
 			</div>
 		</section>
 
@@ -72,10 +100,10 @@ const SALES = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 				</h2>
 				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 					<a
-						href={SIGNUP}
+						href={SALES}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Empezar gratis
+						Agenda una llamada
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a

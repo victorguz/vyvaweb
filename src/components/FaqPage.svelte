@@ -24,7 +24,7 @@
 			items: [
 				{
 					q: '¿Cuáles son los precios?',
-					a: 'Planes personalizados según tu negocio. Consulta los detalles en la página de planes y precios.',
+					a: 'Un solo plan: $99.000 al mes de lista, y $69.900 para los cupos fundadores, con todo incluido, usuarios ilimitados y precio congelado mientras seas cliente. Lo ves completo en la página de precio.',
 				},
 				{
 					q: '¿Puedo cambiar de plan?',
@@ -51,6 +51,10 @@
 				{
 					q: '¿Diferencia Premium vs Essential?',
 					a: 'Premium: hasta 3 sedes, resúmenes para todos los tipos de pago, soporte prioritario y funciones avanzadas.',
+				},
+				{
+					q: '¿Incluye WhatsApp?',
+					a: 'Sí. El chat de WhatsApp va dentro de Vyva: atiendes a tus clientas desde la misma bandeja, los recordatorios de cita salen automáticos sin cobro por mensaje y puedes enviar campañas a tu base segmentada.',
 				},
 				{
 					q: '¿Puedo tener múltiples sedes?',
@@ -102,7 +106,7 @@
 				},
 				{
 					q: '¿Puedo probar antes?',
-					a: 'Sí. Prueba gratuita de 1 año en el plan Essential, o agenda una demo personalizada.',
+					a: 'Sí. Agenda una llamada de 15 minutos y te muestro la plataforma con un negocio real funcionando antes de que decidas.',
 				},
 				{
 					q: '¿Cómo contactar soporte?',

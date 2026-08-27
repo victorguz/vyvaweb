@@ -6,46 +6,71 @@ import Icon from '../components/Icon.astro';
 import FeatureCard from '../components/marketing/FeatureCard.astro';
 import Callout from '../components/marketing/Callout.astro';
 
+// CTA principal: la llamada. CTA secundario: el checkout self-serve.
+// Se invierte cuando haya ~10 clientes pagando y el precio esté validado.
+const CALL = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
-const SALES = 'https://calendly.com/victorguzber/conoce-vyva-pos';
+
+const PRECIO_LISTA = '$99.000';
+const PRECIO = '$69.900';
+
+const incluido = [
+	'Todas las funciones, sin módulos que se pagan aparte',
+	'Chat de WhatsApp con tus clientas, dentro del sistema',
+	'Recordatorios y campañas por WhatsApp, sin cobro por mensaje',
+	'Usuarios, clientas y citas ilimitados',
+	'Configuración inicial hecha contigo en una llamada',
+	'Precio congelado mientras seas cliente',
+	'Sin contrato ni permanencia: cancelas cuando quieras',
+	'Soporte directo por WhatsApp',
+];
 
 const featureSections = [
 	{
 		title: 'Agendamiento y citas',
 		items: [
-			{ icon: 'add-document', title: 'Página de reservas', body: 'Link único con tu marca para que tus clientes reserven 24/7.' },
-			{ icon: 'clock', title: 'Google Calendar', body: 'Sincronización automática de todas tus citas.' },
-			{ icon: 'notes', title: 'Horarios flexibles', body: 'Disponibilidad por día, empleado y servicio.' },
-			{ icon: 'bell-ringing', title: 'Recordatorios', body: 'Avisos por email para reducir ausencias.' },
+			{ icon: 'identification-card', title: 'Página de reservas', body: 'Link único con tu marca para que tus clientas reserven 24/7.' },
+			{ icon: 'arrows-clockwise', title: 'Google Calendar', body: 'Sincronización automática de todas tus citas.' },
+			{ icon: 'clock', title: 'Horarios flexibles', body: 'Disponibilidad por día, empleado y servicio.' },
+			{ icon: 'bell-ringing', title: 'Recordatorios', body: 'Avisos automáticos para reducir las sillas vacías.' },
 			{ icon: 'users-three', title: 'Asignación de equipo', body: 'Citas según especialidad y disponibilidad.' },
-			{ icon: 'list-format', title: 'Vista calendario', body: 'Timeline interactivo de todas tus citas.' },
+			{ icon: 'calendar-dots', title: 'Vista calendario', body: 'Timeline interactivo de todas tus citas.' },
 		],
 	},
 	{
-		title: 'Gestión de clientes',
+		title: 'Gestión de clientas',
 		items: [
-			{ icon: 'users', title: 'Base de datos', body: 'Contacto, preferencias y notas de cada cliente.' },
+			{ icon: 'users', title: 'Base de datos', body: 'Contacto, preferencias y notas de cada clienta.' },
 			{ icon: 'clock', title: 'Historial de citas', body: 'Servicios tomados y última visita.' },
-			{ icon: 'approve-check', title: 'Historial de compras', body: 'Valor del cliente y productos preferidos.' },
-			{ icon: 'chart-line', title: 'Estadísticas', body: 'Clientes nuevos, recurrentes y ticket promedio.' },
+			{ icon: 'check', title: 'Historial de compras', body: 'Valor de la clienta y productos preferidos.' },
+			{ icon: 'chart-line', title: 'Estadísticas', body: 'Clientas nuevas, recurrentes y ticket promedio.' },
+		],
+	},
+	{
+		title: 'WhatsApp y CRM',
+		items: [
+			{ icon: 'chat', title: 'Chat integrado', body: 'Todas las conversaciones en una bandeja, con la ficha de la clienta al lado.' },
+			{ icon: 'bell-ringing', title: 'Recordatorios sin costo', body: 'Aviso automático antes de cada cita, sin cobro por mensaje.' },
+			{ icon: 'sparkle', title: 'Campañas', body: 'Promociones y reactivación a la lista de clientas que elijas.' },
+			{ icon: 'users', title: 'Segmentación', body: 'Filtra por servicio tomado, última visita o ticket para escribirle a quien toca.' },
 		],
 	},
 	{
 		title: 'Punto de venta',
 		items: [
-			{ icon: 'storefront', title: 'Pagos', body: 'Cobra servicios y productos de forma segura.' },
-			{ icon: 'add-document', title: 'Carrito integrado', body: 'Combina tratamientos y productos en una venta.' },
-			{ icon: 'document', title: 'Facturación', body: 'Órdenes de venta y facturación centralizada.' },
-			{ icon: 'setting', title: 'Múltiples métodos', body: 'Tarjetas, transferencias y más.' },
+			{ icon: 'storefront', title: 'Cobros', body: 'Cobra servicios y productos de forma segura.' },
+			{ icon: 'list', title: 'Carrito integrado', body: 'Combina tratamientos y productos en una venta.' },
+			{ icon: 'list', title: 'Órdenes de venta', body: 'Órdenes y cierre de caja centralizados.' },
+			{ icon: 'lock-key', title: 'Múltiples métodos', body: 'Efectivo, tarjetas, transferencias y más.' },
 		],
 	},
 	{
 		title: 'Dashboard y reportes',
 		items: [
-			{ icon: 'chart-line', title: 'KPIs en tiempo real', body: 'Ventas del día, clientes nuevos y ticket promedio.' },
-			{ icon: 'list-format', title: 'Reportes de ventas', body: 'Por día, semana, mes o rango personalizado.' },
+			{ icon: 'chart-line', title: 'KPIs en tiempo real', body: 'Ventas del día, clientas nuevas y ticket promedio.' },
+			{ icon: 'list', title: 'Reportes de ventas', body: 'Por día, semana, mes o rango personalizado.' },
 			{ icon: 'sparkle', title: 'Por método de pago', body: 'Ingresos desglosados por canal.' },
-			{ icon: 'open-book', title: 'Gráficos', body: 'Visualizaciones para entender tu negocio de un vistazo.' },
+			{ icon: 'chart-line', title: 'Gráficos', body: 'Entiende tu negocio de un vistazo.' },
 		],
 	},
 	{
@@ -54,43 +79,95 @@ const featureSections = [
 			{ icon: 'identification-card', title: 'Perfiles', body: 'Fotos, especialidades y horarios por empleado.' },
 			{ icon: 'clock', title: 'Asignación', body: 'Distribución equitativa de citas.' },
 			{ icon: 'lock-key', title: 'Roles y permisos', body: 'Control de acceso según el rol.' },
-			{ icon: 'chart-line', title: 'Desempeño', body: 'Citas atendidas y ventas por miembro del equipo.' },
+			{ icon: 'chart-line', title: 'Desempeño', body: 'Citas atendidas y ventas por especialista.' },
 		],
 	},
 ];
 
 const useCases = [
 	{ icon: 'sparkle', title: 'Salones de belleza', body: 'Cortes, tintes y peinados con estilistas por especialidad.' },
-	{ icon: 'users', title: 'Estéticas faciales', body: 'Tratamientos, historial de clientes y venta de productos.' },
-	{ icon: 'heart', title: 'Spas y bienestar', body: 'Múltiples salas, terapeutas y tratamientos coordinados.' },
-	{ icon: 'document', title: 'Clínicas estéticas', body: 'Consultas, procedimientos y seguimiento.' },
-	{ icon: 'approve-check', title: 'Barberías', body: 'Turnos, clientes recurrentes y servicios de barba.' },
-	{ icon: 'heart', title: 'Centros de masajes', body: 'Tipos de masaje y terapeutas en una sola agenda.' },
+	{ icon: 'users', title: 'Estéticas faciales', body: 'Tratamientos, historial de clientas y venta de productos.' },
+	{ icon: 'sparkle', title: 'Spas y bienestar', body: 'Múltiples salas, terapeutas y tratamientos coordinados.' },
+	{ icon: 'identification-card', title: 'Clínicas estéticas', body: 'Consultas, procedimientos y seguimiento.' },
+	{ icon: 'check', title: 'Barberías', body: 'Turnos, clientes recurrentes y servicios de barba.' },
+	{ icon: 'users-three', title: 'Centros de masajes', body: 'Tipos de masaje y terapeutas en una sola agenda.' },
 ];
 
 const pricingFaqs = [
 	{
-		q: '¿Cómo funcionan los precios?',
-		a: 'El equipo de Vyva define un precio simple y personalizado según el tipo de servicios y el tamaño de tu negocio, con acceso a todas las herramientas de la plataforma.',
+		q: '¿Hay costos de instalación o de configuración?',
+		a: 'No. La configuración inicial la hacemos contigo en una llamada y va incluida en el precio.',
 	},
 	{
-		q: '¿Por qué contactar a ventas?',
-		a: 'Para entender las necesidades de tu negocio, personalizar un plan, obtener el mejor precio y resolver dudas antes de decidir.',
+		q: '¿Cómo se paga?',
+		a: 'Con tarjeta débito o crédito Visa o Mastercard, con cobro automático cada mes. Es el único medio de pago por ahora.',
 	},
 	{
-		q: '¿Puedo probar antes de comprometerme?',
-		a: 'Sí: prueba gratuita de 1 año completo sin compromiso.',
+		q: '¿Qué pasa si quiero cancelar?',
+		a: 'Cancelas desde tu cuenta cuando quieras. No hay permanencia ni penalidad, y no se cobra el mes siguiente.',
+	},
+	{
+		q: '¿El precio me sube después?',
+		a: 'No mientras seas cliente. Los cupos fundadores quedan con el precio congelado, aunque suba para los que entren después.',
+	},
+	{
+		q: '¿Los mensajes de WhatsApp se cobran aparte?',
+		a: 'No. El chat, los recordatorios de cita y las campañas van dentro del plan, sin cobro por mensaje ni herramienta de mensajería adicional.',
+	},
+	{
+		q: '¿Por qué cuestan más que otras agendas?',
+		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas nuevas que llegan a tu negocio, y porque no es solo agenda: el punto de venta, el inventario y los reportes van incluidos. Si trabajas sola, hay opciones más baratas y te lo decimos de frente. Si tienes equipo, haz la cuenta completa.',
+	},
+	{
+		q: '¿Puedo verlo antes de pagar?',
+		a: 'Sí. En la llamada de 15 minutos te muestro la plataforma con un negocio real funcionando y resuelves tus dudas antes de decidir.',
 	},
 ];
+const comparativa = [
+	{
+		icon: 'users-three',
+		title: 'Usuarios ilimitados',
+		body: 'Fresha cobra por cada persona del equipo. Nosotros no. Con cinco especialistas, su cuenta ya te cuesta más que la nuestra.',
+	},
+	{
+		icon: 'storefront',
+		title: 'No es solo la agenda',
+		body: 'Punto de venta, inventario, clientas y reportes van incluidos. No pagas aparte un software para cobrar.',
+	},
+	{
+		icon: 'chat',
+		title: 'Los mensajes no se pagan aparte',
+		body: 'En otras plataformas cada recordatorio o campaña se cobra por mensaje. Aquí el chat de WhatsApp, los recordatorios y las campañas van dentro del plan.',
+	},
+	{
+		icon: 'check',
+		title: 'Cero comisión por clienta nueva',
+		body: 'Fresha se queda con un porcentaje de las clientas que llegan por su marketplace. Aquí tu clientela es tuya, completa.',
+	},
+	{
+		icon: 'device-mobile',
+		title: 'Te contesta el fundador',
+		body: 'No hay mesa de ayuda ni tiquetes. Escribes por WhatsApp y te contesto yo, y lo que pidas entra al desarrollo.',
+	},
+];
+
+const tablaEquipo = [
+	{ personas: '1 persona', vyva: '$69.900', fresha: '$24.000' },
+	{ personas: '3 personas', vyva: '$69.900', fresha: '$56.400' },
+	{ personas: '5 personas', vyva: '$69.900', fresha: '$88.800' },
+	{ personas: '7 personas', vyva: '$69.900', fresha: '$121.200' },
+];
+
 ---
 
 <Landing
-	title="Planes y precios | Vyva"
-	description="Planes personalizados de Vyva para tu salón, estética o spa. Agendamiento, clientes, punto de venta y reportes en una sola plataforma."
+	title="Precio | Vyva"
+	description="Un solo plan de Vyva, con precio visible: agenda online, chat de WhatsApp, campañas, clientas, punto de venta y reportes para estéticas, spas, clínicas estéticas y barberías."
 >
 	<Nav client:load />
 
 	<main>
+		<!-- ============ HERO CON PRECIO ============ -->
 		<section class="page-hero relative overflow-hidden bg-white">
 			<div
 				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_50%_0%,var(--color-brand-100),transparent_70%)]"
@@ -98,31 +175,131 @@ const pricingFaqs = [
 			</div>
 			<div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
 				<h1 data-reveal class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-					Planes y precios
+					Un solo precio, y está aquí
 				</h1>
 				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
-					Planes simples y personalizados: citas, clientes, ventas y equipo en una sola plataforma.
+					Sin cotización, sin "depende de tu negocio", sin llamada para saber
+					cuánto cuesta.
 				</p>
-				<div data-reveal class="mt-8">
-					<Callout variant="tip" title="Prueba gratuita de 1 año">
-						Explora todas las funcionalidades antes de decidir. Sin compromiso.
-					</Callout>
+			</div>
+
+			<div
+				data-reveal
+				class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
+			>
+				<div class="bg-brand-600 px-6 py-3 text-center">
+					<p class="text-sm font-bold uppercase tracking-[0.14em] text-white">
+						Plan fundador · primeros 10 negocios
+					</p>
 				</div>
-				<div data-reveal class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+
+				<div class="px-8 py-10 text-center">
+					<p class="text-base font-semibold text-slate-400">
+						Precio de lista <span class="line-through">{PRECIO_LISTA}/mes</span>
+					</p>
+					<p class="mt-1 text-5xl font-extrabold tracking-tight text-ink">
+						{PRECIO}<span class="text-xl font-bold text-slate-400">/mes</span>
+					</p>
+					<p class="mt-2 text-sm text-slate-500">
+						Pesos colombianos, IVA incluido. Usuarios ilimitados.
+					</p>
+
+					<ul class="mt-8 space-y-3 text-left">
+						{
+							incluido.map((f) => (
+								<li class="flex gap-3">
+									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+										<Icon name="check" size={12} />
+									</span>
+									<span class="text-sm font-medium text-slate-700">{f}</span>
+								</li>
+							))
+						}
+					</ul>
+
 					<a
-						href={SIGNUP}
-						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
+						href={CALL}
+						class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
 					>
-						Probar gratis
+						Tomar un cupo fundador
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a
-						href={SALES}
-						class="btn-press inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3.5 text-base font-semibold text-slate-700"
+						href={SIGNUP}
+						class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
 					>
-						Contactar ventas
+						o crea tu cuenta sin hablar con nadie
 					</a>
+
+					<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+						<Icon name="lock-key" size={14} />
+						Pago con tarjeta débito o crédito Visa o Mastercard
+					</p>
 				</div>
+			</div>
+		</section>
+
+
+		<!-- ============ POR QUÉ NO SOMOS LOS MÁS BARATOS ============ -->
+		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="max-w-2xl">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					No somos los más baratos del mercado, y hay razones
+				</h2>
+				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+					Hay software de agenda más barato que este. Antes de compararlo por la
+					mensualidad pelada, mira lo que estás comparando.
+				</p>
+			</div>
+
+			<div class="mt-12 grid gap-6 sm:grid-cols-2">
+				{
+					comparativa.map((c) => (
+						<article
+							data-reveal
+							class="rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
+						>
+							<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700">
+								<Icon name={c.icon as any} size={24} />
+							</span>
+							<h3 class="mt-5 text-lg font-bold text-ink">{c.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-slate-600">{c.body}</p>
+						</article>
+					))
+				}
+			</div>
+
+			<div data-reveal class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+				<div class="border-b border-slate-200 bg-slate-50 px-6 py-4">
+					<p class="font-bold text-ink">Lo que pagas al mes según el tamaño de tu equipo</p>
+				</div>
+				<div class="overflow-x-auto">
+					<table class="w-full min-w-[420px] text-sm">
+						<thead>
+							<tr class="border-b border-slate-200 text-left text-slate-500">
+								<th class="px-6 py-3 font-semibold">Tu equipo</th>
+								<th class="px-6 py-3 font-semibold text-brand-700">Vyva</th>
+								<th class="px-6 py-3 font-semibold">Cobro por persona</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								tablaEquipo.map((f) => (
+									<tr class="border-b border-slate-100 last:border-0">
+										<td class="px-6 py-3.5 font-medium text-slate-700">{f.personas}</td>
+										<td class="px-6 py-3.5 font-bold text-brand-700">{f.vyva}</td>
+										<td class="px-6 py-3.5 text-slate-600">{f.fresha}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+				<p class="px-6 py-4 text-xs leading-relaxed text-slate-400">
+					Cálculo con tarifas públicas de la competencia a agosto de 2026, sin
+					contar comisiones por transacción ni por clienta nueva. Verifica los
+					valores antes de tomar una decisión.
+				</p>
 			</div>
 		</section>
 
@@ -130,9 +307,7 @@ const pricingFaqs = [
 			featureSections.map((section) => (
 				<section class="border-t border-slate-100 bg-slate-50/50 py-16 sm:py-20">
 					<div class="mx-auto max-w-7xl px-5 sm:px-8">
-						<h2 data-reveal class="section-heading">
-							{section.title}
-						</h2>
+						<h2 data-reveal class="section-heading">{section.title}</h2>
 						<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 							{section.items.map((item) => (
 								<div data-reveal>
@@ -149,7 +324,7 @@ const pricingFaqs = [
 			<div class="mx-auto max-w-7xl px-5 sm:px-8">
 				<h2 data-reveal class="section-heading text-center">Diseñado para tu tipo de negocio</h2>
 				<p data-reveal class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-					Vyva se adapta a salones, estéticas, spas, barberías y más.
+					Vyva se adapta a salones, estéticas, spas, barberías y centros de bienestar.
 				</p>
 				<div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 					{
@@ -165,7 +340,7 @@ const pricingFaqs = [
 
 		<section class="border-t border-slate-100 bg-white py-16 sm:py-20">
 			<div class="mx-auto max-w-3xl px-5 sm:px-8">
-				<h2 data-reveal class="section-heading">Preguntas sobre precios</h2>
+				<h2 data-reveal class="section-heading">Preguntas sobre el precio</h2>
 				<div class="mt-8 space-y-6">
 					{
 						pricingFaqs.map((faq) => (
@@ -178,8 +353,8 @@ const pricingFaqs = [
 				</div>
 				<div data-reveal class="mt-8">
 					<Callout variant="note" title="Sin costos ocultos">
-						El precio acordado incluye las funcionalidades de la plataforma. Sin tarifas de
-						configuración ni cancelación.
+						El precio incluye todas las funcionalidades de la plataforma. Sin tarifas de
+						configuración ni de cancelación.
 					</Callout>
 				</div>
 			</div>
@@ -190,28 +365,29 @@ const pricingFaqs = [
 				class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12"
 			>
 				<h2 data-reveal class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white">
-					¿Listo para transformar tu negocio?
+					Quedan cupos del plan fundador
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Prueba gratis o contacta a nuestro equipo para un plan personalizado.
+					Quince minutos, sin discurso de ventas. Te muestro la plataforma con un
+					negocio real funcionando y me dices si te sirve.
 				</p>
 				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 					<a
-						href={SIGNUP}
+						href={CALL}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Probar gratis
+						Agenda tu llamada
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a
-						href={SALES}
+						href={SIGNUP}
 						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10"
 					>
-						Contactar ventas
+						Crear mi cuenta
 					</a>
 				</div>
 				<p data-reveal class="mt-6 text-sm text-brand-200">
-					Prueba gratuita de 1 año · Sin compromisos · Soporte personalizado
+					Precio congelado · Sin permanencia · Configuración incluida
 				</p>
 			</div>
 		</section>

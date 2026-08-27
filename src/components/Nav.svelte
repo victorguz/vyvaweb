@@ -4,12 +4,13 @@
 	const links = [
 		{ label: 'Características', href: '/#caracteristicas' },
 		{ label: 'Casos de uso', href: '/#casos' },
-		{ label: 'Planes', href: '/pricing' },
+		{ label: 'Precio', href: '/pricing' },
 		{ label: 'FAQ', href: '/faq' },
 	];
 
 	const APP = 'https://app.vyvapos.com';
 	const SIGNUP = 'https://app.vyvapos.com/plans/essential';
+	const CALL = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 
 	function close() {
 		open = false;
@@ -44,10 +45,10 @@
 				Entrar
 			</a>
 			<a
-				href={SIGNUP}
+				href={CALL}
 				class="btn-press rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-600/20"
 			>
-				Empezar gratis
+				Agenda una llamada
 			</a>
 		</div>
 
@@ -88,10 +89,10 @@
 					Entrar
 				</a>
 				<a
-					href={SIGNUP}
+					href={CALL}
 					class="btn-press rounded-lg bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white"
 				>
-					Empezar gratis
+					Agenda una llamada
 				</a>
 			</div>
 		</div>

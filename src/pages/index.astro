@@ -4,73 +4,204 @@ import Nav from '../components/Nav.svelte';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 
+// CTA principal: la llamada. CTA secundario: el checkout self-serve.
+// Se invierte cuando ya haya ~10 clientes pagando y el precio esté validado.
+const CALL = 'https://calendly.com/victorguzber/conoce-vyva-pos';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 
-const benefits = [
-	'Agenda online 24/7',
-	'Google Calendar',
-	'Gestión de clientes',
-	'Punto de venta',
-	'Reportes en tiempo real',
+const PRECIO_LISTA = '$99.000';
+const PRECIO = '$69.900';
+
+const antes = [
+	'Agendas por WhatsApp entre una clienta y otra',
+	'La libreta se queda en el local y solo tú sabes leerla',
+	'Te enteras de que no vino cuando no llegó',
+	'No sabes cuánto vendió cada especialista este mes',
+	'El corte de caja se hace de memoria',
 ];
 
-const pillars = [
+const despues = [
+	'Tus clientas reservan solas 24/7 desde tu link',
+	'La agenda completa en tu celular, desde donde estés',
+	'Recordatorio de cita por WhatsApp, sin que pagues por mensaje',
+	'Le escribes a toda tu clientela desde la misma bandeja',
+	'Ventas y citas por especialista, en tiempo real',
+	'Cierre de caja del día en una pantalla',
+];
+
+const pasos = [
+	{
+		icon: 'identification-card',
+		title: 'Montamos tu cuenta juntos',
+		body: 'En una llamada de 30 minutos cargamos tus servicios, precios, horarios y tu equipo. No tienes que hacerlo tú sola.',
+	},
+	{
+		icon: 'device-mobile',
+		title: 'Compartes tu link de reservas',
+		body: 'Lo pones en tu bio de Instagram y en tu estado de WhatsApp. Tus clientas ven tus servicios y eligen hora.',
+	},
+	{
+		icon: 'storefront',
+		title: 'Recibes citas y cobras',
+		body: 'La cita entra sola a tu agenda. Al terminar, cobras el servicio y los productos desde la misma pantalla.',
+	},
+];
+
+const incluye = [
 	{
 		icon: 'calendar-dots',
-		title: 'Agendamiento online',
-		body: 'Tus clientes reservan 24/7 desde una página con tu marca. Tú mantienes el control total de la agenda.',
+		title: 'Agenda online 24/7',
+		body: 'Página de reservas con tu marca. Tus clientas reservan a las 11 de la noche sin escribirte.',
+	},
+	{
+		icon: 'bell-ringing',
+		title: 'Recordatorios por WhatsApp',
+		body: 'Cada clienta recibe su aviso antes de la cita, sin costo por mensaje. Menos sillas vacías por olvidos.',
+	},
+	{
+		icon: 'chat',
+		title: 'Chat de WhatsApp incluido',
+		body: 'Las conversaciones con tus clientas en una sola bandeja, con su historial al lado. No es la agenda por un lado y el WhatsApp por otro.',
+	},
+	{
+		icon: 'sparkle',
+		title: 'Campañas a tu clientela',
+		body: 'Una promoción, un cumpleaños o un "hace tres meses no vienes" a la lista que elijas, desde el mismo sistema.',
 	},
 	{
 		icon: 'users',
-		title: 'Gestión de clientes',
-		body: 'Base de datos con historial de citas y compras para fidelizar y dar un servicio personalizado.',
+		title: 'Historia de cada clienta',
+		body: 'Qué se hizo, cuándo vino, qué compró y cuánto vale para tu negocio.',
 	},
 	{
 		icon: 'storefront',
 		title: 'Punto de venta',
-		body: 'Cobra servicios y productos en segundos. Carrito, facturación y control de caja integrados.',
+		body: 'Cobra servicios y productos en la misma venta. Varios métodos de pago.',
 	},
 	{
 		icon: 'users-three',
-		title: 'Gestión de equipo',
-		body: 'Asigna citas, define roles y permisos y haz seguimiento del desempeño de cada especialista.',
+		title: 'Tu equipo',
+		body: 'Horarios y especialidad por persona, con permisos según el rol y ventas por especialista.',
 	},
 	{
 		icon: 'chart-line',
-		title: 'Reportes en tiempo real',
-		body: 'Ingresos, clientes nuevos y recurrentes y métricas clave para tomar mejores decisiones.',
+		title: 'Reportes del día',
+		body: 'Cuánto entró, cuántas clientas nuevas y cuál es tu ticket promedio. Sin hacer cuentas.',
+	},
+];
+
+const paraQuienSi = [
+	'Estéticas, spas y clínicas estéticas con equipo',
+	'Barberías y salones que ya facturan todos los días',
+	'Centros de masajes y bienestar con varias salas',
+	'Negocios que hoy agendan a mano y ya no dan abasto',
+];
+
+const paraQuienNo = [
+	'Si trabajas sola y atiendes dos o tres citas al día, todavía no te compensa',
+	'Si no tienes tarjeta débito o crédito para el pago mensual',
+	'Si necesitas facturación electrónica DIAN integrada hoy mismo',
+];
+
+const capturas = [
+	{
+		src: '/capturas/dashboard-facturacion-diaria.png',
+		w: 1916,
+		h: 904,
+		alt: 'Panel de Vyva con la facturación diaria del negocio.',
+		caption: 'Cuánto entró hoy, sin sacar la calculadora.',
 	},
 	{
-		icon: 'arrows-clockwise',
-		title: 'Google Calendar',
-		body: 'Sincronización automática: cada cita de Vyva aparece al instante en tu Google Calendar.',
+		src: '/capturas/dashboard-facturacion-empleado.png',
+		w: 1919,
+		h: 909,
+		alt: 'Panel de Vyva con la facturación por empleado.',
+		caption: 'Cuánto vendió cada especialista este mes.',
+	},
+	{
+		src: '/capturas/dashboard-fidelizacion.png',
+		w: 1919,
+		h: 907,
+		alt: 'Panel de Vyva con frecuencia de visita, clientas nuevas, reagendadas y tasa de retención.',
+		caption: 'Quién vuelve, quién no, y cada cuánto.',
 	},
 ];
 
-const agendaFeatures = [
-	{ icon: 'identification-card', title: 'Página de reservas personalizada', body: 'Comparte tu link único con tu marca y tus servicios.' },
-	{ icon: 'bell-ringing', title: 'Recordatorios automáticos', body: 'Reduce las ausencias con avisos por email antes de cada cita.' },
-	{ icon: 'clock', title: 'Horarios flexibles', body: 'Configura disponibilidad por día, empleado y servicio.' },
-	{ icon: 'device-mobile', title: '100% responsive', body: 'Tus clientes reservan desde móvil, tablet o computador.' },
+const faqs = [
+	{
+		q: '¿Tengo que instalar algo?',
+		a: 'No. Vyva funciona en el navegador, desde tu computador o tu celular. Entras con tu correo y ya.',
+	},
+	{
+		q: '¿Qué pasa con las clientas que tengo en la libreta?',
+		a: 'Las subimos contigo en la misma llamada de configuración. No tienes que digitarlas una por una.',
+	},
+	{
+		q: '¿Me amarra algún contrato?',
+		a: 'No hay permanencia. Pagas mes a mes y cancelas cuando quieras desde tu cuenta.',
+	},
+	{
+		q: '¿Cómo se paga?',
+		a: 'Con tarjeta débito o crédito Visa o Mastercard, con cobro automático cada mes. Es el único medio de pago por ahora.',
+	},
+	{
+		q: '¿Por qué cuestan más que otras agendas?',
+		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas nuevas que llegan a tu negocio, y porque no es solo agenda: el punto de venta, el inventario y los reportes van incluidos. Si trabajas sola, hay opciones más baratas y te lo decimos de frente. Si tienes equipo, haz la cuenta completa.',
+	},
+	{
+		q: '¿Los mensajes de WhatsApp me cuestan aparte?',
+		a: 'No. Los recordatorios de cita van incluidos, sin cobro por mensaje, y las campañas a tu base salen desde el mismo sistema. No tienes que contratar otra herramienta de mensajería.',
+	},
+	{
+		q: '¿Por qué elegirlos si son nuevos?',
+		a: 'Por eso mismo: los primeros negocios entran con precio fundador congelado, yo configuro la cuenta personalmente y lo que pidas entra al desarrollo de una vez. Eso no lo vas a tener con un proveedor de miles de clientes.',
+	},
+];
+const comparativa = [
+	{
+		icon: 'users-three',
+		title: 'Usuarios ilimitados',
+		body: 'Fresha cobra por cada persona del equipo. Nosotros no. Con cinco especialistas, su cuenta ya te cuesta más que la nuestra.',
+	},
+	{
+		icon: 'storefront',
+		title: 'No es solo la agenda',
+		body: 'Punto de venta, inventario, clientas y reportes van incluidos. No pagas aparte un software para cobrar.',
+	},
+	{
+		icon: 'chat',
+		title: 'Los mensajes no se pagan aparte',
+		body: 'En otras plataformas cada recordatorio o campaña se cobra por mensaje. Aquí el chat de WhatsApp, los recordatorios y las campañas van dentro del plan.',
+	},
+	{
+		icon: 'check',
+		title: 'Cero comisión por clienta nueva',
+		body: 'Fresha se queda con un porcentaje de las clientas que llegan por su marketplace. Aquí tu clientela es tuya, completa.',
+	},
+	{
+		icon: 'device-mobile',
+		title: 'Te contesta el fundador',
+		body: 'No hay mesa de ayuda ni tiquetes. Escribes por WhatsApp y te contesto yo, y lo que pidas entra al desarrollo.',
+	},
 ];
 
-const useCases = [
-	'Salones de belleza',
-	'Estéticas y spas',
-	'Barberías',
-	'Clínicas estéticas',
-	'Centros de bienestar',
-	'Uñas y pestañas',
-	'Peluquerías',
-	'Masajes y terapias',
+const tablaEquipo = [
+	{ personas: '1 persona', vyva: '$69.900', fresha: '$24.000' },
+	{ personas: '3 personas', vyva: '$69.900', fresha: '$56.400' },
+	{ personas: '5 personas', vyva: '$69.900', fresha: '$88.800' },
+	{ personas: '7 personas', vyva: '$69.900', fresha: '$121.200' },
 ];
+
 ---
 
-<Landing>
+<Landing
+	title="Vyva | Que tus clientas reserven solas, mientras tú atiendes"
+	description="Agenda online, chat de WhatsApp, campañas, historia de clientas, punto de venta y reportes para estéticas, spas, clínicas estéticas y barberías. Plan fundador para los primeros 10 negocios."
+>
 	<Nav client:load />
 
 	<main>
-		<!-- Hero -->
+		<!-- ============ HERO ============ -->
 		<section class="relative overflow-hidden">
 			<div
 				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_85%_10%,var(--color-brand-100),transparent_60%)]"
@@ -80,106 +211,189 @@ const useCases = [
 				class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-2 lg:gap-8 lg:pb-28 lg:pt-24"
 			>
 				<div>
+					<p
+						data-reveal
+						class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-sm font-semibold text-brand-700"
+					>
+						<Icon name="sparkle" size={16} />
+						Plan fundador · primeros 10 negocios
+					</p>
+
 					<h1
 						data-reveal
-						class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl"
+						class="mt-6 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl"
 					>
-						Agendamiento y gestión para tu
-						<span class="text-brand-600">servicio de belleza</span> y bienestar
+						Deja de perder citas por
+						<span class="text-brand-600">contestar WhatsApp tarde</span>
 					</h1>
+
 					<p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-						Gestiona citas, clientes, ventas y equipo desde una sola plataforma
-						todo-en-uno, hecha para salones, estéticas, spas y barberías.
+						Tus clientas reservan solas desde tu link, les llega el recordatorio
+						por WhatsApp sin que pagues por mensaje, y tú cobras desde la misma
+						pantalla. Agenda, chat de WhatsApp, clientas, ventas y equipo en un
+						solo lugar.
 					</p>
+
 					<div data-reveal class="mt-8 flex flex-col gap-3 sm:flex-row">
 						<a
-							href={SIGNUP}
+							href={CALL}
 							class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
 						>
-							Empezar gratis
+							Agenda 15 minutos conmigo
 							<Icon name="arrow-right" size={18} />
 						</a>
 						<a
-							href="/pricing"
+							href={SIGNUP}
 							class="btn-press inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3.5 text-base font-semibold text-slate-700 hover:border-slate-400"
 						>
-							Ver planes
+							Crear mi cuenta
 						</a>
 					</div>
+
+					<p data-reveal class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-500">
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> Sin instalar nada
+						</span>
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> Recordatorios sin costo
+						</span>
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> Configuro tu cuenta contigo
+						</span>
+					</p>
 				</div>
 
-				<!-- Visual de marca (composición decorativa, no captura simulada) -->
 				<div data-reveal class="relative">
 					<div
-						class="relative aspect-[4/3] overflow-hidden rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 p-6 shadow-2xl shadow-brand-700/30"
+						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10"
 					>
-						<div
-							class="absolute inset-0 bg-[radial-gradient(40%_40%_at_20%_15%,rgba(255,255,255,0.25),transparent)]"
-						>
-						</div>
-
-						<div class="absolute right-6 top-6 flex items-center gap-2 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-							<span class="grid h-9 w-9 place-items-center rounded-lg bg-brand-100 text-brand-700">
-								<Icon name="calendar-dots" size={20} />
-							</span>
-							<div>
-								<p class="text-xs font-medium text-slate-500">Hoy</p>
-								<p class="text-sm font-bold text-ink">12 citas</p>
-							</div>
-						</div>
-
-						<div class="absolute left-6 top-1/2 w-60 -translate-y-4 rounded-xl bg-white/95 p-4 shadow-lg">
-							<p class="text-xs font-medium text-slate-500">10:30 · Disponible</p>
-							<p class="mt-1 text-sm font-bold text-ink">Corte + barba</p>
-							<div class="mt-3 h-2 w-full rounded-full bg-slate-100">
-								<div class="h-2 w-3/4 rounded-full bg-brand-500"></div>
-							</div>
-						</div>
-
-						<div class="absolute bottom-6 right-6 flex items-center gap-2 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-							<span class="grid h-9 w-9 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
-								<Icon name="chart-line" size={20} />
-							</span>
-							<div>
-								<p class="text-xs font-medium text-slate-500">Ingresos</p>
-								<p class="text-sm font-bold text-ink">+24% este mes</p>
-							</div>
-						</div>
+						<img
+							src="/capturas/agenda.png"
+							width="1918"
+							height="908"
+							alt="Agenda de Vyva con las citas del día repartidas por especialista, cada una con su servicio y su botón de WhatsApp."
+							class="w-full"
+							fetchpriority="high"
+							decoding="async"
+						/>
 					</div>
+					<p class="mt-3 text-center text-sm text-slate-500">
+						La agenda de una estética real, un jueves cualquiera.
+					</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Tira de beneficios -->
+		<!-- ============ HONESTIDAD ============ -->
 		<section class="border-y border-slate-200 bg-slate-50">
-			<div
-				class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 py-5 sm:px-8"
-			>
-				{
-					benefits.map((b) => (
-						<span class="inline-flex items-center gap-2 text-sm font-medium text-slate-600">
-							<Icon name="check" size={18} class="text-brand-600" />
-							{b}
-						</span>
-					))
-				}
+			<div class="mx-auto max-w-4xl px-5 py-12 text-center sm:px-8">
+				<p data-reveal class="text-lg leading-relaxed text-slate-700">
+					<strong class="text-ink">Vyva es nuevo, y lo decimos de frente.</strong>
+					No nació en una oficina: nació dentro de una estética real, para resolver
+					el desorden de su propia agenda, y ahí opera todos los días. Por eso los
+					primeros negocios entran con precio fundador congelado y yo mismo les
+					configuro la cuenta.
+				</p>
 			</div>
 		</section>
 
-		<!-- Características (pilares) -->
+		<!-- ============ ANTES / DESPUÉS ============ -->
+		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="max-w-2xl">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					El problema no es que te falten clientas. Es que la agenda vive en
+					cinco lugares al tiempo.
+				</h2>
+			</div>
+
+			<div class="mt-14 grid gap-6 lg:grid-cols-2">
+				<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
+					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">
+						Como está hoy
+					</h3>
+					<ul class="mt-6 space-y-4">
+						{
+							antes.map((a) => (
+								<li class="flex gap-3 text-slate-600">
+									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400">
+										<Icon name="x" size={12} />
+									</span>
+									<span class="text-sm leading-relaxed">{a}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+
+				<div data-reveal class="rounded-2xl border-2 border-brand-200 bg-brand-50/40 p-7">
+					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">
+						Con Vyva
+					</h3>
+					<ul class="mt-6 space-y-4">
+						{
+							despues.map((d) => (
+								<li class="flex gap-3 text-slate-700">
+									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+										<Icon name="check" size={12} />
+									</span>
+									<span class="text-sm font-medium leading-relaxed">{d}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ CÓMO SE MONTA ============ -->
+		<section class="bg-slate-50">
+			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+				<div class="max-w-2xl">
+					<p data-reveal class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">
+						Estás funcionando esta semana
+					</p>
+					<h2 data-reveal class="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						Montarlo no te va a quitar el mes
+					</h2>
+					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+						El miedo real no es el precio, es tener que meter trescientas
+						clientas a mano. No va a pasar.
+					</p>
+				</div>
+
+				<ol class="mt-14 grid gap-6 md:grid-cols-3">
+					{
+						pasos.map((p, i) => (
+							<li
+								data-reveal
+								class="relative rounded-2xl border border-slate-200 bg-white p-7"
+							>
+								<span class="absolute right-6 top-6 text-4xl font-extrabold text-slate-100">
+									{i + 1}
+								</span>
+								<span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-700">
+									<Icon name={p.icon as any} size={26} />
+								</span>
+								<h3 class="mt-5 text-lg font-bold text-ink">{p.title}</h3>
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">{p.body}</p>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
+
+		<!-- ============ QUÉ INCLUYE ============ -->
 		<section id="caracteristicas" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
 			<div class="max-w-2xl">
-				<p data-reveal class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">
-					Todo en una plataforma
-				</p>
-				<h2 data-reveal class="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Lo que necesitas para operar y hacer crecer tu negocio
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					Todo incluido. No hay módulos que se pagan aparte.
 				</h2>
 			</div>
 
 			<div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 				{
-					pillars.map((p) => (
+					incluye.map((p) => (
 						<article
 							data-reveal
 							class="group rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
@@ -193,70 +407,246 @@ const useCases = [
 					))
 				}
 			</div>
+
+			<div data-reveal class="mt-10 grid gap-6 sm:grid-cols-3">
+				{
+					capturas.map((c) => (
+						<figure>
+							<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
+								<img
+									src={c.src}
+									width={c.w}
+									height={c.h}
+									alt={c.alt}
+									class="w-full"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+							<figcaption class="mt-3 text-sm font-medium text-slate-600">{c.caption}</figcaption>
+						</figure>
+					))
+				}
+			</div>
 		</section>
 
-		<!-- Destacado: agenda inteligente -->
-		<section class="bg-slate-50">
-			<div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
-				<div data-reveal>
-					<h2 class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-						Tus clientes reservan, tú te enfocas en atenderlos
+		<!-- ============ PRECIO ============ -->
+		<section id="precio" class="bg-slate-50">
+			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+				<div class="mx-auto max-w-2xl text-center">
+					<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						Un solo precio, y está aquí
 					</h2>
-					<p class="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
-						Un sistema de agendamiento online completo que trabaja por ti las
-						24 horas, sincronizado con tu calendario y tu equipo.
+					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+						Sin cotización, sin "depende de tu negocio", sin llamada para saber
+						cuánto cuesta.
 					</p>
-					<a
-						href={SIGNUP}
-						class="btn-press mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
-					>
-						Empezar gratis
-						<Icon name="arrow-right" size={18} />
-					</a>
 				</div>
 
-				<div class="grid gap-4 sm:grid-cols-2">
+				<div
+					data-reveal
+					class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
+				>
+					<div class="bg-brand-600 px-6 py-3 text-center">
+						<p class="text-sm font-bold uppercase tracking-[0.14em] text-white">
+							Plan fundador · quedan pocos cupos
+						</p>
+					</div>
+
+					<div class="px-8 py-10 text-center">
+						<p class="text-base font-semibold text-slate-400">
+							Precio de lista <span class="line-through">{PRECIO_LISTA}/mes</span>
+						</p>
+						<p class="mt-1 text-5xl font-extrabold tracking-tight text-ink">
+							{PRECIO}<span class="text-xl font-bold text-slate-400">/mes</span>
+						</p>
+						<p class="mt-2 text-sm text-slate-500">
+							Pesos colombianos, IVA incluido. Usuarios ilimitados.
+						</p>
+
+						<ul class="mt-8 space-y-3 text-left">
+							{
+								[
+									'Todas las funciones, sin módulos aparte',
+									'Usuarios y citas ilimitados',
+									'Configuración inicial hecha contigo',
+									'Precio congelado mientras seas cliente',
+									'Sin contrato ni permanencia',
+									'Soporte directo por WhatsApp conmigo',
+								].map((f) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm font-medium text-slate-700">{f}</span>
+									</li>
+								))
+							}
+						</ul>
+
+						<a
+							href={CALL}
+							class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
+						>
+							Tomar un cupo fundador
+							<Icon name="arrow-right" size={18} />
+						</a>
+						<a
+							href={SIGNUP}
+							class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
+						>
+							o crea tu cuenta sin hablar con nadie
+						</a>
+
+						<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+							<Icon name="lock-key" size={14} />
+							Pago con tarjeta débito o crédito Visa o Mastercard
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<!-- ============ POR QUÉ NO SOMOS LOS MÁS BARATOS ============ -->
+		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="max-w-2xl">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					No somos los más baratos del mercado, y hay razones
+				</h2>
+				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+					Hay software de agenda más barato que este. Antes de compararlo por la
+					mensualidad pelada, mira lo que estás comparando.
+				</p>
+			</div>
+
+			<div class="mt-12 grid gap-6 sm:grid-cols-2">
+				{
+					comparativa.map((c) => (
+						<article
+							data-reveal
+							class="rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
+						>
+							<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700">
+								<Icon name={c.icon as any} size={24} />
+							</span>
+							<h3 class="mt-5 text-lg font-bold text-ink">{c.title}</h3>
+							<p class="mt-2 text-sm leading-relaxed text-slate-600">{c.body}</p>
+						</article>
+					))
+				}
+			</div>
+
+			<div data-reveal class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+				<div class="border-b border-slate-200 bg-slate-50 px-6 py-4">
+					<p class="font-bold text-ink">Lo que pagas al mes según el tamaño de tu equipo</p>
+				</div>
+				<div class="overflow-x-auto">
+					<table class="w-full min-w-[420px] text-sm">
+						<thead>
+							<tr class="border-b border-slate-200 text-left text-slate-500">
+								<th class="px-6 py-3 font-semibold">Tu equipo</th>
+								<th class="px-6 py-3 font-semibold text-brand-700">Vyva</th>
+								<th class="px-6 py-3 font-semibold">Cobro por persona</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								tablaEquipo.map((f) => (
+									<tr class="border-b border-slate-100 last:border-0">
+										<td class="px-6 py-3.5 font-medium text-slate-700">{f.personas}</td>
+										<td class="px-6 py-3.5 font-bold text-brand-700">{f.vyva}</td>
+										<td class="px-6 py-3.5 text-slate-600">{f.fresha}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+				<p class="px-6 py-4 text-xs leading-relaxed text-slate-400">
+					Cálculo con tarifas públicas de la competencia a agosto de 2026, sin
+					contar comisiones por transacción ni por clienta nueva. Verifica los
+					valores antes de tomar una decisión.
+				</p>
+			</div>
+		</section>
+
+		<!-- ============ PARA QUIÉN SÍ / NO ============ -->
+		<section id="casos" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="max-w-2xl">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					Vyva no es para todo el mundo
+				</h2>
+				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+					Preferimos decírtelo aquí y no en la llamada.
+				</p>
+			</div>
+
+			<div class="mt-12 grid gap-6 lg:grid-cols-2">
+				<div data-reveal class="rounded-2xl border-2 border-brand-200 bg-brand-50/40 p-7">
+					<h3 class="text-lg font-bold text-ink">Sí es para ti</h3>
+					<ul class="mt-5 space-y-3">
+						{
+							paraQuienSi.map((u) => (
+								<li class="flex gap-3">
+									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+										<Icon name="check" size={12} />
+									</span>
+									<span class="text-sm font-medium leading-relaxed text-slate-700">{u}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+
+				<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
+					<h3 class="text-lg font-bold text-ink">Todavía no es para ti</h3>
+					<ul class="mt-5 space-y-3">
+						{
+							paraQuienNo.map((u) => (
+								<li class="flex gap-3">
+									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400">
+										<Icon name="x" size={12} />
+									</span>
+									<span class="text-sm leading-relaxed text-slate-600">{u}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ FAQ ============ -->
+		<section class="bg-slate-50">
+			<div class="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					Lo que todos preguntan
+				</h2>
+
+				<div class="mt-12 space-y-4">
 					{
-						agendaFeatures.map((f) => (
-							<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-5">
-								<span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-50 text-brand-700">
-									<Icon name={f.icon as any} size={22} />
-								</span>
-								<h3 class="mt-4 font-semibold text-ink">{f.title}</h3>
-								<p class="mt-1 text-sm leading-relaxed text-slate-600">{f.body}</p>
-							</div>
+						faqs.map((f) => (
+							<details
+								data-reveal
+								class="group rounded-2xl border border-slate-200 bg-white p-6 open:border-brand-300"
+							>
+								<summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-bold text-ink marker:content-['']">
+									{f.q}
+									<span class="shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-90">
+										<Icon name="arrow-right" size={18} />
+									</span>
+								</summary>
+								<p class="mt-4 text-sm leading-relaxed text-slate-600">{f.a}</p>
+							</details>
 						))
 					}
 				</div>
 			</div>
 		</section>
 
-		<!-- Casos de uso -->
-		<section id="casos" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-			<div class="max-w-2xl">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Hecho para los negocios de belleza y bienestar
-				</h2>
-				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-					Si tu negocio vive de las citas y de la relación con tus clientes,
-					Vyva se adapta a tu día a día.
-				</p>
-			</div>
-
-			<div data-reveal class="mt-12 flex flex-wrap gap-3">
-				{
-					useCases.map((u) => (
-						<span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700">
-							<Icon name="sparkle" size={16} class="text-brand-500" />
-							{u}
-						</span>
-					))
-				}
-			</div>
-		</section>
-
-		<!-- CTA final -->
-		<section class="px-5 pb-24 sm:px-8">
+		<!-- ============ CTA FINAL ============ -->
+		<section class="px-5 py-24 sm:px-8">
 			<div
 				class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12 lg:py-20"
 			>
@@ -264,26 +654,29 @@ const useCases = [
 					class="pointer-events-none absolute inset-0 bg-[radial-gradient(40%_50%_at_50%_0%,rgba(255,255,255,0.18),transparent)]"
 				>
 				</div>
-				<h2 data-reveal class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-					Empieza gratis y haz crecer tu negocio con Vyva
+				<h2
+					data-reveal
+					class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
+				>
+					Quedan cupos del plan fundador
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Configura tus servicios, comparte tu página de reservas y recibe citas
-					hoy mismo.
+					Quince minutos, sin discurso de ventas. Te muestro la plataforma con un
+					negocio real funcionando y me dices si te sirve.
 				</p>
 				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 					<a
-						href={SIGNUP}
+						href={CALL}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-brand-700 shadow-lg"
 					>
-						Empezar gratis
+						Agenda tu llamada
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a
-						href="/pricing"
+						href={SIGNUP}
 						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10"
 					>
-						Ver planes
+						Crear mi cuenta
 					</a>
 				</div>
 			</div>
