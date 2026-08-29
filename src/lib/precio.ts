@@ -1,39 +1,60 @@
 /**
  * Fuente única del precio para toda la web.
  *
- * El precio real vive en el plan de la app (vyva-subscriptions-api,
- * `GET /api/subscriptions/plans/app`). Ese endpoint hoy exige autenticación,
- * así que aquí se resuelve en tiempo de compilación: si `PLANS_URL` apunta a
- * una ruta pública de planes, el sitio la consulta al construirse y toma el
- * precio del plan indicado en `PLAN_ID`; si no está configurada, si la
- * petición falla o si el plan no trae precio, se usa el respaldo de abajo.
+ * El precio real vive en el plan de la app y se lee del catálogo público de
+ * planes (`GET /api/subscriptions/public/plans`), que no pide sesión. Se
+ * resuelve una vez al construir el sitio: como Amplify reconstruye en cada
+ * push, cambiar el precio del plan y relanzar el build lo actualiza en todas
+ * las páginas a la vez.
  *
- * Como Amplify reconstruye el sitio en cada push, cambiar el precio del plan
- * y relanzar el build es suficiente para que cambie en todas las páginas.
+ * Si el endpoint no responde o el plan no trae precio se usa el respaldo de
+ * abajo, para que un fallo de red nunca deje la web sin precio.
  *
  * Variables de entorno (Amplify → variables de entorno del app):
- *   PLANS_URL  ruta pública que devuelve los planes de la app
- *   PLAN_ID    identificador del plan que se muestra en la web
+ *   PLANS_URL  catálogo público de planes; por defecto el de producción
+ *   PLAN_ID    plan que se muestra; por defecto el primero activo
  */
 
+/** Ciclos que la web sabe pintar. */
+export type Ciclo = 'mensual' | 'anual';
+
+export interface PrecioCiclo {
+	/** Importe formateado, p. ej. "$45.000". */
+	texto: string;
+	/** Importe numérico, por si alguna página necesita calcular. */
+	valor: number;
+}
+
 export interface Precio {
-	/** Precio vigente, el que se cobra hoy. */
+	/** Precio vigente del ciclo mensual. */
 	precio: string;
 	/** Precio de lista, tachado junto al vigente. Vacío si no aplica. */
 	precioLista: string;
 	/** Valores numéricos, por si alguna página necesita calcular. */
 	valores: { precio: number; precioLista: number };
+	/** Mensual y, si el plan lo ofrece, anual. */
+	ciclos: { mensual: PrecioCiclo; anual?: PrecioCiclo };
+	/**
+	 * Lo que ahorra el anual frente a doce meses sueltos, redondeado. 0 si no
+	 * hay ciclo anual o si no ahorra nada.
+	 */
+	ahorroAnual: number;
+	/** Equivalente mensual del plan anual, para poder compararlos de tú a tú. */
+	anualPorMes?: PrecioCiclo;
 	/** true cuando el precio vino del plan y no del respaldo. */
 	desdeElPlan: boolean;
 }
 
-/** Respaldo: plan fundador vigente. Se usa si no hay endpoint configurado. */
+/** Respaldo: plan fundador vigente. Se usa si el catálogo no responde. */
 const RESPALDO = {
 	precio: 69900,
 	precioLista: 99000,
 };
 
-const PLANS_URL = import.meta.env.PLANS_URL ?? process.env.PLANS_URL ?? '';
+const PLANS_URL =
+	import.meta.env.PLANS_URL ??
+	process.env.PLANS_URL ??
+	'https://kpdlrafaa7.execute-api.us-east-1.amazonaws.com/api/subscriptions/public/plans';
 const PLAN_ID = import.meta.env.PLAN_ID ?? process.env.PLAN_ID ?? '';
 
 /** Formatea a pesos colombianos sin decimales: 69900 → "$69.900". */
@@ -41,11 +62,32 @@ export function formatoCOP(valor: number): string {
 	return '$' + Math.round(valor).toLocaleString('es-CO');
 }
 
-function construir(precio: number, precioLista: number, desdeElPlan: boolean): Precio {
+function ciclo(valor: number): PrecioCiclo {
+	return { texto: formatoCOP(valor), valor };
+}
+
+function construir(
+	mensual: number,
+	precioLista: number,
+	anual: number | undefined,
+	desdeElPlan: boolean
+): Precio {
+	const doceMeses = mensual * 12;
+	const ahorroAnual =
+		anual && doceMeses && anual < doceMeses
+			? Math.round((1 - anual / doceMeses) * 100)
+			: 0;
+
 	return {
-		precio: formatoCOP(precio),
-		precioLista: precioLista > precio ? formatoCOP(precioLista) : '',
-		valores: { precio, precioLista },
+		precio: formatoCOP(mensual),
+		precioLista: precioLista > mensual ? formatoCOP(precioLista) : '',
+		valores: { precio: mensual, precioLista },
+		ciclos: {
+			mensual: ciclo(mensual),
+			...(anual ? { anual: ciclo(anual) } : {}),
+		},
+		ahorroAnual,
+		...(anual ? { anualPorMes: ciclo(Math.round(anual / 12)) } : {}),
 		desdeElPlan,
 	};
 }
@@ -53,7 +95,7 @@ function construir(precio: number, precioLista: number, desdeElPlan: boolean): P
 /**
  * Busca el plan en la respuesta de la fachada, que puede venir como arreglo
  * o envuelta en `data`/`items`. Si hay `PLAN_ID` se toma ese plan; si no, el
- * primero activo.
+ * primero.
  */
 function elegirPlan(payload: unknown): Record<string, any> | undefined {
 	const raiz = payload as any;
@@ -67,6 +109,14 @@ function elegirPlan(payload: unknown): Record<string, any> | undefined {
 	return lista.find((p) => p?.active !== false) ?? lista[0];
 }
 
+/** Importe de un ciclo, aceptando tanto `prices.month.amount` como el plano. */
+function importe(plan: Record<string, any>, ciclo: 'month' | 'year'): number {
+	const anidado = Number(plan?.prices?.[ciclo]?.amount);
+	if (Number.isFinite(anidado) && anidado > 0) return anidado;
+	const plano = Number(ciclo === 'month' ? plan?.price : plan?.annualPrice);
+	return Number.isFinite(plano) && plano > 0 ? plano : 0;
+}
+
 let cache: Promise<Precio> | undefined;
 
 /**
@@ -78,7 +128,7 @@ export function getPrecio(): Promise<Precio> {
 
 	cache = (async (): Promise<Precio> => {
 		if (!PLANS_URL) {
-			return construir(RESPALDO.precio, RESPALDO.precioLista, false);
+			return construir(RESPALDO.precio, RESPALDO.precioLista, undefined, false);
 		}
 
 		try {
@@ -89,19 +139,25 @@ export function getPrecio(): Promise<Precio> {
 			if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
 
 			const plan = elegirPlan(await respuesta.json());
-			const precio = Number(plan?.price ?? plan?.precio);
-			if (!plan || !Number.isFinite(precio) || precio <= 0) {
-				throw new Error('el plan no trae un precio utilizable');
+			const mensual = plan ? importe(plan, 'month') : 0;
+			if (!mensual) {
+				throw new Error('el plan no trae un precio mensual utilizable');
 			}
 
+			const anual = importe(plan!, 'year') || undefined;
 			const lista = Number(plan?.listPrice ?? plan?.fullPrice ?? RESPALDO.precioLista);
-			return construir(precio, Number.isFinite(lista) ? lista : 0, true);
+			return construir(
+				mensual,
+				Number.isFinite(lista) ? lista : 0,
+				anual,
+				true
+			);
 		} catch (error) {
 			console.warn(
 				`[precio] No se pudo leer el plan (${(error as Error).message}). ` +
 					`Se usa el respaldo ${formatoCOP(RESPALDO.precio)}.`
 			);
-			return construir(RESPALDO.precio, RESPALDO.precioLista, false);
+			return construir(RESPALDO.precio, RESPALDO.precioLista, undefined, false);
 		}
 	})();
 

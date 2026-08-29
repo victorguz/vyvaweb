@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import FeatureCard from '../components/marketing/FeatureCard.astro';
 import Callout from '../components/marketing/Callout.astro';
+import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
 
 // CTA principal: la llamada. CTA secundario: el checkout self-serve.
@@ -13,7 +14,8 @@ const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 
 // El precio sale del plan de la app; ver src/lib/precio.ts.
-const { precio: PRECIO, precioLista: PRECIO_LISTA } = await getPrecio();
+const PRECIO_PLAN = await getPrecio();
+const { precio: PRECIO } = PRECIO_PLAN;
 
 const incluido = [
 	'Todas las funciones, sin módulos que se pagan aparte',
@@ -195,15 +197,7 @@ const tablaEquipo = [
 				</div>
 
 				<div class="px-8 py-10 text-center">
-					<p class="text-base font-semibold text-slate-400">
-						Precio de lista <span class="line-through">{PRECIO_LISTA}/mes</span>
-					</p>
-					<p class="mt-1 text-5xl font-extrabold tracking-tight text-ink">
-						{PRECIO}<span class="text-xl font-bold text-slate-400">/mes</span>
-					</p>
-					<p class="mt-2 text-sm text-slate-500">
-						Pesos colombianos, IVA incluido. Usuarios ilimitados.
-					</p>
+					<SelectorPrecio precio={PRECIO_PLAN} client:load />
 
 					<ul class="mt-8 space-y-3 text-left">
 						{
@@ -227,6 +221,7 @@ const tablaEquipo = [
 					</a>
 					<a
 						href={SIGNUP}
+						data-signup-plan={SIGNUP}
 						class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
 					>
 						o crea tu cuenta sin hablar con nadie
