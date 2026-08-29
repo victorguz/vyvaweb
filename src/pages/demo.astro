@@ -4,7 +4,8 @@ import Icon from '../components/Icon.astro';
 import { getPrecio } from '../lib/precio';
 
 // Landing cerrada para campañas de pauta: sin navegación y con una sola
-// acción repetida. El único enlace de salida es el legal, que Meta exige.
+// acción repetida. Los únicos enlaces son los legales, que exigen las
+// plataformas de pauta, y abren en otra pestaña para no soltar la página.
 // El orden sigue al anuncio: primero el problema del que le hablamos, después
 // cómo se resuelve, y solo al final la demo.
 const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
@@ -40,7 +41,7 @@ const comoFunciona = [
 	{
 		icon: 'clock',
 		title: 'Aprende el ritmo de cada clienta',
-		body: 'No es un plazo fijo igual para todas. Vyva mira cada cuánto vuelve cada una: la que viene cada mes y la que viene cada tres se miden distinto.',
+		body: 'No es un plazo fijo igual para todas. Vyva mira cada cuánto vuelve cada una: a la que viene cada mes y a la que viene cada tres meses no se les mide con la misma vara.',
 	},
 	{
 		icon: 'users',
@@ -80,19 +81,19 @@ const tambien = [
 
 const enLaDemo = [
 	{
+		icon: 'chart-line',
+		title: 'Las estadísticas de hoy de un negocio real',
+		body: 'Cuántas clientas volvieron este mes, cada cuánto vuelven y cuántas se están quedando por el camino. Números de verdad, no una demostración preparada.',
+	},
+	{
 		icon: 'users',
-		title: 'La lista de clientas que se están yendo',
-		body: 'Con los datos de una estética que usa Vyva todos los días: quién se está yendo, cada cuánto volvía y cuánto vale recuperarla.',
+		title: 'Su lista real de clientas que se están yendo',
+		body: 'Las que se pasaron de su ritmo de visita y todavía no han vuelto, con nombre y con cuánto llevan sin aparecer.',
 	},
 	{
 		icon: 'chat',
-		title: 'Una campaña de WhatsApp, de principio a fin',
-		body: 'Cómo esa lista se convierte en mensajes sin exportar nada, sin cambiar de herramienta y sin cobro por mensaje.',
-	},
-	{
-		icon: 'check',
-		title: 'Qué haría falta para arrancar tu negocio',
-		body: 'Cuánto cuesta, qué se necesita de tu lado y en cuántos días quedarías funcionando.',
+		title: 'Un envío masivo, hecho delante de ti',
+		body: 'Armamos la campaña de WhatsApp con esa lista y la enviamos en la llamada, para que veas cómo funciona antes de decidir nada.',
 	},
 ];
 
@@ -238,12 +239,19 @@ const paraQuienNo = [
 					}
 				</div>
 
+				<p data-reveal class="mt-12 max-w-3xl text-lg leading-relaxed text-slate-600">
+					Y perderla no sale igual de barato que reemplazarla: conseguir una
+					clienta nueva te cuesta pauta, promoción y tiempo, mientras que traer de
+					vuelta a una que ya conoce tu trabajo y que ya confió en ti te cuesta un
+					mensaje a tiempo.
+				</p>
+
 				<p
 					data-reveal
-					class="mt-12 max-w-3xl border-l-4 border-brand-600 pl-5 text-xl font-semibold leading-snug text-ink"
+					class="mt-8 max-w-3xl border-l-4 border-brand-600 pl-5 text-xl font-semibold leading-snug text-ink"
 				>
-					Hay una ventana en la que todavía la recuperas con un mensaje. El
-					problema es que hoy nadie te avisa que se abrió.
+					Por eso existe una ventana para recuperarla. El problema es que hoy nadie
+					te avisa cuándo se abre.
 				</p>
 			</div>
 		</section>
@@ -317,11 +325,14 @@ const paraQuienNo = [
 		<section class="border-t border-slate-200 py-16 sm:py-20">
 			<div class="mx-auto max-w-7xl px-5 sm:px-8">
 				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Y reemplaza lo que hoy tienes suelto
+					Una agenda no te devuelve a las que se fueron
 				</h2>
-				<p data-reveal class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-					La retención es lo que nadie más te da. El resto también está incluido,
-					en el mismo lugar y por el mismo precio.
+				<p data-reveal class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
+					Los programas de citas y los sistemas de cobro te ayudan a resolver el
+					día de hoy: reservar, atender, cobrar y cerrar la caja. Ninguno te dice
+					quién dejó de venir, y mucho menos te deja hacer algo al respecto. Vyva
+					hace las dos cosas, así que no tienes que elegir: esto también viene
+					incluido, en el mismo lugar y por el mismo precio.
 				</p>
 
 				<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -406,7 +417,7 @@ const paraQuienNo = [
 					Vyva no le sirve a todos los negocios
 				</h2>
 				<p data-reveal class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-					Preferimos decirlo antes que hacerte perder el tiempo.
+					Preferimos decírtelo ahora, antes de hacerte perder el tiempo.
 				</p>
 
 				<div class="mt-10 grid gap-6 sm:grid-cols-2">
@@ -447,11 +458,12 @@ const paraQuienNo = [
 		<section class="border-t border-slate-200 bg-slate-50 py-16 sm:py-20">
 			<div class="mx-auto max-w-7xl px-5 sm:px-8">
 				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					La demo dura 15 minutos y es la plataforma abierta
+					La demo dura 15 minutos y es con la plataforma abierta
 				</h2>
-				<p data-reveal class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-					No es una presentación grabada ni una llamada de ventas larga. Esto es
-					lo que vas a ver:
+				<p data-reveal class="mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
+					No es una presentación grabada ni una llamada de ventas larga: entramos a
+					un negocio que lleva meses trabajando con Vyva y miramos sus números
+					contigo. Esto es lo que vas a ver:
 				</p>
 
 				<div class="mt-12 grid gap-6 sm:grid-cols-3">
@@ -485,8 +497,8 @@ const paraQuienNo = [
 					data-reveal
 					class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand-100"
 				>
-					En la demo lo vas a ver con un negocio real, y sabrás qué haría falta
-					para verlo con el tuyo.
+					En la demo lo vas a ver en un negocio que ya lleva meses con Vyva, y
+					sabrás qué hace falta para que el tuyo llegue ahí.
 				</p>
 
 				<div data-reveal class="mt-9">
@@ -512,10 +524,11 @@ const paraQuienNo = [
 			>
 				<p>© {new Date().getFullYear()} VyvaPOS, LLC. Barranquilla, Colombia.</p>
 				<div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-					<a href="/privacy" class="hover:text-ink">Privacidad</a>
-					<a href="/terms" class="hover:text-ink">Términos</a>
-					<a href="mailto:contact@vyvapos.com" class="hover:text-ink">
-						contact@vyvapos.com
+					<a href="/privacy" target="_blank" rel="noopener" class="hover:text-ink">
+						Privacidad
+					</a>
+					<a href="/terms" target="_blank" rel="noopener" class="hover:text-ink">
+						Términos
 					</a>
 				</div>
 			</div>
