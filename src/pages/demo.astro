@@ -1,0 +1,360 @@
+---
+import Landing from '../layouts/Landing.astro';
+import Icon from '../components/Icon.astro';
+
+// Landing cerrada para campañas de pauta: sin navegación y con una sola
+// acción repetida. El único enlace de salida es el legal, que Meta exige.
+// TODO: reemplazar por el Calendly nuevo del evento de demo.
+const DEMO = 'https://calendly.com/victorguzber/conoce-vyva-pos';
+
+const PRECIO = '$69.900';
+const PRECIO_LISTA = '$99.000';
+
+const enLaDemo = [
+	{
+		icon: 'users',
+		title: 'Tu lista de clientas en riesgo',
+		body: 'Con los datos de un negocio real operando hoy: quién se está yendo, cada cuánto volvía y cuánto vale recuperarla.',
+	},
+	{
+		icon: 'chat',
+		title: 'La campaña, de principio a fin',
+		body: 'Cómo esa lista se convierte en un mensaje de WhatsApp sin exportar nada, sin cambiar de herramienta y sin cobro por mensaje.',
+	},
+	{
+		icon: 'check',
+		title: 'Qué hace falta para arrancar',
+		body: 'Cuánto cuesta, qué se necesita de tu lado y en cuántos días quedaría funcionando tu negocio.',
+	},
+];
+
+const capturas = [
+	{
+		src: '/capturas/dashboard-fidelizacion.png',
+		w: 1919,
+		h: 907,
+		alt: 'Panel de Vyva con frecuencia de visita, clientas nuevas, reagendadas y tasa de retención.',
+		caption: 'Quién vuelve, quién no, y cada cuánto.',
+	},
+	{
+		src: '/capturas/agenda.png',
+		w: 1918,
+		h: 908,
+		alt: 'Agenda de Vyva con las citas del día repartidas por especialista, cada una con su servicio y su botón de WhatsApp.',
+		caption: 'La agenda de una estética real, un jueves cualquiera.',
+	},
+];
+
+const incluye = [
+	'Agenda online 24/7 con tu propio link de reservas',
+	'Chat de WhatsApp, recordatorios y campañas sin cobro por mensaje',
+	'Historia de cada clienta, punto de venta e inventario',
+	'Usuarios, clientas y citas ilimitados',
+	'Configuración inicial hecha contigo, sin costo aparte',
+];
+
+const paraQuienSi = [
+	'Estéticas, spas y clínicas estéticas con equipo',
+	'Barberías y salones que ya facturan todos los días',
+	'Centros de masajes y bienestar con varias salas',
+	'Negocios que hoy agendan a mano y ya no dan abasto',
+];
+
+const paraQuienNo = [
+	'Si trabajas sola y atiendes dos o tres citas al día, todavía no te compensa',
+	'Si no tienes tarjeta débito o crédito para el pago mensual',
+	'Si necesitas facturación electrónica DIAN integrada hoy mismo',
+];
+---
+
+<Landing
+	title="Agenda una demo de Vyva | 15 minutos"
+	description="Vyva te muestra qué clientas están a punto de dejar de venir y te deja reactivarlas por WhatsApp desde el mismo lugar. Agenda una demo de 15 minutos con un negocio real funcionando."
+>
+	<main>
+		<!-- ============ HERO ============ -->
+		<section class="relative overflow-hidden">
+			<div
+				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_85%_8%,var(--color-brand-100),transparent_60%)]"
+			>
+			</div>
+
+			<div class="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
+				<img src="/brand/vyva_logo_black.svg" alt="Vyva" class="h-7 w-auto" />
+			</div>
+
+			<div
+				class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-12 sm:px-8 lg:grid-cols-2 lg:gap-10 lg:pb-24 lg:pt-16"
+			>
+				<div>
+					<p
+						data-reveal
+						class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-sm font-semibold text-brand-700"
+					>
+						<Icon name="sparkle" size={16} />
+						Plan fundador · primeros 10 negocios
+					</p>
+
+					<h1
+						data-reveal
+						class="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]"
+					>
+						Tus clientas dejan de venir y te enteras
+						<span class="text-brand-600">cuando ya se fueron</span>
+					</h1>
+
+					<p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+						Vyva te muestra quién está a punto de no volver —según la frecuencia
+						de cada clienta, no un plazo fijo— y te deja escribirle por WhatsApp
+						desde ahí mismo. Agenda, clientas, ventas y equipo en el mismo lugar.
+					</p>
+
+					<div data-reveal class="mt-8">
+						<a
+							href="#agendar"
+							class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-7 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
+						>
+							Agenda una demo
+							<Icon name="arrow-right" size={18} />
+						</a>
+					</div>
+
+					<p
+						data-reveal
+						class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-500"
+					>
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> 15 minutos
+						</span>
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> Sin compromiso
+						</span>
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="check" size={16} class="text-brand-600" /> Con un negocio real funcionando
+						</span>
+					</p>
+				</div>
+
+				<div data-reveal class="relative">
+					<div
+						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10"
+					>
+						<img
+							src="/capturas/dashboard-fidelizacion.png"
+							width="1919"
+							height="907"
+							alt="Panel de Vyva con frecuencia de visita, clientas nuevas, reagendadas y tasa de retención."
+							class="w-full"
+							fetchpriority="high"
+							decoding="async"
+						/>
+					</div>
+					<p class="mt-3 text-center text-sm text-slate-500">
+						El panel que dice quién está volviendo y quién no.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ QUÉ VES EN LA DEMO ============ -->
+		<section class="border-y border-slate-200 bg-slate-50">
+			<div class="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+				<h2
+					data-reveal
+					class="text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+				>
+					Qué pasa en esos 15 minutos
+				</h2>
+				<p data-reveal class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+					No es una presentación. Es la plataforma abierta, con datos reales, y
+					tus preguntas respondidas de una.
+				</p>
+
+				<div class="mt-12 grid gap-6 sm:grid-cols-3">
+					{
+						enLaDemo.map((item) => (
+							<article
+								data-reveal
+								class="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+							>
+								<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-600">
+									<Icon name={item.icon} size={22} />
+								</span>
+								<h3 class="mt-5 text-lg font-bold text-ink">{item.title}</h3>
+								<p class="mt-2 text-slate-600">{item.body}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ PRUEBA DE PRODUCTO ============ -->
+		<section class="py-16 sm:py-20">
+			<div class="mx-auto max-w-6xl px-5 sm:px-8">
+				<div class="grid gap-10 sm:grid-cols-2">
+					{
+						capturas.map((c) => (
+							<figure data-reveal class="m-0">
+								<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-900/5">
+									<img
+										src={c.src}
+										width={c.w}
+										height={c.h}
+										alt={c.alt}
+										class="w-full"
+										loading="lazy"
+										decoding="async"
+									/>
+								</div>
+								<figcaption class="mt-3 text-center text-sm text-slate-500">
+									{c.caption}
+								</figcaption>
+							</figure>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ PRECIO ============ -->
+		<section class="border-y border-slate-200 bg-slate-50">
+			<div class="mx-auto max-w-3xl px-5 py-16 text-center sm:px-8 lg:py-20">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					El precio, antes de que preguntes
+				</h2>
+
+				<div
+					data-reveal
+					class="mx-auto mt-10 overflow-hidden rounded-3xl border-2 border-brand-300 bg-white text-left shadow-xl shadow-brand-600/10"
+				>
+					<div class="bg-brand-600 px-6 py-3 text-center">
+						<p class="text-sm font-bold uppercase tracking-[0.14em] text-white">
+							Plan fundador · quedan pocos cupos
+						</p>
+					</div>
+
+					<div class="px-7 py-9 sm:px-10">
+						<div class="flex items-end justify-center gap-3">
+							<p class="text-5xl font-extrabold tracking-tight text-ink">
+								{PRECIO}<span class="text-xl font-bold text-slate-400">/mes</span>
+							</p>
+							<p class="pb-2 text-lg font-semibold text-slate-400 line-through">
+								{PRECIO_LISTA}
+							</p>
+						</div>
+						<p class="mt-2 text-center text-sm text-slate-500">
+							Pesos colombianos, IVA incluido. Precio congelado mientras seas cliente.
+						</p>
+
+						<ul class="mt-8 space-y-3">
+							{
+								incluye.map((f) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm font-medium text-slate-700">{f}</span>
+									</li>
+								))
+							}
+						</ul>
+
+						<p class="mt-7 text-center text-sm text-slate-500">
+							Sin contrato ni permanencia: cancelas cuando quieras.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ PARA QUIÉN ============ -->
+		<section class="py-16 sm:py-20">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					Para que no pierdas los 15 minutos
+				</h2>
+
+				<div class="mt-10 grid gap-6 sm:grid-cols-2">
+					<div data-reveal class="rounded-2xl border border-brand-200 bg-brand-50/60 p-7">
+						<h3 class="text-lg font-bold text-ink">Sí es para ti</h3>
+						<ul class="mt-4 space-y-3">
+							{
+								paraQuienSi.map((p) => (
+									<li class="flex gap-3 text-slate-700">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm font-medium">{p}</span>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+
+					<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
+						<h3 class="text-lg font-bold text-ink">Todavía no es para ti</h3>
+						<ul class="mt-4 space-y-3">
+							{
+								paraQuienNo.map((p) => (
+									<li class="flex gap-3 text-slate-600">
+										<span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300" />
+										<span class="text-sm">{p}</span>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ AGENDAR ============ -->
+		<section id="agendar" class="scroll-mt-8 px-5 pb-20 sm:px-8">
+			<div
+				class="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12"
+			>
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+					¿Cuántas clientas tienes en riesgo ahora mismo?
+				</h2>
+				<p
+					data-reveal
+					class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand-100"
+				>
+					En la demo lo vas a ver con un negocio real, y sabrás qué haría falta
+					para verlo con el tuyo.
+				</p>
+
+				<div data-reveal class="mt-9">
+					<a
+						href={DEMO}
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-brand-700 shadow-lg"
+					>
+						Agenda una demo
+						<Icon name="arrow-right" size={18} />
+					</a>
+				</div>
+
+				<p data-reveal class="mt-5 text-sm text-brand-100">
+					15 minutos · sin compromiso · te responde una persona
+				</p>
+			</div>
+		</section>
+
+		<!-- ============ LEGAL ============ -->
+		<footer class="border-t border-slate-200 bg-white">
+			<div
+				class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-5 py-9 text-center text-sm text-slate-500 sm:flex-row sm:justify-between sm:px-8 sm:text-left"
+			>
+				<p>© {new Date().getFullYear()} VyvaPOS, LLC. Barranquilla, Colombia.</p>
+				<div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+					<a href="/privacy" class="hover:text-ink">Privacidad</a>
+					<a href="/terms" class="hover:text-ink">Términos</a>
+					<a href="mailto:contact@vyvapos.com" class="hover:text-ink">
+						contact@vyvapos.com
+					</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Landing>
