@@ -106,11 +106,11 @@
 				},
 				{
 					q: '¿Puedo probar antes?',
-					a: 'Sí. Agenda una llamada de 15 minutos y te muestro la plataforma con un negocio real funcionando antes de que decidas.',
+					a: 'Sí. Agenda una demo de 15 minutos y ves la plataforma con un negocio real funcionando antes de decidir.',
 				},
 				{
 					q: '¿Cómo contactar soporte?',
-					a: 'Email: contact@solaradev.com o agenda una demo en Calendly.',
+					a: 'Email: contact@vyvapos.com o agenda una demo en Calendly.',
 				},
 				{
 					q: '¿Capacitación para el equipo?',

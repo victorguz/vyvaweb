@@ -338,7 +338,7 @@ El hecho de que no ejerzamos algún derecho no constituye una renuncia a ese der
 
 Para preguntas sobre estos términos de servicio o para ejercer tus derechos, puedes contactar a Vyva POS, LLC:
 
-📧 Correo electrónico: contact@solaradev.com
+📧 Correo electrónico: contact@vyvapos.com
 
 🌐 Sitio web: https://vyvapos.com
 

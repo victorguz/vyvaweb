@@ -160,7 +160,7 @@ Puedes solicitar una copia de tus datos en formato estructurado.
 
 Para ejercer cualquiera de estos derechos o solicitar la eliminación de tus datos, puedes contactarnos en:
 
-📧 contact@solaradev.com
+📧 contact@vyvapos.com
 
 ### 5\. Retención de Datos
 
@@ -256,6 +256,6 @@ Podemos actualizar esta política de privacidad ocasionalmente. Te notificaremos
 
 Si tienes preguntas sobre esta política de privacidad o sobre cómo manejamos tus datos personales, puedes contactar a Vyva POS, LLC:
 
-📧 Correo electrónico: contact@solaradev.com
+📧 Correo electrónico: contact@vyvapos.com
 
 🌐 Sitio web: https://vyvapos.com
