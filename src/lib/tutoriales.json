@@ -27,7 +27,7 @@
       "titulo": "Configurar tu negocio",
       "descripcion": "Datos públicos, enlace de reserva y qué se muestra a tus clientes.",
       "duracion": "0:57",
-      "segundos": 57.2,
+      "segundos": 57.1,
       "pasos": [
         {
           "n": 1,
@@ -57,7 +57,7 @@
         {
           "n": 6,
           "texto": "Ajusta el encuadre y confirma",
-          "t": 20
+          "t": 20.1
         },
         {
           "n": 7,
@@ -72,7 +72,7 @@
         {
           "n": 9,
           "texto": "Guarda solo esta sección",
-          "t": 32.6
+          "t": 32.7
         },
         {
           "n": 10,
@@ -87,7 +87,7 @@
         {
           "n": 12,
           "texto": "Y la ficha pública publica la página de tu negocio",
-          "t": 44.8
+          "t": 44.9
         },
         {
           "n": 13,
@@ -110,8 +110,8 @@
       "grupo": "primeros-pasos",
       "titulo": "Iniciar sesión",
       "descripcion": "Entra a Vyva desde cualquier navegador.",
-      "duracion": "0:17",
-      "segundos": 17.2,
+      "duracion": "0:18",
+      "segundos": 17.6,
       "pasos": [
         {
           "n": 1,
@@ -145,7 +145,7 @@
       "titulo": "Registrar tu negocio",
       "descripcion": "Los cinco pasos del asistente: nombre, qué ofreces, área y punto físico.",
       "duracion": "0:48",
-      "segundos": 48.1,
+      "segundos": 48.4,
       "pasos": [
         {
           "n": 1,
@@ -170,7 +170,7 @@
         {
           "n": 5,
           "texto": "Si atiendes en un local, aquí va la dirección",
-          "t": 23.5
+          "t": 23.6
         },
         {
           "n": 6,
@@ -180,12 +180,12 @@
         {
           "n": 7,
           "texto": "Por último el logo y las fotos de portada, que puedes dejar para más tarde",
-          "t": 31.3
+          "t": 31.4
         },
         {
           "n": 8,
           "texto": "Tu negocio ya está creado y listo para usar",
-          "t": 43.5
+          "t": 43.6
         }
       ],
       "tiemposFiables": true
@@ -198,13 +198,13 @@
       "grupo": "primeros-pasos",
       "titulo": "Crear tu cuenta",
       "descripcion": "Regístrate con tu correo o con Google en menos de un minuto.",
-      "duracion": "0:34",
-      "segundos": 34.4,
+      "duracion": "0:35",
+      "segundos": 34.5,
       "pasos": [
         {
           "n": 1,
           "texto": "Crea tu cuenta de cliente en Vyva",
-          "t": 1.9
+          "t": 2
         },
         {
           "n": 2,
@@ -224,27 +224,27 @@
         {
           "n": 5,
           "texto": "Si eres nuevo, te pide los datos para crear la cuenta",
-          "t": 15.7
+          "t": 15.6
         },
         {
           "n": 6,
           "texto": "Tu nombre completo",
-          "t": 19.3
+          "t": 19.2
         },
         {
           "n": 7,
           "texto": "Y tu teléfono, para las confirmaciones de cita",
-          "t": 22
+          "t": 21.8
         },
         {
           "n": 8,
           "texto": "Elige una contraseña que solo tú conozcas",
-          "t": 25.3
+          "t": 25.2
         },
         {
           "n": 9,
           "texto": "Acepta la política de privacidad y pulsa Continuar",
-          "t": 28.5
+          "t": 28.4
         }
       ],
       "tiemposFiables": true
@@ -258,7 +258,7 @@
       "titulo": "Crear un formulario",
       "descripcion": "Capta clientes con un enlace público, partiendo de una plantilla.",
       "duracion": "0:32",
-      "segundos": 31.5,
+      "segundos": 31.6,
       "pasos": [
         {
           "n": 1,
@@ -278,27 +278,27 @@
         {
           "n": 4,
           "texto": "Continúa al editor",
-          "t": 9.7
+          "t": 9.8
         },
         {
           "n": 5,
           "texto": "Ponle un nombre que reconozcas",
-          "t": 12.1
+          "t": 12.2
         },
         {
           "n": 6,
           "texto": "La plantilla ya trae nombre, correo y teléfono",
-          "t": 15.3
+          "t": 15.4
         },
         {
           "n": 7,
           "texto": "Cada campo elige su tipo y si es obligatorio",
-          "t": 18.8
+          "t": 18.9
         },
         {
           "n": 8,
           "texto": "Guarda el formulario",
-          "t": 21.7
+          "t": 21.8
         },
         {
           "n": 9,
@@ -316,8 +316,8 @@
       "grupo": "catalogo",
       "titulo": "Crear un producto",
       "descripcion": "Igual que un servicio, pero con control de inventario.",
-      "duracion": "0:36",
-      "segundos": 36,
+      "duracion": "0:43",
+      "segundos": 42.9,
       "pasos": [
         {
           "n": 1,
@@ -341,38 +341,48 @@
         },
         {
           "n": 5,
-          "texto": "Nombre y precio",
-          "t": 12.1
+          "texto": "Y elige Crear producto",
+          "t": 12
         },
         {
           "n": 6,
-          "texto": "Describe el producto",
-          "t": 16.7
+          "texto": "Nombre y precio",
+          "t": 14.2
         },
         {
           "n": 7,
-          "texto": "A diferencia de un servicio, un producto lleva stock",
-          "t": 18.8
+          "texto": "Para la descripción y el inventario, entra en Registro avanzado",
+          "t": 19.1
         },
         {
           "n": 8,
-          "texto": "Activa el control de inventario",
-          "t": 22.3
+          "texto": "Describe el producto",
+          "t": 23.1
         },
         {
           "n": 9,
-          "texto": "Y pon cuántas unidades tienes",
-          "t": 24.6
+          "texto": "Despliega Opciones adicionales",
+          "t": 25.1
         },
         {
           "n": 10,
-          "texto": "Guarda el producto",
-          "t": 27
+          "texto": "A diferencia de un servicio, un producto lleva stock",
+          "t": 27.8
         },
         {
           "n": 11,
+          "texto": "Pon cuántas unidades tienes",
+          "t": 31.3
+        },
+        {
+          "n": 12,
+          "texto": "Guarda el producto",
+          "t": 33.9
+        },
+        {
+          "n": 13,
           "texto": "Ya está a la venta en tu tienda",
-          "t": 32.2
+          "t": 39.2
         }
       ],
       "tiemposFiables": true
@@ -385,8 +395,8 @@
       "grupo": "catalogo",
       "titulo": "Crear un servicio",
       "descripcion": "Precio y duración, que es lo que define los huecos de tu agenda.",
-      "duracion": "0:33",
-      "segundos": 33.2,
+      "duracion": "0:36",
+      "segundos": 35.8,
       "pasos": [
         {
           "n": 1,
@@ -400,38 +410,38 @@
         },
         {
           "n": 3,
-          "texto": "Ponle nombre",
+          "texto": "Y elige Crear servicio",
           "t": 6.3
         },
         {
           "n": 4,
-          "texto": "Y su precio",
-          "t": 8.9
+          "texto": "Ponle nombre",
+          "t": 8.5
         },
         {
           "n": 5,
-          "texto": "Describe en qué consiste",
+          "texto": "Y su precio",
           "t": 11.1
         },
         {
           "n": 6,
-          "texto": "En Opciones adicionales está la duración",
-          "t": 13.3
+          "texto": "La duración define los huecos de tu agenda",
+          "t": 13.4
         },
         {
           "n": 7,
-          "texto": "La duración define los huecos de tu agenda",
-          "t": 16.2
+          "texto": "En Registro avanzado tienes descripción, categoría e inventario",
+          "t": 22.6
         },
         {
           "n": 8,
           "texto": "Guarda y listo",
-          "t": 25.3
+          "t": 26.9
         },
         {
           "n": 9,
           "texto": "El servicio ya está en tu catálogo",
-          "t": 29.6
+          "t": 32.1
         }
       ],
       "tiemposFiables": true
@@ -444,8 +454,8 @@
       "grupo": "catalogo",
       "titulo": "Publicar tus servicios",
       "descripcion": "Haz que tu catálogo se vea en tu página pública de reservas.",
-      "duracion": "0:35",
-      "segundos": 34.8,
+      "duracion": "0:34",
+      "segundos": 34.3,
       "pasos": [
         {
           "n": 1,
@@ -470,7 +480,7 @@
         {
           "n": 5,
           "texto": "El estado Publicado es lo que lo hace visible",
-          "t": 17.5
+          "t": 17.6
         },
         {
           "n": 6,
@@ -480,12 +490,12 @@
         {
           "n": 7,
           "texto": "Guarda los cambios",
-          "t": 24.3
+          "t": 24.5
         },
         {
           "n": 8,
           "texto": "Listo: tu servicio ya se puede reservar en línea",
-          "t": 29.6
+          "t": 29.8
         }
       ],
       "tiemposFiables": true
@@ -498,8 +508,8 @@
       "grupo": "dia-a-dia",
       "titulo": "Agendar una cita",
       "descripcion": "Desde el calendario: hueco libre, servicio, cliente y listo.",
-      "duracion": "0:46",
-      "segundos": 45.7,
+      "duracion": "0:45",
+      "segundos": 44.9,
       "pasos": [
         {
           "n": 1,
@@ -514,52 +524,52 @@
         {
           "n": 3,
           "texto": "Cada especialista tiene su propia columna",
-          "t": 11.8
+          "t": 12.1
         },
         {
           "n": 4,
           "texto": "Pulsa el hueco libre que quieras ocupar",
-          "t": 14.8
+          "t": 15.2
         },
         {
           "n": 5,
           "texto": "Elige Agendar cita",
-          "t": 17.4
+          "t": 17.8
         },
         {
           "n": 6,
           "texto": "Escoge el servicio: su duración fija el horario",
-          "t": 19.9
+          "t": 20.3
         },
         {
           "n": 7,
           "texto": "Continúa al resumen",
-          "t": 23.3
+          "t": 23.7
         },
         {
           "n": 8,
           "texto": "Falta decir quién viene",
-          "t": 25.9
+          "t": 26.4
         },
         {
           "n": 9,
           "texto": "Elige el cliente",
-          "t": 29.1
+          "t": 29.6
         },
         {
           "n": 10,
           "texto": "Apunta lo que haga falta recordar",
-          "t": 32.1
+          "t": 32.7
         },
         {
           "n": 11,
           "texto": "Finaliza y la cita queda en la agenda",
-          "t": 34.6
+          "t": 35.2
         },
         {
           "n": 12,
           "texto": "Cita agendada",
-          "t": 40.2
+          "t": 40.8
         }
       ],
       "tiemposFiables": true
@@ -572,8 +582,8 @@
       "grupo": "dia-a-dia",
       "titulo": "Vender desde la tienda",
       "descripcion": "Carrito, cliente, métodos de pago, cobro y recibo.",
-      "duracion": "0:49",
-      "segundos": 48.9,
+      "duracion": "0:51",
+      "segundos": 50.9,
       "pasos": [
         {
           "n": 1,
@@ -583,62 +593,62 @@
         {
           "n": 2,
           "texto": "Abre el menú y entra en Tienda",
-          "t": 6.3
+          "t": 6.4
         },
         {
           "n": 3,
           "texto": "Toca un producto para añadirlo al carrito",
-          "t": 10.8
+          "t": 11
         },
         {
           "n": 4,
           "texto": "Tócalo otra vez para sumar unidades",
-          "t": 13.6
+          "t": 13.9
         },
         {
           "n": 5,
           "texto": "El total se recalcula solo",
-          "t": 16.4
+          "t": 16.9
         },
         {
           "n": 6,
           "texto": "Asigna la venta a un cliente",
-          "t": 19
+          "t": 19.5
         },
         {
           "n": 7,
           "texto": "Elige quién compra y vuelve solo al carrito",
-          "t": 21.3
+          "t": 21.9
         },
         {
           "n": 8,
           "texto": "Cuando esté listo, recibe el pago",
-          "t": 24.5
+          "t": 26.4
         },
         {
           "n": 9,
           "texto": "Efectivo, transferencia, datáfono o link de pago",
-          "t": 27.3
+          "t": 29.2
         },
         {
           "n": 10,
           "texto": "El monto ya viene con el total de la venta",
-          "t": 31.2
+          "t": 33.1
         },
         {
           "n": 11,
           "texto": "Confirma el cobro",
-          "t": 34.1
+          "t": 36
         },
         {
           "n": 12,
           "texto": "Venta registrada, con su número de orden",
-          "t": 40.5
+          "t": 42.2
         },
         {
           "n": 13,
           "texto": "Puedes imprimir el recibo o compartirlo con el cliente",
-          "t": 43.7
+          "t": 45.4
         }
       ],
       "tiemposFiables": true
@@ -651,8 +661,8 @@
       "grupo": "dia-a-dia",
       "titulo": "Añadir un cliente",
       "descripcion": "Con etiquetas para segmentar tus campañas.",
-      "duracion": "0:28",
-      "segundos": 28.1,
+      "duracion": "0:27",
+      "segundos": 26.9,
       "pasos": [
         {
           "n": 1,
@@ -667,12 +677,12 @@
         {
           "n": 3,
           "texto": "Nombre y apellido",
-          "t": 6.8
+          "t": 6.9
         },
         {
           "n": 4,
           "texto": "El correo le llegan las confirmaciones de cita",
-          "t": 10.7
+          "t": 10.8
         },
         {
           "n": 5,
@@ -682,7 +692,7 @@
         {
           "n": 6,
           "texto": "Las etiquetas te sirven para segmentar campañas",
-          "t": 16.7
+          "t": 16.8
         },
         {
           "n": 7,
@@ -692,7 +702,7 @@
         {
           "n": 8,
           "texto": "Ya está en tu comunidad",
-          "t": 24.7
+          "t": 24.8
         }
       ],
       "tiemposFiables": true
@@ -705,8 +715,8 @@
       "grupo": "tus-clientes",
       "titulo": "La agenda del negocio",
       "descripcion": "Cómo llegan las reservas al negocio y dónde se consultan.",
-      "duracion": "0:55",
-      "segundos": 55.4,
+      "duracion": "0:54",
+      "segundos": 53.9,
       "pasos": [
         {
           "n": 1,
@@ -721,32 +731,32 @@
         {
           "n": 3,
           "texto": "Entra en Citas",
-          "t": 9
+          "t": 9.2
         },
         {
           "n": 4,
           "texto": "Cierra el menú para ver la agenda",
-          "t": 15.4
+          "t": 15.7
         },
         {
           "n": 5,
           "texto": "Aquí aparecen las reservas con su cliente, hora y estado",
-          "t": 25.2
+          "t": 25.5
         },
         {
           "n": 6,
           "texto": "Puedes filtrar por fechas y buscar por cliente o servicio",
-          "t": 29
+          "t": 29.3
         },
         {
           "n": 7,
           "texto": "Y en el calendario las ves por especialista y franja horaria",
-          "t": 32.8
+          "t": 33.1
         },
         {
           "n": 8,
           "texto": "Toda la agenda del negocio, desde el celular",
-          "t": 47.1
+          "t": 47.4
         }
       ],
       "tiemposFiables": true
@@ -760,52 +770,52 @@
       "titulo": "Agendamiento público",
       "descripcion": "El recorrido completo desde el enlace que compartes con tus clientes.",
       "duracion": "0:48",
-      "segundos": 47.8,
+      "segundos": 48,
       "pasos": [
         {
           "n": 1,
           "texto": "Este es el enlace de reserva que compartes con tus clientes",
-          "t": 3.6
+          "t": 3.7
         },
         {
           "n": 2,
           "texto": "Tu cliente ve tu catálogo con precio y duración",
-          "t": 7.2
+          "t": 7.3
         },
         {
           "n": 3,
           "texto": "Elige el primer servicio",
-          "t": 10.3
+          "t": 10.4
         },
         {
           "n": 4,
           "texto": "Y puede sumar los que quiera en la misma cita",
-          "t": 12.8
+          "t": 13
         },
         {
           "n": 5,
           "texto": "Vyva calcula los huecos libres sumando la duración de todo",
-          "t": 18.5
+          "t": 18.8
         },
         {
           "n": 6,
           "texto": "Elige día y hora",
-          "t": 22
+          "t": 22.4
         },
         {
           "n": 7,
           "texto": "Revisa el resumen con los dos servicios y el total",
-          "t": 27.2
+          "t": 27.7
         },
         {
           "n": 8,
           "texto": "Y confirma la reserva",
-          "t": 30.4
+          "t": 30.8
         },
         {
           "n": 9,
           "texto": "Queda registrada en Mis Citas, sin llamadas ni mensajes",
-          "t": 41.3
+          "t": 42
         }
       ],
       "tiemposFiables": true
@@ -818,8 +828,8 @@
       "grupo": "tus-clientes",
       "titulo": "Reservar desde la app",
       "descripcion": "Cómo reserva un cliente que ya tiene cuenta en Vyva.",
-      "duracion": "0:51",
-      "segundos": 51.2,
+      "duracion": "0:53",
+      "segundos": 52.9,
       "pasos": [
         {
           "n": 1,
@@ -839,42 +849,42 @@
         {
           "n": 4,
           "texto": "En su perfil entra en Agendamiento online",
-          "t": 12
+          "t": 12.7
         },
         {
           "n": 5,
           "texto": "Escoge el servicio que necesita",
-          "t": 14.8
+          "t": 16
         },
         {
           "n": 6,
           "texto": "Vyva le muestra solo los huecos libres del negocio",
-          "t": 19.6
+          "t": 21
         },
         {
           "n": 7,
           "texto": "Elige día y hora",
-          "t": 22.8
+          "t": 24.2
         },
         {
           "n": 8,
           "texto": "Revisa el resumen: servicio, fecha y precio",
-          "t": 27.5
+          "t": 29
         },
         {
           "n": 9,
           "texto": "Y confirma la reserva",
-          "t": 31.1
+          "t": 32.6
         },
         {
           "n": 10,
           "texto": "Y la encuentra en Mis Citas",
-          "t": 42.6
+          "t": 44.2
         },
         {
           "n": 11,
           "texto": "Reservado, sin llamadas ni mensajes",
-          "t": 46.1
+          "t": 47.8
         }
       ],
       "tiemposFiables": true
