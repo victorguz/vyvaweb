@@ -26,7 +26,7 @@
 			items: [
 				{
 					q: '¿Cuáles son los precios?',
-					a: `Un solo plan: ${precioLista} al mes de lista, y ${precio} para los cupos fundadores, con todo incluido, usuarios ilimitados y precio congelado mientras seas cliente. Lo ves completo en la página de precio.`,
+					a: `Un solo plan: ${precioLista} al mes de lista, y ${precio} con el plan fundador, con todo incluido, usuarios ilimitados y precio congelado mientras seas cliente. Lo ves completo en la página de precio.`,
 				},
 				{
 					q: '¿Puedo cambiar de plan?',
