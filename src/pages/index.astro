@@ -3,14 +3,15 @@ import Landing from '../layouts/Landing.astro';
 import Nav from '../components/Nav.svelte';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
+import { getPrecio } from '../lib/precio';
 
 // CTA principal: la llamada. CTA secundario: el checkout self-serve.
 // Se invierte cuando ya haya ~10 clientes pagando y el precio esté validado.
 const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 
-const PRECIO_LISTA = '$99.000';
-const PRECIO = '$69.900';
+// El precio sale del plan de la app; ver src/lib/precio.ts.
+const { precio: PRECIO, precioLista: PRECIO_LISTA } = await getPrecio();
 
 const antes = [
 	'Agendas por WhatsApp entre una clienta y otra',
@@ -186,10 +187,10 @@ const comparativa = [
 ];
 
 const tablaEquipo = [
-	{ personas: '1 persona', vyva: '$69.900', fresha: '$24.000' },
-	{ personas: '3 personas', vyva: '$69.900', fresha: '$56.400' },
-	{ personas: '5 personas', vyva: '$69.900', fresha: '$88.800' },
-	{ personas: '7 personas', vyva: '$69.900', fresha: '$121.200' },
+	{ personas: '1 persona', vyva: PRECIO, fresha: '$24.000' },
+	{ personas: '3 personas', vyva: PRECIO, fresha: '$56.400' },
+	{ personas: '5 personas', vyva: PRECIO, fresha: '$88.800' },
+	{ personas: '7 personas', vyva: PRECIO, fresha: '$121.200' },
 ];
 
 ---

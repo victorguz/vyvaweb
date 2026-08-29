@@ -1,4 +1,6 @@
 <script>
+	let { precio = '$69.900', precioLista = '$99.000' } = $props();
+
 	const categories = [
 		{
 			id: 'general',
@@ -24,7 +26,7 @@
 			items: [
 				{
 					q: '¿Cuáles son los precios?',
-					a: 'Un solo plan: $99.000 al mes de lista, y $69.900 para los cupos fundadores, con todo incluido, usuarios ilimitados y precio congelado mientras seas cliente. Lo ves completo en la página de precio.',
+					a: `Un solo plan: ${precioLista} al mes de lista, y ${precio} para los cupos fundadores, con todo incluido, usuarios ilimitados y precio congelado mientras seas cliente. Lo ves completo en la página de precio.`,
 				},
 				{
 					q: '¿Puedo cambiar de plan?',

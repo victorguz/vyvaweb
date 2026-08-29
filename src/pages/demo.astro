@@ -1,13 +1,14 @@
 ---
 import Landing from '../layouts/Landing.astro';
 import Icon from '../components/Icon.astro';
+import { getPrecio } from '../lib/precio';
 
 // Landing cerrada para campañas de pauta: sin navegación y con una sola
 // acción repetida. El único enlace de salida es el legal, que Meta exige.
 const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 
-const PRECIO = '$69.900';
-const PRECIO_LISTA = '$99.000';
+// El precio sale del plan de la app; ver src/lib/precio.ts.
+const { precio: PRECIO, precioLista: PRECIO_LISTA } = await getPrecio();
 
 const enLaDemo = [
 	{

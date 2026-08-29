@@ -4,9 +4,13 @@ import Nav from '../components/Nav.svelte';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
 import FaqPage from '../components/FaqPage.svelte';
+import { getPrecio } from '../lib/precio';
 import Tutoriales from '../components/Tutoriales.svelte';
 
 const SALES = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+
+// El precio sale del plan de la app; ver src/lib/precio.ts.
+const { precio: PRECIO, precioLista: PRECIO_LISTA } = await getPrecio();
 ---
 
 <Landing
@@ -62,7 +66,7 @@ const SALES = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 		<section class="pb-16 sm:pb-20">
 			<div class="mx-auto max-w-3xl px-5 sm:px-8">
 				<div data-reveal>
-					<FaqPage client:load />
+					<FaqPage client:load precio={PRECIO} precioLista={PRECIO_LISTA} />
 				</div>
 
 				<div
