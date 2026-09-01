@@ -7,11 +7,16 @@ import FeatureCard from '../components/marketing/FeatureCard.astro';
 import Callout from '../components/marketing/Callout.astro';
 import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
+import Faq from '../components/Faq.astro';
+import { faqsPorTema } from '../lib/faqs';
 
 // CTA principal: la llamada. CTA secundario: el checkout self-serve.
 // Se invierte cuando haya ~10 clientes pagando y el precio esté validado.
 const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
+
+// Las preguntas salen del origen común; ver src/lib/faqs.ts.
+const pricingFaqs = faqsPorTema('precio');
 
 // El precio sale del plan de la app; ver src/lib/precio.ts.
 const PRECIO_PLAN = await getPrecio();
@@ -96,36 +101,6 @@ const useCases = [
 	{ icon: 'users-three', title: 'Centros de masajes', body: 'Tipos de masaje y terapeutas en una sola agenda.' },
 ];
 
-const pricingFaqs = [
-	{
-		q: '¿Hay costos de instalación o de configuración?',
-		a: 'No. La configuración inicial la hacemos contigo en una llamada y va incluida en el precio.',
-	},
-	{
-		q: '¿Cómo se paga?',
-		a: 'Con tarjeta débito o crédito Visa o Mastercard, con cobro automático cada mes. Es el único medio de pago por ahora.',
-	},
-	{
-		q: '¿Qué pasa si quiero cancelar?',
-		a: 'Cancelas desde tu cuenta cuando quieras. No hay permanencia ni penalidad, y no se cobra el mes siguiente.',
-	},
-	{
-		q: '¿El precio me sube después?',
-		a: 'No mientras seas cliente. Si entras con el plan fundador, tu precio queda congelado aunque suba para los que entren después.',
-	},
-	{
-		q: '¿Los mensajes de WhatsApp se cobran aparte?',
-		a: 'No. El chat, los recordatorios de cita y las campañas van dentro del plan, sin cobro por mensaje ni herramienta de mensajería adicional.',
-	},
-	{
-		q: '¿Por qué cuestan más que otras agendas?',
-		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas nuevas que llegan a tu negocio, y porque no es solo agenda: el punto de venta, el inventario y los reportes van incluidos. Si trabajas sola, hay opciones más baratas y te lo decimos de frente. Si tienes equipo, haz la cuenta completa.',
-	},
-	{
-		q: '¿Puedo verlo antes de pagar?',
-		a: 'Sí. En la demo de 15 minutos ves la plataforma con un negocio real funcionando y resuelves tus dudas antes de decidir.',
-	},
-];
 const comparativa = [
 	{
 		icon: 'users-three',
@@ -336,17 +311,8 @@ const tablaEquipo = [
 
 		<section class="border-t border-slate-100 bg-white py-16 sm:py-20">
 			<div class="mx-auto max-w-3xl px-5 sm:px-8">
-				<h2 data-reveal class="section-heading">Preguntas sobre el precio</h2>
-				<div class="mt-8 space-y-6">
-					{
-						pricingFaqs.map((faq) => (
-							<div data-reveal class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-								<h3 class="font-semibold text-ink">{faq.q}</h3>
-								<p class="mt-2 text-sm leading-relaxed text-slate-600">{faq.a}</p>
-							</div>
-						))
-					}
-				</div>
+				<Faq items={pricingFaqs} titulo="Preguntas sobre el precio" schema={false} />
+
 				<div data-reveal class="mt-8">
 					<Callout variant="note" title="Sin costos ocultos">
 						El precio incluye todas las funcionalidades de la plataforma. Sin tarifas de

@@ -1,0 +1,98 @@
+---
+import Landing from '../../layouts/Landing.astro';
+import Nav from '../../components/Nav.svelte';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import { faqsPorTema } from '../../lib/faqs';
+
+const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+
+// Todas las preguntas salen del mismo origen que la home y la página de
+// precio; ver src/lib/faqs.ts. Aquí van completas y agrupadas.
+const bloques = [
+	{
+		titulo: 'Sobre Vyva',
+		items: faqsPorTema('general'),
+	},
+	{
+		titulo: 'Precio y cobro',
+		items: faqsPorTema('precio'),
+	},
+	{
+		titulo: 'WhatsApp',
+		items: faqsPorTema('whatsapp'),
+	},
+	{
+		titulo: 'Cómo funciona y cómo se empieza',
+		items: faqsPorTema('plataforma', 'empezar'),
+	},
+	{
+		titulo: 'Tus datos y el soporte',
+		items: faqsPorTema('datos', 'soporte'),
+	},
+];
+---
+
+<Landing
+	title="Preguntas frecuentes sobre Vyva"
+	description="Precio, permanencia, mensajes de WhatsApp, migración de la libreta, soporte y datos: las respuestas a lo que más se pregunta antes de contratar Vyva."
+>
+	<Nav client:load />
+
+	<main>
+		<section class="page-hero">
+			<div class="mx-auto max-w-3xl px-5 sm:px-8">
+				<a
+					href="/blog"
+					class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700"
+				>
+					<span aria-hidden="true">&larr;</span> Blog
+				</a>
+				<h1 class="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
+					Preguntas frecuentes sobre Vyva
+				</h1>
+				<p class="mt-5 text-lg leading-relaxed text-slate-600">
+					Lo que más se pregunta antes de contratar, respondido de frente: qué cuesta,
+					qué incluye, qué no hace y qué pasa con tus datos.
+				</p>
+			</div>
+		</section>
+
+		<div class="mx-auto max-w-3xl px-5 pb-16 sm:px-8">
+			{
+				bloques.map((bloque, i) => (
+					<section class="mt-14 first:mt-10">
+						<h2 class="text-2xl font-bold tracking-tight text-ink">{bloque.titulo}</h2>
+						<Faq items={bloque.items} schema={i === 0} />
+					</section>
+				))
+			}
+		</div>
+
+		<section class="px-5 pb-24 sm:px-8">
+			<div
+				class="mx-auto max-w-3xl rounded-3xl border border-brand-200 bg-brand-50 px-7 py-10 text-center sm:px-10"
+			>
+				<h2 class="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+					¿Te quedó alguna sin responder?
+				</h2>
+				<p class="mx-auto mt-3 max-w-xl text-slate-600">
+					En la demo de quince minutos se resuelven las que queden, con la plataforma
+					abierta y los datos de un negocio real.
+				</p>
+				<div class="mt-7">
+					<a
+						href={DEMO}
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-7 py-3.5 font-semibold text-white"
+					>
+						Agenda una demo
+						<Icon name="arrow-right" size={18} />
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Landing>

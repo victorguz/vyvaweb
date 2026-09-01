@@ -3,6 +3,8 @@ import Landing from '../layouts/Landing.astro';
 import Nav from '../components/Nav.svelte';
 import Footer from '../components/Footer.astro';
 import Icon from '../components/Icon.astro';
+import Faq from '../components/Faq.astro';
+import { faqsPorTema } from '../lib/faqs';
 import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
 
@@ -10,6 +12,10 @@ import { getPrecio } from '../lib/precio';
 // Se invierte cuando ya haya ~10 clientes pagando y el precio esté validado.
 const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 const SIGNUP = 'https://app.vyvapos.com/plans/essential';
+
+// Las preguntas salen del origen común; ver src/lib/faqs.ts.
+// En la home van las ocho primeras; el listado completo vive en el blog.
+const faqs = faqsPorTema('general', 'precio', 'empezar', 'whatsapp').slice(0, 8);
 
 // El precio sale del plan de la app; ver src/lib/precio.ts.
 const PRECIO_PLAN = await getPrecio();
@@ -130,36 +136,6 @@ const capturas = [
 	},
 ];
 
-const faqs = [
-	{
-		q: '¿Tengo que instalar algo?',
-		a: 'No. Vyva funciona en el navegador, desde tu computador o tu celular. Entras con tu correo y ya.',
-	},
-	{
-		q: '¿Qué pasa con las clientas que tengo en la libreta?',
-		a: 'Las subimos contigo en la misma llamada de configuración. No tienes que digitarlas una por una.',
-	},
-	{
-		q: '¿Me amarra algún contrato?',
-		a: 'No hay permanencia. Pagas mes a mes y cancelas cuando quieras desde tu cuenta.',
-	},
-	{
-		q: '¿Cómo se paga?',
-		a: 'Con tarjeta débito o crédito Visa o Mastercard, con cobro automático cada mes. Es el único medio de pago por ahora.',
-	},
-	{
-		q: '¿Por qué cuestan más que otras agendas?',
-		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas nuevas que llegan a tu negocio, y porque no es solo agenda: el punto de venta, el inventario y los reportes van incluidos. Si trabajas sola, hay opciones más baratas y te lo decimos de frente. Si tienes equipo, haz la cuenta completa.',
-	},
-	{
-		q: '¿Los mensajes de WhatsApp me cuestan aparte?',
-		a: 'No. Los recordatorios de cita van incluidos, sin cobro por mensaje, y las campañas a tu base salen desde el mismo sistema. No tienes que contratar otra herramienta de mensajería.',
-	},
-	{
-		q: '¿Por qué elegirlos si son nuevos?',
-		a: 'Porque entras cuando todavía puedes influir en el producto: los primeros negocios tienen precio fundador congelado, la cuenta te la dejamos configurada y lo que pidas entra al desarrollo de una vez. Eso no lo consigues con un proveedor de miles de clientes.',
-	},
-];
 const comparativa = [
 	{
 		icon: 'users-three',
@@ -616,28 +592,7 @@ const tablaEquipo = [
 		<!-- ============ FAQ ============ -->
 		<section class="bg-slate-50">
 			<div class="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Lo que todos preguntan
-				</h2>
-
-				<div class="mt-12 space-y-4">
-					{
-						faqs.map((f) => (
-							<details
-								data-reveal
-								class="group rounded-2xl border border-slate-200 bg-white p-6 open:border-brand-300"
-							>
-								<summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-bold text-ink marker:content-['']">
-									{f.q}
-									<span class="shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-90">
-										<Icon name="arrow-right" size={18} />
-									</span>
-								</summary>
-								<p class="mt-4 text-sm leading-relaxed text-slate-600">{f.a}</p>
-							</details>
-						))
-					}
-				</div>
+				<Faq items={faqs} titulo="Lo que todos preguntan" />
 			</div>
 		</section>
 

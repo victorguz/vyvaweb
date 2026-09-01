@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import type { Faq } from '../lib/faqs';
+
+interface Props {
+	/** Preguntas a mostrar; salen de faqsPorTema() en src/lib/faqs.ts. */
+	items: Faq[];
+	/** Título de la sección. Si va vacío, no se pinta encabezado. */
+	titulo?: string;
+	/** Publica los datos estructurados de FAQPage. Solo una vez por página. */
+	schema?: boolean;
+}
+
+const { items, titulo, schema = true } = Astro.props;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: items.map((f) => ({
+		'@type': 'Question',
+		name: f.q,
+		acceptedAnswer: { '@type': 'Answer', text: f.a },
+	})),
+};
+---
+
+{
+	titulo && (
+		<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+			{titulo}
+		</h2>
+	)
+}
+
+<div class="mt-8 space-y-4">
+	{
+		items.map((faq) => (
+			<details
+				data-reveal
+				class="group rounded-2xl border border-slate-200 bg-white p-6 open:border-brand-200"
+			>
+				<summary class="flex cursor-pointer items-center justify-between gap-4 text-base font-bold text-ink marker:content-['']">
+					{faq.q}
+					<span class="shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-90">
+						<Icon name="arrow-right" size={18} />
+					</span>
+				</summary>
+				<p class="mt-4 text-sm leading-relaxed text-slate-600">{faq.a}</p>
+			</details>
+		))
+	}
+</div>
+
+{schema && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
