@@ -1,0 +1,235 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { getPrecio } from '../lib/precio';
+
+// El precio sale del plan de la app; ver src/lib/precio.ts.
+const { precio: PRECIO } = await getPrecio();
+---
+
+<Legal
+	title="Términos de servicio | Vyva"
+	description="Las condiciones de uso de Vyva: qué incluye el servicio, cómo se cobra, qué responsabilidades tiene cada parte y cómo se cancela."
+	heading="Términos de servicio"
+	updated="agosto de 2026"
+>
+	<div class="destacado">
+		<p>
+			<strong>En corto:</strong> un solo plan de {PRECIO} al mes, cobrado por
+			anticipado con tarjeta, sin permanencia y sin comisión sobre tus ventas. Cancelas
+			cuando quieras desde tu cuenta y no se cobra el mes siguiente.
+		</p>
+	</div>
+
+	<h2>1. Quiénes somos y qué aceptas</h2>
+	<p>
+		Vyva es un producto de <strong>VyvaPOS, LLC</strong>, sociedad de Delaware con
+		operación en Barranquilla, Colombia, registrada ante la Cámara de Comercio como
+		VyvaPOS. Al crear una cuenta o usar la plataforma aceptas estos términos y la
+		<a href="/privacy">política de privacidad</a>, que forma parte de ellos.
+	</p>
+	<p>
+		Para contratar debes ser mayor de edad y tener capacidad para obligar al negocio que
+		representas.
+	</p>
+
+	<h2>2. Qué incluye el servicio</h2>
+	<ul>
+		<li>
+			<strong>Agenda y reservas:</strong> calendario por especialista, página pública de
+			reservas con tu marca y sincronización opcional con Google Calendar.
+		</li>
+		<li>
+			<strong>Clientas:</strong> ficha con historial de citas, compras y notas, e
+			indicadores de retención como frecuencia de visita, inasistencia y segmentos de
+			clientas que dejaron de venir.
+		</li>
+		<li>
+			<strong>WhatsApp:</strong> chat con tus clientas dentro de la plataforma,
+			recordatorios automáticos de cita y campañas a los segmentos que elijas, sin cobro
+			por mensaje enviado.
+		</li>
+		<li>
+			<strong>Punto de venta e inventario:</strong> cobro de servicios y productos,
+			órdenes de venta, métodos de pago y control de insumos.
+		</li>
+		<li>
+			<strong>Reportes:</strong> facturación por día, por método de pago y por
+			especialista, y reporte anual descargable.
+		</li>
+		<li><strong>Equipo:</strong> perfiles, horarios, roles y permisos.</li>
+	</ul>
+	<p>
+		Vyva <strong>no</strong> incluye facturación electrónica ante la DIAN, no es una
+		pasarela de pagos para tus ventas y no consigue clientas nuevas para tu negocio.
+	</p>
+
+	<h2>3. Tu cuenta</h2>
+	<ul>
+		<li>Los datos que registres deben ser reales y estar actualizados.</li>
+		<li>
+			Eres responsable de las credenciales de acceso y de lo que ocurra en tu cuenta,
+			incluida la actividad de las personas de tu equipo a las que des acceso.
+		</li>
+		<li>Avísanos de inmediato si detectas un uso no autorizado.</li>
+	</ul>
+	<p>
+		Podemos suspender una cuenta que incumpla estos términos, entregue información
+		falsa, se use para actividades ilegales o quede en mora. Salvo casos graves o
+		urgentes, avisamos antes.
+	</p>
+
+	<h2>4. Precio y pagos</h2>
+	<ul>
+		<li>
+			Vyva tiene <strong>un solo plan</strong>, con todo incluido y sin módulos que se
+			paguen aparte. El precio vigente está siempre en la
+			<a href="/pricing">página de precio</a>.
+		</li>
+		<li>
+			El cobro es <strong>mensual y por anticipado</strong>: pagas hoy y usas el servicio
+			los treinta días siguientes. El siguiente cobro se hace al terminar ese periodo.
+		</li>
+		<li>
+			El único medio de pago disponible hoy es tarjeta débito o crédito Visa o
+			Mastercard, con cobro automático.
+		</li>
+		<li>
+			<strong>No cobramos comisión</strong> por tus ventas, por tus citas ni por las
+			clientas que atiendas, y no cobramos por usuario adicional.
+		</li>
+		<li>
+			Si entras con el plan fundador, tu precio queda congelado mientras seas cliente,
+			aunque suba para quienes entren después.
+		</li>
+		<li>
+			Podemos ajustar el precio general del servicio avisando con al menos treinta días
+			de anticipación.
+		</li>
+	</ul>
+
+	<h3>Reembolsos y cancelación</h3>
+	<ul>
+		<li>
+			Puedes solicitar el reembolso completo dentro de los <strong>primeros 7 días</strong>
+			de la primera suscripción.
+		</li>
+		<li>
+			Después de ese plazo puedes cancelar cuando quieras desde tu cuenta: no hay
+			permanencia ni penalidad, el servicio sigue disponible hasta terminar el periodo
+			pagado y no se cobra el mes siguiente.
+		</li>
+		<li>
+			Los cobros que tu negocio le haga a sus propias clientas no pasan por nosotros, así
+			que esos reembolsos los gestiona tu negocio directamente.
+		</li>
+	</ul>
+
+	<h2>5. Uso aceptable</h2>
+	<p>Usando Vyva te comprometes a no:</p>
+	<ul>
+		<li>Realizar actividades ilegales o fraudulentas, ni vender lo que la ley prohíba.</li>
+		<li>
+			Enviar mensajes a personas que no te autorizaron a escribirles, ni ignorar a quien
+			pide dejar de recibirlos.
+		</li>
+		<li>Cargar datos personales sin tener derecho a tratarlos.</li>
+		<li>Vulnerar derechos de propiedad intelectual de terceros.</li>
+		<li>Intentar comprometer la seguridad de la plataforma o el acceso a datos ajenos.</li>
+	</ul>
+	<p>
+		La mensajería masiva merece atención aparte: cuando envías una campaña, tú decides el
+		destinatario y el contenido, así que respondes por contar con su autorización y por
+		cumplir las reglas de WhatsApp Business. Un uso que provoque bloqueos de Meta puede
+		afectar tu número y, en casos graves, dar lugar a la suspensión del servicio.
+	</p>
+
+	<h2>6. Citas y responsabilidad del negocio</h2>
+	<ul>
+		<li>
+			Las citas se pactan entre tu negocio y su clienta. Vyva pone la herramienta, no es
+			parte de esa relación.
+		</li>
+		<li>
+			Cada negocio define sus propias políticas de cancelación, abonos y reprogramación.
+		</li>
+		<li>
+			No respondemos por inasistencias, cancelaciones de última hora ni por disputas
+			entre el negocio y sus clientas.
+		</li>
+		<li>
+			Los recordatorios salen según la configuración de cada negocio, y su entrega
+			depende de WhatsApp.
+		</li>
+	</ul>
+
+	<h2>7. Google Calendar</h2>
+	<p>
+		La sincronización con Google Calendar es opcional y la autorizas tú. Se sincronizan
+		las citas creadas en Vyva hacia tu calendario; los cambios hechos directamente en
+		Google no vuelven a Vyva. Puedes desconectarla en cualquier momento, y no
+		respondemos por fallos o cambios en los servicios de Google.
+	</p>
+
+	<h2>8. Propiedad</h2>
+	<p>
+		El software, el diseño, la marca y la documentación de Vyva son propiedad de
+		VyvaPOS, LLC. <strong>La información de tu negocio y de tus clientas es tuya.</strong>
+		Nos autorizas únicamente a alojarla y procesarla para prestarte el servicio, y a usar
+		datos agregados y anonimizados para mejorar el producto.
+	</p>
+
+	<h2>9. Disponibilidad, garantías y responsabilidad</h2>
+	<p>
+		Trabajamos para mantener el servicio disponible, pero dependemos de proveedores de
+		nube y de terceros como Google y Meta, así que no garantizamos disponibilidad
+		ininterrumpida. Programamos los mantenimientos y avisamos con anticipación cuando
+		impliquen interrupción.
+	</p>
+	<p>
+		El servicio se presta "tal cual". En la medida en que la ley lo permita, nuestra
+		responsabilidad total frente a ti se limita a lo que hayas pagado por el servicio en
+		los últimos tres meses, y no respondemos por lucro cesante ni por daños indirectos.
+		Nada de esto excluye la responsabilidad que la ley no permite excluir.
+	</p>
+
+	<h2>10. Terminación</h2>
+	<p>
+		Puedes cancelar cuando quieras desde tu cuenta. Nosotros podemos terminar el servicio
+		por incumplimiento grave de estos términos, por mora sostenida o si dejamos de operar
+		la plataforma; en ese último caso avisaremos con la mayor anticipación posible y
+		podrás exportar tu información.
+	</p>
+	<p>
+		Al terminar, tu información se conserva treinta días para que puedas recuperarla y
+		después se elimina, salvo lo que debamos guardar por obligación legal.
+	</p>
+
+	<h2>11. Cambios a estos términos</h2>
+	<p>
+		Podemos modificarlos avisando con al menos treinta días de anticipación por correo o
+		dentro de la plataforma. Si no estás de acuerdo con el cambio, puedes cancelar antes
+		de que entre en vigor.
+	</p>
+
+	<h2>12. Ley aplicable</h2>
+	<p>
+		Estos términos se rigen por las leyes de la República de Colombia. Antes de acudir a
+		instancias legales intentaremos resolver cualquier diferencia de forma directa. Los
+		tribunales colombianos tendrán jurisdicción.
+	</p>
+
+	<h2>13. Disposiciones generales</h2>
+	<p>
+		Si una cláusula resulta inválida, las demás siguen vigentes. Estos términos y la
+		política de privacidad son el acuerdo completo entre tu negocio y VyvaPOS, LLC. El
+		hecho de que no ejerzamos un derecho en un momento dado no significa que renunciemos
+		a él.
+	</p>
+
+	<h2>14. Contacto</h2>
+	<p>
+		VyvaPOS, LLC · Barranquilla, Colombia<br />
+		<a href="mailto:contact@vyvapos.com">contact@vyvapos.com</a><br />
+		<a href="https://vyvapos.com">vyvapos.com</a>
+	</p>
+</Legal>

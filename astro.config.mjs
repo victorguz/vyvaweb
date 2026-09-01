@@ -43,13 +43,6 @@ export default defineConfig({
 					label: 'Empezar',
 					items: [{ label: 'Introducción', slug: 'intro' }],
 				},
-				{
-					label: 'Legal',
-					items: [
-						{ label: 'Política de privacidad', slug: 'privacy' },
-						{ label: 'Términos de servicio', slug: 'terms' },
-					],
-				},
 			],
 		}),
 		svelte(),
