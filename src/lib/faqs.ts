@@ -29,6 +29,11 @@ export const FAQS: Faq[] = [
 		temas: ['general'],
 	},
 	{
+		q: '¿Qué hace Vyva que no haga una agenda normal?',
+		a: 'Una agenda te organiza el día: reservar, atender y cobrar. Vyva hace eso y además vigila tu clientela: te dice quién se está saliendo de su ritmo de visita, quién ya dejó de venir y quiénes son tus mejores clientas, y te deja escribirles por WhatsApp desde la misma pantalla. Es la diferencia entre administrar la agenda y sostener la caja.',
+		temas: ['general'],
+	},
+	{
 		q: '¿Qué tipo de negocios lo usan?',
 		a: 'Estéticas, spas, clínicas estéticas, salones, barberías y centros de masajes con equipo. Está pensado para negocios que ya facturan todos los días; si atiendes dos o tres citas al día y trabajas sola, todavía no te compensa.',
 		temas: ['general'],
@@ -112,11 +117,6 @@ export const FAQS: Faq[] = [
 		q: '¿Puedo verlo antes de pagar?',
 		a: 'Sí. En la demo de 15 minutos ves la plataforma funcionando con los datos de un negocio real y resuelves tus dudas antes de decidir.',
 		temas: ['empezar'],
-	},
-	{
-		q: '¿Por qué elegirlos si son nuevos?',
-		a: 'Porque entras cuando todavía puedes influir en el producto: el precio fundador queda congelado, la cuenta te la dejamos configurada y lo que pidas entra al desarrollo de una vez. Eso no se consigue con un proveedor de miles de clientes.',
-		temas: ['general'],
 	},
 	{
 		q: '¿Cómo pido soporte?',
