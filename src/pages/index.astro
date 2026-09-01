@@ -114,6 +114,13 @@ const paraQuienNo = [
 
 const capturas = [
 	{
+		src: '/capturas/agenda.png',
+		w: 1918,
+		h: 908,
+		alt: 'Agenda de Vyva con las citas del día repartidas por especialista, cada una con su servicio y su botón de WhatsApp.',
+		caption: 'La agenda de un jueves cualquiera, por especialista.',
+	},
+	{
 		src: '/capturas/dashboard-facturacion-diaria.png',
 		w: 1916,
 		h: 904,
@@ -174,8 +181,8 @@ const tablaEquipo = [
 ---
 
 <Landing
-	title="Vyva | Que tus clientas reserven solas, mientras tú atiendes"
-	description="Agenda online, chat de WhatsApp, campañas, historia de clientas, punto de venta y reportes para estéticas, spas, clínicas estéticas y barberías. Plan fundador con precio congelado."
+	title="Vyva | Agenda, WhatsApp y retención de clientas para estéticas"
+	description="Vyva te avisa qué clientas están dejando de venir y te deja reactivarlas por WhatsApp. Además: agenda online, punto de venta, inventario y reportes para estéticas, spas y barberías."
 >
 	<Nav client:load />
 
@@ -202,15 +209,14 @@ const tablaEquipo = [
 						data-reveal
 						class="mt-6 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl"
 					>
-						Deja de perder citas por
-						<span class="text-brand-600">contestar WhatsApp tarde</span>
+						Tu agenda te organiza el día.
+						<span class="text-brand-600">Vyva además te cuida la clientela.</span>
 					</h1>
 
 					<p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-						Tus clientas reservan solas desde tu link, les llega el recordatorio
-						por WhatsApp sin que pagues por cada aviso, y tú cobras desde la misma
-						pantalla. Agenda, chat de WhatsApp, clientas, ventas y equipo en un
-						solo lugar.
+						Te avisa qué clientas están dejando de venir y te deja escribirles por
+						WhatsApp desde la misma pantalla. Y hace lo de todos los días: reservas
+						en línea, recordatorios de cita, punto de venta, inventario y reportes.
 					</p>
 
 					<div data-reveal class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -237,7 +243,7 @@ const tablaEquipo = [
 							<Icon name="check" size={16} class="text-brand-600" /> Recordatorios incluidos
 						</span>
 						<span class="inline-flex items-center gap-1.5">
-							<Icon name="check" size={16} class="text-brand-600" /> Configuro tu cuenta contigo
+							<Icon name="check" size={16} class="text-brand-600" /> Configuración incluida
 						</span>
 					</p>
 				</div>
@@ -247,17 +253,17 @@ const tablaEquipo = [
 						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10"
 					>
 						<img
-							src="/capturas/agenda.png"
-							width="1918"
-							height="908"
-							alt="Agenda de Vyva con las citas del día repartidas por especialista, cada una con su servicio y su botón de WhatsApp."
+							src="/capturas/dashboard-fidelizacion.png"
+							width="1919"
+							height="907"
+							alt="Panel de Vyva con la frecuencia de visita, las clientas nuevas, las reagendadas y la tasa de retención."
 							class="w-full"
 							fetchpriority="high"
 							decoding="async"
 						/>
 					</div>
 					<p class="mt-3 text-center text-sm text-slate-500">
-						La agenda de una estética real, un jueves cualquiera.
+						El panel de una estética real: quién vuelve, quién no y cada cuánto.
 					</p>
 				</div>
 			</div>
@@ -268,11 +274,11 @@ const tablaEquipo = [
 			<div class="mx-auto max-w-4xl px-5 py-12 text-center sm:px-8">
 				<p data-reveal class="text-lg leading-relaxed text-slate-700">
 					<strong class="text-ink"
-						>Cualquier agenda te organiza el día. Vyva además te cuida la clientela.</strong
+						>Recuperar una clienta cuesta menos que reemplazarla.</strong
 					>
-					Te dice qué clientas se están saliendo de su ritmo de visita, cuáles ya
-					dejaron de venir y cuáles sostienen tu caja, y te deja escribirles por
-					WhatsApp desde la misma pantalla, sin pagar por cada recordatorio.
+					En una clienta nueva inviertes pauta, promoción y tiempo, mientras que la
+					que ya vino confió en ti una vez y solo necesita que la llames a tiempo.
+					El problema es que hoy nadie te avisa cuándo llamarla.
 				</p>
 			</div>
 		</section>
