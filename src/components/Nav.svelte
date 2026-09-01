@@ -5,7 +5,7 @@
 		{ label: 'Características', href: '/#caracteristicas' },
 		{ label: 'Casos de uso', href: '/#casos' },
 		{ label: 'Precio', href: '/pricing' },
-		{ label: 'FAQ', href: '/faq' },
+		{ label: 'Blog', href: '/blog' },
 	];
 
 	const APP = 'https://app.vyvapos.com';

@@ -7,7 +7,10 @@
     "node": ">=22.12.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   },
   "scripts": {
     "dev": "astro dev",
@@ -20,8 +23,6 @@
   "dependencies": {
     "@astrojs/mdx": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/starlight": "^0.39.3",
-    "@astrojs/starlight-tailwind": "^5.0.0",
     "@astrojs/svelte": "^8.1.2",
     "@fontsource-variable/inter": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",

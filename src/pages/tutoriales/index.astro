@@ -1,0 +1,67 @@
+---
+import Landing from '../../layouts/Landing.astro';
+import Nav from '../../components/Nav.svelte';
+import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
+import Tutoriales from '../../components/Tutoriales.svelte';
+
+const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+---
+
+<Landing
+	title="Tutoriales en video | Vyva"
+	description="Cómo se usa Vyva, paso a paso y en menos de un minuto por tema: agendar una cita, crear servicios, cobrar una venta y publicar tu página de reservas."
+>
+	<Nav client:load />
+
+	<main>
+		<section class="page-hero relative overflow-hidden bg-white">
+			<div
+				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_50%_0%,var(--color-brand-100),transparent_70%)]"
+			>
+			</div>
+			<div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
+				<h1 data-reveal class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+					Tutoriales en video
+				</h1>
+				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
+					Menos de un minuto cada uno, narrados paso a paso. Si prefieres verlo antes
+					que leerlo, empieza por aquí.
+				</p>
+			</div>
+		</section>
+
+		<section class="pb-16 sm:pb-20">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<div data-reveal>
+					<Tutoriales client:visible />
+				</div>
+			</div>
+		</section>
+
+		<section class="px-5 pb-24 sm:px-8">
+			<div
+				class="mx-auto max-w-5xl rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-14 text-center sm:px-12"
+			>
+				<h2 data-reveal class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+					¿Prefieres que te lo mostremos?
+				</h2>
+				<p data-reveal class="mx-auto mt-3 max-w-2xl text-brand-100">
+					En quince minutos ves Vyva funcionando con los datos de un negocio real, y
+					resuelves tus dudas antes de decidir.
+				</p>
+				<div data-reveal class="mt-7">
+					<a
+						href={DEMO}
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
+					>
+						Agenda una demo
+						<Icon name="arrow-right" size={18} />
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Landing>
