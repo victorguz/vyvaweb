@@ -85,7 +85,7 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Los mensajes de WhatsApp se cobran aparte?',
-		a: 'No. El chat con tus clientas, los recordatorios de cita y las campañas van dentro del plan, sin cobro por mensaje y sin contratar otra herramienta de mensajería.',
+		a: 'Los recordatorios de cita no: muchas plataformas cobran cada aviso que sale, y nosotros no. El chat con tus clientas tampoco tiene costo por mensaje. Las campañas de marketing sí tienen un cobro, pero lo hace Meta y no nosotros: en Colombia ronda un centavo de dólar por mensaje, así que una campaña a mil personas cuesta alrededor de trece dólares. Tu plan incluye campañas ilimitadas para hasta 250 clientas al mes, y a partir de ahí solo pagas lo que Meta cobre por los mensajes de más.',
 		temas: ['whatsapp', 'precio'],
 	},
 	{

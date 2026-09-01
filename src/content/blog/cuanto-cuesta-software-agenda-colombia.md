@@ -82,4 +82,4 @@ Cuando la cuenta se hace así, la pregunta deja de ser "cuánto cuesta" y pasa a
 
 ## Cómo lo cobra Vyva
 
-Un solo plan, con usuarios ilimitados, mensajes de WhatsApp incluidos, punto de venta e inventario, y sin comisión sobre tus clientas. El precio está publicado en la [página de precio](/pricing), en pesos y sin cotización de por medio, y queda congelado mientras seas cliente.
+Un solo plan, con usuarios ilimitados, recordatorios de WhatsApp sin cobro por aviso, campañas para hasta 250 clientas al mes, punto de venta e inventario, y sin comisión sobre tus clientas. El precio está publicado en la [página de precio](/pricing), en pesos y sin cotización de por medio, y queda congelado mientras seas cliente.

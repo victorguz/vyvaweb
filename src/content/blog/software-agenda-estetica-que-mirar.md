@@ -86,6 +86,6 @@ Ese es el costo real del sistema, y es el único comparable entre dos proveedore
 
 ## Cómo lo resuelve Vyva
 
-Un solo plan con usuarios ilimitados, mensajes de WhatsApp incluidos y cero comisión sobre tus clientas, con el panel que te dice cuáles están a punto de dejar de venir y te deja escribirles desde la misma pantalla.
+Un solo plan con usuarios ilimitados, recordatorios de WhatsApp sin cobro por aviso y cero comisión sobre tus clientas, con el panel que te dice cuáles están a punto de dejar de venir y te deja escribirles desde la misma pantalla.
 
 Se puede ver funcionando con los datos de un negocio real en una demo de quince minutos, y ahí mismo se responden las siete preguntas de arriba.

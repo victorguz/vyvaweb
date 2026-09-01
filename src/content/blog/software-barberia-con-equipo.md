@@ -64,4 +64,4 @@ Con equipo, eso último pesa más. Una silla vacía en una barbería de un solo 
 
 Suma la mensualidad, el costo por cada barbero si se cobra por usuario, lo que cuestan los mensajes y la comisión que aplique sobre clientes nuevos. Compara ese número con lo que deja un solo cliente recuperado al mes, y la decisión se vuelve evidente.
 
-Vyva hace todo lo anterior en un solo plan, con usuarios ilimitados —así que sumar barberos no sube la factura—, mensajes incluidos y el panel que te dice quién dejó de venir. Se puede ver funcionando con los datos de un negocio real en quince minutos.
+Vyva hace todo lo anterior en un solo plan, con usuarios ilimitados —así que sumar barberos no sube la factura—, recordatorios incluidos y el panel que te dice quién dejó de venir. Se puede ver funcionando con los datos de un negocio real en quince minutos.
