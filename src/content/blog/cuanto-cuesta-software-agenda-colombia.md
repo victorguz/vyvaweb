@@ -14,7 +14,7 @@ Vamos uno por uno, y al final está la comparación que sí sirve para decidir.
 
 Es el número de la portada y el único que suele estar visible. Dos advertencias.
 
-La primera son los planes escalonados. Lo que necesita un negocio con equipo —reportes por especialista, mensajería, control de inventario, permisos por rol— suele vivir uno o dos escalones por encima del plan que aparece en la publicidad. Antes de anotar la cifra, confirma que el plan que estás mirando incluye lo que vas a usar.
+La primera son los planes escalonados. Lo que necesita un negocio con equipo —reportes por especialista, mensajería, cierre de caja, permisos por rol— suele vivir uno o dos escalones por encima del plan que aparece en la publicidad. Antes de anotar la cifra, confirma que el plan que estás mirando incluye lo que vas a usar.
 
 La segunda es la moneda. Varios proveedores publican en dólares y cobran en dólares, así que tu mensualidad se mueve con la tasa de cambio y con el impuesto de tu tarjeta. Un plan de veinte dólares no cuesta lo mismo en enero que en julio.
 
@@ -82,4 +82,4 @@ Cuando la cuenta se hace así, la pregunta deja de ser "cuánto cuesta" y pasa a
 
 ## Cómo lo cobra Vyva
 
-Un solo plan, con usuarios ilimitados, chat y recordatorios de WhatsApp sin cobro por mensaje de nuestra parte, punto de venta e inventario, y sin comisión sobre tus clientas. Los mensajes de marketing tienen la tarifa que cobra Meta, que se paga directamente a Meta. El precio está publicado en la [página de precio](/pricing), en pesos y sin cotización de por medio, y queda congelado mientras seas cliente.
+Un solo plan, con usuarios ilimitados, chat y recordatorios de WhatsApp sin cobro por mensaje de nuestra parte, punto de venta, y sin comisión sobre tus clientas. Los mensajes de marketing tienen la tarifa que cobra Meta, que se paga directamente a Meta. El precio está publicado en la [página de precio](/pricing), en pesos y sin cotización de por medio, y queda congelado mientras seas cliente.

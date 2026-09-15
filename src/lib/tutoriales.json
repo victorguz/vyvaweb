@@ -315,7 +315,7 @@
       "vertical": false,
       "grupo": "catalogo",
       "titulo": "Crear un producto",
-      "descripcion": "Igual que un servicio, pero con control de inventario.",
+      "descripcion": "Productos que cobras en la misma venta que tus servicios.",
       "duracion": "0:43",
       "segundos": 42.9,
       "pasos": [
@@ -351,7 +351,7 @@
         },
         {
           "n": 7,
-          "texto": "Para la descripción y el inventario, entra en Registro avanzado",
+          "texto": "Para la descripción, entra en Registro avanzado",
           "t": 19.1
         },
         {
@@ -366,7 +366,7 @@
         },
         {
           "n": 10,
-          "texto": "A diferencia de un servicio, un producto lleva stock",
+          "texto": "Revisa las opciones adicionales del producto",
           "t": 27.8
         },
         {
@@ -430,7 +430,7 @@
         },
         {
           "n": 7,
-          "texto": "En Registro avanzado tienes descripción, categoría e inventario",
+          "texto": "En Registro avanzado tienes descripción y categoría",
           "t": 22.6
         },
         {

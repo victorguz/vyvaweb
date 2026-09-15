@@ -80,7 +80,7 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Por qué cuesta más que otras agendas?',
-		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas que llegan a tu negocio, y porque no es solo agenda: el chat de WhatsApp, el punto de venta, el inventario y los reportes van incluidos. Si trabajas sola hay opciones más baratas y te lo decimos de frente; si tienes equipo, conviene hacer la cuenta completa.',
+		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas que llegan a tu negocio, y porque no es solo agenda: el chat de WhatsApp, el punto de venta y los reportes van incluidos. Si trabajas sola hay opciones más baratas y te lo decimos de frente; si tienes equipo, conviene hacer la cuenta completa.',
 		temas: ['precio'],
 	},
 	{

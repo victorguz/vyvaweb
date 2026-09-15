@@ -94,25 +94,23 @@ export const TUTORIALES_TEXTO: Record<string, TutorialTexto> = {
 			'Escribe el nombre tal como quieres que lo lea tu clienta.',
 			'Pon el precio.',
 			'Define la duración con realismo: si el servicio toma una hora y media, ponla completa, porque de ahí salen los huecos que ofrece tu agenda.',
-			'Si necesitas descripción, categoría o insumos asociados, entra en Registro avanzado.',
+			'Si necesitas descripción o categoría, entra en Registro avanzado.',
 			'Guarda y el servicio queda en tu catálogo.',
 		],
 		nota: 'Duraciones demasiado cortas son la causa más común de agendas apretadas: la cita entra, pero el equipo no alcanza.',
 	},
 	'vyva-crear-producto': {
-		titulo: 'Cómo crear un producto con inventario en Vyva',
+		titulo: 'Cómo crear un producto en Vyva',
 		descripcion:
-			'Añadir un producto a tu tienda en Vyva y llevar el control de unidades disponibles.',
+			'Añadir un producto a tu tienda en Vyva para cobrarlo junto con los servicios.',
 		intro:
-			'Un producto se crea igual que un servicio, con una diferencia: lleva stock, y ese stock baja solo cuando vendes.',
+			'Un producto se crea igual que un servicio, y después se cobra en la misma venta que el tratamiento.',
 		pasos: [
 			'Abre el menú, entra en Tienda y pulsa "Nuevo producto" → "Crear producto".',
 			'Escribe el nombre y el precio de venta.',
-			'Entra en Registro avanzado para la descripción y el inventario.',
-			'Despliega Opciones adicionales y escribe cuántas unidades tienes hoy.',
+			'Entra en Registro avanzado si quieres añadir una descripción.',
 			'Guarda: el producto queda a la venta en tu tienda.',
 		],
-		nota: 'Conviene cargar el inventario real desde el primer día, aunque sean pocas unidades, porque después es difícil saber qué se vendió y qué se descuadró.',
 	},
 	'vyva-publicar-servicios': {
 		titulo: 'Cómo publicar tus servicios en la página de reservas',
