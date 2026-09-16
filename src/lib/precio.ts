@@ -26,6 +26,8 @@ export interface PrecioCiclo {
 }
 
 export interface Precio {
+	/** Id del plan, para armar el enlace al checkout de la app. */
+	id: string;
 	/** Precio vigente del ciclo mensual. */
 	precio: string;
 	/** Precio de lista, tachado junto al vigente. Vacío si no aplica. */
@@ -45,8 +47,13 @@ export interface Precio {
 	desdeElPlan: boolean;
 }
 
-/** Respaldo: plan fundador vigente. Se usa si el catálogo no responde. */
+/**
+ * Respaldo: plan fundador vigente. Se usa si el catálogo no responde. El `id`
+ * es el del plan vivo en producción, para que el botón de pago siga apuntando
+ * a algún lado aunque el catálogo falle.
+ */
 const RESPALDO = {
+	id: '055e43cb-220f-4df4-a453-a9e8aab457ab',
 	precio: 69900,
 	precioLista: 99000,
 };
@@ -67,6 +74,7 @@ function ciclo(valor: number): PrecioCiclo {
 }
 
 function construir(
+	id: string,
 	mensual: number,
 	precioLista: number,
 	anual: number | undefined,
@@ -79,6 +87,7 @@ function construir(
 			: 0;
 
 	return {
+		id,
 		precio: formatoCOP(mensual),
 		precioLista: precioLista > mensual ? formatoCOP(precioLista) : '',
 		valores: { precio: mensual, precioLista },
@@ -128,7 +137,13 @@ export function getPrecio(): Promise<Precio> {
 
 	cache = (async (): Promise<Precio> => {
 		if (!PLANS_URL) {
-			return construir(RESPALDO.precio, RESPALDO.precioLista, undefined, false);
+			return construir(
+				RESPALDO.id,
+				RESPALDO.precio,
+				RESPALDO.precioLista,
+				undefined,
+				false
+			);
 		}
 
 		try {
@@ -146,7 +161,9 @@ export function getPrecio(): Promise<Precio> {
 
 			const anual = importe(plan!, 'year') || undefined;
 			const lista = Number(plan?.listPrice ?? plan?.fullPrice ?? RESPALDO.precioLista);
+			const id = String(plan?.id ?? plan?._id ?? '').trim() || RESPALDO.id;
 			return construir(
+				id,
 				mensual,
 				Number.isFinite(lista) ? lista : 0,
 				anual,
@@ -157,7 +174,13 @@ export function getPrecio(): Promise<Precio> {
 				`[precio] No se pudo leer el plan (${(error as Error).message}). ` +
 					`Se usa el respaldo ${formatoCOP(RESPALDO.precio)}.`
 			);
-			return construir(RESPALDO.precio, RESPALDO.precioLista, undefined, false);
+			return construir(
+				RESPALDO.id,
+				RESPALDO.precio,
+				RESPALDO.precioLista,
+				undefined,
+				false
+			);
 		}
 	})();
 

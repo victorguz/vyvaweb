@@ -9,7 +9,6 @@
 	];
 
 	const APP = 'https://app.vyvapos.com';
-	const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 	const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 
 	function close() {

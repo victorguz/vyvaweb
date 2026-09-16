@@ -35,7 +35,10 @@
 			const base = nodo.dataset.signupPlan || nodo.getAttribute('href');
 			if (!base) continue;
 			nodo.dataset.signupPlan = base;
-			nodo.setAttribute('href', anual ? `${base}?interval=year` : base);
+			// El enlace ya puede traer parámetros (el plan, por ejemplo), así que
+			// el ciclo se añade con el separador que toque.
+			const separador = base.includes('?') ? '&' : '?';
+			nodo.setAttribute('href', anual ? `${base}${separador}interval=year` : base);
 		}
 	});
 </script>

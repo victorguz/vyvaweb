@@ -10,10 +10,8 @@ import { getPrecio } from '../lib/precio';
 import Faq from '../components/Faq.astro';
 import { faqsPorTema } from '../lib/faqs';
 
-// CTA principal: la llamada. CTA secundario: el checkout self-serve.
-// Se invierte cuando haya ~10 clientes pagando y el precio esté validado.
+// CTA principal: el pago. CTA secundario: la llamada.
 const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
-const SIGNUP = 'https://app.vyvapos.com/plans/essential';
 
 // Las preguntas salen del origen común; ver src/lib/faqs.ts.
 const pricingFaqs = faqsPorTema('precio');
@@ -21,6 +19,17 @@ const pricingFaqs = faqsPorTema('precio');
 // El precio sale del plan de la app; ver src/lib/precio.ts.
 const PRECIO_PLAN = await getPrecio();
 const { precio: PRECIO } = PRECIO_PLAN;
+
+/**
+ * Entrada al pago del plan. La app pide iniciar sesión (o crear la cuenta) y
+ * desde ahí lleva al checkout de la suscripción: por eso el enlace apunta al
+ * login con el plan en la URL y no directo a `/pay/plan/:id`, que sin sesión
+ * no puede preparar el cobro.
+ *
+ * El ciclo también viaja en la URL: `SelectorPrecio` le añade
+ * `interval=year` cuando se elige anual.
+ */
+const CHECKOUT = `https://app.vyvapos.com/auth/login?intent=pay-plan&plan=${PRECIO_PLAN.id}`;
 
 const incluido = [
 	'Todas las funciones, sin módulos que se pagan aparte',
@@ -188,18 +197,18 @@ const tablaEquipo = [
 					</ul>
 
 					<a
-						href={CALL}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
 					>
 						Tomar el plan fundador
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a
-						href={SIGNUP}
-						data-signup-plan={SIGNUP}
+						href={CALL}
 						class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
 					>
-						o crea tu cuenta sin hablar con nadie
+						o agenda una demo
 					</a>
 
 					<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
@@ -330,22 +339,23 @@ const tablaEquipo = [
 					Quedan cupos del plan fundador
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Quince minutos, sin discurso de ventas. Te muestro la plataforma con un
-					negocio real funcionando y me dices si te sirve.
+					Lo activas hoy con tu tarjeta y empiezas a usarlo de una. Si prefieres
+					verlo antes, son quince minutos sin discurso de ventas.
 				</p>
 				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 					<a
-						href={CALL}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Agenda una demo
+						Tomar el plan fundador
 						<Icon name="arrow-right" size={18} />
 					</a>
 					<a
-						href={SIGNUP}
+						href={CALL}
 						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10"
 					>
-						Crear mi cuenta
+						Agenda una demo
 					</a>
 				</div>
 				<p data-reveal class="mt-6 text-sm text-brand-200">
