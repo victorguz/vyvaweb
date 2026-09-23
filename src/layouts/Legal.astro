@@ -1,6 +1,9 @@
 ---
 import Landing from './Landing.astro';
 import Nav from '../components/Nav.svelte';
+import { getCheckout } from '../lib/precio';
+
+const CHECKOUT = await getCheckout();
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -14,7 +17,7 @@ const { title, description, heading, updated } = Astro.props;
 ---
 
 <Landing title={title} description={description}>
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero">

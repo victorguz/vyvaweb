@@ -1,0 +1,77 @@
+---
+/** El panel: cómo va el negocio, sin pedirle cuentas a nadie. */
+import Marco from './Marco.astro';
+
+interface Props {
+  pie?: string;
+  clase?: string;
+}
+const { pie, clase } = Astro.props;
+
+const indicadores = [
+  { etiqueta: 'Facturado del mes', valor: '$14.280.000', nota: 'Servicios y productos' },
+  { etiqueta: 'Clientes atendidos', valor: '312', nota: '56 nuevos' },
+  { etiqueta: 'Vuelven', valor: '68 %', nota: 'Agendaron otra vez' },
+  { etiqueta: 'Agenda ocupada', valor: '81 %', nota: 'Del horario disponible' },
+];
+
+const equipo = [
+  { nombre: 'Daniela', ancho: '86%', valor: '$5.4M' },
+  { nombre: 'Leivys', ancho: '68%', valor: '$4.2M' },
+  { nombre: 'Sofía', ancho: '52%', valor: '$3.1M' },
+];
+---
+
+<Marco titulo="Panel" contexto="Este mes" pie={pie} clase={clase}>
+  <div class="grid grid-cols-2 gap-2.5">
+    {
+      indicadores.map((indicador) => (
+        <div class="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm">
+          <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-50 text-brand-600">
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 3v18h18" />
+              <path d="m7 14 3-4 3 3 5-6" />
+            </svg>
+          </span>
+          <p class="mt-2.5 text-[0.62rem] font-semibold tracking-wide text-slate-400 uppercase">
+            {indicador.etiqueta}
+          </p>
+          <p class="mt-1 text-lg leading-tight font-bold text-ink">{indicador.valor}</p>
+          <p class="text-[0.68rem] text-slate-500">{indicador.nota}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-2.5 rounded-2xl border border-slate-100 bg-white p-3 shadow-sm">
+    <p class="text-[0.62rem] font-semibold tracking-wide text-slate-400 uppercase">
+      Facturado por persona
+    </p>
+    <div class="mt-2.5 flex flex-col gap-2.5">
+      {
+        equipo.map((persona) => (
+          <div class="flex items-center gap-3">
+            <span class="w-16 shrink-0 truncate text-[0.75rem] font-medium text-slate-600">
+              {persona.nombre}
+            </span>
+            <span class="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+              <span class="block h-full rounded-full bg-brand-500" style={`width:${persona.ancho}`} />
+            </span>
+            <span class="w-12 shrink-0 text-right text-[0.72rem] font-semibold text-ink">
+              {persona.valor}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Marco>

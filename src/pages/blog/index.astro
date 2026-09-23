@@ -2,12 +2,13 @@
 import { getCollection } from 'astro:content';
 import Landing from '../../layouts/Landing.astro';
 import Nav from '../../components/Nav.svelte';
+import { getCheckout } from '../../lib/precio';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import catalogo from '../../lib/tutoriales.json';
 import { TUTORIALES_TEXTO } from '../../lib/tutoriales-seo';
 
-const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+const CHECKOUT = await getCheckout();
 
 // Primero lo que busca alguien que ya está evaluando un sistema; después el
 // contenido que envejece bien y atrae a quien todavía no lo busca.
@@ -76,7 +77,7 @@ const secciones = [
 	title="Blog de Vyva | Gestión, retención y agenda para negocios de belleza"
 	description="Artículos sobre cómo elegir un sistema de agenda, cuánto cuesta de verdad, y cómo retener a las clientas de un negocio de belleza con equipo."
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero relative overflow-hidden bg-white">
@@ -144,10 +145,11 @@ const secciones = [
 				</p>
 				<div data-reveal class="mt-7">
 					<a
-						href={DEMO}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Agenda una demo
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
 					</a>
 				</div>

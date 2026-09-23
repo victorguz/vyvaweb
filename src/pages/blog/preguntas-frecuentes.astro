@@ -1,12 +1,13 @@
 ---
 import Landing from '../../layouts/Landing.astro';
 import Nav from '../../components/Nav.svelte';
+import { getCheckout } from '../../lib/precio';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import Faq from '../../components/Faq.astro';
 import { faqsPorTema } from '../../lib/faqs';
 
-const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+const CHECKOUT = await getCheckout();
 
 // Todas las preguntas salen del mismo origen que la home y la página de
 // precio; ver src/lib/faqs.ts. Aquí van completas y agrupadas.
@@ -38,7 +39,7 @@ const bloques = [
 	title="Preguntas frecuentes sobre Vyva"
 	description="Precio, permanencia, mensajes de WhatsApp, migración de la libreta, soporte y datos: las respuestas a lo que más se pregunta antes de contratar Vyva."
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero">
@@ -78,15 +79,16 @@ const bloques = [
 					¿Te quedó alguna sin responder?
 				</h2>
 				<p class="mx-auto mt-3 max-w-xl text-slate-600">
-					En la demo de quince minutos se resuelven las que queden, con la plataforma
-					abierta y los datos de un negocio real.
+					El soporte de Vyva contesta por WhatsApp, y te responde una persona.
+					Sin permanencia: si no te sirve, cancelas cuando quieras.
 				</p>
 				<div class="mt-7">
 					<a
-						href={DEMO}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-7 py-3.5 font-semibold text-white"
 					>
-						Agenda una demo
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
 					</a>
 				</div>

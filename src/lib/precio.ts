@@ -126,6 +126,16 @@ function importe(plan: Record<string, any>, ciclo: 'month' | 'year'): number {
 	return Number.isFinite(plano) && plano > 0 ? plano : 0;
 }
 
+/**
+ * Único CTA del sitio: suscribirse. Lleva al login (o registro) de la app, que
+ * de ahí pasa al pago del plan. `SelectorPrecio` le añade `interval=year`
+ * cuando se elige el ciclo anual.
+ */
+export async function getCheckout(): Promise<string> {
+	const plan = await getPrecio();
+	return `https://app.vyvapos.com/auth/login?intent=pay-plan&plan=${plan.id}`;
+}
+
 let cache: Promise<Precio> | undefined;
 
 /**

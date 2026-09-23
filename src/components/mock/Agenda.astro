@@ -1,0 +1,114 @@
+---
+/** La agenda del día, con el equipo en columnas y los estados de cada cita. */
+import Marco from './Marco.astro';
+
+interface Props {
+  pie?: string;
+  clase?: string;
+}
+const { pie, clase } = Astro.props;
+
+const horas = ['9:00', '10:00', '11:00', '12:00'];
+
+const columnas = [
+  {
+    nombre: 'Daniela',
+    inicial: 'D',
+    color: 'bg-[#e8622a]',
+    citas: [
+      { hora: '9:00 – 10:00', quien: 'Camila Rojas', que: 'Primera visita', estado: 'confirmada', fila: 1 },
+      { hora: '11:00 – 12:00', quien: 'Andrés Peña', que: 'Control', estado: 'completada', fila: 3 },
+    ],
+  },
+  {
+    nombre: 'Leivys',
+    inicial: 'L',
+    color: 'bg-[#2f9e7f]',
+    citas: [
+      { hora: '9:30 – 10:30', quien: 'Laura Gómez', que: 'Reservó en línea', estado: 'nueva', fila: 1 },
+      { hora: '12:00 – 1:00', quien: 'Almuerzo', que: '', estado: 'bloqueo', fila: 4 },
+    ],
+  },
+  {
+    nombre: 'Sofía',
+    inicial: 'S',
+    color: 'bg-brand-500',
+    citas: [
+      { hora: '10:00 – 11:30', quien: 'Valeria Ruiz', que: 'Recordatorio enviado', estado: 'confirmada', fila: 2 },
+    ],
+  },
+];
+
+const estilos: Record<string, string> = {
+  confirmada: 'border-[#61b197]/50 bg-[#61b197]/10 text-[#2f7c65]',
+  completada: 'border-[#61b197]/50 bg-[#61b197]/10 text-[#2f7c65]',
+  nueva: 'border-brand-300 bg-brand-50 text-brand-700',
+  bloqueo: 'border-[#ff3f3f]/30 bg-[#ff3f3f]/10 text-[#c33]',
+};
+---
+
+<Marco titulo="Citas" contexto="Hoy · 3 profesionales" pie={pie} clase={clase}>
+  <div class="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm">
+    <!-- En pantallas pequeñas caben dos profesionales; la tercera columna se
+         esconde para que los nombres y las horas se sigan leyendo. -->
+    <div
+      class="grid grid-cols-[2.4rem_repeat(2,minmax(0,1fr))] gap-2 @md:grid-cols-[2.6rem_repeat(3,minmax(0,1fr))]"
+    >
+      <div></div>
+      {
+        columnas.map((col, i) => (
+          <div class={`flex items-center gap-1.5 pb-2 ${i === 2 ? 'hidden @md:flex' : ''}`}>
+            <span
+              class={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-[0.65rem] font-bold text-white ${col.color}`}
+            >
+              {col.inicial}
+            </span>
+            <span class="truncate text-[0.75rem] font-semibold text-ink">{col.nombre}</span>
+          </div>
+        ))
+      }
+
+      <div class="flex flex-col gap-1">
+        {
+          horas.map((hora) => (
+            <span class="flex h-14 items-start pt-1 text-[0.65rem] font-medium text-slate-400">
+              {hora}
+            </span>
+          ))
+        }
+      </div>
+
+      {
+        columnas.map((col, i) => (
+          <div class={`relative grid grid-rows-4 gap-1 ${i === 2 ? 'hidden @md:grid' : ''}`}>
+            {horas.map(() => (
+              <div class="h-14 rounded-lg border border-dashed border-slate-100" />
+            ))}
+            {col.citas.map((cita) => (
+              <div
+                class={`absolute inset-x-0 rounded-xl border px-2 py-1.5 ${estilos[cita.estado]}`}
+                style={`top: calc(${cita.fila - 1} * 3.75rem); min-height: 3.4rem;`}
+              >
+                <p class="truncate text-[0.6rem] font-medium opacity-80">{cita.hora}</p>
+                <p class="truncate text-[0.74rem] font-semibold text-ink">{cita.quien}</p>
+                {cita.que && <p class="truncate text-[0.62rem]">{cita.que}</p>}
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-slate-100 pt-3 text-[0.68rem] text-slate-500">
+      <span class="flex items-center gap-1.5">
+        <span class="h-2 w-2 rounded-full bg-[#61b197]"></span>Confirmada
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="h-2 w-2 rounded-full bg-brand-500"></span>Reservó en línea
+      </span>
+      <span class="flex items-center gap-1.5">
+        <span class="h-2 w-2 rounded-full bg-[#ff3f3f]"></span>Bloqueo
+      </span>
+    </div>
+  </div>
+</Marco>

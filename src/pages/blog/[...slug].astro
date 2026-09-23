@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Landing from '../../layouts/Landing.astro';
 import Nav from '../../components/Nav.svelte';
+import { getCheckout } from '../../lib/precio';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+const CHECKOUT = await getCheckout();
 
 const fecha = post.data.fecha.toLocaleDateString('es-CO', {
 	year: 'numeric',
@@ -22,7 +23,7 @@ const fecha = post.data.fecha.toLocaleDateString('es-CO', {
 ---
 
 <Landing title={`${post.data.title} | Vyva`} description={post.data.description}>
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero">
@@ -49,18 +50,19 @@ const fecha = post.data.fecha.toLocaleDateString('es-CO', {
 				class="mx-auto max-w-3xl rounded-3xl border border-brand-200 bg-brand-50 px-7 py-10 text-center sm:px-10"
 			>
 				<h2 class="text-xl font-bold tracking-tight text-ink sm:text-2xl">
-					Vyva te dice qué clientas están a punto de no volver
+					Todo lo que te escriben, agendan y piden, en un solo lugar
 				</h2>
 				<p class="mx-auto mt-3 max-w-xl text-slate-600">
-					Y te deja escribirles por WhatsApp desde la misma pantalla. Se ve en quince
-					minutos, con los datos de un negocio real.
+					Vyva reúne el WhatsApp del negocio, las citas, los pedidos, el cobro y las
+					cuentas del día. Lo activas hoy con tu tarjeta.
 				</p>
 				<div class="mt-7">
 					<a
-						href={DEMO}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-7 py-3.5 font-semibold text-white"
 					>
-						Agenda una demo
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
 					</a>
 				</div>

@@ -1,15 +1,18 @@
 <script>
+	// El enlace de pago lo arma la página, porque lleva el id del plan; ver
+	// src/lib/precio.ts.
+	let { checkout = 'https://app.vyvapos.com/auth/login?intent=pay-plan' } = $props();
+
 	let open = $state(false);
 
 	const links = [
-		{ label: 'Características', href: '/#caracteristicas' },
-		{ label: 'Casos de uso', href: '/#casos' },
+		{ label: 'Cómo funciona', href: '/#como-funciona' },
+		{ label: 'Qué incluye', href: '/#caracteristicas' },
 		{ label: 'Precio', href: '/pricing' },
 		{ label: 'Blog', href: '/blog' },
 	];
 
 	const APP = 'https://app.vyvapos.com';
-	const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 
 	function close() {
 		open = false;
@@ -44,10 +47,11 @@
 				Entrar
 			</a>
 			<a
-				href={CALL}
+				href={checkout}
+				data-signup-plan={checkout}
 				class="btn-press rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-600/20"
 			>
-				Agenda una demo
+				Empieza ahora
 			</a>
 		</div>
 
@@ -88,10 +92,11 @@
 					Entrar
 				</a>
 				<a
-					href={CALL}
+					href={checkout}
+					data-signup-plan={checkout}
 					class="btn-press rounded-lg bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white"
 				>
-					Agenda una demo
+					Empieza ahora
 				</a>
 			</div>
 		</div>

@@ -1,0 +1,57 @@
+---
+/** Los pedidos que entran por WhatsApp o por el enlace del negocio, en fila. */
+import Marco from './Marco.astro';
+
+interface Props {
+  pie?: string;
+  clase?: string;
+}
+const { pie, clase } = Astro.props;
+
+const columnas = [
+  {
+    titulo: 'Nuevos',
+    tono: 'bg-brand-50 text-brand-700',
+    pedidos: [
+      { codigo: '#1284', cliente: 'María Camila', detalle: '2 postres · entrega 5:00 p. m.', valor: '$84.000' },
+      { codigo: '#1285', cliente: 'Andrés Peña', detalle: '1 torta · recoge en tienda', valor: '$120.000' },
+    ],
+  },
+  {
+    titulo: 'En preparación',
+    tono: 'bg-[#ffc107]/20 text-[#8a6100]',
+    pedidos: [{ codigo: '#1283', cliente: 'Laura Gómez', detalle: '6 porciones · domicilio', valor: '$96.000' }],
+  },
+  {
+    titulo: 'Listos',
+    tono: 'bg-[#61b197]/15 text-[#2f7c65]',
+    pedidos: [{ codigo: '#1281', cliente: 'Juan David', detalle: 'Pagado · entregado', valor: '$45.000' }],
+  },
+];
+---
+
+<Marco titulo="Pedidos" contexto="Hoy · 4 pedidos" pie={pie} clase={clase}>
+  <div class="grid gap-2.5 @md:grid-cols-3">
+    {
+      columnas.map((columna) => (
+        <div class="rounded-2xl border border-slate-100 bg-white p-2.5 shadow-sm">
+          <span class={`inline-block rounded-full px-2.5 py-1 text-[0.65rem] font-semibold ${columna.tono}`}>
+            {columna.titulo}
+          </span>
+          <div class="mt-2 flex flex-col gap-2">
+            {columna.pedidos.map((pedido) => (
+              <div class="rounded-xl bg-[#f3f4f7] p-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-[0.68rem] font-semibold text-slate-400">{pedido.codigo}</span>
+                  <span class="text-[0.72rem] font-bold text-ink">{pedido.valor}</span>
+                </div>
+                <p class="truncate text-[0.78rem] font-semibold text-ink">{pedido.cliente}</p>
+                <p class="truncate text-[0.68rem] text-slate-500">{pedido.detalle}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</Marco>

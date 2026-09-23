@@ -7,10 +7,13 @@ import Faq from '../components/Faq.astro';
 import { faqsPorTema } from '../lib/faqs';
 import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
-
-// CTA principal: la llamada. CTA secundario: tomar el plan. En la tarjeta de
-// precio se invierte, igual que en /pricing.
-const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+import MockWhatsapp from '../components/mock/Whatsapp.astro';
+import MockAgenda from '../components/mock/Agenda.astro';
+import MockPedidos from '../components/mock/Pedidos.astro';
+import MockRecordatorio from '../components/mock/Recordatorio.astro';
+import MockCobro from '../components/mock/Cobro.astro';
+import MockClientes from '../components/mock/Clientes.astro';
+import MockPanel from '../components/mock/Panel.astro';
 
 // Las preguntas salen del origen común; ver src/lib/faqs.ts.
 // En la home van las ocho primeras; el listado completo vive en el blog.
@@ -18,176 +21,134 @@ const faqs = faqsPorTema('general', 'precio', 'empezar', 'whatsapp').slice(0, 8)
 
 // El precio sale del plan de la app; ver src/lib/precio.ts.
 const PRECIO_PLAN = await getPrecio();
-const { precio: PRECIO } = PRECIO_PLAN;
 
-// Entrada al pago: login (o registro) en la app y de ahí al checkout del plan.
-// Mismo enlace que /pricing; `SelectorPrecio` le añade `interval=year`.
+// Único CTA del sitio: suscribirse. Entra al login (o registro) de la app y de
+// ahí al pago del plan. `SelectorPrecio` le añade `interval=year`.
 const CHECKOUT = `https://app.vyvapos.com/auth/login?intent=pay-plan&plan=${PRECIO_PLAN.id}`;
 
 const antes = [
-	'Agendas por WhatsApp entre una clienta y otra',
-	'La libreta se queda en el local y solo tú sabes leerla',
+	'Los pedidos y las citas se pierden entre mil chats sin leer',
+	'Apuntas en la libreta, en notas del celular y en la cabeza',
 	'Te enteras de que no vino cuando no llegó',
-	'No sabes cuánto vendió cada especialista este mes',
-	'El corte de caja se hace de memoria',
+	'Cada quien lleva sus clientes por su lado',
+	'El cierre del día se hace de memoria',
 ];
 
 const despues = [
-	'Tus clientas reservan solas 24/7 desde tu link',
-	'La agenda completa en tu celular, desde donde estés',
-	'Recordatorio de cita por WhatsApp, sin pagar por cada aviso',
-	'Le escribes a toda tu clientela desde la misma bandeja',
-	'Ventas y citas por especialista, en tiempo real',
-	'Cierre de caja del día en una pantalla',
+	'Cada persona que escribe queda registrada, con su historia',
+	'Citas y pedidos en un solo lugar, desde cualquier celular',
+	'Los avisos de cita salen solos, sin pagar por aviso enviado',
+	'Tu equipo ve lo que le toca, y tú ves todo',
+	'Lo que entró hoy, en una pantalla',
 ];
 
 const pasos = [
 	{
-		icon: 'identification-card',
-		title: 'Montamos tu cuenta juntos',
-		body: 'En una llamada de 30 minutos cargamos tus servicios, precios, horarios y tu equipo. No tienes que hacerlo tú sola.',
+		id: 'registro',
+		etiqueta: 'Escriben',
+		title: 'Te escriben y quedan registrados solos',
+		body: 'Los mensajes al WhatsApp del negocio llegan a una sola bandeja. Quien escribe queda con su ficha, su teléfono y su historia, sin que nadie copie datos a ninguna parte.',
+		componente: 'whatsapp',
 	},
 	{
-		icon: 'device-mobile',
-		title: 'Compartes tu link de reservas',
-		body: 'Lo pones en tu bio de Instagram y en tu estado de WhatsApp. Tus clientas ven tus servicios y eligen hora.',
+		id: 'agenda',
+		etiqueta: 'Agendan',
+		title: 'La cita entra a la agenda sin que la pases a mano',
+		body: 'Desde el chat o desde tu enlace de reservas, la cita cae en la agenda de quien la atiende. Cada quien ve su día y nadie pisa la hora de otro.',
+		componente: 'agenda',
 	},
 	{
-		icon: 'storefront',
-		title: 'Recibes citas y cobras',
-		body: 'La cita entra sola a tu agenda. Al terminar, cobras el servicio y los productos desde la misma pantalla.',
+		id: 'pedidos',
+		etiqueta: 'Piden',
+		title: 'Los pedidos dejan de vivir en la conversación',
+		body: 'Lo que te encargan queda en una fila con su estado: nuevo, en preparación, listo. Se sabe qué falta y qué ya salió sin volver a leer el chat.',
+		componente: 'pedidos',
+	},
+	{
+		id: 'avisos',
+		etiqueta: 'Recuerdan',
+		title: 'Nadie olvida a qué hora era',
+		body: 'Al agendar, el aviso sale solo por WhatsApp y el cliente confirma con un toque. Menos horas perdidas por olvidos, y sin cobro por cada mensaje enviado.',
+		componente: 'recordatorio',
+	},
+	{
+		id: 'cobro',
+		etiqueta: 'Pagan',
+		title: 'Cobras sin cambiar de aplicación',
+		body: 'Servicios y productos en la misma venta, con el medio de pago que use cada quien. La venta queda en la historia del cliente y en las cuentas del día.',
+		componente: 'cobro',
+	},
+	{
+		id: 'vuelven',
+		etiqueta: 'Vuelven',
+		title: 'Sabes quién dejó de venir, a tiempo',
+		body: 'Vyva mira cada cuánto viene cada cliente y arma la lista de los que se pasaron de su ritmo. Desde ahí mismo se les escribe por WhatsApp.',
+		componente: 'clientes',
 	},
 ];
 
 const incluye = [
 	{
+		icon: 'chat',
+		title: 'Todo lo que te escriben, en un solo hilo',
+		body: 'El WhatsApp del negocio con la historia de cada cliente al lado. Lo puede atender tu equipo sin pasarse el celular.',
+	},
+	{
 		icon: 'calendar-dots',
-		title: 'Agenda online 24/7',
-		body: 'Página de reservas con tu marca. Tus clientas reservan a las 11 de la noche sin escribirte.',
+		title: 'Tu enlace para reservar',
+		body: 'Una página con tus servicios y tus horarios. Reservan a las once de la noche sin escribirte.',
 	},
 	{
 		icon: 'bell-ringing',
-		title: 'Recordatorios por WhatsApp',
-		body: 'Cada clienta recibe su aviso antes de la cita, y no se cobra por aviso enviado. Menos sillas vacías por olvidos.',
-	},
-	{
-		icon: 'chat',
-		title: 'Chat de WhatsApp incluido',
-		body: 'Las conversaciones con tus clientas en una sola bandeja, con su historial al lado. No es la agenda por un lado y el WhatsApp por otro.',
-	},
-	{
-		icon: 'sparkle',
-		title: 'Campañas a tu clientela',
-		body: 'Una promoción, un cumpleaños o un "hace tres meses no vienes" a la lista que elijas, desde el mismo sistema.',
-	},
-	{
-		icon: 'users',
-		title: 'Historia de cada clienta',
-		body: 'Qué se hizo, cuándo vino, qué compró y cuánto vale para tu negocio.',
+		title: 'Avisos que salen solos',
+		body: 'Confirmación y recordatorio de cada cita, y aviso a quien la atiende. No se cobra por aviso enviado.',
 	},
 	{
 		icon: 'storefront',
-		title: 'Punto de venta',
-		body: 'Cobra servicios y productos en la misma venta. Varios métodos de pago.',
+		title: 'Cobrar y cerrar el día',
+		body: 'Servicios, productos y varios medios de pago en la misma venta, con el cierre hecho al final del día.',
+	},
+	{
+		icon: 'users',
+		title: 'La historia de cada cliente',
+		body: 'Qué se le hizo, cuándo vino, qué compró y cada cuánto vuelve. Deja de vivir en la memoria de quien lo atiende.',
+	},
+	{
+		icon: 'sparkle',
+		title: 'Escribirle a la lista que elijas',
+		body: 'Una promoción, un cumpleaños o un «hace tres meses no vienes», a las personas que elijas, desde el mismo lugar.',
 	},
 	{
 		icon: 'users-three',
-		title: 'Tu equipo',
-		body: 'Horarios y especialidad por persona, con permisos según el rol y ventas por especialista.',
+		title: 'Tu equipo, con lo que le toca',
+		body: 'Horarios y permisos por persona, y cuánto produce cada quien sin tener que preguntarlo.',
 	},
 	{
 		icon: 'chart-line',
-		title: 'Reportes del día',
-		body: 'Cuánto entró, cuántas clientas nuevas y cuál es tu ticket promedio. Sin hacer cuentas.',
+		title: 'Las cuentas hechas',
+		body: 'Lo facturado, los clientes atendidos, los que vuelven y cómo va cada persona del equipo.',
 	},
 ];
 
 const paraQuienSi = [
-	'Estéticas, spas y clínicas estéticas con equipo',
-	'Barberías y salones que ya facturan todos los días',
-	'Centros de masajes y bienestar con varias salas',
-	'Negocios que hoy agendan a mano y ya no dan abasto',
+	'Negocios que atienden a mucha gente con un equipo pequeño',
+	'Los que reciben citas: estética, salud, bienestar, mascotas, servicios a domicilio',
+	'Los que reciben pedidos por WhatsApp o por redes y los despachan cada día',
+	'Los que ya no dan abasto respondiendo, agendando y cobrando a la vez',
 ];
 
 const paraQuienNo = [
-	'Si trabajas sola y atiendes dos o tres citas al día, todavía no te compensa',
+	'Si atiendes dos o tres personas al día, todavía no te compensa',
 	'Si no tienes tarjeta débito o crédito para el pago mensual',
-	'Si necesitas facturación electrónica DIAN integrada hoy mismo',
+	'Si necesitas facturación electrónica ante la DIAN desde el primer día',
 ];
-
-const capturas = [
-	{
-		src: '/capturas/agenda.png',
-		w: 1918,
-		h: 908,
-		alt: 'Agenda de Vyva con las citas del día repartidas por especialista, cada una con su servicio y su botón de WhatsApp.',
-		caption: 'La agenda de un jueves cualquiera, por especialista.',
-	},
-	{
-		src: '/capturas/dashboard-facturacion-diaria.png',
-		w: 1916,
-		h: 904,
-		alt: 'Panel de Vyva con la facturación diaria del negocio.',
-		caption: 'Cuánto entró hoy, sin sacar la calculadora.',
-	},
-	{
-		src: '/capturas/dashboard-facturacion-empleado.png',
-		w: 1919,
-		h: 909,
-		alt: 'Panel de Vyva con la facturación por empleado.',
-		caption: 'Cuánto vendió cada especialista este mes.',
-	},
-	{
-		src: '/capturas/dashboard-fidelizacion.png',
-		w: 1919,
-		h: 907,
-		alt: 'Panel de Vyva con frecuencia de visita, clientas nuevas, reagendadas y tasa de retención.',
-		caption: 'Quién vuelve, quién no, y cada cuánto.',
-	},
-];
-
-const comparativa = [
-	{
-		icon: 'users-three',
-		title: 'Usuarios ilimitados',
-		body: 'Fresha cobra por cada persona del equipo. Nosotros no. Con cinco especialistas, su cuenta ya te cuesta más que la nuestra.',
-	},
-	{
-		icon: 'storefront',
-		title: 'No es solo la agenda',
-		body: 'Punto de venta, clientas y reportes van incluidos. No pagas aparte un software para cobrar.',
-	},
-	{
-		icon: 'chat',
-		title: 'Los mensajes no se pagan aparte',
-		body: 'En otras plataformas cada recordatorio se cobra por mensaje. Aquí el chat de WhatsApp y los recordatorios van incluidos, y las campañas van dentro del plan.',
-	},
-	{
-		icon: 'check',
-		title: 'Cero comisión por clienta nueva',
-		body: 'Fresha se queda con un porcentaje de las clientas que llegan por su marketplace. Aquí tu clientela es tuya, completa.',
-	},
-	{
-		icon: 'device-mobile',
-		title: 'Te contesta el fundador',
-		body: 'No hay mesa de ayuda ni tiquetes. Escribes por WhatsApp y te contesto yo, y lo que pidas entra al desarrollo.',
-	},
-];
-
-const tablaEquipo = [
-	{ personas: '1 persona', vyva: PRECIO, fresha: '$24.000' },
-	{ personas: '3 personas', vyva: PRECIO, fresha: '$56.400' },
-	{ personas: '5 personas', vyva: PRECIO, fresha: '$88.800' },
-	{ personas: '7 personas', vyva: PRECIO, fresha: '$121.200' },
-];
-
 ---
 
 <Landing
-	title="Vyva | Agenda, WhatsApp y retención de clientas para estéticas"
-	description="Vyva te avisa qué clientas están dejando de venir y te deja reactivarlas por WhatsApp. Además: agenda online, punto de venta y reportes para estéticas, spas y barberías."
+	title="Vyva | La aplicación para negocios que atienden a mucha gente"
+	description="Vyva reúne en un solo lugar lo que te escriben, las citas, los pedidos, el cobro y las cuentas del día. Para negocios que atienden a mucha gente con poco equipo."
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<!-- ============ HERO ============ -->
@@ -197,7 +158,7 @@ const tablaEquipo = [
 			>
 			</div>
 			<div
-				class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-2 lg:gap-8 lg:pb-28 lg:pt-24"
+				class="mx-auto grid max-w-7xl items-center gap-12 px-5 pt-16 pb-20 sm:px-8 lg:grid-cols-2 lg:gap-8 lg:pt-24 lg:pb-28"
 			>
 				<div>
 					<p
@@ -212,30 +173,31 @@ const tablaEquipo = [
 						data-reveal
 						class="mt-6 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl"
 					>
-						Una agenda te organiza el día, pero
-						<span class="text-brand-600">Vyva te cuida la clientela.</span>
+						Te llegan muchos clientes.
+						<span class="text-brand-600">Que no se te caiga ninguno.</span>
 					</h1>
 
 					<p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-						Los programas de citas y los sistemas de cobro te ayudan a resolver el
-						día a día: reservar, atender y cobrar. Ninguno te dice quién dejó de
-						venir, y mucho menos te deja hacer algo al respecto.
+						Cuando el día se llena, lo que falla no es el trabajo: es acordarse.
+						Quién escribió, quién viene mañana, qué pedido falta, quién quedó
+						debiendo y quién no ha vuelto. Vyva lo sostiene por ti, en un solo
+						lugar.
 					</p>
 
 					<div data-reveal class="mt-8 flex flex-col gap-3 sm:flex-row">
 						<a
-							href={CALL}
+							href={CHECKOUT}
+							data-signup-plan={CHECKOUT}
 							class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
 						>
-							Agenda una demo
+							Empieza ahora
 							<Icon name="arrow-right" size={18} />
 						</a>
 						<a
-							href={CHECKOUT}
-							data-signup-plan={CHECKOUT}
+							href="#como-funciona"
 							class="btn-press inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3.5 text-base font-semibold text-slate-700 hover:border-slate-400"
 						>
-							Tomar el plan fundador
+							Ver cómo funciona
 						</a>
 					</div>
 
@@ -244,31 +206,18 @@ const tablaEquipo = [
 							<Icon name="check" size={16} class="text-brand-600" /> Sin instalar nada
 						</span>
 						<span class="inline-flex items-center gap-1.5">
-							<Icon name="check" size={16} class="text-brand-600" /> Recordatorios incluidos
+							<Icon name="check" size={16} class="text-brand-600" /> Configuración incluida
 						</span>
 						<span class="inline-flex items-center gap-1.5">
-							<Icon name="check" size={16} class="text-brand-600" /> Configuración incluida
+							<Icon name="check" size={16} class="text-brand-600" /> Sin permanencia
 						</span>
 					</p>
 				</div>
 
 				<div data-reveal class="relative">
-					<div
-						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/10"
-					>
-						<img
-							src="/capturas/dashboard-fidelizacion.png"
-							width="1919"
-							height="907"
-							alt="Panel de Vyva con la frecuencia de visita, las clientas nuevas, las reagendadas y la tasa de retención."
-							class="w-full"
-							fetchpriority="high"
-							decoding="async"
-						/>
-					</div>
-					<p class="mt-3 text-center text-sm text-slate-500">
-						El panel de una estética real: quién vuelve, quién no y cada cuánto.
-					</p>
+					<MockWhatsapp
+						pie="Lo que te escriben al WhatsApp del negocio, con la ficha del cliente hecha sola."
+					/>
 				</div>
 			</div>
 		</section>
@@ -277,12 +226,12 @@ const tablaEquipo = [
 		<section class="border-y border-slate-200 bg-slate-50">
 			<div class="mx-auto max-w-4xl px-5 py-12 text-center sm:px-8">
 				<p data-reveal class="text-lg leading-relaxed text-slate-700">
-					<strong class="text-ink"
-						>Recuperar una clienta cuesta menos que reemplazarla.</strong
-					>
-					En una clienta nueva inviertes pauta, promoción y tiempo, mientras que la
-					que ya vino confió en ti una vez y solo necesita que la llames a tiempo.
-					El problema es que hoy nadie te avisa cuándo llamarla.
+					<strong class="text-ink">
+						Cada negocio llega por una necesidad distinta.
+					</strong>
+					A uno le pesa agendar, a otro le pesan los pedidos del chat, a otro cobrar
+					y cerrar caja, y a otro que la gente vuelva. Vyva resuelve la que te pese
+					a ti, y las demás ya están ahí cuando te hagan falta.
 				</p>
 			</div>
 		</section>
@@ -291,14 +240,14 @@ const tablaEquipo = [
 		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
 			<div class="max-w-2xl">
 				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					El problema no es que te falten clientas. Es que la agenda vive en
-					cinco lugares al tiempo.
+					El problema no es que falte trabajo. Es que el negocio vive en cinco
+					lugares al tiempo.
 				</h2>
 			</div>
 
 			<div class="mt-14 grid gap-6 lg:grid-cols-2">
 				<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
-					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">
+					<h3 class="text-sm font-semibold tracking-[0.18em] text-slate-400 uppercase">
 						Como está hoy
 					</h3>
 					<ul class="mt-6 space-y-4">
@@ -316,7 +265,7 @@ const tablaEquipo = [
 				</div>
 
 				<div data-reveal class="rounded-2xl border-2 border-brand-200 bg-brand-50/40 p-7">
-					<h3 class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">
+					<h3 class="text-sm font-semibold tracking-[0.18em] text-brand-600 uppercase">
 						Con Vyva
 					</h3>
 					<ul class="mt-6 space-y-4">
@@ -326,7 +275,7 @@ const tablaEquipo = [
 									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
 										<Icon name="check" size={12} />
 									</span>
-									<span class="text-sm font-medium leading-relaxed">{d}</span>
+									<span class="text-sm leading-relaxed font-medium">{d}</span>
 								</li>
 							))
 						}
@@ -335,276 +284,223 @@ const tablaEquipo = [
 			</div>
 		</section>
 
-		<!-- ============ CÓMO SE MONTA ============ -->
-		<section class="bg-slate-50">
+		<!-- ============ CÓMO FUNCIONA ============ -->
+		<section id="como-funciona" class="bg-slate-50">
 			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
 				<div class="max-w-2xl">
-					<p data-reveal class="text-sm font-semibold uppercase tracking-[0.18em] text-brand-600">
-						Estás funcionando esta semana
+					<p data-reveal class="text-sm font-semibold tracking-[0.18em] text-brand-600 uppercase">
+						Cómo funciona
 					</p>
 					<h2 data-reveal class="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-						Montarlo no te va a quitar el mes
+						El día completo, paso a paso
 					</h2>
 					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-						El miedo real no es el precio, es tener que meter trescientas
-						clientas a mano. No va a pasar.
+						Así se ve Vyva por dentro en cada momento del día.
 					</p>
 				</div>
 
-				<ol class="mt-14 grid gap-6 md:grid-cols-3">
+				<div class="mt-16 flex flex-col gap-16 lg:gap-24">
 					{
-						pasos.map((p, i) => (
-							<li
+						pasos.map((paso, i) => (
+							<div
 								data-reveal
-								class="relative rounded-2xl border border-slate-200 bg-white p-7"
+								class={`grid items-center gap-8 lg:grid-cols-2 lg:gap-14 ${
+									i % 2 === 1 ? 'lg:[&>div:first-child]:order-2' : ''
+								}`}
 							>
-								<span class="absolute right-6 top-6 text-4xl font-extrabold text-slate-100">
-									{i + 1}
-								</span>
+								<div>
+									<span class="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold tracking-[0.14em] text-brand-700 uppercase shadow-sm">
+										<span class="grid h-5 w-5 place-items-center rounded-full bg-brand-600 text-[0.65rem] text-white">
+											{i + 1}
+										</span>
+										{paso.etiqueta}
+									</span>
+									<h3 class="mt-4 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+										{paso.title}
+									</h3>
+									<p class="mt-3 max-w-lg text-base leading-relaxed text-slate-600">
+										{paso.body}
+									</p>
+								</div>
+								<div>
+									{paso.componente === 'whatsapp' && <MockWhatsapp />}
+									{paso.componente === 'agenda' && <MockAgenda />}
+									{paso.componente === 'pedidos' && <MockPedidos />}
+									{paso.componente === 'recordatorio' && <MockRecordatorio />}
+									{paso.componente === 'cobro' && <MockCobro />}
+									{paso.componente === 'clientes' && <MockClientes />}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ EL NEGOCIO EN UNA PANTALLA ============ -->
+		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+				<div>
+					<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						Y al final, saber cómo va el negocio sin pedirle cuentas a nadie
+					</h2>
+					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+						Cuánto entró, cuántas personas atendiste, cuántas volvieron y cómo va
+						cada quien. Son las mismas citas, pedidos y ventas del día, ya
+						sumadas.
+					</p>
+					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+						Sirve para lo que cuesta decidir a ojo: a quién reforzar, qué día
+						sobra gente, qué servicio se vende solo y cuál hay que mover.
+					</p>
+				</div>
+				<div data-reveal>
+					<MockPanel />
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ QUÉ INCLUYE ============ -->
+		<section id="caracteristicas" class="bg-slate-50">
+			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+				<div class="max-w-2xl">
+					<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						Todo incluido. No hay módulos que se pagan aparte.
+					</h2>
+				</div>
+
+				<div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					{
+						incluye.map((p) => (
+							<article
+								data-reveal
+								class="group rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
+							>
 								<span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-700">
 									<Icon name={p.icon as any} size={26} />
 								</span>
 								<h3 class="mt-5 text-lg font-bold text-ink">{p.title}</h3>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">{p.body}</p>
-							</li>
+							</article>
 						))
 					}
-				</ol>
-			</div>
-		</section>
-
-		<!-- ============ QUÉ INCLUYE ============ -->
-		<section id="caracteristicas" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-			<div class="max-w-2xl">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Todo incluido. No hay módulos que se pagan aparte.
-				</h2>
-			</div>
-
-			<div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-				{
-					incluye.map((p) => (
-						<article
-							data-reveal
-							class="group rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
-						>
-							<span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-700">
-								<Icon name={p.icon as any} size={26} />
-							</span>
-							<h3 class="mt-5 text-lg font-bold text-ink">{p.title}</h3>
-							<p class="mt-2 text-sm leading-relaxed text-slate-600">{p.body}</p>
-						</article>
-					))
-				}
-			</div>
-
-			<div data-reveal class="mt-10 grid gap-6 sm:grid-cols-3">
-				{
-					capturas.map((c) => (
-						<figure>
-							<div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
-								<img
-									src={c.src}
-									width={c.w}
-									height={c.h}
-									alt={c.alt}
-									class="w-full"
-									loading="lazy"
-									decoding="async"
-								/>
-							</div>
-							<figcaption class="mt-3 text-sm font-medium text-slate-600">{c.caption}</figcaption>
-						</figure>
-					))
-				}
+				</div>
 			</div>
 		</section>
 
 		<!-- ============ PRECIO ============ -->
-		<section id="precio" class="bg-slate-50">
-			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-				<div class="mx-auto max-w-2xl text-center">
-					<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-						Un solo precio, y está aquí
-					</h2>
-					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-						Sin cotización, sin "depende de tu negocio", sin llamada para saber
-						cuánto cuesta.
+		<section id="precio" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+			<div class="mx-auto max-w-2xl text-center">
+				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+					Un solo precio, y está aquí
+				</h2>
+				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+					Sin cotización, sin «depende de tu negocio», sin llamada para saber
+					cuánto cuesta.
+				</p>
+			</div>
+
+			<div
+				data-reveal
+				class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
+			>
+				<div class="bg-brand-600 px-6 py-3 text-center">
+					<p class="text-sm font-bold tracking-[0.14em] text-white uppercase">
+						Plan fundador
 					</p>
 				</div>
 
-				<div
-					data-reveal
-					class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
-				>
-					<div class="bg-brand-600 px-6 py-3 text-center">
-						<p class="text-sm font-bold uppercase tracking-[0.14em] text-white">
-							Plan fundador
-						</p>
-					</div>
+				<div class="px-8 py-10 text-center">
+					<SelectorPrecio precio={PRECIO_PLAN} client:load />
 
-					<div class="px-8 py-10 text-center">
-						<SelectorPrecio precio={PRECIO_PLAN} client:load />
-
-						<ul class="mt-8 space-y-3 text-left">
-							{
-								[
-									'Todas las funciones, sin módulos aparte',
-									'Usuarios y citas ilimitados',
-									'Configuración inicial hecha contigo',
-									'Precio congelado mientras seas cliente',
-									'Sin contrato ni permanencia',
-									'Soporte por WhatsApp: te responde una persona',
-								].map((f) => (
-									<li class="flex gap-3">
-										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
-											<Icon name="check" size={12} />
-										</span>
-										<span class="text-sm font-medium text-slate-700">{f}</span>
-									</li>
-								))
-							}
-						</ul>
-
-						<a
-							href={CHECKOUT}
-							data-signup-plan={CHECKOUT}
-							class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
-						>
-							Tomar el plan fundador
-							<Icon name="arrow-right" size={18} />
-						</a>
-						<a
-							href={CALL}
-							class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
-						>
-							o agenda una demo
-						</a>
-
-						<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
-							<Icon name="lock-key" size={14} />
-							Pago con tarjeta débito o crédito Visa o Mastercard
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-
-		<!-- ============ POR QUÉ NO SOMOS LOS MÁS BARATOS ============ -->
-		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-			<div class="max-w-2xl">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					No somos los más baratos del mercado, y hay razones
-				</h2>
-				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-					Hay software de agenda más barato que este. Antes de compararlo por la
-					mensualidad sola, mira lo que estás comparando.
-				</p>
-			</div>
-
-			<div class="mt-12 grid gap-6 sm:grid-cols-2">
-				{
-					comparativa.map((c) => (
-						<article
-							data-reveal
-							class="rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
-						>
-							<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700">
-								<Icon name={c.icon as any} size={24} />
-							</span>
-							<h3 class="mt-5 text-lg font-bold text-ink">{c.title}</h3>
-							<p class="mt-2 text-sm leading-relaxed text-slate-600">{c.body}</p>
-						</article>
-					))
-				}
-			</div>
-
-			<div data-reveal class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-				<div class="border-b border-slate-200 bg-slate-50 px-6 py-4">
-					<p class="font-bold text-ink">Lo que pagas al mes según el tamaño de tu equipo</p>
-				</div>
-				<div class="overflow-x-auto">
-					<table class="w-full min-w-[420px] text-sm">
-						<thead>
-							<tr class="border-b border-slate-200 text-left text-slate-500">
-								<th class="px-6 py-3 font-semibold">Tu equipo</th>
-								<th class="px-6 py-3 font-semibold text-brand-700">Vyva</th>
-								<th class="px-6 py-3 font-semibold">Cobro por persona</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								tablaEquipo.map((f) => (
-									<tr class="border-b border-slate-100 last:border-0">
-										<td class="px-6 py-3.5 font-medium text-slate-700">{f.personas}</td>
-										<td class="px-6 py-3.5 font-bold text-brand-700">{f.vyva}</td>
-										<td class="px-6 py-3.5 text-slate-600">{f.fresha}</td>
-									</tr>
-								))
-							}
-						</tbody>
-					</table>
-				</div>
-				<p class="px-6 py-4 text-xs leading-relaxed text-slate-400">
-					Cálculo con tarifas públicas de la competencia a agosto de 2026, sin
-					contar comisiones por transacción ni por clienta nueva. Verifica los
-					valores antes de tomar una decisión.
-				</p>
-			</div>
-		</section>
-
-		<!-- ============ PARA QUIÉN SÍ / NO ============ -->
-		<section id="casos" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-			<div class="max-w-2xl">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					Vyva no es para todo el mundo
-				</h2>
-				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-					Preferimos decírtelo aquí y no en la llamada.
-				</p>
-			</div>
-
-			<div class="mt-12 grid gap-6 lg:grid-cols-2">
-				<div data-reveal class="rounded-2xl border-2 border-brand-200 bg-brand-50/40 p-7">
-					<h3 class="text-lg font-bold text-ink">Sí es para ti</h3>
-					<ul class="mt-5 space-y-3">
+					<ul class="mt-8 space-y-3 text-left">
 						{
-							paraQuienSi.map((u) => (
+							[
+								'Todas las funciones, sin módulos aparte',
+								'Todo tu equipo, sin cobro por persona',
+								'Configuración inicial hecha contigo',
+								'Precio congelado mientras seas cliente',
+								'Sin contrato ni permanencia',
+								'Soporte por WhatsApp: te responde una persona',
+							].map((f) => (
 								<li class="flex gap-3">
 									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
 										<Icon name="check" size={12} />
 									</span>
-									<span class="text-sm font-medium leading-relaxed text-slate-700">{u}</span>
+									<span class="text-sm font-medium text-slate-700">{f}</span>
 								</li>
 							))
 						}
 					</ul>
+
+					<a
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
+						class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
+					>
+						Empieza ahora
+						<Icon name="arrow-right" size={18} />
+					</a>
+
+					<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+						<Icon name="lock-key" size={14} />
+						Pago con tarjeta débito o crédito Visa o Mastercard
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ PARA QUIÉN SÍ / NO ============ -->
+		<section id="casos" class="bg-slate-50">
+			<div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+				<div class="max-w-2xl">
+					<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+						Vyva no es para todo el mundo
+					</h2>
+					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
+						Preferimos decírtelo aquí y no después de que pagues.
+					</p>
 				</div>
 
-				<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
-					<h3 class="text-lg font-bold text-ink">Todavía no es para ti</h3>
-					<ul class="mt-5 space-y-3">
-						{
-							paraQuienNo.map((u) => (
-								<li class="flex gap-3">
-									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400">
-										<Icon name="x" size={12} />
-									</span>
-									<span class="text-sm leading-relaxed text-slate-600">{u}</span>
-								</li>
-							))
-						}
-					</ul>
+				<div class="mt-12 grid gap-6 lg:grid-cols-2">
+					<div data-reveal class="rounded-2xl border-2 border-brand-200 bg-white p-7">
+						<h3 class="text-lg font-bold text-ink">Sí es para ti</h3>
+						<ul class="mt-5 space-y-3">
+							{
+								paraQuienSi.map((u) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm leading-relaxed font-medium text-slate-700">{u}</span>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+
+					<div data-reveal class="rounded-2xl border border-slate-200 bg-white p-7">
+						<h3 class="text-lg font-bold text-ink">Todavía no es para ti</h3>
+						<ul class="mt-5 space-y-3">
+							{
+								paraQuienNo.map((u) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400">
+											<Icon name="x" size={12} />
+										</span>
+										<span class="text-sm leading-relaxed text-slate-600">{u}</span>
+									</li>
+								))
+							}
+						</ul>
+					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- ============ FAQ ============ -->
-		<section class="bg-slate-50">
-			<div class="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
-				<Faq items={faqs} titulo="Lo que todos preguntan" />
-			</div>
+		<section class="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
+			<Faq items={faqs} titulo="Lo que todos preguntan" />
 		</section>
 
 		<!-- ============ CTA FINAL ============ -->
@@ -620,26 +516,20 @@ const tablaEquipo = [
 					data-reveal
 					class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
 				>
-					Quedan cupos del plan fundador
+					Empieza hoy y deja de sostenerlo todo en la cabeza
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Quince minutos, sin discurso de ventas. Te muestro la plataforma con un
-					negocio real funcionando y me dices si te sirve.
+					Te suscribes, entras y la configuración inicial se hace contigo. Sin
+					permanencia: si no te sirve, te vas cuando quieras.
 				</p>
-				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-					<a
-						href={CALL}
-						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-brand-700 shadow-lg"
-					>
-						Agenda una demo
-						<Icon name="arrow-right" size={18} />
-					</a>
+				<div data-reveal class="mt-8 flex justify-center">
 					<a
 						href={CHECKOUT}
 						data-signup-plan={CHECKOUT}
-						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10"
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-brand-700 shadow-lg"
 					>
-						Tomar el plan fundador
+						Empieza ahora
+						<Icon name="arrow-right" size={18} />
 					</a>
 				</div>
 			</div>

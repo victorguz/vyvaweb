@@ -1,0 +1,70 @@
+---
+/** Quién dejó de venir, y escribirles sin salir de aquí. */
+import Marco from './Marco.astro';
+
+interface Props {
+  pie?: string;
+  clase?: string;
+}
+const { pie, clase } = Astro.props;
+
+const clientes = [
+  { nombre: 'Valeria Ruiz', iniciales: 'VR', visitas: 'Venía cada 3 semanas', ultima: 'Hace 64 días' },
+  { nombre: 'Juan David Mesa', iniciales: 'JM', visitas: 'Venía cada mes', ultima: 'Hace 58 días' },
+  { nombre: 'Laura Gómez', iniciales: 'LG', visitas: 'Venía cada 2 semanas', ultima: 'Hace 41 días' },
+];
+---
+
+<Marco titulo="Clientes" contexto="Filtro: dejaron de venir" pie={pie} clase={clase}>
+  <div class="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm">
+    <div class="flex flex-wrap items-center gap-2 pb-3">
+      <span class="rounded-full bg-brand-600 px-3 py-1 text-[0.7rem] font-semibold text-white">
+        Dejaron de venir · 12
+      </span>
+      <span class="rounded-full bg-slate-100 px-3 py-1 text-[0.7rem] font-medium text-slate-500">
+        Frecuentes · 48
+      </span>
+      <span class="rounded-full bg-slate-100 px-3 py-1 text-[0.7rem] font-medium text-slate-500">
+        Nuevos del mes · 23
+      </span>
+    </div>
+
+    {
+      clientes.map((cliente) => (
+        <div class="flex items-center gap-3 border-t border-slate-50 py-2.5">
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-50 text-[0.7rem] font-semibold text-brand-700">
+            {cliente.iniciales}
+          </span>
+          <div class="min-w-0">
+            <p class="truncate text-[0.82rem] font-semibold text-ink">{cliente.nombre}</p>
+            <p class="truncate text-[0.7rem] text-slate-500">{cliente.visitas}</p>
+          </div>
+          <span class="ml-auto shrink-0 rounded-full bg-[#ffc107]/20 px-2.5 py-1 text-[0.65rem] font-semibold text-[#8a6100]">
+            {cliente.ultima}
+          </span>
+        </div>
+      ))
+    }
+
+    <button
+      type="button"
+      tabindex="-1"
+      aria-hidden="true"
+      class="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-[0.85rem] font-semibold text-white shadow-lg shadow-brand-600/25"
+    >
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 20.5l1.6-4.9A8.4 8.4 0 0 1 3.6 11 8.5 8.5 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"></path>
+      </svg>
+      Escribirles por WhatsApp
+    </button>
+  </div>
+</Marco>

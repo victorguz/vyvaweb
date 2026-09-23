@@ -1,18 +1,19 @@
 ---
 import Landing from '../../layouts/Landing.astro';
 import Nav from '../../components/Nav.svelte';
+import { getCheckout } from '../../lib/precio';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import Tutoriales from '../../components/Tutoriales.svelte';
 
-const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+const CHECKOUT = await getCheckout();
 ---
 
 <Landing
 	title="Tutoriales en video | Vyva"
 	description="Cómo se usa Vyva, paso a paso y en menos de un minuto por tema: agendar una cita, crear servicios, cobrar una venta y publicar tu página de reservas."
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero relative overflow-hidden bg-white">
@@ -52,10 +53,11 @@ const DEMO = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
 				</p>
 				<div data-reveal class="mt-7">
 					<a
-						href={DEMO}
+						href={CHECKOUT}
+						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Agenda una demo
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
 					</a>
 				</div>

@@ -1,0 +1,54 @@
+---
+/**
+ * Marco de las visualizaciones de producto.
+ *
+ * No son capturas: son la interfaz de Vyva dibujada con los mismos tokens que
+ * usa la app (fondo #f3f4f7, acento #7b8be9, tarjetas blancas de esquina muy
+ * redonda y sombra suave). Así se ve nítido en cualquier pantalla, se traduce
+ * y se corrige sin volver a tomar pantallazos.
+ */
+interface Props {
+  /** Título de la barra superior de la app. */
+  titulo?: string;
+  /** Texto pequeño a la derecha de la barra (fecha, filtro, estado). */
+  contexto?: string;
+  /** Pie que explica qué se está viendo. */
+  pie?: string;
+  clase?: string;
+}
+
+const { titulo, contexto, pie, clase = '' } = Astro.props;
+---
+
+<figure class={`not-prose ${clase}`}>
+  <!-- `@container`: las pantallas de dentro se reparten según el ancho de este
+       marco, no el de la ventana. Así la misma visualización cabe en una
+       columna angosta y se despliega entera cuando tiene sitio. -->
+  <div
+    class="@container overflow-hidden rounded-[1.75rem] border border-slate-200 bg-[#f3f4f7] shadow-2xl shadow-slate-900/10"
+  >
+    {
+      titulo && (
+        <div class="flex items-center gap-2.5 border-b border-slate-200/80 bg-white px-4 py-3">
+          <span class="grid h-7 w-7 place-items-center rounded-[0.6rem] bg-brand-500 text-[0.7rem] font-bold text-white">
+            V
+          </span>
+          <span class="text-sm font-semibold text-ink">{titulo}</span>
+          {contexto && (
+            <span class="ml-auto rounded-full bg-slate-100 px-2.5 py-1 text-[0.7rem] font-medium text-slate-500">
+              {contexto}
+            </span>
+          )}
+        </div>
+      )
+    }
+    <div class="p-3 sm:p-4">
+      <slot />
+    </div>
+  </div>
+  {
+    pie && (
+      <figcaption class="mt-3 text-center text-sm text-slate-500">{pie}</figcaption>
+    )
+  }
+</figure>

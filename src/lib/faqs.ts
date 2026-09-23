@@ -25,17 +25,17 @@ export interface Faq {
 export const FAQS: Faq[] = [
 	{
 		q: '¿Qué es Vyva exactamente?',
-		a: 'Es el sistema con el que un negocio de belleza maneja su agenda, sus clientas, sus ventas y su equipo en un solo lugar. Lo que lo diferencia es que también te avisa qué clientas están dejando de venir y te deja escribirles por WhatsApp desde la misma pantalla.',
+		a: 'Es la aplicación donde queda todo lo que mueve tu negocio en el día: lo que te escriben por WhatsApp, las citas, los pedidos, el cobro, la historia de cada cliente y las cuentas. En un solo lugar, para que nada dependa de acordarse.',
 		temas: ['general'],
 	},
 	{
-		q: '¿Qué hace Vyva que no haga una agenda normal?',
-		a: 'Una agenda te organiza el día: reservar, atender y cobrar. Vyva hace eso y además vigila tu clientela: te dice quién se está saliendo de su ritmo de visita, quién ya dejó de venir y quiénes son tus mejores clientas, y te deja escribirles por WhatsApp desde la misma pantalla. Es la diferencia entre administrar la agenda y sostener la caja.',
+		q: '¿Para qué me sirve si ya me organizo con WhatsApp y una libreta?',
+		a: 'Mientras atiendes a poca gente, funciona. Cuando el día se llena, empiezan a caerse cosas: un mensaje sin responder, una cita que nadie anotó, un pedido que quedó en la conversación, un cliente que no volvió y nadie notó. Vyva sostiene eso por ti y deja registro de todo sin que nadie lo copie a ningún lado.',
 		temas: ['general'],
 	},
 	{
 		q: '¿Qué tipo de negocios lo usan?',
-		a: 'Estéticas, spas, clínicas estéticas, salones, barberías y centros de masajes con equipo. Está pensado para negocios que ya facturan todos los días; si atiendes dos o tres citas al día y trabajas sola, todavía no te compensa.',
+		a: 'Negocios que atienden a mucha gente con un equipo pequeño: estética y belleza, salud y bienestar, mascotas, entrenamiento, comida por encargo y ventas por redes. Tanto los que reciben citas como los que reciben pedidos. Si atiendes dos o tres personas al día, todavía no te compensa.',
 		temas: ['general'],
 	},
 	{
@@ -45,12 +45,12 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Necesito saber de tecnología?',
-		a: 'No. La cuenta queda configurada en la llamada inicial, y cada indicador del panel explica qué significa y qué decisión permite tomar. Si algo no se entiende, se pregunta por WhatsApp.',
+		a: 'No. La cuenta queda configurada contigo al empezar, y cada indicador del panel explica qué significa y qué decisión permite tomar. Si algo no se entiende, se pregunta por WhatsApp.',
 		temas: ['plataforma', 'soporte'],
 	},
 	{
-		q: '¿Qué pasa con las clientas que tengo en la libreta?',
-		a: 'Se cargan contigo en la llamada de configuración, empezando por las que tienen cita próxima y las que vienen seguido. No hay que digitarlas una por una antes de arrancar.',
+		q: '¿Qué pasa con los clientes que tengo en la libreta?',
+		a: 'Se cargan contigo en la llamada de configuración, empezando por los que tienen cita próxima y los que vienen seguido. No hay que digitarlos uno por uno antes de arrancar.',
 		temas: ['empezar'],
 	},
 	{
@@ -75,32 +75,32 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Cuántas personas de mi equipo pueden usarlo?',
-		a: 'Las que necesites. No cobramos por usuario, así que sumar una especialista no cambia lo que pagas al mes.',
+		a: 'Las que necesites. No cobramos por usuario, así que sumar a alguien al equipo no cambia lo que pagas al mes.',
 		temas: ['precio'],
 	},
 	{
-		q: '¿Por qué cuesta más que otras agendas?',
-		a: 'Porque no cobramos por persona del equipo ni comisión por las clientas que llegan a tu negocio, y porque no es solo agenda: el chat de WhatsApp, el punto de venta y los reportes van incluidos. Si trabajas sola hay opciones más baratas y te lo decimos de frente; si tienes equipo, conviene hacer la cuenta completa.',
+		q: '¿Qué entra en el precio?',
+		a: 'Todo: el WhatsApp del negocio, las citas y sus avisos, los pedidos, el cobro, la historia de cada cliente y los reportes. No se cobra por persona del equipo, ni comisión por los clientes que atiendes, ni módulos aparte.',
 		temas: ['precio'],
 	},
 	{
 		q: '¿Los mensajes de WhatsApp se cobran aparte?',
-		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los recordatorios de cita, ni las campañas. Otras plataformas sí cobran cada aviso que sale. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientas cuesta unos trece dólares. Por ahora no ponemos ningún tope de envío; el día que exista uno, lo verás antes de mandar la difusión.',
+		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los avisos de cita, ni las campañas. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientes cuesta unos trece dólares. Por ahora no ponemos ningún tope de envío; el día que exista uno, lo verás antes de mandar la difusión.',
 		temas: ['whatsapp', 'precio'],
 	},
 	{
 		q: '¿Funciona con el WhatsApp de mi negocio?',
-		a: 'Sí, el chat trabaja sobre el número de WhatsApp del negocio. La conexión se hace una sola vez y se ve paso a paso en la demo.',
+		a: 'Sí, el chat trabaja sobre el número de WhatsApp del negocio. La conexión se hace una sola vez, y es uno de los pasos de la configuración inicial que hacemos contigo.',
 		temas: ['whatsapp'],
 	},
 	{
-		q: '¿Cómo sabe Vyva qué clientas están dejando de venir?',
-		a: 'Mira cada cuánto vuelve cada clienta y marca a las que se pasaron de su propio ritmo. No es un plazo fijo igual para todas: a la que viene cada mes y a la que viene cada tres meses no se les mide con la misma vara.',
+		q: '¿Cómo sabe Vyva quién está dejando de venir?',
+		a: 'Mira cada cuánto vuelve cada cliente y marca a los que se pasaron de su propio ritmo. No es un plazo fijo igual para todos: a quien viene cada mes y a quien viene cada tres meses no se les mide con la misma vara.',
 		temas: ['general', 'plataforma'],
 	},
 	{
-		q: '¿Vyva me consigue clientas nuevas?',
-		a: 'No. No somos marketplace ni agencia de pauta: lo que hacemos es ayudarte a conservar y recuperar las que ya tienes, que suele ser bastante más barato que traer gente nueva.',
+		q: '¿Vyva me consigue clientes nuevos?',
+		a: 'No. No somos marketplace ni agencia de pauta: lo que hacemos es ayudarte a conservar y recuperar los que ya tienes, que suele ser bastante más barato que traer gente nueva.',
 		temas: ['general'],
 	},
 	{
@@ -109,13 +109,13 @@ export const FAQS: Faq[] = [
 		temas: ['plataforma'],
 	},
 	{
-		q: '¿La información de mis clientas es mía?',
+		q: '¿La información de mis clientes es mía?',
 		a: 'Sí. Tu negocio es el dueño de esos datos y nosotros solo los guardamos y procesamos para prestarte el servicio. Puedes pedir una copia completa cuando quieras, incluso si decides irte.',
 		temas: ['datos'],
 	},
 	{
-		q: '¿Puedo verlo antes de pagar?',
-		a: 'Sí. En la demo de 15 minutos ves la plataforma funcionando con los datos de un negocio real y resuelves tus dudas antes de decidir.',
+		q: '¿Y si lo pruebo y no me sirve?',
+		a: 'No hay permanencia: cancelas cuando quieras desde el perfil de tu negocio y no se vuelve a cobrar. Si cancelas dentro de los primeros siete días, te devolvemos el pago completo.',
 		temas: ['empezar'],
 	},
 	{

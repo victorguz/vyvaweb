@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import TutorialPlayer from '../../components/TutorialPlayer.svelte';
 import catalogo from '../../lib/tutoriales.json';
 import { TUTORIALES_TEXTO } from '../../lib/tutoriales-seo';
+import { getCheckout } from '../../lib/precio';
 
 export function getStaticPaths() {
 	return catalogo.tutoriales.map((t, i) => ({
@@ -25,13 +26,15 @@ const { tutorial, grupo, anterior, siguiente } = Astro.props;
 const texto = TUTORIALES_TEXTO[tutorial.slug];
 const titulo = texto?.titulo ?? tutorial.titulo;
 const descripcion = texto?.descripcion ?? tutorial.descripcion;
+
+const CHECKOUT = await getCheckout();
 ---
 
 <Landing
 	title={`${titulo} | Vyva`}
 	description={descripcion}
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<section class="page-hero relative overflow-hidden bg-white">

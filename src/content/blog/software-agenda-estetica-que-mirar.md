@@ -88,4 +88,4 @@ Ese es el costo real del sistema, y es el único comparable entre dos proveedore
 
 Un solo plan con usuarios ilimitados, recordatorios de WhatsApp sin cobro por aviso y cero comisión sobre tus clientas, con el panel que te dice cuáles están a punto de dejar de venir y te deja escribirles desde la misma pantalla.
 
-Se puede ver funcionando con los datos de un negocio real en una demo de quince minutos, y ahí mismo se responden las siete preguntas de arriba.
+Se puede activar hoy mismo y probarlo con el negocio andando: la configuración inicial se hace acompañada y no hay permanencia.

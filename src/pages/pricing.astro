@@ -9,149 +9,206 @@ import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
 import Faq from '../components/Faq.astro';
 import { faqsPorTema } from '../lib/faqs';
-
-// CTA principal: el pago. CTA secundario: la llamada.
-const CALL = 'https://calendar.app.google/TAJNgrzZdqu8s8Rk9';
+import MockAgenda from '../components/mock/Agenda.astro';
+import MockCobro from '../components/mock/Cobro.astro';
+import MockPanel from '../components/mock/Panel.astro';
 
 // Las preguntas salen del origen común; ver src/lib/faqs.ts.
 const pricingFaqs = faqsPorTema('precio');
 
 // El precio sale del plan de la app; ver src/lib/precio.ts.
 const PRECIO_PLAN = await getPrecio();
-const { precio: PRECIO } = PRECIO_PLAN;
 
 /**
- * Entrada al pago del plan. La app pide iniciar sesión (o crear la cuenta) y
- * desde ahí lleva al checkout de la suscripción: por eso el enlace apunta al
- * login con el plan en la URL y no directo a `/pay/plan/:id`, que sin sesión
- * no puede preparar el cobro.
+ * Entrada al pago del plan, y único CTA de la página. La app pide iniciar
+ * sesión (o crear la cuenta) y desde ahí lleva al checkout de la suscripción:
+ * por eso el enlace apunta al login con el plan en la URL y no directo a
+ * `/pay/plan/:id`, que sin sesión no puede preparar el cobro.
  *
- * El ciclo también viaja en la URL: `SelectorPrecio` le añade
- * `interval=year` cuando se elige anual.
+ * El ciclo también viaja en la URL: `SelectorPrecio` le añade `interval=year`
+ * cuando se elige anual.
  */
 const CHECKOUT = `https://app.vyvapos.com/auth/login?intent=pay-plan&plan=${PRECIO_PLAN.id}`;
 
 const incluido = [
 	'Todas las funciones, sin módulos que se pagan aparte',
-	'Chat de WhatsApp con tus clientas, dentro del sistema',
-	'Chat, recordatorios y campañas de WhatsApp sin que te cobremos por mensaje',
-	'Usuarios, clientas y citas ilimitados',
-	'Configuración inicial hecha contigo en una llamada',
+	'El WhatsApp del negocio, con la historia de cada cliente al lado',
+	'Chat, avisos de cita y campañas sin que te cobremos por mensaje',
+	'Todo tu equipo, sin cobro por persona',
+	'Clientes, citas y pedidos sin tope',
+	'Configuración inicial hecha contigo',
 	'Precio congelado mientras seas cliente',
 	'Sin contrato ni permanencia: cancelas cuando quieras',
-	'Soporte por WhatsApp: te responde una persona',
 ];
 
 const featureSections = [
 	{
-		title: 'Agendamiento y citas',
+		title: 'Lo que te escriben',
 		items: [
-			{ icon: 'identification-card', title: 'Página de reservas', body: 'Link único con tu marca para que tus clientas reserven 24/7.' },
-			{ icon: 'arrows-clockwise', title: 'Google Calendar', body: 'Sincronización automática de todas tus citas.' },
-			{ icon: 'clock', title: 'Horarios flexibles', body: 'Disponibilidad por día, empleado y servicio.' },
-			{ icon: 'bell-ringing', title: 'Recordatorios', body: 'Avisos automáticos para reducir las sillas vacías.' },
-			{ icon: 'users-three', title: 'Asignación de equipo', body: 'Citas según especialidad y disponibilidad.' },
-			{ icon: 'calendar-dots', title: 'Vista calendario', body: 'Timeline interactivo de todas tus citas.' },
+			{
+				icon: 'chat',
+				title: 'Una sola bandeja',
+				body: 'El WhatsApp del negocio lo atiende tu equipo sin pasarse el celular.',
+			},
+			{
+				icon: 'identification-card',
+				title: 'Ficha automática',
+				body: 'Quien escribe queda registrado con su teléfono y su conversación.',
+			},
+			{
+				icon: 'users',
+				title: 'La historia al lado',
+				body: 'Mientras respondes ves qué se le hizo, cuándo vino y qué compró.',
+			},
+			{
+				icon: 'sparkle',
+				title: 'Escribirle a una lista',
+				body: 'Promociones o recordatorios a las personas que elijas, desde el mismo lugar.',
+			},
 		],
 	},
 	{
-		title: 'Gestión de clientas',
+		title: 'Las citas',
 		items: [
-			{ icon: 'users', title: 'Base de datos', body: 'Contacto, preferencias y notas de cada clienta.' },
-			{ icon: 'clock', title: 'Historial de citas', body: 'Servicios tomados y última visita.' },
-			{ icon: 'check', title: 'Historial de compras', body: 'Valor de la clienta y productos preferidos.' },
-			{ icon: 'chart-line', title: 'Estadísticas', body: 'Clientas nuevas, recurrentes y ticket promedio.' },
+			{
+				icon: 'calendar-dots',
+				title: 'Tu enlace para reservar',
+				body: 'Con tus servicios y horarios. Reservan a cualquier hora sin escribirte.',
+			},
+			{
+				icon: 'bell-ringing',
+				title: 'Avisos que salen solos',
+				body: 'Confirmación y recordatorio por WhatsApp, y el cliente confirma con un toque.',
+			},
+			{
+				icon: 'users-three',
+				title: 'La agenda de cada quien',
+				body: 'Cada persona ve su día, según su horario y lo que sabe hacer.',
+			},
+			{
+				icon: 'arrows-clockwise',
+				title: 'Google Calendar',
+				body: 'Las citas quedan también en el calendario que ya usas.',
+			},
 		],
 	},
 	{
-		title: 'WhatsApp y CRM',
+		title: 'Los pedidos',
 		items: [
-			{ icon: 'chat', title: 'Chat integrado', body: 'Todas las conversaciones en una bandeja, con la ficha de la clienta al lado.' },
-			{ icon: 'bell-ringing', title: 'Recordatorios incluidos', body: 'Aviso automático antes de cada cita, sin que se cobre por aviso enviado.' },
-			{ icon: 'sparkle', title: 'Campañas', body: 'Promociones y reactivación a la lista de clientas que elijas.' },
-			{ icon: 'users', title: 'Segmentación', body: 'Filtra por servicio tomado, última visita o ticket para escribirle a quien toca.' },
+			{
+				icon: 'list',
+				title: 'La fila del día',
+				body: 'Nuevo, en preparación, listo. Se ve qué falta sin releer el chat.',
+			},
+			{
+				icon: 'device-mobile',
+				title: 'Desde el celular',
+				body: 'Quien despacha va moviendo el pedido desde donde esté.',
+			},
+			{
+				icon: 'storefront',
+				title: 'Tu catálogo',
+				body: 'Productos y servicios con sus precios, listos para armar el pedido.',
+			},
+			{
+				icon: 'check',
+				title: 'Queda en la historia',
+				body: 'Cada pedido se suma al cliente y a las cuentas del día.',
+			},
 		],
 	},
 	{
-		title: 'Punto de venta',
+		title: 'El cobro y el cierre del día',
 		items: [
-			{ icon: 'storefront', title: 'Cobros', body: 'Cobra servicios y productos de forma segura.' },
-			{ icon: 'list', title: 'Carrito integrado', body: 'Combina tratamientos y productos en una venta.' },
-			{ icon: 'list', title: 'Órdenes de venta', body: 'Órdenes y cierre de caja centralizados.' },
-			{ icon: 'lock-key', title: 'Múltiples métodos', body: 'Efectivo, tarjetas, transferencias y más.' },
+			{
+				icon: 'storefront',
+				title: 'Una sola venta',
+				body: 'Servicios y productos juntos, sin cambiar de aplicación.',
+			},
+			{
+				icon: 'lock-key',
+				title: 'Varios medios de pago',
+				body: 'Efectivo, tarjeta, transferencia o la mezcla que use cada quien.',
+			},
+			{
+				icon: 'list',
+				title: 'Cierre del día',
+				body: 'Lo que entró, por medio de pago, sin cuadrar de memoria.',
+			},
+			{
+				icon: 'chart-line',
+				title: 'Gastos también',
+				body: 'Lo que sale del negocio queda registrado junto a lo que entra.',
+			},
 		],
 	},
 	{
-		title: 'Dashboard y reportes',
+		title: 'Que vuelvan',
 		items: [
-			{ icon: 'chart-line', title: 'KPIs en tiempo real', body: 'Ventas del día, clientas nuevas y ticket promedio.' },
-			{ icon: 'list', title: 'Reportes de ventas', body: 'Por día, semana, mes o rango personalizado.' },
-			{ icon: 'sparkle', title: 'Por método de pago', body: 'Ingresos desglosados por canal.' },
-			{ icon: 'chart-line', title: 'Gráficos', body: 'Entiende tu negocio de un vistazo.' },
+			{
+				icon: 'clock',
+				title: 'Cada cuánto viene cada uno',
+				body: 'Vyva aprende el ritmo de cada cliente sin que nadie lo apunte.',
+			},
+			{
+				icon: 'users',
+				title: 'Los que se pasaron',
+				body: 'La lista de quienes llevan más tiempo del suyo sin volver.',
+			},
+			{
+				icon: 'chat',
+				title: 'Escribirles desde ahí',
+				body: 'Del listado al WhatsApp, sin buscar el número en ningún lado.',
+			},
+			{
+				icon: 'sparkle',
+				title: 'Los que más valen',
+				body: 'Quiénes vienen seguido y gastan por encima del promedio.',
+			},
 		],
 	},
 	{
-		title: 'Gestión de equipo',
+		title: 'El equipo y las cuentas',
 		items: [
-			{ icon: 'identification-card', title: 'Perfiles', body: 'Fotos, especialidades y horarios por empleado.' },
-			{ icon: 'clock', title: 'Asignación', body: 'Distribución equitativa de citas.' },
-			{ icon: 'lock-key', title: 'Roles y permisos', body: 'Control de acceso según el rol.' },
-			{ icon: 'chart-line', title: 'Desempeño', body: 'Citas atendidas y ventas por especialista.' },
+			{
+				icon: 'identification-card',
+				title: 'Cada quien con lo suyo',
+				body: 'Horarios, servicios y permisos por persona.',
+			},
+			{
+				icon: 'chart-line',
+				title: 'Cuánto produce cada uno',
+				body: 'Citas atendidas y facturado por persona, sin preguntarlo.',
+			},
+			{
+				icon: 'chart-line',
+				title: 'Cómo va el mes',
+				body: 'Facturado, clientes atendidos, nuevos y los que vuelven.',
+			},
+			{
+				icon: 'list',
+				title: 'Reportes para exportar',
+				body: 'Por día, semana, mes o el rango que necesites.',
+			},
 		],
 	},
 ];
 
 const useCases = [
-	{ icon: 'sparkle', title: 'Salones de belleza', body: 'Cortes, tintes y peinados con estilistas por especialidad.' },
-	{ icon: 'users', title: 'Estéticas faciales', body: 'Tratamientos, historial de clientas y venta de productos.' },
-	{ icon: 'sparkle', title: 'Spas y bienestar', body: 'Múltiples salas, terapeutas y tratamientos coordinados.' },
-	{ icon: 'identification-card', title: 'Clínicas estéticas', body: 'Consultas, procedimientos y seguimiento.' },
-	{ icon: 'check', title: 'Barberías', body: 'Turnos, clientes recurrentes y servicios de barba.' },
-	{ icon: 'users-three', title: 'Centros de masajes', body: 'Tipos de masaje y terapeutas en una sola agenda.' },
+	{ icon: 'sparkle', title: 'Belleza y estética', body: 'Salones, barberías, uñas y centros de estética con varias personas atendiendo.' },
+	{ icon: 'users', title: 'Salud y bienestar', body: 'Consultorios, terapias, spas y masajes con agenda por profesional.' },
+	{ icon: 'users-three', title: 'Fitness y entrenamiento', body: 'Entrenadores y estudios con sesiones y clientes recurrentes.' },
+	{ icon: 'check', title: 'Mascotas', body: 'Peluquería canina, veterinarias y guarderías con citas y recordatorios.' },
+	{ icon: 'storefront', title: 'Comida por encargo', body: 'Pastelerías, catering y cocinas ocultas con pedidos por WhatsApp.' },
+	{ icon: 'device-mobile', title: 'Venta por redes', body: 'Tiendas que reciben pedidos por Instagram o WhatsApp y despachan cada día.' },
 ];
-
-const comparativa = [
-	{
-		icon: 'users-three',
-		title: 'Usuarios ilimitados',
-		body: 'Fresha cobra por cada persona del equipo. Nosotros no. Con cinco especialistas, su cuenta ya te cuesta más que la nuestra.',
-	},
-	{
-		icon: 'storefront',
-		title: 'No es solo la agenda',
-		body: 'Punto de venta, clientas y reportes van incluidos. No pagas aparte un software para cobrar.',
-	},
-	{
-		icon: 'chat',
-		title: 'Los mensajes no se pagan aparte',
-		body: 'En otras plataformas cada recordatorio se cobra por mensaje. Aquí el chat de WhatsApp y los recordatorios van incluidos, y las campañas van dentro del plan.',
-	},
-	{
-		icon: 'check',
-		title: 'Cero comisión por clienta nueva',
-		body: 'Fresha se queda con un porcentaje de las clientas que llegan por su marketplace. Aquí tu clientela es tuya, completa.',
-	},
-	{
-		icon: 'device-mobile',
-		title: 'Te contesta el fundador',
-		body: 'No hay mesa de ayuda ni tiquetes. Escribes por WhatsApp y te contesto yo, y lo que pidas entra al desarrollo.',
-	},
-];
-
-const tablaEquipo = [
-	{ personas: '1 persona', vyva: PRECIO, fresha: '$24.000' },
-	{ personas: '3 personas', vyva: PRECIO, fresha: '$56.400' },
-	{ personas: '5 personas', vyva: PRECIO, fresha: '$88.800' },
-	{ personas: '7 personas', vyva: PRECIO, fresha: '$121.200' },
-];
-
 ---
 
 <Landing
 	title="Precio | Vyva"
-	description="Un solo plan de Vyva, con precio visible: agenda online, chat de WhatsApp, campañas, clientas, punto de venta y reportes para estéticas, spas, clínicas estéticas y barberías."
+	description="Un solo plan de Vyva, con precio visible y todo incluido: el WhatsApp del negocio, citas, pedidos, cobro, clientes y las cuentas del día."
 >
-	<Nav client:load />
+	<Nav checkout={CHECKOUT} client:load />
 
 	<main>
 		<!-- ============ HERO CON PRECIO ============ -->
@@ -165,7 +222,7 @@ const tablaEquipo = [
 					Un solo precio, y está aquí
 				</h1>
 				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
-					Sin cotización, sin "depende de tu negocio", sin llamada para saber
+					Sin cotización, sin «depende de tu negocio», sin llamada para saber
 					cuánto cuesta.
 				</p>
 			</div>
@@ -175,7 +232,7 @@ const tablaEquipo = [
 				class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
 			>
 				<div class="bg-brand-600 px-6 py-3 text-center">
-					<p class="text-sm font-bold uppercase tracking-[0.14em] text-white">
+					<p class="text-sm font-bold tracking-[0.14em] text-white uppercase">
 						Plan fundador · precio congelado
 					</p>
 				</div>
@@ -201,14 +258,8 @@ const tablaEquipo = [
 						data-signup-plan={CHECKOUT}
 						class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
 					>
-						Tomar el plan fundador
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
-					</a>
-					<a
-						href={CALL}
-						class="mt-3 inline-block text-sm font-semibold text-slate-500 underline underline-offset-4 hover:text-slate-700"
-					>
-						o agenda una demo
 					</a>
 
 					<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
@@ -219,67 +270,18 @@ const tablaEquipo = [
 			</div>
 		</section>
 
-
-		<!-- ============ POR QUÉ NO SOMOS LOS MÁS BARATOS ============ -->
-		<section class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-			<div class="max-w-2xl">
-				<h2 data-reveal class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-					No somos los más baratos del mercado, y hay razones
-				</h2>
-				<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
-					Hay software de agenda más barato que este. Antes de compararlo por la
-					mensualidad sola, mira lo que estás comparando.
+		<!-- ============ ASÍ SE VE ============ -->
+		<section class="border-t border-slate-100 py-16 sm:py-20">
+			<div class="mx-auto max-w-7xl px-5 sm:px-8">
+				<h2 data-reveal class="section-heading text-center">Así se ve por dentro</h2>
+				<p data-reveal class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+					Las mismas pantallas que vas a usar el día que entres.
 				</p>
-			</div>
-
-			<div class="mt-12 grid gap-6 sm:grid-cols-2">
-				{
-					comparativa.map((c) => (
-						<article
-							data-reveal
-							class="rounded-2xl border border-slate-200 bg-white p-6 transition-colors duration-300 hover:border-brand-300"
-						>
-							<span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700">
-								<Icon name={c.icon as any} size={24} />
-							</span>
-							<h3 class="mt-5 text-lg font-bold text-ink">{c.title}</h3>
-							<p class="mt-2 text-sm leading-relaxed text-slate-600">{c.body}</p>
-						</article>
-					))
-				}
-			</div>
-
-			<div data-reveal class="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-				<div class="border-b border-slate-200 bg-slate-50 px-6 py-4">
-					<p class="font-bold text-ink">Lo que pagas al mes según el tamaño de tu equipo</p>
+				<div class="mt-12 grid gap-8 lg:grid-cols-3">
+					<div data-reveal><MockAgenda pie="Las citas del día, por persona." /></div>
+					<div data-reveal><MockCobro pie="El cobro, con servicios y productos juntos." /></div>
+					<div data-reveal><MockPanel pie="Cómo va el mes, ya sumado." /></div>
 				</div>
-				<div class="overflow-x-auto">
-					<table class="w-full min-w-[420px] text-sm">
-						<thead>
-							<tr class="border-b border-slate-200 text-left text-slate-500">
-								<th class="px-6 py-3 font-semibold">Tu equipo</th>
-								<th class="px-6 py-3 font-semibold text-brand-700">Vyva</th>
-								<th class="px-6 py-3 font-semibold">Cobro por persona</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								tablaEquipo.map((f) => (
-									<tr class="border-b border-slate-100 last:border-0">
-										<td class="px-6 py-3.5 font-medium text-slate-700">{f.personas}</td>
-										<td class="px-6 py-3.5 font-bold text-brand-700">{f.vyva}</td>
-										<td class="px-6 py-3.5 text-slate-600">{f.fresha}</td>
-									</tr>
-								))
-							}
-						</tbody>
-					</table>
-				</div>
-				<p class="px-6 py-4 text-xs leading-relaxed text-slate-400">
-					Cálculo con tarifas públicas de la competencia a agosto de 2026, sin
-					contar comisiones por transacción ni por clienta nueva. Verifica los
-					valores antes de tomar una decisión.
-				</p>
 			</div>
 		</section>
 
@@ -288,7 +290,7 @@ const tablaEquipo = [
 				<section class="border-t border-slate-100 bg-slate-50/50 py-16 sm:py-20">
 					<div class="mx-auto max-w-7xl px-5 sm:px-8">
 						<h2 data-reveal class="section-heading">{section.title}</h2>
-						<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+						<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 							{section.items.map((item) => (
 								<div data-reveal>
 									<FeatureCard icon={item.icon} title={item.title} body={item.body} />
@@ -302,9 +304,10 @@ const tablaEquipo = [
 
 		<section class="py-16 sm:py-20">
 			<div class="mx-auto max-w-7xl px-5 sm:px-8">
-				<h2 data-reveal class="section-heading text-center">Diseñado para tu tipo de negocio</h2>
+				<h2 data-reveal class="section-heading text-center">Para qué negocios funciona</h2>
 				<p data-reveal class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-					Vyva se adapta a salones, estéticas, spas, barberías y centros de bienestar.
+					Negocios que atienden a mucha gente con un equipo pequeño, reciban
+					citas o reciban pedidos.
 				</p>
 				<div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 					{
@@ -336,26 +339,20 @@ const tablaEquipo = [
 				class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12"
 			>
 				<h2 data-reveal class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white">
-					Quedan cupos del plan fundador
+					Lo activas hoy y empiezas a usarlo
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Lo activas hoy con tu tarjeta y empiezas a usarlo de una. Si prefieres
-					verlo antes, son quince minutos sin discurso de ventas.
+					Te suscribes con tu tarjeta, entras de una y la configuración inicial
+					se hace contigo.
 				</p>
-				<div data-reveal class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+				<div data-reveal class="mt-8 flex justify-center">
 					<a
 						href={CHECKOUT}
 						data-signup-plan={CHECKOUT}
 						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-white px-7 py-3.5 font-semibold text-brand-700"
 					>
-						Tomar el plan fundador
+						Empieza ahora
 						<Icon name="arrow-right" size={18} />
-					</a>
-					<a
-						href={CALL}
-						class="btn-press inline-flex items-center justify-center rounded-xl border border-white/40 px-7 py-3.5 font-semibold text-white hover:bg-white/10"
-					>
-						Agenda una demo
 					</a>
 				</div>
 				<p data-reveal class="mt-6 text-sm text-brand-200">
