@@ -10,7 +10,7 @@ import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
 import MockWhatsapp from '../components/mock/Whatsapp.astro';
 import MockAgenda from '../components/mock/Agenda.astro';
-import MockPedidos from '../components/mock/Pedidos.astro';
+import MockVentas from '../components/mock/Ventas.astro';
 import MockCobro from '../components/mock/Cobro.astro';
 import MockClientes from '../components/mock/Clientes.astro';
 
@@ -31,16 +31,16 @@ const dia = [
 		componente: 'agenda',
 	},
 	{
-		hora: 'Durante el día',
-		title: 'Los pedidos dejan de vivir en la conversación',
-		body: 'Lo que te encargan queda en una fila con su estado. Se sabe qué falta y qué ya salió sin volver a leer el chat.',
-		componente: 'pedidos',
+		hora: 'Al cobrar',
+		title: 'Cobras sin cambiar de aplicación',
+		body: 'Servicios y productos en la misma venta, con el medio de pago de cada quien. La venta queda en la historia del cliente.',
+		componente: 'cobro',
 	},
 	{
 		hora: 'Al cerrar',
-		title: 'Cobras y las cuentas quedan hechas',
-		body: 'Servicios y productos en la misma venta, con el medio de pago de cada quien. Al final del día ves lo que entró, sin cuadrar de memoria.',
-		componente: 'cobro',
+		title: 'El día cuadra solo, venta por venta',
+		body: 'Cada cobro queda en el listado con quién atendió, qué se vendió y si quedó pagado o abonado. Los gastos van en la misma lista, así que el total del día sale sin sacar cuentas.',
+		componente: 'ventas',
 	},
 	{
 		hora: 'Semanas después',
@@ -53,7 +53,7 @@ const dia = [
 const incluye = [
 	'El WhatsApp del negocio, con la historia de cada cliente al lado',
 	'Citas, enlace de reservas y avisos automáticos, sin cobro por aviso enviado',
-	'Pedidos, cobro y cierre del día',
+	'Cobro, ventas y cierre del día',
 	'Todo tu equipo, sin cobro por persona',
 	'Configuración inicial hecha contigo, sin costo aparte',
 ];
@@ -74,7 +74,7 @@ const paraQuienNo = [
 
 <Landing
 	title="Empieza hoy con Vyva | Todo tu negocio en un solo lugar"
-	description="Vyva reúne el WhatsApp del negocio, las citas, los pedidos, el cobro y las cuentas del día. Te suscribes con tu tarjeta y la configuración inicial se hace contigo."
+	description="Vyva reúne el WhatsApp del negocio, las citas, el cobro, las ventas y las cuentas del día. Te suscribes con tu tarjeta y la configuración inicial se hace contigo."
 >
 	<main>
 		<!-- ============ HERO ============ -->
@@ -111,7 +111,7 @@ const paraQuienNo = [
 					<p data-reveal class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
 						Responder, agendar, anotar el pedido, cobrar y acordarse de todo al
 						tiempo. Vyva lo sostiene en un solo lugar: lo que te escriben, las
-						citas, los pedidos, el cobro y las cuentas del día.
+						citas, el cobro, las ventas y las cuentas del día.
 					</p>
 
 					<div data-reveal class="mt-8">
@@ -181,7 +181,7 @@ const paraQuienNo = [
 								<div>
 									{momento.componente === 'whatsapp' && <MockWhatsapp />}
 									{momento.componente === 'agenda' && <MockAgenda />}
-									{momento.componente === 'pedidos' && <MockPedidos />}
+									{momento.componente === 'ventas' && <MockVentas />}
 									{momento.componente === 'cobro' && <MockCobro />}
 									{momento.componente === 'clientes' && <MockClientes />}
 								</div>

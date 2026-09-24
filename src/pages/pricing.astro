@@ -35,7 +35,7 @@ const incluido = [
 	'El WhatsApp del negocio, con la historia de cada cliente al lado',
 	'Chat, avisos de cita y campañas sin que te cobremos por mensaje',
 	'Todo tu equipo, sin cobro por persona',
-	'Clientes, citas y pedidos sin tope',
+	'Clientes, citas y ventas sin tope',
 	'Configuración inicial hecha contigo',
 	'Precio congelado mientras seas cliente',
 	'Sin contrato ni permanencia: cancelas cuando quieras',
@@ -93,27 +93,27 @@ const featureSections = [
 		],
 	},
 	{
-		title: 'Los pedidos',
+		title: 'Las ventas del día',
 		items: [
 			{
 				icon: 'list',
-				title: 'La fila del día',
-				body: 'Nuevo, en preparación, listo. Se ve qué falta sin releer el chat.',
+				title: 'Una lista, no un cuaderno',
+				body: 'Cada venta con su cliente, quién atendió y qué se vendió.',
 			},
 			{
-				icon: 'device-mobile',
-				title: 'Desde el celular',
-				body: 'Quien despacha va moviendo el pedido desde donde esté.',
+				icon: 'check',
+				title: 'Pagado o abonado',
+				body: 'El estado de cada cobro se ve de un vistazo, con su fecha.',
 			},
 			{
 				icon: 'storefront',
 				title: 'Tu catálogo',
-				body: 'Productos y servicios con sus precios, listos para armar el pedido.',
+				body: 'Productos y servicios con sus precios, listos para cobrar.',
 			},
 			{
-				icon: 'check',
-				title: 'Queda en la historia',
-				body: 'Cada pedido se suma al cliente y a las cuentas del día.',
+				icon: 'chart-line',
+				title: 'Los gastos también',
+				body: 'Lo que sale del negocio entra en la misma lista que lo que entra.',
 			},
 		],
 	},
@@ -136,9 +136,9 @@ const featureSections = [
 				body: 'Lo que entró, por medio de pago, sin cuadrar de memoria.',
 			},
 			{
-				icon: 'chart-line',
-				title: 'Gastos también',
-				body: 'Lo que sale del negocio queda registrado junto a lo que entra.',
+				icon: 'clock',
+				title: 'Queda en su historia',
+				body: 'La venta se suma al cliente que la recibió, con lo que compró.',
 			},
 		],
 	},
@@ -206,7 +206,7 @@ const useCases = [
 
 <Landing
 	title="Precio | Vyva"
-	description="Un solo plan de Vyva, con precio visible y todo incluido: el WhatsApp del negocio, citas, pedidos, cobro, clientes y las cuentas del día."
+	description="Un solo plan de Vyva, con precio visible y todo incluido: el WhatsApp del negocio, citas, cobro, ventas, clientes y las cuentas del día."
 >
 	<Nav checkout={CHECKOUT} client:load />
 

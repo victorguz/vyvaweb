@@ -9,7 +9,7 @@ import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
 import MockWhatsapp from '../components/mock/Whatsapp.astro';
 import MockAgenda from '../components/mock/Agenda.astro';
-import MockPedidos from '../components/mock/Pedidos.astro';
+import MockVentas from '../components/mock/Ventas.astro';
 import MockRecordatorio from '../components/mock/Recordatorio.astro';
 import MockCobro from '../components/mock/Cobro.astro';
 import MockClientes from '../components/mock/Clientes.astro';
@@ -36,7 +36,7 @@ const antes = [
 
 const despues = [
 	'Cada persona que escribe queda registrada, con su historia',
-	'Citas y pedidos en un solo lugar, desde cualquier celular',
+	'Citas y ventas en un solo lugar, desde cualquier celular',
 	'Los avisos de cita salen solos, sin pagar por aviso enviado',
 	'Tu equipo ve lo que le toca, y tú ves todo',
 	'Lo que entró hoy, en una pantalla',
@@ -58,13 +58,6 @@ const pasos = [
 		componente: 'agenda',
 	},
 	{
-		id: 'pedidos',
-		etiqueta: 'Piden',
-		title: 'Los pedidos dejan de vivir en la conversación',
-		body: 'Lo que te encargan queda en una fila con su estado: nuevo, en preparación, listo. Se sabe qué falta y qué ya salió sin volver a leer el chat.',
-		componente: 'pedidos',
-	},
-	{
 		id: 'avisos',
 		etiqueta: 'Recuerdan',
 		title: 'Nadie olvida a qué hora era',
@@ -77,6 +70,13 @@ const pasos = [
 		title: 'Cobras sin cambiar de aplicación',
 		body: 'Servicios y productos en la misma venta, con el medio de pago que use cada quien. La venta queda en la historia del cliente y en las cuentas del día.',
 		componente: 'cobro',
+	},
+	{
+		id: 'ventas',
+		etiqueta: 'Cuadran',
+		title: 'El día cuadra solo, venta por venta',
+		body: 'Cada cobro queda en el listado con quién atendió, qué se vendió y si quedó pagado o abonado. Los gastos van en la misma lista, así que el total del día sale sin sacar cuentas.',
+		componente: 'ventas',
 	},
 	{
 		id: 'vuelven',
@@ -146,7 +146,7 @@ const paraQuienNo = [
 
 <Landing
 	title="Vyva | La aplicación para negocios que atienden a mucha gente"
-	description="Vyva reúne en un solo lugar lo que te escriben, las citas, los pedidos, el cobro y las cuentas del día. Para negocios que atienden a mucha gente con poco equipo."
+	description="Vyva reúne en un solo lugar lo que te escriben, las citas, el cobro, las ventas y las cuentas del día. Para negocios que atienden a mucha gente con poco equipo."
 >
 	<Nav checkout={CHECKOUT} client:load />
 
@@ -325,7 +325,7 @@ const paraQuienNo = [
 								<div>
 									{paso.componente === 'whatsapp' && <MockWhatsapp />}
 									{paso.componente === 'agenda' && <MockAgenda />}
-									{paso.componente === 'pedidos' && <MockPedidos />}
+									{paso.componente === 'ventas' && <MockVentas />}
 									{paso.componente === 'recordatorio' && <MockRecordatorio />}
 									{paso.componente === 'cobro' && <MockCobro />}
 									{paso.componente === 'clientes' && <MockClientes />}
@@ -346,7 +346,7 @@ const paraQuienNo = [
 					</h2>
 					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">
 						Cuánto entró, cuántas personas atendiste, cuántas volvieron y cómo va
-						cada quien. Son las mismas citas, pedidos y ventas del día, ya
+						cada quien. Son las mismas citas y ventas del día, ya
 						sumadas.
 					</p>
 					<p data-reveal class="mt-4 text-lg leading-relaxed text-slate-600">

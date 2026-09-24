@@ -1,0 +1,92 @@
+---
+/**
+ * El listado de ventas del día, como lo pinta la app: cliente, quién atendió y
+ * qué se vendió, con la fecha y el estado del pago como etiquetas, y el monto
+ * al final de la fila. Los gastos van en la misma lista.
+ */
+import Marco from './Marco.astro';
+
+interface Props {
+  pie?: string;
+  clase?: string;
+}
+const { pie, clase } = Astro.props;
+
+const ventas = [
+  {
+    quien: 'Camila Rojas',
+    detalle: 'Daniela · Limpieza facial + Sérum',
+    etiquetas: [{ t: 'Hoy 3:40 p. m.', tono: 'neutro' }, { t: 'Pagado', tono: 'ok' }],
+    monto: '$188.000',
+  },
+  {
+    quien: 'Andrés Peña',
+    detalle: 'Sofía · Control',
+    etiquetas: [{ t: 'Hoy 1:10 p. m.', tono: 'neutro' }, { t: 'Abonado', tono: 'aviso' }],
+    monto: '$90.000',
+  },
+  {
+    quien: 'Laura Gómez',
+    detalle: 'Leivys · Limpieza facial',
+    etiquetas: [{ t: 'Hoy 11:20 a. m.', tono: 'neutro' }, { t: 'Pagado', tono: 'ok' }],
+    monto: '$120.000',
+  },
+  {
+    quien: 'Insumos de la semana',
+    detalle: 'Compra a proveedor',
+    etiquetas: [{ t: 'Hoy 9:00 a. m.', tono: 'neutro' }, { t: 'Gasto', tono: 'gasto' }],
+    monto: '$240.000',
+  },
+];
+
+const tonos: Record<string, string> = {
+  neutro: 'bg-slate-100 text-slate-500',
+  ok: 'bg-[#61b197]/15 text-[#2f7c65]',
+  aviso: 'bg-[#ffc107]/20 text-[#8a6100]',
+  gasto: 'bg-[#ff3f3f]/10 text-[#c33]',
+};
+---
+
+<Marco titulo="Ventas" contexto="Hoy" pie={pie} clase={clase}>
+  <div class="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm">
+    <div class="flex items-center gap-2 rounded-xl bg-[#f3f4f7] px-3 py-2">
+      <svg
+        class="h-3.5 w-3.5 shrink-0 text-slate-400"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <span class="text-[0.72rem] text-slate-400">Buscar por cliente, producto o monto</span>
+    </div>
+
+    {
+      ventas.map((venta) => (
+        <div class="flex items-center gap-3 border-t border-slate-50 py-2.5 first:border-t-0">
+          <div class="min-w-0 flex-1">
+            <p class="truncate text-[0.82rem] font-semibold text-ink">{venta.quien}</p>
+            <p class="truncate text-[0.7rem] text-slate-500">{venta.detalle}</p>
+            <div class="mt-1 flex flex-wrap gap-1">
+              {venta.etiquetas.map((e) => (
+                <span class={`rounded-full px-2 py-0.5 text-[0.6rem] font-semibold ${tonos[e.tono]}`}>
+                  {e.t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <span class="shrink-0 text-[0.85rem] font-bold text-ink">{venta.monto}</span>
+        </div>
+      ))
+    }
+
+    <div class="mt-2 flex items-center justify-between rounded-xl bg-[#f3f4f7] px-3 py-2.5">
+      <span class="text-[0.72rem] font-medium text-slate-600">Vendido hoy</span>
+      <span class="text-[0.95rem] font-bold text-ink">$398.000</span>
+    </div>
+  </div>
+</Marco>
