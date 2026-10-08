@@ -80,13 +80,28 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Qué entra en el precio?',
-		a: 'Todo: el WhatsApp del negocio, las citas y sus avisos, los pedidos, el cobro, la historia de cada cliente y los reportes. No se cobra por persona del equipo, ni comisión por los clientes que atiendes, ni módulos aparte.',
+		a: 'En el plan de pago, todo: el WhatsApp del negocio, las citas y sus avisos, los pedidos, el cobro, la historia de cada cliente, los reportes y el asistente de IA. No se cobra por persona del equipo, ni comisión por los clientes que atiendes, ni módulos aparte.',
 		temas: ['precio'],
 	},
 	{
 		q: '¿Los mensajes de WhatsApp se cobran aparte?',
-		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los avisos de cita, ni las campañas. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientes cuesta unos trece dólares. Por ahora no ponemos ningún tope de envío; el día que exista uno, lo verás antes de mandar la difusión.',
+		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los avisos de cita, ni las campañas. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientes cuesta unos trece dólares. En el plan de pago no hay tope de envío. En el plan gratis sí hay un tope mensual de avisos, plantillas y campañas, y la pantalla te dice cuántos te quedan antes de enviar una plantilla o una campaña.',
 		temas: ['whatsapp', 'precio'],
+	},
+	{
+		q: '¿Qué incluye el plan gratis y qué lo limita?',
+		a: 'Agenda, clientes, ventas, reportes y el chat de WhatsApp del negocio, con todo tu equipo. Lo que se limita cada mes: hasta 200 avisos de Vyva (citas, recordatorios y ventas), hasta 1.000 plantillas por el WhatsApp de tu negocio y hasta 5 campañas. El texto que escribes en el chat no tiene tope. El asistente de IA no viene en el plan gratis.',
+		temas: ['precio', 'empezar'],
+	},
+	{
+		q: '¿Cómo sé cuántos envíos me quedan?',
+		a: 'Antes de enviar una plantilla o una campaña, Vyva te dice cuántos te quedan en el mes. Si una campaña tiene más contactos de los que te quedan, no se envía a medias: te avisamos antes y puedes reducir la lista o pasar al plan completo.',
+		temas: ['precio', 'whatsapp'],
+	},
+	{
+		q: '¿Qué pasa si llego al tope del plan gratis?',
+		a: 'Dejas de poder enviar más avisos, plantillas o campañas hasta el mes siguiente, o hasta que pases al plan completo. Tus clientes, tu agenda, tus ventas y el texto del chat siguen funcionando igual.',
+		temas: ['precio'],
 	},
 	{
 		q: '¿Funciona con el WhatsApp de mi negocio?',

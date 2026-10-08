@@ -7,6 +7,7 @@ import FeatureCard from '../components/marketing/FeatureCard.astro';
 import Callout from '../components/marketing/Callout.astro';
 import SelectorPrecio from '../components/marketing/SelectorPrecio.svelte';
 import { getPrecio } from '../lib/precio';
+import { ENTRADA_GRATIS, incluidoDePago, incluidoGratis, soloEnPlanDePago } from '../lib/planes';
 import Faq from '../components/Faq.astro';
 import { faqsPorTema } from '../lib/faqs';
 import MockAgenda from '../components/mock/Agenda.astro';
@@ -29,17 +30,6 @@ const PRECIO_PLAN = await getPrecio();
  * cuando se elige anual.
  */
 const CHECKOUT = `https://app.vyvapos.com/auth/login?intent=pay-plan&plan=${PRECIO_PLAN.id}`;
-
-const incluido = [
-	'Todas las funciones, sin módulos que se pagan aparte',
-	'El WhatsApp del negocio, con la historia de cada cliente al lado',
-	'Chat, avisos de cita y campañas sin que te cobremos por mensaje',
-	'Todo tu equipo, sin cobro por persona',
-	'Clientes, citas y ventas sin tope',
-	'Configuración inicial hecha contigo',
-	'Precio congelado mientras seas cliente',
-	'Sin contrato ni permanencia: cancelas cuando quieras',
-];
 
 const featureSections = [
 	{
@@ -206,7 +196,7 @@ const useCases = [
 
 <Landing
 	title="Precio | Vyva"
-	description="Un solo plan de Vyva, con precio visible y todo incluido: el WhatsApp del negocio, citas, cobro, ventas, clientes y las cuentas del día."
+	description="Empieza gratis con Vyva o pasa al plan completo, con la IA y sin tope de plantillas ni campañas. Precio visible: el WhatsApp del negocio, citas, cobro, ventas, clientes y las cuentas del día."
 >
 	<Nav checkout={CHECKOUT} client:load />
 
@@ -219,53 +209,107 @@ const useCases = [
 			</div>
 			<div class="mx-auto max-w-3xl px-5 text-center sm:px-8">
 				<h1 data-reveal class="text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-					Un solo precio, y está aquí
+					Empieza gratis. Paga cuando lo necesites
 				</h1>
 				<p data-reveal class="mt-5 text-lg leading-relaxed text-slate-600">
-					Sin cotización, sin «depende de tu negocio», sin llamada para saber
-					cuánto cuesta.
+					Los dos precios están aquí: sin cotización, sin «depende de tu
+					negocio», sin llamada para saber cuánto cuesta.
 				</p>
 			</div>
 
-			<div
-				data-reveal
-				class="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
-			>
-				<div class="bg-brand-600 px-6 py-3 text-center">
-					<p class="text-sm font-bold tracking-[0.14em] text-white uppercase">
-						Plan fundador · precio congelado
-					</p>
+			<div class="mx-auto mt-12 grid max-w-5xl gap-6 px-5 sm:px-8 md:grid-cols-2">
+				<!-- ---------- Gratis ---------- -->
+				<div
+					data-reveal
+					class="flex flex-col overflow-hidden rounded-3xl border-2 border-slate-200 bg-white shadow-lg shadow-slate-900/5"
+				>
+					<div class="bg-slate-100 px-6 py-3 text-center">
+						<p class="text-sm font-bold tracking-[0.14em] text-slate-700 uppercase">Gratis</p>
+					</div>
+
+					<div class="flex flex-1 flex-col px-8 py-10 text-center">
+						<p class="text-5xl font-extrabold tracking-tight text-ink">
+							$0
+							<span class="text-lg font-medium text-slate-500">/mes</span>
+						</p>
+						<p class="mt-2 text-sm text-slate-500">Para empezar a ordenar el negocio</p>
+
+						<ul class="mt-8 space-y-3 text-left">
+							{
+								incluidoGratis.map((f) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-slate-500 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm font-medium text-slate-700">{f}</span>
+									</li>
+								))
+							}
+						</ul>
+
+						<p class="mt-6 rounded-xl bg-slate-50 px-4 py-3 text-left text-sm text-slate-600">
+							<strong class="font-semibold text-slate-700">Solo en el plan de pago:</strong>
+							{soloEnPlanDePago.map((f) => f.charAt(0).toLowerCase() + f.slice(1)).join(' y ')}.
+						</p>
+
+						<a
+							href={ENTRADA_GRATIS}
+							class="btn-press mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-brand-600 px-6 py-3.5 text-base font-semibold text-brand-700"
+							style="margin-top: 2.25rem"
+						>
+							Crear cuenta gratis
+							<Icon name="arrow-right" size={18} />
+						</a>
+
+						<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+							<Icon name="lock-key" size={14} />
+							Sin tarjeta. Pasas al plan completo cuando quieras
+						</p>
+					</div>
 				</div>
 
-				<div class="px-8 py-10 text-center">
-					<SelectorPrecio precio={PRECIO_PLAN} client:load />
+				<!-- ---------- Plan fundador ---------- -->
+				<div
+					data-reveal
+					class="flex flex-col overflow-hidden rounded-3xl border-2 border-brand-300 bg-white shadow-xl shadow-brand-600/10"
+				>
+					<div class="bg-brand-600 px-6 py-3 text-center">
+						<p class="text-sm font-bold tracking-[0.14em] text-white uppercase">
+							Plan fundador · precio congelado
+						</p>
+					</div>
 
-					<ul class="mt-8 space-y-3 text-left">
-						{
-							incluido.map((f) => (
-								<li class="flex gap-3">
-									<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
-										<Icon name="check" size={12} />
-									</span>
-									<span class="text-sm font-medium text-slate-700">{f}</span>
-								</li>
-							))
-						}
-					</ul>
+					<div class="flex flex-1 flex-col px-8 py-10 text-center">
+						<SelectorPrecio precio={PRECIO_PLAN} client:load />
 
-					<a
-						href={CHECKOUT}
-						data-signup-plan={CHECKOUT}
-						class="btn-press mt-9 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
-					>
-						Empieza ahora
-						<Icon name="arrow-right" size={18} />
-					</a>
+						<ul class="mt-8 space-y-3 text-left">
+							{
+								incluidoDePago.map((f) => (
+									<li class="flex gap-3">
+										<span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+											<Icon name="check" size={12} />
+										</span>
+										<span class="text-sm font-medium text-slate-700">{f}</span>
+									</li>
+								))
+							}
+						</ul>
 
-					<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
-						<Icon name="lock-key" size={14} />
-						Pago con tarjeta débito o crédito Visa o Mastercard
-					</p>
+						<a
+							href={CHECKOUT}
+							data-signup-plan={CHECKOUT}
+							class="btn-press mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25"
+							style="margin-top: 2.25rem"
+						>
+							Empieza ahora
+							<Icon name="arrow-right" size={18} />
+						</a>
+
+						<p class="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
+							<Icon name="lock-key" size={14} />
+							Pago con tarjeta débito o crédito Visa o Mastercard
+						</p>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -327,8 +371,9 @@ const useCases = [
 
 				<div data-reveal class="mt-8">
 					<Callout variant="note" title="Sin costos ocultos">
-						El precio incluye todas las funcionalidades de la plataforma. Sin tarifas de
-						configuración ni de cancelación.
+						El plan de pago incluye todas las funcionalidades de la plataforma. Sin
+						tarifas de configuración ni de cancelación, y sin cobro por mensaje: lo
+						único que se paga aparte es la tarifa de Meta por los mensajes de marketing.
 					</Callout>
 				</div>
 			</div>
@@ -339,13 +384,19 @@ const useCases = [
 				class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-6 py-16 text-center sm:px-12"
 			>
 				<h2 data-reveal class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white">
-					Lo activas hoy y empiezas a usarlo
+					Empieza hoy, sin pagar, y crece cuando lo necesites
 				</h2>
 				<p data-reveal class="mx-auto mt-4 max-w-xl text-lg text-brand-100">
-					Te suscribes con tu tarjeta, entras de una y la configuración inicial
-					se hace contigo.
+					Entras gratis y pasas al plan completo con tu tarjeta cuando lo
+					necesites, con la configuración inicial hecha contigo.
 				</p>
-				<div data-reveal class="mt-8 flex justify-center">
+				<div data-reveal class="mt-8 flex flex-wrap justify-center gap-3">
+					<a
+						href={ENTRADA_GRATIS}
+						class="btn-press inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white px-7 py-3.5 font-semibold text-white"
+					>
+						Crear cuenta gratis
+					</a>
 					<a
 						href={CHECKOUT}
 						data-signup-plan={CHECKOUT}
@@ -356,7 +407,7 @@ const useCases = [
 					</a>
 				</div>
 				<p data-reveal class="mt-6 text-sm text-brand-200">
-					Precio congelado · Sin permanencia · Configuración incluida
+					Gratis para empezar · Precio congelado en el plan completo · Sin permanencia
 				</p>
 			</div>
 		</section>
