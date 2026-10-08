@@ -196,7 +196,7 @@ const useCases = [
 
 <Landing
 	title="Precio | Vyva"
-	description="Empieza gratis con Vyva o pasa al plan completo, con la IA y sin tope de plantillas ni campañas. Precio visible: el WhatsApp del negocio, citas, cobro, ventas, clientes y las cuentas del día."
+	description="Empieza gratis con Vyva o pasa al plan completo, con la IA y mucho más uso mensual de plantillas y campañas. Precio visible: el WhatsApp del negocio, citas, cobro, ventas, clientes y las cuentas del día."
 >
 	<Nav checkout={CHECKOUT} client:load />
 
@@ -249,7 +249,7 @@ const useCases = [
 
 						<p class="mt-6 rounded-xl bg-slate-50 px-4 py-3 text-left text-sm text-slate-600">
 							<strong class="font-semibold text-slate-700">Solo en el plan de pago:</strong>
-							{soloEnPlanDePago.map((f) => f.charAt(0).toLowerCase() + f.slice(1)).join(' y ')}.
+							{soloEnPlanDePago.map((f) => f.charAt(0).toLowerCase() + f.slice(1)).join(', y ')}.
 						</p>
 
 						<a

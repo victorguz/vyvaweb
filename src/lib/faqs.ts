@@ -85,12 +85,12 @@ export const FAQS: Faq[] = [
 	},
 	{
 		q: '¿Los mensajes de WhatsApp se cobran aparte?',
-		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los avisos de cita, ni las campañas. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientes cuesta unos trece dólares. En el plan de pago no hay tope de envío. En el plan gratis sí hay un tope mensual de avisos, plantillas y campañas, y la pantalla te dice cuántos te quedan antes de enviar una plantilla o una campaña.',
+		a: 'Nosotros no te cobramos por mensaje: ni el chat, ni los avisos de cita, ni las campañas. Lo que sí tiene un costo es la tarifa de Meta por los mensajes de marketing, que pagas directamente a Meta como cualquiera que use WhatsApp Business: en Colombia ronda un centavo de dólar por mensaje, así que escribirle a mil clientes cuesta unos trece dólares. El plan de pago trae mucho más uso mensual que el gratis, y antes de enviar una plantilla o una campaña la pantalla te dice cuántos envíos te quedan.',
 		temas: ['whatsapp', 'precio'],
 	},
 	{
 		q: '¿Qué incluye el plan gratis y qué lo limita?',
-		a: 'Agenda, clientes, ventas, reportes y el chat de WhatsApp del negocio, con todo tu equipo. Lo que se limita cada mes: hasta 200 avisos de Vyva (citas, recordatorios y ventas), hasta 1.000 plantillas por el WhatsApp de tu negocio y hasta 5 campañas. El texto que escribes en el chat no tiene tope. El asistente de IA no viene en el plan gratis.',
+		a: 'Agenda, clientes, ventas, reportes y el chat de WhatsApp del negocio, con todo tu equipo. Trae un uso mensual incluido de avisos de Vyva (citas, recordatorios y ventas), de plantillas por el WhatsApp de tu negocio y de campañas. El texto que escribes en el chat no tiene tope. El asistente de IA no viene en el plan gratis.',
 		temas: ['precio', 'empezar'],
 	},
 	{
@@ -99,8 +99,8 @@ export const FAQS: Faq[] = [
 		temas: ['precio', 'whatsapp'],
 	},
 	{
-		q: '¿Qué pasa si llego al tope del plan gratis?',
-		a: 'Dejas de poder enviar más avisos, plantillas o campañas hasta el mes siguiente, o hasta que pases al plan completo. Tus clientes, tu agenda, tus ventas y el texto del chat siguen funcionando igual.',
+		q: '¿Qué pasa si agoto el uso mensual del plan gratis?',
+		a: 'Dejas de poder enviar más avisos, plantillas o campañas hasta el mes siguiente, o hasta que pases al plan completo, que trae mucho más. Tus clientes, tu agenda, tus ventas y el texto del chat siguen funcionando igual.',
 		temas: ['precio'],
 	},
 	{
