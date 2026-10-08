@@ -115,7 +115,11 @@ function elegirPlan(payload: unknown): Record<string, any> | undefined {
 	if (PLAN_ID) {
 		return lista.find((p) => p?.id === PLAN_ID || p?._id === PLAN_ID);
 	}
-	return lista.find((p) => p?.active !== false) ?? lista[0];
+	// El plan Free (sin cobro) está en el catálogo pero no es el que se vende.
+	const deCobro = lista.filter(
+		(p) => p?.code !== 'free' && Number(p?.price ?? 1) > 0
+	);
+	return deCobro.find((p) => p?.active !== false) ?? deCobro[0];
 }
 
 /** Importe de un ciclo, aceptando tanto `prices.month.amount` como el plano. */
