@@ -7,6 +7,9 @@ import awsAmplify from 'astro-aws-amplify';
 
 const SITE = 'https://vyvapos.com';
 
+/** `astro build`: el bundle del servidor lleva todas sus dependencias (ver `vite.ssr`). */
+const esBuild = process.argv.includes('build');
+
 // https://astro.build/config
 export default defineConfig({
 	site: SITE,
@@ -32,7 +35,8 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 		// El servidor de Amplify no recibe node_modules (pnpm usa enlaces que no
-		// viajan en el paquete): todas las dependencias van dentro del bundle.
-		ssr: { noExternal: true },
+		// viajan en el paquete): al construir, todas las dependencias van dentro
+		// del bundle. En `astro dev` no, porque rompe los paquetes CommonJS.
+		ssr: esBuild ? { noExternal: true } : {},
 	},
 });

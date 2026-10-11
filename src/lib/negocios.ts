@@ -14,8 +14,15 @@
  * (`stale-if-error`). Nunca se publica un directorio vacío ni un "no existe"
  * por una falla pasajera.
  *
+ * Quién sale: todo negocio activo de estética o salud con el perfil completo,
+ * la ficha y la agenda en línea encendidas y servicios para agendar (ver
+ * `faltantes`). Nadie lo habilita a mano; Vyva solo puede ocultar alguno con
+ * el dominio `businessDirectory` (`disabledIds`). La app lee la misma lista
+ * en /negocios.json, así que web y app muestran siempre lo mismo.
+ *
  * Fuentes, todas públicas y sin sesión (las mismas que usa la app):
- *   - Directorio: dominio `businessDirectory` del negocio de Vyva → enabledIds.
+ *   - Candidatos: /businesses/public/all (negocios activos, resumidos).
+ *   - Ocultos: dominio `businessDirectory` del negocio de Vyva → disabledIds.
  *   - Negocio: /businesses/public/:id y /businesses/public/slug/:slug.
  *   - Ficha: dominio `businessPublicProfile` del negocio (publicProfile,
  *     onlineBooking, onlineStore). Ausente equivale a los valores por defecto.
@@ -97,6 +104,7 @@ export interface Negocio {
 
 /** Lo que el buscador necesita de cada negocio; va incrustado en la página. */
 export interface NegocioResumen {
+	id: string;
 	slug: string;
 	nombre: string;
 	rubro: string;
@@ -197,16 +205,21 @@ async function dominio<T>(grupo: string, idBusiness: string): Promise<T | null> 
 	return parsearJSON<T>(datos?.[0]?.value);
 }
 
-/** Ids de los negocios activados en el directorio, en su orden. */
-export function idsDelDirectorio(): Promise<string[]> {
-	return recordar('directorio', async () => {
-		const valor = await dominio<{ enabledIds?: unknown[] }>('businessDirectory', VYVA_ID_BUSINESS);
-		const ids = Array.isArray(valor?.enabledIds) ? valor.enabledIds : [];
-		return ids.filter((id): id is string => typeof id === 'string' && id.trim().length > 0);
+/**
+ * Negocios que Vyva ocultó del directorio a mano. El directorio se llena solo
+ * con los negocios que cumplen los requisitos (ver `faltantes`); el dominio
+ * `businessDirectory` del negocio de Vyva solo sirve para sacar alguno:
+ * `{ "disabledIds": [...] }`. El `enabledIds` de antes ya no se usa.
+ */
+export function idsOcultos(): Promise<Set<string>> {
+	return recordar('ocultos', async () => {
+		const valor = await dominio<{ disabledIds?: unknown[] }>('businessDirectory', VYVA_ID_BUSINESS);
+		const ids = Array.isArray(valor?.disabledIds) ? valor.disabledIds : [];
+		return new Set(ids.filter((id): id is string => typeof id === 'string' && id.trim().length > 0));
 	});
 }
 
-interface Ficha {
+export interface Ficha {
 	publicProfile: boolean;
 	onlineBooking: boolean;
 	onlineStore: boolean;
@@ -336,29 +349,69 @@ function whatsapp(valor: unknown): string {
 	return digitos.length === 10 && digitos.startsWith('3') ? `57${digitos}` : digitos;
 }
 
+/**
+ * Rubros que salen en el directorio por ahora: estética y salud. Son los de
+ * `BusinessDedicationArea` de la app (vyva-frontend-core) que ella misma agrupa
+ * como belleza-estética (aesthetics, spa) y salud (HEALTH).
+ */
+const AREAS_DEL_DIRECTORIO = new Set([
+	'aesthetics',
+	'spa',
+	'clinic',
+	'medicalOffice',
+	'physiotherapy',
+	'dentalClinic',
+	'veterinaryClinic',
+]);
+
+/** Valores viejos de `business.area` (texto) → clave actual, como `normalizeBusinessDedicationArea`. */
+const AREAS_LEGADAS: Record<string, string> = {
+	'Clínica': 'clinic',
+	Consultorio: 'medicalOffice',
+	'Estética': 'aesthetics',
+	Spa: 'spa',
+	'Tattoo studio': 'tattooStudio',
+	'Barbería': 'barbershop',
+	'Peluquería': 'hairSalon',
+	'Cejas y pestañas': 'eyebrowsEyelashes',
+	Otros: 'other',
+};
+
+const areaNormalizada = (valor: unknown): string => {
+	const area = String(valor ?? '').trim();
+	return AREAS_LEGADAS[area] ?? area;
+};
+
+/** Cómo se presenta cada rubro en la ficha (mismos nombres que la app, en singular de negocio). */
 const RUBROS: Record<string, string> = {
 	aesthetics: 'Centro de estética',
 	spa: 'Spa',
-	beauty: 'Salón de belleza',
-	barbershop: 'Barbería',
-	nails: 'Uñas',
-	dentistry: 'Odontología',
+	clinic: 'Clínica',
+	medicalOffice: 'Consultorio',
 	physiotherapy: 'Fisioterapia',
-	health: 'Salud',
-	restaurant: 'Restaurante',
+	dentalClinic: 'Clínica dental',
+	veterinaryClinic: 'Veterinaria',
+	eyebrowsEyelashes: 'Cejas y pestañas',
+	hairSalon: 'Peluquería',
+	barbershop: 'Barbería',
+	nailSalon: 'Salón de uñas',
+	gym: 'Gimnasio',
 };
 
 /** Tipo de schema.org según el rubro; Google lo usa para la ficha local. */
 const TIPOS_SCHEMA: Record<string, string> = {
 	aesthetics: 'BeautySalon',
-	beauty: 'BeautySalon',
 	spa: 'DaySpa',
-	barbershop: 'HairSalon',
-	nails: 'NailSalon',
-	dentistry: 'Dentist',
+	clinic: 'MedicalClinic',
+	medicalOffice: 'Physician',
 	physiotherapy: 'Physiotherapy',
-	health: 'MedicalBusiness',
-	restaurant: 'Restaurant',
+	dentalClinic: 'Dentist',
+	veterinaryClinic: 'VeterinaryCare',
+	eyebrowsEyelashes: 'BeautySalon',
+	hairSalon: 'HairSalon',
+	barbershop: 'HairSalon',
+	nailSalon: 'NailSalon',
+	gym: 'ExerciseGym',
 };
 
 export const tipoSchema = (area: string): string => TIPOS_SCHEMA[area] ?? 'LocalBusiness';
@@ -371,8 +424,8 @@ function armar(b: Record<string, any>, f: Ficha, lista: Servicio[]): Negocio {
 		nombre: String(b.name ?? '').trim(),
 		eslogan: String(b.slogan ?? '').trim(),
 		descripcion: String(b.description ?? '').trim(),
-		rubro: RUBROS[String(b.area ?? '')] ?? '',
-		area: String(b.area ?? ''),
+		rubro: RUBROS[areaNormalizada(b.area)] ?? '',
+		area: areaNormalizada(b.area),
 		logo: fotoVisible(b.logo) ? b.logo : '',
 		fotos: fotos.length ? fotos : fotoVisible(b.logo) ? [b.logo] : [],
 		direccion: direccion(b.address),
@@ -389,48 +442,126 @@ function armar(b: Record<string, any>, f: Ficha, lista: Servicio[]): Negocio {
 	};
 }
 
-/**
- * Misma regla que `isPublicProfileComplete` de la app: sin nombre ni imagen
- * la ficha saldría vacía y da peor impresión que no existir.
- */
-function publicable(b: Record<string, any> | null | undefined, f: Ficha): boolean {
-	if (!b || b.isActive === false || !f.publicProfile) return false;
-	if (!String(b.name ?? '').trim() || !String(b.slug ?? '').trim()) return false;
-	return fotoVisible(b.logo) || (b.coverImages ?? []).some(fotoVisible);
+/** Datos del perfil sin los que un negocio no entra al directorio. */
+function faltantesDelPerfil(b: Record<string, any>): string[] {
+	const faltan: string[] = [];
+	if (!String(b.name ?? '').trim()) faltan.push('nombre');
+	if (!String(b.slug ?? '').trim()) faltan.push('dirección web (slug)');
+	if (!String(b.description ?? '').trim()) faltan.push('descripción');
+	if (!fotoVisible(b.logo)) faltan.push('logo');
+	if (!(b.coverImages ?? []).some(fotoVisible)) faltan.push('foto de portada');
+	if (!direccion(b.address)?.texto) faltan.push('dirección');
+	if (!String(b.phone ?? '').trim() && !whatsapp(b.whatsapp)) faltan.push('teléfono o WhatsApp');
+	return faltan;
 }
 
-/** Ficha completa de un negocio del directorio, o null si no se publica. */
+/**
+ * Lo que le falta a un negocio para salir en el directorio; vacío = entra solo.
+ *
+ * Requisitos: activo, de un rubro del directorio (estética o salud), con el
+ * perfil completo (`faltantesDelPerfil`), la ficha pública y la agenda en línea
+ * encendidas en "Mi negocio", y al menos un servicio para agendar. Además no
+ * debe estar en los ocultos de Vyva (`idsOcultos`), que se revisa aparte.
+ */
+export function faltantes(b: Record<string, any>, f: Ficha, lista: Servicio[]): string[] {
+	const faltan: string[] = [];
+	if (b.isActive === false) faltan.push('negocio inactivo');
+	const area = areaNormalizada(b.area);
+	if (!AREAS_DEL_DIRECTORIO.has(area)) faltan.push(`rubro fuera del directorio (${area || 'sin rubro'})`);
+	faltan.push(...faltantesDelPerfil(b));
+	if (!f.publicProfile) faltan.push('ficha pública apagada');
+	if (!f.onlineBooking) faltan.push('agenda en línea apagada');
+	if (!lista.length) faltan.push('servicios para agendar');
+	return faltan;
+}
+
+export interface Evaluacion {
+	id: string;
+	slug: string;
+	nombre: string;
+	oculto: boolean;
+	faltantes: string[];
+	negocio: Negocio | null;
+}
+
+/**
+ * Evalúa un negocio completo contra los requisitos. Lo barato va primero: si
+ * el rubro o el perfil ya lo descartan, no se piden su ficha ni sus servicios.
+ */
+async function evaluar(b: Record<string, any>, ocultos: Set<string>): Promise<Evaluacion> {
+	const base = { id: String(b.id), slug: String(b.slug ?? ''), nombre: String(b.name ?? '').trim(), oculto: ocultos.has(String(b.id)) };
+	const area = areaNormalizada(b.area);
+	const previos = [
+		...(b.isActive === false ? ['negocio inactivo'] : []),
+		...(AREAS_DEL_DIRECTORIO.has(area) ? [] : [`rubro fuera del directorio (${area || 'sin rubro'})`]),
+		...faltantesDelPerfil(b),
+	];
+	if (previos.length) return { ...base, faltantes: previos, negocio: null };
+
+	const [f, lista] = await Promise.all([ficha(base.id), servicios(base.id)]);
+	const faltan = faltantes(b, f, lista);
+	return { ...base, faltantes: faltan, negocio: faltan.length || base.oculto ? null : armar(b, f, lista) };
+}
+
+/** Ficha de un negocio del directorio, o null si no cumple los requisitos o está oculto. */
 export function negocioPorSlug(slug: string): Promise<Negocio | null> {
 	const limpio = slug.trim().toLowerCase();
 	return recordar(`negocio:${limpio}`, async () => {
-		const [ids, b] = await Promise.all([
-			idsDelDirectorio(),
+		const [ocultos, b] = await Promise.all([
+			idsOcultos(),
 			pedirSiExiste<Record<string, any>>(`/businesses/public/slug/${encodeURIComponent(limpio)}`),
 		]);
-		if (!b?.id || !ids.includes(b.id)) return null;
-		const [f, lista] = await Promise.all([ficha(b.id), servicios(b.id)]);
-		return publicable(b, f) ? armar(b, f, lista) : null;
+		if (!b?.id) return null;
+		return (await evaluar(b, ocultos)).negocio;
 	});
 }
 
-/** Todos los negocios publicables del directorio, en el orden del directorio. */
-export function negociosDelDirectorio(): Promise<Negocio[]> {
-	return recordar('negocios', async () => {
-		const ids = await idsDelDirectorio();
-		const negocios = await Promise.all(
-			ids.map(async (id) => {
-				const b = await pedirSiExiste<Record<string, any>>(`/businesses/public/${encodeURIComponent(id)}`);
-				if (!b?.id) return null;
-				const [f, lista] = await Promise.all([ficha(b.id), servicios(b.id)]);
-				return publicable(b, f) ? armar(b, f, lista) : null;
-			})
+/**
+ * Evaluación de todos los negocios activos. La lista resumida del API ya trae
+ * nombre, slug, logo y descripción: los que fallan ahí se descartan sin pedir
+ * más; al resto se le pide el perfil completo.
+ */
+export function evaluarTodos(): Promise<Evaluacion[]> {
+	return recordar('evaluacion', async () => {
+		const [ocultos, resumidos] = await Promise.all([
+			idsOcultos(),
+			pedir<Array<Record<string, any>>>('/businesses/public/all'),
+		]);
+		return Promise.all(
+			(resumidos ?? [])
+				.filter((r) => r?.id)
+				.map(async (r) => {
+					const sinBasicos = [
+						...(!String(r.name ?? '').trim() ? ['nombre'] : []),
+						...(!String(r.slug ?? '').trim() ? ['dirección web (slug)'] : []),
+						...(!String(r.description ?? '').trim() ? ['descripción'] : []),
+						...(!fotoVisible(r.logo) ? ['logo'] : []),
+					];
+					if (sinBasicos.length) {
+						return { id: String(r.id), slug: String(r.slug ?? ''), nombre: String(r.name ?? '').trim(), oculto: ocultos.has(String(r.id)), faltantes: sinBasicos, negocio: null };
+					}
+					const b = await pedirSiExiste<Record<string, any>>(`/businesses/public/${encodeURIComponent(String(r.id))}`);
+					if (!b?.id) {
+						return { id: String(r.id), slug: String(r.slug ?? ''), nombre: String(r.name ?? '').trim(), oculto: false, faltantes: ['no encontrado'], negocio: null };
+					}
+					return evaluar(b, ocultos);
+				})
 		);
-		return negocios.filter((n): n is Negocio => n !== null);
 	});
+}
+
+/** Negocios del directorio: los que cumplen los requisitos y no están ocultos, por nombre. */
+export async function negociosDelDirectorio(): Promise<Negocio[]> {
+	const evaluaciones = await evaluarTodos();
+	return evaluaciones
+		.map((e) => e.negocio)
+		.filter((n): n is Negocio => n !== null)
+		.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
 }
 
 export function resumen(n: Negocio): NegocioResumen {
 	return {
+		id: n.id,
 		slug: n.slug,
 		nombre: n.nombre,
 		rubro: n.rubro,

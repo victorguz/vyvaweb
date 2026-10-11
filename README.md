@@ -62,9 +62,13 @@ adaptador `astro-aws-amplify`). El app de Amplify debe estar en la plataforma
 
 ### Directorio de negocios
 
-`/negocios` (buscador) y `/negocios/<slug>` (ficha) muestran los negocios
-activados en el dominio `businessDirectory` del negocio de Vyva, el mismo que
-usa la búsqueda del cliente en la app. Datos y reglas en `src/lib/negocios.ts`.
+`/negocios` (buscador) y `/negocios/<slug>` (ficha) muestran solos a todo
+negocio activo de estética o salud con el perfil completo (nombre, descripción,
+logo, portada, dirección, teléfono o WhatsApp), la ficha y la agenda en línea
+encendidas y al menos un servicio para agendar. Vyva solo puede ocultar alguno
+con `disabledIds` en el dominio `businessDirectory`. La app lee la misma lista
+en `/negocios.json`. Reglas en `src/lib/negocios.ts`; en `astro dev`,
+`/negocios/diagnostico.json` dice qué le falta a cada negocio.
 Variables opcionales: `VYVA_API_URL`, `VYVA_ID_BUSINESS`, `VYVA_APP_URL`.
 
 ## 👀 Want to learn more?
