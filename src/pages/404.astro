@@ -1,0 +1,23 @@
+---
+import Landing from '../layouts/Landing.astro';
+import Nav from '../components/Nav.svelte';
+import Footer from '../components/Footer.astro';
+import { getCheckout } from '../lib/precio';
+
+Astro.response.status = 404;
+const CHECKOUT = await getCheckout();
+---
+
+<Landing title="Página no encontrada | Vyva" description="Esta página no existe o cambió de dirección.">
+	<Nav checkout={CHECKOUT} client:load />
+	<main class="mx-auto grid max-w-xl justify-items-center gap-4 px-5 py-24 text-center sm:px-8">
+		<p class="text-sm font-semibold uppercase tracking-wide text-brand-700">Error 404</p>
+		<h1 class="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Esta página no existe</h1>
+		<p class="text-slate-600">Puede que haya cambiado de dirección. Desde el inicio llegas a todo lo de Vyva.</p>
+		<div class="flex flex-wrap justify-center gap-3">
+			<a href="/" class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Ir al inicio</a>
+			<a href="/negocios" class="btn-press rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700">Buscar un negocio</a>
+		</div>
+	</main>
+	<Footer />
+</Landing>

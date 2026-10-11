@@ -1,0 +1,32 @@
+---
+import { formatoCOP } from '../../lib/precio';
+import { duracion, type Servicio } from '../../lib/negocios';
+
+interface Props {
+	servicio: Servicio;
+	/** El servicio de entrada (valoración, consulta) va resaltado arriba. */
+	destacado?: boolean;
+}
+
+const { servicio, destacado = false } = Astro.props;
+---
+
+<li
+	class:list={[
+		'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1',
+		destacado ? 'mb-1.5 rounded-2xl bg-brand-50 px-4 py-3.5' : 'border-t border-slate-200 py-3.5',
+	]}
+>
+	<div class="min-w-0">
+		{
+			destacado && (
+				<span class="mb-1 inline-block rounded-full border border-brand-200 bg-white px-2 py-0.5 text-[11px] font-bold tracking-wide text-brand-700 uppercase">
+					Para empezar
+				</span>
+			)
+		}
+		<h3 class="font-semibold text-ink">{servicio.nombre}</h3>
+		<p class="text-sm text-slate-500">{duracion(servicio.minutos)}</p>
+	</div>
+	<span class="text-right font-semibold text-ink tabular-nums">{formatoCOP(servicio.precio)}</span>
+</li>

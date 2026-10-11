@@ -7,19 +7,14 @@ import catalogo from '../../lib/tutoriales.json';
 import { TUTORIALES_TEXTO } from '../../lib/tutoriales-seo';
 import { getCheckout } from '../../lib/precio';
 
-export function getStaticPaths() {
-	return catalogo.tutoriales.map((t, i) => ({
-		params: { slug: t.slug },
-		props: {
-			tutorial: t,
-			grupo: catalogo.grupos.find((g) => g.id === t.grupo),
-			anterior: catalogo.tutoriales[i - 1] ?? null,
-			siguiente: catalogo.tutoriales[i + 1] ?? null,
-		},
-	}));
-}
+// El sitio se arma en el servidor: el tutorial se busca por su dirección en cada visita.
+const indice = catalogo.tutoriales.findIndex((t) => t.slug === Astro.params.slug);
+if (indice === -1) return Astro.rewrite('/404');
 
-const { tutorial, grupo, anterior, siguiente } = Astro.props;
+const tutorial = catalogo.tutoriales[indice];
+const grupo = catalogo.grupos.find((g) => g.id === tutorial.grupo);
+const anterior = catalogo.tutoriales[indice - 1] ?? null;
+const siguiente = catalogo.tutoriales[indice + 1] ?? null;
 
 // El texto de búsqueda vive aparte, en tutoriales-seo.ts. Si un tutorial nuevo
 // todavía no lo tiene, se cae al título y la descripción del catálogo.

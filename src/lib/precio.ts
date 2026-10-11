@@ -141,13 +141,19 @@ export async function getCheckout(): Promise<string> {
 }
 
 let cache: Promise<Precio> | undefined;
+let cacheHasta = 0;
 
 /**
- * Devuelve el precio que debe mostrar la web. Se resuelve una sola vez por
- * build: todas las páginas comparten el mismo resultado.
+ * Cuánto guarda cada servidor el precio leído. Con el sitio en SSR, un cambio
+ * de precio en el plan llega a la web en ese tiempo más la caché de la CDN,
+ * sin volver a publicar.
  */
+const TTL_MS = 10 * 60_000;
+
+/** Devuelve el precio que debe mostrar la web; todas las páginas comparten el resultado. */
 export function getPrecio(): Promise<Precio> {
-	if (cache) return cache;
+	if (cache && Date.now() < cacheHasta) return cache;
+	cacheHasta = Date.now() + TTL_MS;
 
 	cache = (async (): Promise<Precio> => {
 		if (!PLANS_URL) {
@@ -188,6 +194,8 @@ export function getPrecio(): Promise<Precio> {
 				`[precio] No se pudo leer el plan (${(error as Error).message}). ` +
 					`Se usa el respaldo ${formatoCOP(RESPALDO.precio)}.`
 			);
+			// El respaldo no se guarda los 10 minutos: se reintenta en la próxima visita.
+			cacheHasta = 0;
 			return construir(
 				RESPALDO.id,
 				RESPALDO.precio,

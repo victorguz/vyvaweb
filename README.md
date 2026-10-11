@@ -39,10 +39,33 @@ All commands are run from the root of the project, from a terminal:
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run build`           | Build the SSR server to `./.amplify-hosting/`    |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## SSR en Amplify
+
+Todo el sitio se arma en el servidor en cada visita (`output: 'server'` con el
+adaptador `astro-aws-amplify`). El app de Amplify debe estar en la plataforma
+`WEB_COMPUTE` y publicar `.amplify-hosting/` (ver `amplify.yml`).
+
+- **Caché:** `src/middleware.ts` pone el `Cache-Control` de cada página (1 h en
+  la CDN, con `stale-while-revalidate` y `stale-if-error`). El directorio de
+  negocios usa 5 min (`src/lib/negocios.ts`).
+- **Redirecciones:** las de `astro.config.mjs` se escriben en
+  `.amplify-hosting/customRules.json` al construir; Astro también las resuelve
+  en el servidor.
+- **Mapas del sitio:** `sitemap-index.xml`, `sitemap-0.xml` (páginas, blog,
+  tutoriales) y `sitemap-negocios.xml`, armados en cada visita.
+- **Probar el servidor construido:** `pnpm build` y luego
+  `node .amplify-hosting/compute/default/entry.mjs` con la variable `PORT`.
+
+### Directorio de negocios
+
+`/negocios` (buscador) y `/negocios/<slug>` (ficha) muestran los negocios
+activados en el dominio `businessDirectory` del negocio de Vyva, el mismo que
+usa la búsqueda del cliente en la app. Datos y reglas en `src/lib/negocios.ts`.
+Variables opcionales: `VYVA_API_URL`, `VYVA_ID_BUSINESS`, `VYVA_APP_URL`.
 
 ## 👀 Want to learn more?
 

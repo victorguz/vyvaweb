@@ -1,17 +1,15 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import Landing from '../../layouts/Landing.astro';
 import Nav from '../../components/Nav.svelte';
 import { getCheckout } from '../../lib/precio';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
-}
+// El sitio se arma en el servidor: el artículo se busca por su dirección en cada visita.
+const post = await getEntry('blog', Astro.params.slug ?? '');
+if (!post) return Astro.rewrite('/404');
 
-const { post } = Astro.props;
 const { Content } = await render(post);
 
 const CHECKOUT = await getCheckout();

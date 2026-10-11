@@ -1,0 +1,293 @@
+---
+/**
+ * Buscador del directorio. Se arma en el servidor en cada visita (con caché
+ * corta en Amplify): todos los negocios llegan escritos en el HTML y el
+ * buscador solo los filtra en el navegador.
+ */
+import Landing from '../../layouts/Landing.astro';
+import Nav from '../../components/Nav.svelte';
+import Footer from '../../components/Footer.astro';
+import { getCheckout, formatoCOP } from '../../lib/precio';
+import {
+	CACHE_CONTROL,
+	SIN_CACHE,
+	enlaceAgendar,
+	negociosDelDirectorio,
+	resumen,
+} from '../../lib/negocios';
+
+let fallo = false;
+const negocios = (
+	await negociosDelDirectorio().catch((error) => {
+		console.error(`[negocios] No se pudo leer el directorio (${(error as Error).message}).`);
+		fallo = true;
+		return [];
+	})
+).map(resumen);
+
+// Con el API caído no se publica un directorio vacío: 503 sin caché y la CDN
+// sigue entregando su última copia buena.
+Astro.response.headers.set('Cache-Control', fallo ? SIN_CACHE : CACHE_CONTROL);
+if (fallo) Astro.response.status = 503;
+
+const CHECKOUT = await getCheckout();
+const consulta = Astro.url.searchParams.get('q')?.trim() ?? '';
+
+/** Misma normalización que usa el filtro del navegador. */
+const normalizar = (texto: string) =>
+	texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+const ciudades = [...new Set(negocios.map((n) => n.ciudad).filter(Boolean))];
+const textoCiudad = ciudades.length === 1 ? ` en ${ciudades[0]}` : '';
+
+/**
+ * Sugerencias para el buscador: la palabra con la que empiezan los servicios
+ * más repetidos ("Limpieza", "Microneedling"…) y los barrios. Se omiten las
+ * palabras que describen la forma de venta y no el servicio.
+ */
+const NO_SUGERIR = new Set(['pack', 'paquete', 'combo', 'promo', 'abono', 'tratamiento', 'protocolo', 'sesion', 'valoracion', 'garantia']);
+const conteo = new Map<string, { texto: string; veces: number }>();
+for (const n of negocios) {
+	for (const s of n.servicios) {
+		const palabra = s.split(/\s+/)[0]?.replace(/[^\p{L}]/gu, '') ?? '';
+		const clave = normalizar(palabra);
+		if (palabra.length < 4 || NO_SUGERIR.has(clave)) continue;
+		const actual = conteo.get(clave) ?? { texto: palabra[0].toUpperCase() + palabra.slice(1).toLowerCase(), veces: 0 };
+		actual.veces += 1;
+		conteo.set(clave, actual);
+	}
+}
+const barrios = [...new Set(negocios.map((n) => n.zona.split(',')[0]?.trim()).filter(Boolean))];
+const sugerencias = [
+	...[...conteo.values()].sort((a, b) => b.veces - a.veces).slice(0, 3).map((c) => c.texto),
+	...barrios.slice(0, 2),
+];
+
+const ld = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Negocios con agenda en línea en Vyva',
+	itemListElement: negocios.map((n, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		url: new URL(`/negocios/${n.slug}`, Astro.site).href,
+		name: n.nombre,
+	})),
+};
+const ldJson = JSON.stringify(ld).replace(/</g, '\\u003c');
+---
+
+<Landing
+	title={`Negocios con agenda en línea${textoCiudad} | Vyva`}
+	description={`Encuentra negocios que reciben reservas en línea con Vyva${textoCiudad}. Mira sus servicios y precios, y agenda tu cita en minutos.`}
+>
+	<script type="application/ld+json" set:html={ldJson} />
+	<Nav checkout={CHECKOUT} client:load />
+
+	<main>
+		<section class="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white pt-14 pb-8 sm:pt-20">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<p class="text-sm font-semibold uppercase tracking-wide text-brand-700">Negocios en Vyva</p>
+				<h1 class="mt-3 max-w-2xl text-4xl font-extrabold tracking-tight text-balance text-ink sm:text-5xl">
+					Encuentra dónde agendar tu próxima cita
+				</h1>
+				<p class="mt-4 max-w-xl text-lg text-slate-600">
+					Negocios que reciben reservas en línea con Vyva. Busca por nombre, servicio, barrio o ciudad.
+				</p>
+
+				<form
+					id="buscador"
+					role="search"
+					action="/negocios"
+					class="mt-8 flex max-w-2xl items-center gap-3 rounded-2xl border border-slate-200 bg-white py-1.5 pr-1.5 pl-4 shadow-[0_10px_30px_-16px_rgba(42,42,74,.35)] focus-within:border-brand-400 focus-within:ring-4 focus-within:ring-brand-100"
+				>
+					<svg class="size-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+					<input
+						id="q"
+						name="q"
+						type="search"
+						value={consulta}
+						autocomplete="off"
+						aria-label="Buscar negocios"
+						placeholder="Limpieza facial, nombre del negocio, barrio…"
+						class="min-w-0 flex-1 bg-transparent py-2.5 text-base text-ink outline-none placeholder:text-slate-400"
+					/>
+					<button type="submit" class="btn-press hidden rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white sm:block">
+						Buscar
+					</button>
+				</form>
+
+				{
+					sugerencias.length > 0 && (
+						<div class="mt-4 flex flex-wrap items-center gap-2" id="sugerencias">
+							<span class="mr-1 text-sm text-slate-500">Prueba con</span>
+							{sugerencias.map((s) => (
+								<button type="button" class="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:border-brand-400 hover:text-brand-700">
+									{s}
+								</button>
+							))}
+						</div>
+					)
+				}
+			</div>
+		</section>
+
+		<section class="pb-12">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<h2 id="conteo" class="mb-4 text-[15px] font-semibold text-slate-500" aria-live="polite">
+					<b class="text-ink">{negocios.length} {negocios.length === 1 ? 'negocio' : 'negocios'}</b>{textoCiudad}
+				</h2>
+
+				<div class="grid gap-4" id="resultados">
+					{
+						negocios.map((n) => (
+							<article
+								class="negocio grid overflow-hidden rounded-2xl border border-slate-200 bg-white transition-shadow duration-300 hover:shadow-[0_18px_40px_-24px_rgba(42,42,74,.35)] md:grid-cols-[260px_minmax(0,1fr)]"
+								data-texto={normalizar([n.nombre, n.rubro, n.zona, n.eslogan, ...n.servicios].join(' '))}
+								data-servicios={JSON.stringify(n.servicios)}
+							>
+								<a href={`/negocios/${n.slug}`} class="grid aspect-[16/9] grid-cols-4 gap-0.5 overflow-hidden bg-slate-200 md:aspect-auto md:min-h-56 md:grid-cols-2 md:grid-rows-2" tabindex="-1" aria-hidden="true">
+									{n.fotos.map((foto) => (
+										<img src={foto} alt="" loading="lazy" class="size-full min-h-0 object-cover" />
+									))}
+								</a>
+								<div class="grid content-start gap-3 p-5 sm:p-6">
+									<div class="flex items-center gap-3.5">
+										{n.logo && <img src={n.logo} alt="" width="52" height="52" class="size-13 shrink-0 rounded-xl border border-slate-200" />}
+										<div class="min-w-0">
+											<h3 class="text-xl font-bold tracking-tight text-ink">
+												<a href={`/negocios/${n.slug}`} class="hover:text-brand-700">{n.nombre}</a>
+											</h3>
+											<p class="text-sm text-slate-500">{[n.rubro, n.zona].filter(Boolean).join(' · ')}</p>
+										</div>
+									</div>
+									{n.eslogan && <p class="text-[15px] text-ink">{n.eslogan}</p>}
+									<div class="etiquetas flex flex-wrap gap-1.5">
+										{n.servicios.slice(0, 5).map((s) => (
+											<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-ink">{s}</span>
+										))}
+									</div>
+									<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+										{n.desde > 0 && (
+											<span class="text-sm text-slate-500">
+												Desde <b class="text-base text-ink tabular-nums">{formatoCOP(n.desde)}</b> · {n.servicios.length} servicios
+											</span>
+										)}
+										<div class="flex w-full gap-2 sm:w-auto">
+											<a href={`/negocios/${n.slug}`} class="btn-press flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-ink sm:flex-none">
+												Ver negocio
+											</a>
+											{n.agendaEnLinea && (
+												<a href={enlaceAgendar(n)} class="btn-press flex-1 rounded-xl bg-brand-600 px-4 py-2.5 text-center text-sm font-semibold text-white sm:flex-none">
+													Agendar
+												</a>
+											)}
+										</div>
+									</div>
+								</div>
+							</article>
+						))
+					}
+				</div>
+
+				{
+					fallo && (
+						<div class="grid justify-items-center gap-3 rounded-2xl border border-dashed border-slate-300 px-6 py-10 text-center">
+							<h3 class="text-lg font-bold text-ink">No pudimos cargar los negocios</h3>
+							<p class="max-w-md text-slate-500">Es un problema de nuestro lado. Vuelve a intentarlo en un momento.</p>
+							<a href="/negocios" class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Intentar de nuevo</a>
+						</div>
+					)
+				}
+
+				<div id="vacio" class="grid justify-items-center gap-3 rounded-2xl border border-dashed border-slate-300 px-6 py-10 text-center" hidden={negocios.length > 0 || fallo}>
+					<h3 class="text-lg font-bold text-ink" id="vacio-titulo">Todavía no hay negocios aquí</h3>
+					<p class="max-w-md text-slate-500">Estamos sumando negocios a Vyva. Si tienes uno, puede aparecer aquí con su agenda en línea.</p>
+					<a href="/prueba" class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Sumar mi negocio</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="pb-16 sm:pb-20">
+			<div class="mx-auto max-w-5xl px-5 sm:px-8">
+				<div class="grid items-center gap-5 rounded-3xl bg-ink px-7 py-8 text-white md:grid-cols-[minmax(0,1fr)_auto]">
+					<div>
+						<h2 class="text-2xl font-bold tracking-tight">¿Tienes un negocio con agenda?</h2>
+						<p class="mt-2 max-w-xl text-slate-300">
+							Los negocios que usan Vyva pueden aparecer aquí, con su ficha, sus servicios y el botón para agendar. Pruébalo 30 días sin tarjeta.
+						</p>
+					</div>
+					<a href="/prueba" class="btn-press rounded-xl bg-brand-500 px-5 py-3 text-center text-sm font-semibold text-white">Probar Vyva gratis</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Landing>
+
+<script>
+	const normalizar = (texto: string) =>
+		texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+	const form = document.getElementById('buscador') as HTMLFormElement;
+	const input = document.getElementById('q') as HTMLInputElement;
+	const conteo = document.getElementById('conteo')!;
+	const vacio = document.getElementById('vacio')!;
+	const vacioTitulo = document.getElementById('vacio-titulo')!;
+	const tarjetas = Array.from(document.querySelectorAll<HTMLElement>('.negocio'));
+	const conteoInicial = conteo.innerHTML;
+	const etiquetasIniciales = new Map(tarjetas.map((t) => [t, t.querySelector('.etiquetas')!.innerHTML]));
+
+	const escapar = (s: string) =>
+		s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+	function filtrar() {
+		const termino = normalizar(input.value);
+		const palabras = termino.split(/\s+/).filter(Boolean);
+		let visibles = 0;
+
+		for (const tarjeta of tarjetas) {
+			const coincide = palabras.every((p) => tarjeta.dataset.texto!.includes(p));
+			tarjeta.hidden = !coincide;
+			if (coincide) visibles += 1;
+
+			// Si la búsqueda coincide con servicios, se muestran esos en vez de los destacados.
+			const etiquetas = tarjeta.querySelector('.etiquetas')!;
+			const servicios: string[] = JSON.parse(tarjeta.dataset.servicios || '[]');
+			const aciertos = palabras.length
+				? servicios.filter((s) => palabras.every((p) => normalizar(s).includes(p))).slice(0, 3)
+				: [];
+			etiquetas.innerHTML = aciertos.length
+				? aciertos.map((s) => `<span class="rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-xs font-semibold text-brand-700">${escapar(s)}</span>`).join('')
+				: etiquetasIniciales.get(tarjeta)!;
+		}
+
+		const texto = escapar(input.value.trim());
+		conteo.innerHTML = termino
+			? visibles
+				? `<b class="text-ink">${visibles} ${visibles === 1 ? 'negocio' : 'negocios'}</b> para “${texto}”`
+				: `Sin resultados para “${texto}”`
+			: conteoInicial;
+		vacio.hidden = visibles > 0;
+		vacioTitulo.textContent = termino ? `Todavía no hay negocios para “${input.value.trim()}”` : 'Todavía no hay negocios aquí';
+
+		const url = new URL(location.href);
+		if (termino) url.searchParams.set('q', input.value.trim());
+		else url.searchParams.delete('q');
+		history.replaceState(null, '', url);
+	}
+
+	input.addEventListener('input', filtrar);
+	form.addEventListener('submit', (e) => {
+		e.preventDefault();
+		filtrar();
+	});
+	document.getElementById('sugerencias')?.addEventListener('click', (e) => {
+		const boton = (e.target as HTMLElement).closest('button');
+		if (!boton) return;
+		input.value = boton.textContent!.trim();
+		filtrar();
+	});
+	if (input.value) filtrar();
+</script>

@@ -1,0 +1,341 @@
+---
+/**
+ * Ficha pública de un negocio del directorio. Se arma en el servidor en cada
+ * visita (con caché corta en Amplify), así Google y la vista previa de
+ * WhatsApp reciben la página completa. Agendar sigue en la app.
+ */
+import Landing from '../../layouts/Landing.astro';
+import Nav from '../../components/Nav.svelte';
+import Footer from '../../components/Footer.astro';
+import ServicioFila from '../../components/negocios/ServicioFila.astro';
+import { getCheckout, formatoCOP } from '../../lib/precio';
+import {
+	CACHE_CONTROL,
+	SIN_CACHE,
+	enlaceAgendar,
+	negocioPorSlug,
+	recortar,
+	tipoSchema,
+} from '../../lib/negocios';
+
+let fallo = false;
+const negocio = await negocioPorSlug(Astro.params.slug ?? '').catch((error) => {
+	console.error(`[negocios] No se pudo leer ${Astro.params.slug} (${(error as Error).message}).`);
+	fallo = true;
+	return null;
+});
+if (negocio) {
+	Astro.response.headers.set('Cache-Control', CACHE_CONTROL);
+} else if (fallo) {
+	// API caído: 503 sin caché; la CDN sigue entregando su última copia buena.
+	Astro.response.status = 503;
+	Astro.response.headers.set('Cache-Control', SIN_CACHE);
+} else {
+	// No está en el directorio: 404 con la caché corta del middleware, para que
+	// una ficha recién publicada aparezca rápido.
+	Astro.response.status = 404;
+}
+
+const CHECKOUT = await getCheckout();
+
+/** Servicios que se ven de entrada; el resto queda en "Ver todos", también en el HTML. */
+const VISIBLES = 8;
+
+const n = negocio;
+const dir = n?.direccion;
+const zona = [dir?.barrio, dir?.ciudad].filter(Boolean).join(', ');
+const precios = n?.servicios.map((s) => s.precio) ?? [];
+const desde = precios.length ? Math.min(...precios) : 0;
+const mapsUrl = n
+	? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([n.nombre, dir?.ciudad].filter(Boolean).join(' ') || dir?.texto || '')}`
+	: '';
+const waUrl = n?.whatsapp ? `https://wa.me/${n.whatsapp}` : '';
+const telefonoVisible = n?.telefono.replace(/^(\+?57)?(\d{3})(\d{3})(\d{4})$/, '$2 $3 $4') ?? '';
+
+const titulo = n
+	? `${n.nombre}${n.rubro ? ` · ${n.rubro}` : ''}${dir?.ciudad ? ` en ${dir.ciudad}` : ''} | Agenda en línea`
+	: fallo
+		? 'No pudimos cargar este negocio | Vyva'
+		: 'Negocio no encontrado | Vyva';
+const descripcion = n
+	? recortar(
+			[
+				`Agenda tu cita en ${n.nombre}${n.rubro ? `, ${n.rubro.toLowerCase()}` : ''}${zona ? ` en ${zona}` : ''}.`,
+				n.servicios.length
+					? `${n.servicios.slice(0, 3).map((s) => s.nombre).join(', ')}${desde ? `, desde ${formatoCOP(desde)}` : ''}.`
+					: n.eslogan,
+			].join(' '),
+			158
+		)
+	: 'Este negocio no está publicado en Vyva.';
+
+const url = n ? new URL(`/negocios/${n.slug}`, Astro.site).href : '';
+const ld = n
+	? [
+			{
+				'@context': 'https://schema.org',
+				'@type': tipoSchema(n.area),
+				'@id': `${url}#negocio`,
+				name: n.nombre,
+				url,
+				...(n.eslogan && { slogan: n.eslogan }),
+				...(n.descripcion && { description: n.descripcion }),
+				...(n.fotos.length && { image: n.fotos }),
+				...(n.logo && { logo: n.logo }),
+				...(n.telefono && { telephone: n.telefono }),
+				...(n.email && { email: n.email }),
+				...(precios.length && {
+					priceRange: `${formatoCOP(Math.min(...precios))} - ${formatoCOP(Math.max(...precios))}`,
+				}),
+				...(dir && {
+					address: {
+						'@type': 'PostalAddress',
+						streetAddress: dir.calle || dir.texto,
+						...(dir.ciudad && { addressLocality: dir.ciudad }),
+						...(dir.region && { addressRegion: dir.region }),
+						...(dir.codigoPostal && { postalCode: dir.codigoPostal }),
+						addressCountry: dir.pais || 'CO',
+					},
+				}),
+				...(dir?.lat !== undefined &&
+					dir?.lng !== undefined && {
+						geo: { '@type': 'GeoCoordinates', latitude: dir.lat, longitude: dir.lng },
+					}),
+				sameAs: [n.instagram, n.tiktok, n.facebook, n.sitioWeb].filter(Boolean),
+				...(n.agendaEnLinea && {
+					potentialAction: { '@type': 'ReserveAction', target: enlaceAgendar(n) },
+				}),
+				...(n.servicios.length && {
+					hasOfferCatalog: {
+						'@type': 'OfferCatalog',
+						name: 'Servicios',
+						itemListElement: n.servicios.map((s) => ({
+							'@type': 'Offer',
+							price: s.precio,
+							priceCurrency: 'COP',
+							itemOffered: { '@type': 'Service', name: s.nombre, ...(s.descripcion && { description: s.descripcion }) },
+						})),
+					},
+				}),
+			},
+			{
+				'@context': 'https://schema.org',
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Negocios', item: new URL('/negocios', Astro.site).href },
+					{ '@type': 'ListItem', position: 2, name: n.nombre, item: url },
+				],
+			},
+		]
+	: null;
+const ldJson = ld ? JSON.stringify(ld).replace(/</g, '\\u003c') : '';
+
+// Mapa sin llave de API: OpenStreetMap con un recuadro de ~400 m alrededor del punto.
+const mapa =
+	dir?.lat !== undefined && dir?.lng !== undefined
+		? `https://www.openstreetmap.org/export/embed.html?bbox=${dir.lng - 0.004},${dir.lat - 0.0025},${dir.lng + 0.004},${dir.lat + 0.0025}&layer=mapnik&marker=${dir.lat},${dir.lng}`
+		: '';
+
+const redes = n
+	? [
+			{ clave: 'instagram', etiqueta: 'Instagram', href: n.instagram },
+			{ clave: 'tiktok', etiqueta: 'TikTok', href: n.tiktok },
+			{ clave: 'facebook', etiqueta: 'Facebook', href: n.facebook },
+			{ clave: 'web', etiqueta: n.sitioWeb.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''), href: n.sitioWeb },
+			{ clave: 'whatsapp', etiqueta: `WhatsApp · ${telefonoVisible || n.whatsapp}`, href: waUrl },
+		].filter((r) => r.href)
+	: [];
+---
+
+<Landing title={titulo} description={descripcion} image={n?.fotos[0]}>
+	{ldJson && <script type="application/ld+json" set:html={ldJson} />}
+	<Nav checkout={CHECKOUT} client:load />
+
+	{
+		!n ? (
+			<main class="mx-auto grid max-w-xl justify-items-center gap-4 px-5 py-24 text-center sm:px-8">
+				{fallo ? (
+					<>
+						<h1 class="text-3xl font-extrabold tracking-tight text-ink">No pudimos cargar este negocio</h1>
+						<p class="text-slate-600">Es un problema de nuestro lado. Vuelve a intentarlo en un momento.</p>
+						<a href={Astro.url.pathname} class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Intentar de nuevo</a>
+					</>
+				) : (
+					<>
+						<h1 class="text-3xl font-extrabold tracking-tight text-ink">Este negocio no está en Vyva</h1>
+						<p class="text-slate-600">Puede que haya cambiado su dirección o que ya no publique su ficha.</p>
+						<a href="/negocios" class="btn-press rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">Ver negocios</a>
+					</>
+				)}
+			</main>
+		) : (
+			<main class="pb-24 lg:pb-0">
+				<div class="mx-auto max-w-6xl px-5 sm:px-8">
+					<nav class="flex flex-wrap gap-1.5 pt-5 pb-3 text-sm text-slate-500" aria-label="Migas de pan">
+						<a href="/negocios" class="font-medium text-brand-700 hover:underline">Negocios</a>
+						<span aria-hidden="true">›</span>
+						<span>{n.nombre}</span>
+					</nav>
+
+					{n.fotos.length > 0 && (
+						<div class="-mx-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr] sm:overflow-visible sm:px-0">
+							{n.fotos.slice(0, 4).map((foto, i) => (
+								<img
+									src={foto}
+									alt={i === 0 ? `Foto de ${n.nombre}` : ''}
+									loading={i === 0 ? 'eager' : 'lazy'}
+									fetchpriority={i === 0 ? 'high' : 'auto'}
+									class={`aspect-[3/4] w-[72%] shrink-0 snap-center rounded-2xl bg-slate-200 object-cover sm:w-full ${i === 0 ? 'sm:aspect-auto sm:h-full sm:max-h-96' : ''}`}
+								/>
+							))}
+						</div>
+					)}
+
+					<div class="grid items-start gap-10 py-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:pb-16">
+						<div class="min-w-0">
+							<div class="flex items-center gap-4">
+								{n.logo && <img src={n.logo} alt={`Logo de ${n.nombre}`} width="68" height="68" class="size-17 shrink-0 rounded-2xl border border-slate-200" />}
+								<div class="min-w-0">
+									<h1 class="text-3xl font-extrabold tracking-tight text-balance text-ink sm:text-4xl">{n.nombre}</h1>
+									<p class="mt-0.5 text-slate-500">{[n.rubro, zona].filter(Boolean).join(' · ')}</p>
+								</div>
+							</div>
+							{n.eslogan && <p class="mt-5 text-lg font-medium text-ink">{n.eslogan}</p>}
+							<div class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
+								{dir?.calle && <span>{dir.calle}</span>}
+								{n.agendaEnLinea && <span>Agenda en línea</span>}
+								{desde > 0 && <span>Desde {formatoCOP(desde)}</span>}
+							</div>
+
+							{n.servicios.length > 0 && (
+								<section class="mt-10" id="servicios">
+									<h2 class="text-xl font-bold tracking-tight text-ink">Servicios</h2>
+									<p class="mt-1 text-sm text-slate-500">
+										{n.servicios.length} {n.servicios.length === 1 ? 'servicio' : 'servicios'} con precio.
+										{n.agendaEnLinea && ' Al agendar eliges el servicio, el día y la hora.'}
+									</p>
+									<ul class="mt-3">
+										{n.servicios.slice(0, VISIBLES).map((s, i) => (
+											<ServicioFila servicio={s} destacado={i === 0 && s.deEntrada} />
+										))}
+									</ul>
+									{n.servicios.length > VISIBLES && (
+										<details class="group">
+											<summary class="mt-2 inline-flex cursor-pointer list-none rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-brand-700 group-open:hidden">
+												Ver los {n.servicios.length} servicios
+											</summary>
+											<ul>
+												{n.servicios.slice(VISIBLES).map((s) => (
+													<ServicioFila servicio={s} />
+												))}
+											</ul>
+										</details>
+									)}
+									{n.agendaEnLinea && (
+										<a href={enlaceAgendar(n)} class="btn-press mt-5 inline-flex rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">
+											Agendar cita
+										</a>
+									)}
+								</section>
+							)}
+
+							{n.descripcion && (
+								<section class="mt-10">
+									<h2 class="text-xl font-bold tracking-tight text-ink">Sobre {n.nombre}</h2>
+									<p class="mt-3 max-w-prose leading-relaxed whitespace-pre-line text-slate-700">{n.descripcion}</p>
+								</section>
+							)}
+
+							{dir && (
+								<section class="mt-10">
+									<h2 class="text-xl font-bold tracking-tight text-ink">Ubicación</h2>
+									{mapa && (
+										<iframe
+											src={mapa}
+											title={`Mapa de ${n.nombre}`}
+											loading="lazy"
+											class="mt-3 aspect-[4/3] w-full rounded-2xl border border-slate-200 sm:aspect-[16/7]"
+										></iframe>
+									)}
+									<div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+										<div>
+											<p class="font-semibold text-ink">{[dir.calle, dir.barrio].filter(Boolean).join(', ') || dir.texto}</p>
+											<p class="text-sm text-slate-500">{[dir.ciudad, dir.region].filter(Boolean).join(', ')}</p>
+										</div>
+										<a href={mapsUrl} target="_blank" rel="noopener" class="btn-press rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink">
+											Cómo llegar
+										</a>
+									</div>
+								</section>
+							)}
+
+							{(redes.length > 0 || n.email) && (
+								<section class="mt-10">
+									<h2 class="text-xl font-bold tracking-tight text-ink">Redes y contacto</h2>
+									<div class="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+										{redes.map((r) => (
+											<a href={r.href} target="_blank" rel="noopener" class="truncate rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-ink hover:border-brand-200 hover:bg-brand-50">
+												{r.etiqueta}
+											</a>
+										))}
+										{n.email && (
+											<a href={`mailto:${n.email}`} class="truncate rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-ink hover:border-brand-200 hover:bg-brand-50">
+												{n.email}
+											</a>
+										)}
+									</div>
+								</section>
+							)}
+						</div>
+
+						<aside class="sticky top-24 hidden gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_18px_40px_-28px_rgba(42,42,74,.4)] lg:grid">
+							{n.agendaEnLinea ? (
+								<>
+									<h2 class="text-lg font-bold text-ink">Agenda tu cita</h2>
+									<p class="text-sm text-slate-500">Elige servicio, día y hora en minutos.</p>
+									<a href={enlaceAgendar(n)} class="btn-press rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">Agendar cita</a>
+								</>
+							) : (
+								<>
+									<h2 class="text-lg font-bold text-ink">Pide tu cita</h2>
+									<p class="text-sm text-slate-500">Escríbele al negocio y te ayuda a agendar.</p>
+								</>
+							)}
+							{waUrl && (
+								<a href={waUrl} target="_blank" rel="noopener" class={`btn-press rounded-xl border px-4 py-3 text-center text-sm font-semibold ${n.agendaEnLinea ? 'border-emerald-200 bg-white text-emerald-700' : 'border-transparent bg-emerald-600 text-white'}`}>
+									Escribir por WhatsApp
+								</a>
+							)}
+							<dl class="mt-1 grid gap-2 border-t border-slate-200 pt-3 text-sm">
+								{n.servicios[0]?.deEntrada ? (
+									<div class="flex justify-between gap-3"><dt class="text-slate-500">Para empezar</dt><dd class="text-right font-semibold text-ink">{n.servicios[0].nombre.split('(')[0].trim()} · {formatoCOP(n.servicios[0].precio)}</dd></div>
+								) : desde > 0 && (
+									<div class="flex justify-between gap-3"><dt class="text-slate-500">Desde</dt><dd class="text-right font-semibold text-ink">{formatoCOP(desde)}</dd></div>
+								)}
+								{telefonoVisible && (
+									<div class="flex justify-between gap-3"><dt class="text-slate-500">Teléfono</dt><dd class="text-right font-semibold text-ink">{telefonoVisible}</dd></div>
+								)}
+								{dir?.barrio && (
+									<div class="flex justify-between gap-3"><dt class="text-slate-500">Barrio</dt><dd class="text-right font-semibold text-ink">{dir.barrio}</dd></div>
+								)}
+							</dl>
+						</aside>
+					</div>
+				</div>
+
+				<div class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-slate-200 bg-white/95 px-4 pt-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+					{n.agendaEnLinea && (
+						<a href={enlaceAgendar(n)} class="btn-press flex-1 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">Agendar cita</a>
+					)}
+					{waUrl && (
+						<a href={waUrl} target="_blank" rel="noopener" class={`btn-press rounded-xl border px-4 py-3 text-center text-sm font-semibold ${n.agendaEnLinea ? 'border-emerald-200 bg-white text-emerald-700' : 'flex-1 border-transparent bg-emerald-600 text-white'}`}>
+							WhatsApp
+						</a>
+					)}
+				</div>
+			</main>
+		)
+	}
+
+	<Footer />
+</Landing>

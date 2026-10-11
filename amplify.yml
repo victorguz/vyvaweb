@@ -1,3 +1,6 @@
+# SSR en Amplify Hosting (plataforma WEB_COMPUTE). El adaptador astro-aws-amplify
+# deja en .amplify-hosting/ el servidor (compute/default, con todas las
+# dependencias dentro del bundle), los archivos estáticos y el deploy-manifest.
 version: 1
 frontend:
   phases:
@@ -15,7 +18,7 @@ frontend:
       commands:
         - pnpm run build
   artifacts:
-    baseDirectory: dist
+    baseDirectory: .amplify-hosting
     files:
       - '**/*'
   cache:
