@@ -63,6 +63,27 @@ if (metodo === 'POST') {
 			var ficha = document.getElementById('ficha');
 			var ultimo = 0;
 
+			// Quién nos incrusta: ancestorOrigins (Chrome, Safari) o el referente (Firefox).
+			// Si no se sabe, se avisa a cada app permitida; la que no es la nuestra lo ignora.
+			var padre = (location.ancestorOrigins && location.ancestorOrigins[0]) || '';
+			if (!padre && document.referrer) {
+				try {
+					padre = new URL(document.referrer).origin;
+				} catch (e) {
+					padre = '';
+				}
+			}
+			var destinos = origenes.indexOf(padre) !== -1 ? [padre] : origenes;
+			function avisar(mensaje) {
+				destinos.forEach(function (origen) {
+					try {
+						parent.postMessage(mensaje, origen);
+					} catch (e) {
+						/* otro origen: no es la app que nos incrusta */
+					}
+				});
+			}
+
 			// Lo que llega de la app: el borrador. Se pide la ficha a esta misma página.
 			window.addEventListener('message', function (evento) {
 				if (origenes.indexOf(evento.origin) === -1) return;
@@ -94,18 +115,14 @@ if (metodo === 'POST') {
 				var editar = objetivo.closest && objetivo.closest('[data-editar]');
 				if (editar) {
 					evento.preventDefault();
-					origenes.forEach(function (origen) {
-						parent.postMessage({ tipo: 'vyva:editar', campo: editar.getAttribute('data-editar') }, origen);
-					});
+					avisar({ tipo: 'vyva:editar', campo: editar.getAttribute('data-editar') });
 					return;
 				}
 				if (objetivo.closest && objetivo.closest('a[href]')) evento.preventDefault();
 			});
 
 			// Aviso a la app de que ya puede mandar el borrador.
-			origenes.forEach(function (origen) {
-				parent.postMessage({ tipo: 'vyva:listo' }, origen);
-			});
+			avisar({ tipo: 'vyva:listo' });
 		})();
 	</script>
 </VistaPrevia>
