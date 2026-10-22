@@ -46,7 +46,11 @@ if (metodo === 'POST') {
 
 <VistaPrevia>
 	<div class="sticky top-0 z-50 flex items-center gap-2 bg-amber-100 px-4 py-1.5 text-xs font-semibold text-amber-900">
-		Vista previa <span class="ml-auto font-medium">Así se verá con tus cambios</span>
+		Vista previa
+		<span id="estado" class="ml-auto inline-flex items-center gap-1.5 font-medium" aria-live="polite">
+			<span id="estado-icono" class="inline-block" aria-hidden="true"></span>
+			<span id="estado-texto">Así se verá con tus cambios</span>
+		</span>
 	</div>
 	<div id="ficha">
 		{
@@ -62,6 +66,15 @@ if (metodo === 'POST') {
 		(function () {
 			var ficha = document.getElementById('ficha');
 			var ultimo = 0;
+
+			// Estado de la ficha en la franja: qué está pasando con los cambios.
+			var estadoIcono = document.getElementById('estado-icono');
+			var estadoTexto = document.getElementById('estado-texto');
+			function estado(texto, icono, girando) {
+				estadoTexto.textContent = texto;
+				estadoIcono.textContent = icono;
+				estadoIcono.className = girando ? 'inline-block animate-spin' : 'inline-block';
+			}
 
 			// Quién nos incrusta: ancestorOrigins (Chrome, Safari) o el referente (Firefox).
 			// Si no se sabe, se avisa a cada app permitida; la que no es la nuestra lo ignora.
@@ -90,6 +103,7 @@ if (metodo === 'POST') {
 				var mensaje = evento.data;
 				if (!mensaje || mensaje.tipo !== 'vyva:borrador') return;
 				var turno = ++ultimo;
+				estado('Actualizando…', '↻', true);
 				fetch(location.pathname, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -103,9 +117,11 @@ if (metodo === 'POST') {
 						if (turno !== ultimo) return; // llegó otra más nueva
 						var nuevo = new DOMParser().parseFromString(html, 'text/html').getElementById('ficha');
 						if (nuevo) ficha.innerHTML = nuevo.innerHTML;
+						estado('Actualizada hace un momento', '✓', false);
 					})
 					.catch(function () {
 						/* se queda la última ficha buena */
+						if (turno === ultimo) estado('No se pudo actualizar', '!', false);
 					});
 			});
 
