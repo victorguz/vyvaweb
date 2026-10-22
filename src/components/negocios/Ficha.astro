@@ -1,0 +1,331 @@
+---
+/**
+ * Ficha pública de un negocio: la misma plantilla para /negocios/<slug> y para la
+ * vista previa de "Mi negocio". En la vista previa (`vista`) lo que falta se
+ * enseña como un bloque punteado con "Agregar", que le avisa a la app cuál campo
+ * abrir; en la página pública no sale nada de eso.
+ */
+import IconoWhatsapp from './IconoWhatsapp.astro';
+import ServicioFila from './ServicioFila.astro';
+import { formatoCOP } from '../../lib/precio';
+import { derivados, enlaceAgendar, type Negocio } from '../../lib/negocios';
+
+interface Props {
+	n: Negocio;
+	vista?: boolean;
+}
+
+const { n, vista = false } = Astro.props;
+const { dir, zona, desde, mapsUrl, waUrl, telefonoVisible, mapa, redes } = derivados(n);
+
+/** Servicios que se ven de entrada; el resto queda en "Ver todos", también en el HTML. */
+const VISIBLES = 8;
+const llamar = n.telefono ? `tel:${n.telefono.replace(/[^\d+]/g, '')}` : '';
+// Sin agenda en línea ni WhatsApp, lo que queda para pedir la cita es llamar.
+const soloLlamar = !n.agendaEnLinea && !waUrl && llamar;
+---
+
+<main class="pb-24 lg:pb-0">
+	<div class="mx-auto max-w-6xl px-5 sm:px-8">
+		<nav class="flex flex-wrap gap-1.5 pt-5 pb-3 text-sm text-slate-500" aria-label="Migas de pan">
+			<a href="/negocios" class="font-medium text-brand-700 hover:underline">Negocios</a>
+			<span aria-hidden="true">›</span>
+			<span>{n.nombre || 'Tu negocio'}</span>
+		</nav>
+
+		{
+			n.fotos.length > 0 ? (
+				<div class="-mx-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr] sm:overflow-visible sm:px-0">
+					{n.fotos.slice(0, 4).map((foto, i) => (
+						<img
+							src={foto}
+							alt={i === 0 ? `Foto de ${n.nombre}` : ''}
+							loading={i === 0 ? 'eager' : 'lazy'}
+							fetchpriority={i === 0 ? 'high' : 'auto'}
+							class={`aspect-[3/4] w-[72%] shrink-0 snap-center rounded-2xl bg-slate-200 object-cover sm:w-full ${i === 0 ? 'sm:aspect-auto sm:h-full sm:max-h-96' : ''}`}
+						/>
+					))}
+				</div>
+			) : (
+				vista && (
+					<button
+						type="button"
+						data-editar="portada"
+						class="flex aspect-[4/3] w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 text-sm font-semibold text-amber-800 sm:aspect-[16/6]"
+					>
+						Falta una foto de portada · <span class="underline">Agregar</span>
+					</button>
+				)
+			)
+		}
+
+		<div class="grid items-start gap-10 py-7 lg:grid-cols-[minmax(0,1fr)_320px] lg:pb-16">
+			<div class="min-w-0">
+				<div class="flex items-center gap-4">
+					{
+						n.logo ? (
+							<img src={n.logo} alt={`Logo de ${n.nombre}`} width="68" height="68" class="size-17 shrink-0 rounded-2xl border border-slate-200" />
+						) : (
+							vista && (
+								<button
+									type="button"
+									data-editar="logo"
+									class="flex size-17 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 text-xs font-semibold text-amber-800"
+								>
+									Logo
+								</button>
+							)
+						)
+					}
+					<div class="min-w-0">
+						{
+							n.nombre || !vista ? (
+								<h1 class="text-3xl font-extrabold tracking-tight text-balance text-ink sm:text-4xl">{n.nombre}</h1>
+							) : (
+								<h1 class="text-3xl font-extrabold tracking-tight text-balance text-slate-300 sm:text-4xl">
+									<button type="button" data-editar="nombre">Nombre de tu negocio</button>
+								</h1>
+							)
+						}
+						<p class="mt-0.5 text-slate-500">{[n.rubro, zona].filter(Boolean).join(' · ')}</p>
+					</div>
+				</div>
+				{n.eslogan && <p class="mt-5 text-lg font-medium text-ink">{n.eslogan}</p>}
+				<div class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
+					{dir?.calle && <span>{dir.calle}</span>}
+					{n.agendaEnLinea && <span>Agenda en línea</span>}
+					{desde > 0 && <span>Desde {formatoCOP(desde)}</span>}
+				</div>
+
+				{
+					n.servicios.length > 0 && (
+						<section class="mt-10" id="servicios">
+							<h2 class="text-xl font-bold tracking-tight text-ink">Servicios</h2>
+							<p class="mt-1 text-sm text-slate-500">
+								{n.servicios.length} {n.servicios.length === 1 ? 'servicio' : 'servicios'} con precio.
+								{n.agendaEnLinea && ' Al agendar eliges el servicio, el día y la hora.'}
+							</p>
+							<ul class="mt-3">
+								{n.servicios.slice(0, VISIBLES).map((s, i) => (
+									<ServicioFila servicio={s} destacado={i === 0 && s.deEntrada} />
+								))}
+							</ul>
+							{n.servicios.length > VISIBLES && (
+								<details class="group">
+									<summary class="mt-2 inline-flex cursor-pointer list-none rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-brand-700 group-open:hidden">
+										Ver los {n.servicios.length} servicios
+									</summary>
+									<ul>
+										{n.servicios.slice(VISIBLES).map((s) => (
+											<ServicioFila servicio={s} />
+										))}
+									</ul>
+								</details>
+							)}
+							{n.agendaEnLinea && (
+								<a href={enlaceAgendar(n)} class="btn-press mt-5 inline-flex rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white">
+									Agendar cita
+								</a>
+							)}
+						</section>
+					)
+				}
+
+				{
+					n.descripcion ? (
+						<section class="mt-10">
+							<h2 class="text-xl font-bold tracking-tight text-ink">Sobre {n.nombre}</h2>
+							<p class="mt-3 max-w-prose leading-relaxed whitespace-pre-line text-slate-700">{n.descripcion}</p>
+						</section>
+					) : (
+						vista && (
+							<section class="mt-10">
+								<h2 class="text-xl font-bold tracking-tight text-ink">Sobre {n.nombre || 'tu negocio'}</h2>
+								<button
+									type="button"
+									data-editar="descripcion"
+									class="mt-3 flex w-full items-center gap-2 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-left text-sm font-semibold text-amber-800"
+								>
+									Falta la descripción <span class="ml-auto underline">Agregar</span>
+								</button>
+							</section>
+						)
+					)
+				}
+
+				{
+					dir ? (
+						<section class="mt-10">
+							<h2 class="text-xl font-bold tracking-tight text-ink">Ubicación</h2>
+							{mapa && (
+								<iframe
+									src={mapa}
+									title={`Mapa de ${n.nombre}`}
+									loading="lazy"
+									class="mt-3 aspect-[4/3] w-full rounded-2xl border border-slate-200 sm:aspect-[16/7]"
+								/>
+							)}
+							<div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+								<div>
+									<p class="font-semibold text-ink">{[dir.calle, dir.barrio].filter(Boolean).join(', ') || dir.texto}</p>
+									<p class="text-sm text-slate-500">{[dir.ciudad, dir.region].filter(Boolean).join(', ')}</p>
+								</div>
+								<a href={mapsUrl} target="_blank" rel="noopener" class="btn-press rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink">
+									Cómo llegar
+								</a>
+							</div>
+						</section>
+					) : (
+						vista && (
+							<section class="mt-10">
+								<h2 class="text-xl font-bold tracking-tight text-ink">Ubicación</h2>
+								<button
+									type="button"
+									data-editar="direccion"
+									class="mt-3 flex w-full items-center gap-2 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-left text-sm font-semibold text-amber-800"
+								>
+									Falta la dirección <span class="ml-auto underline">Agregar</span>
+								</button>
+							</section>
+						)
+					)
+				}
+
+				{
+					redes.length > 0 || n.email ? (
+						<section class="mt-10">
+							<h2 class="text-xl font-bold tracking-tight text-ink">Redes y contacto</h2>
+							<div class="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+								{redes.map((r) => (
+									<a href={r.href} target="_blank" rel="noopener" class="truncate rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-ink hover:border-brand-200 hover:bg-brand-50">
+										{r.etiqueta}
+									</a>
+								))}
+								{n.email && (
+									<a href={`mailto:${n.email}`} class="truncate rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-ink hover:border-brand-200 hover:bg-brand-50">
+										{n.email}
+									</a>
+								)}
+							</div>
+						</section>
+					) : (
+						vista && (
+							<section class="mt-10">
+								<h2 class="text-xl font-bold tracking-tight text-ink">Redes y contacto</h2>
+								<button
+									type="button"
+									data-editar="contacto"
+									class="mt-3 flex w-full items-center gap-2 rounded-2xl border-2 border-dashed border-amber-300 bg-amber-50 px-4 py-3 text-left text-sm font-semibold text-amber-800"
+								>
+									Falta un teléfono o WhatsApp <span class="ml-auto underline">Agregar</span>
+								</button>
+							</section>
+						)
+					)
+				}
+			</div>
+
+			<aside class="sticky top-24 hidden gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_18px_40px_-28px_rgba(42,42,74,.4)] lg:grid">
+				{
+					n.agendaEnLinea ? (
+						<>
+							<h2 class="text-lg font-bold text-ink">Agenda tu cita</h2>
+							<p class="text-sm text-slate-500">Elige servicio, día y hora en minutos.</p>
+							<a href={enlaceAgendar(n)} class="btn-press rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">Agendar cita</a>
+						</>
+					) : (
+						<>
+							<h2 class="text-lg font-bold text-ink">Pide tu cita</h2>
+							<p class="text-sm text-slate-500">Escríbele al negocio y te ayuda a agendar.</p>
+						</>
+					)
+				}
+				{
+					waUrl && (
+						<a
+							href={waUrl}
+							target="_blank"
+							rel="noopener"
+							class={`btn-press inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-center text-sm font-semibold ${n.agendaEnLinea ? 'border-emerald-200 bg-white text-emerald-700' : 'border-transparent bg-emerald-600 text-white'}`}
+						>
+							<IconoWhatsapp class="size-5" />
+							Escribir por WhatsApp
+						</a>
+					)
+				}
+				{
+					soloLlamar && (
+						<a href={llamar} class="btn-press rounded-xl border border-transparent bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">
+							Llamar al {telefonoVisible || n.telefono}
+						</a>
+					)
+				}
+				<dl class="mt-1 grid gap-2 border-t border-slate-200 pt-3 text-sm">
+					{
+						n.servicios[0]?.deEntrada ? (
+							<div class="flex justify-between gap-3">
+								<dt class="text-slate-500">Para empezar</dt>
+								<dd class="text-right font-semibold text-ink">
+									{n.servicios[0].nombre.split('(')[0].trim()} · {formatoCOP(n.servicios[0].precio)}
+								</dd>
+							</div>
+						) : (
+							desde > 0 && (
+								<div class="flex justify-between gap-3">
+									<dt class="text-slate-500">Desde</dt>
+									<dd class="text-right font-semibold text-ink">{formatoCOP(desde)}</dd>
+								</div>
+							)
+						)
+					}
+					{
+						telefonoVisible && (
+							<div class="flex justify-between gap-3">
+								<dt class="text-slate-500">Teléfono</dt>
+								<dd class="text-right font-semibold text-ink">{telefonoVisible}</dd>
+							</div>
+						)
+					}
+					{
+						dir?.barrio && (
+							<div class="flex justify-between gap-3">
+								<dt class="text-slate-500">Barrio</dt>
+								<dd class="text-right font-semibold text-ink">{dir.barrio}</dd>
+							</div>
+						)
+					}
+				</dl>
+			</aside>
+		</div>
+	</div>
+
+	<div class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-slate-200 bg-white/95 px-4 pt-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+		{
+			n.agendaEnLinea && (
+				<a href={enlaceAgendar(n)} class="btn-press flex-1 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">
+					Agendar cita
+				</a>
+			)
+		}
+		{
+			waUrl && (
+				<a
+					href={waUrl}
+					target="_blank"
+					rel="noopener"
+					class={`btn-press inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-center text-sm font-semibold ${n.agendaEnLinea ? 'border-emerald-200 bg-white text-emerald-700' : 'flex-1 border-transparent bg-emerald-600 text-white'}`}
+				>
+					<IconoWhatsapp class="size-5" />
+					WhatsApp
+				</a>
+			)
+		}
+		{
+			soloLlamar && (
+				<a href={llamar} class="btn-press flex-1 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white">
+					Llamar
+				</a>
+			)
+		}
+	</div>
+</main>

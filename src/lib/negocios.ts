@@ -15,8 +15,9 @@
  * por una falla pasajera.
  *
  * Quién sale: todo negocio activo de estética o salud con el perfil completo,
- * la ficha y la agenda en línea encendidas y servicios para agendar (ver
- * `faltantes`). Nadie lo habilita a mano; Vyva solo puede ocultar alguno con
+ * la ficha encendida y servicios publicados (ver `faltantes`). La agenda en
+ * línea no es requisito: sin ella, la ficha manda a WhatsApp en vez de a la
+ * agenda. Nadie lo habilita a mano; Vyva solo puede ocultar alguno con
  * el dominio `businessDirectory` (`disabledIds`). La app lee la misma lista
  * en /negocios.json, así que web y app muestran siempre lo mismo.
  *
@@ -34,6 +35,8 @@
  *   VYVA_API_URL          base del API; por defecto la de producción
  *   VYVA_ID_BUSINESS      negocio de Vyva que guarda el directorio
  *   VYVA_APP_URL          app donde se agenda; por defecto app.vyvapos.com
+ *   VYVA_APP_ORIGINS      páginas de la app que pueden mostrar la vista previa de la
+ *                         ficha (separadas por coma); por defecto la app y QAS
  */
 
 const env = (clave: string): string | undefined =>
@@ -42,6 +45,12 @@ const env = (clave: string): string | undefined =>
 const API = (env('VYVA_API_URL') ?? 'https://kpdlrafaa7.execute-api.us-east-1.amazonaws.com/api').replace(/\/$/, '');
 const VYVA_ID_BUSINESS = env('VYVA_ID_BUSINESS') ?? 'f5173e34-fc33-451d-934a-f47ef248a541';
 export const APP_URL = (env('VYVA_APP_URL') ?? 'https://app.vyvapos.com').replace(/\/$/, '');
+
+/** Quién puede incrustar la vista previa de la ficha y hablar con ella (postMessage). */
+export const ORIGENES_APP = (env('VYVA_APP_ORIGINS') ?? `${APP_URL},https://qas.vyvapos.com`)
+	.split(',')
+	.map((origen) => origen.trim().replace(/\/$/, ''))
+	.filter(Boolean);
 
 /**
  * Cabecera de caché de las páginas del directorio: Amplify (CDN) las guarda 5
@@ -244,7 +253,7 @@ async function muestraTodosLosServicios(idBusiness: string): Promise<boolean> {
 }
 
 /** Servicios publicados del negocio. Un error del API sube: mejor reintentar que publicar una ficha sin servicios. */
-async function servicios(idBusiness: string): Promise<Servicio[]> {
+export async function servicios(idBusiness: string): Promise<Servicio[]> {
 	const [productos, todos] = await Promise.all([
 		pedir<any[]>(`/products/public/business/${encodeURIComponent(idBusiness)}`),
 		muestraTodosLosServicios(idBusiness),
@@ -416,7 +425,7 @@ const TIPOS_SCHEMA: Record<string, string> = {
 
 export const tipoSchema = (area: string): string => TIPOS_SCHEMA[area] ?? 'LocalBusiness';
 
-function armar(b: Record<string, any>, f: Ficha, lista: Servicio[]): Negocio {
+export function armar(b: Record<string, any>, f: Ficha, lista: Servicio[]): Negocio {
 	const fotos = (b.coverImages ?? []).filter(fotoVisible);
 	return {
 		id: String(b.id),
@@ -459,9 +468,10 @@ function faltantesDelPerfil(b: Record<string, any>): string[] {
  * Lo que le falta a un negocio para salir en el directorio; vacío = entra solo.
  *
  * Requisitos: activo, de un rubro del directorio (estética o salud), con el
- * perfil completo (`faltantesDelPerfil`), la ficha pública y la agenda en línea
- * encendidas en "Mi negocio", y al menos un servicio para agendar. Además no
- * debe estar en los ocultos de Vyva (`idsOcultos`), que se revisa aparte.
+ * perfil completo (`faltantesDelPerfil`), la ficha pública encendida en "Mi
+ * negocio" y al menos un servicio publicado. La agenda en línea no cuenta: un
+ * negocio que la apaga sigue con su ficha y se le escribe por WhatsApp. Además
+ * no debe estar en los ocultos de Vyva (`idsOcultos`), que se revisa aparte.
  */
 export function faltantes(b: Record<string, any>, f: Ficha, lista: Servicio[]): string[] {
 	const faltan: string[] = [];
@@ -470,8 +480,7 @@ export function faltantes(b: Record<string, any>, f: Ficha, lista: Servicio[]): 
 	if (!AREAS_DEL_DIRECTORIO.has(area)) faltan.push(`rubro fuera del directorio (${area || 'sin rubro'})`);
 	faltan.push(...faltantesDelPerfil(b));
 	if (!f.publicProfile) faltan.push('ficha pública apagada');
-	if (!f.onlineBooking) faltan.push('agenda en línea apagada');
-	if (!lista.length) faltan.push('servicios para agendar');
+	if (!lista.length) faltan.push('servicios publicados');
 	return faltan;
 }
 
@@ -593,4 +602,71 @@ export function recortar(texto: string, max: number): string {
 	const limpio = texto.replace(/\s+/g, ' ').trim();
 	if (limpio.length <= max) return limpio;
 	return limpio.slice(0, max - 1).replace(/\s+\S*$/, '') + '…';
+}
+
+
+// ---------------------------------------------------------------------------
+// Vista previa desde "Mi negocio" (la app manda lo que el negocio está editando,
+// guardado o no, y la ficha se arma con la misma plantilla que la pública).
+// ---------------------------------------------------------------------------
+
+const TEXTO_MAX = 2000;
+const DESCRIPCION_MAX = 6000;
+const CAMPOS_TEXTO = ['slug', 'name', 'slogan', 'area', 'phone', 'whatsapp', 'email', 'website', 'instagram', 'facebook', 'tiktok'] as const;
+
+const texto = (valor: unknown, max = TEXTO_MAX): string => (typeof valor === 'string' ? valor.slice(0, max) : '');
+
+/**
+ * Convierte lo que manda la app en el mismo registro que guarda el API, solo con
+ * los campos que la ficha usa y con tamaños acotados. Nada de esto se guarda.
+ */
+export async function negocioDeBorrador(borrador: Record<string, unknown>): Promise<Negocio> {
+	const b: Record<string, any> = { id: texto(borrador.id, 80) };
+	for (const campo of CAMPOS_TEXTO) b[campo] = texto(borrador[campo]);
+	b.description = texto(borrador.description, DESCRIPCION_MAX);
+	b.logo = texto(borrador.logo, 600);
+	b.address = texto(borrador.address, 6000);
+	b.coverImages = Array.isArray(borrador.coverImages)
+		? borrador.coverImages.filter((url): url is string => typeof url === 'string').slice(0, 12).map((url) => url.slice(0, 600))
+		: [];
+	const lista = b.id ? await servicios(b.id).catch(() => [] as Servicio[]) : [];
+	// La vista previa no depende de ningún interruptor: enseña cómo quedaría la ficha publicada.
+	const f: Ficha = { publicProfile: true, onlineBooking: borrador.onlineBooking !== false, onlineStore: false };
+	return armar(b, f, lista);
+}
+
+export interface Derivados {
+	dir: Direccion | null;
+	zona: string;
+	precios: number[];
+	desde: number;
+	mapsUrl: string;
+	waUrl: string;
+	telefonoVisible: string;
+	mapa: string;
+	redes: { clave: string; etiqueta: string; href: string }[];
+}
+
+/** Lo que la ficha calcula a partir del negocio (se usa en la página, en su SEO y en la vista previa). */
+export function derivados(n: Negocio): Derivados {
+	const dir = n.direccion;
+	const zona = [dir?.barrio, dir?.ciudad].filter(Boolean).join(', ');
+	const precios = n.servicios.map((s) => s.precio);
+	const desde = precios.length ? Math.min(...precios) : 0;
+	const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([n.nombre, dir?.ciudad].filter(Boolean).join(' ') || dir?.texto || '')}`;
+	const waUrl = n.whatsapp ? `https://wa.me/${n.whatsapp}` : '';
+	const telefonoVisible = n.telefono.replace(/^(\+?57)?(\d{3})(\d{3})(\d{4})$/, '$2 $3 $4');
+	// Mapa sin llave de API: OpenStreetMap con un recuadro de ~400 m alrededor del punto.
+	const mapa =
+		dir?.lat !== undefined && dir?.lng !== undefined
+			? `https://www.openstreetmap.org/export/embed.html?bbox=${dir.lng - 0.004},${dir.lat - 0.0025},${dir.lng + 0.004},${dir.lat + 0.0025}&layer=mapnik&marker=${dir.lat},${dir.lng}`
+			: '';
+	const redes = [
+		{ clave: 'instagram', etiqueta: 'Instagram', href: n.instagram },
+		{ clave: 'tiktok', etiqueta: 'TikTok', href: n.tiktok },
+		{ clave: 'facebook', etiqueta: 'Facebook', href: n.facebook },
+		{ clave: 'web', etiqueta: n.sitioWeb.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''), href: n.sitioWeb },
+		{ clave: 'whatsapp', etiqueta: `WhatsApp · ${telefonoVisible || n.whatsapp}`, href: waUrl },
+	].filter((r) => r.href);
+	return { dir, zona, precios, desde, mapsUrl, waUrl, telefonoVisible, mapa, redes };
 }

@@ -1,0 +1,111 @@
+---
+/**
+ * Vista previa de la ficha para "Mi negocio" (la app la muestra en un iframe).
+ *
+ * GET entrega el marco vacío. La app le manda por postMessage lo que el negocio
+ * está editando (guardado o no) y esta misma página lo envía por POST a sí
+ * misma, mismo dominio, y pinta la ficha que vuelve, sin recargar. Nada se
+ * guarda, nada se indexa y solo la app puede incrustarla.
+ *
+ * Por qué no un formulario desde la app: un POST entre dominios lo bloquea la
+ * protección de Astro (y debe seguir bloqueado), y recargar el iframe parpadea.
+ */
+import VistaPrevia from '../../layouts/VistaPrevia.astro';
+import Ficha from '../../components/negocios/Ficha.astro';
+import { ORIGENES_APP, SIN_CACHE, negocioDeBorrador } from '../../lib/negocios';
+
+const cabeceras = {
+	'Cache-Control': SIN_CACHE,
+	'X-Robots-Tag': 'noindex, nofollow',
+	'Content-Security-Policy': `frame-ancestors 'self' ${ORIGENES_APP.join(' ')}`,
+};
+for (const [nombre, valor] of Object.entries(cabeceras)) Astro.response.headers.set(nombre, valor);
+
+const metodo = Astro.request.method;
+if (metodo !== 'GET' && metodo !== 'POST') {
+	return new Response('Método no permitido', { status: 405, headers: { ...cabeceras, Allow: 'GET, POST' } });
+}
+
+let negocio = null;
+if (metodo === 'POST') {
+	// Solo la propia página de la vista previa (mismo dominio) puede pedir una ficha.
+	const sitio = Astro.request.headers.get('sec-fetch-site');
+	if (sitio && sitio !== 'same-origin') {
+		return new Response('Origen no permitido', { status: 403, headers: cabeceras });
+	}
+	try {
+		const cuerpo = await Astro.request.text();
+		if (cuerpo.length > 150_000) throw new Error('El borrador es demasiado grande.');
+		const datos = JSON.parse(cuerpo);
+		negocio = await negocioDeBorrador(datos && typeof datos === 'object' && !Array.isArray(datos) ? datos : {});
+	} catch (error) {
+		return new Response('Datos no válidos', { status: 400, headers: cabeceras });
+	}
+}
+---
+
+<VistaPrevia>
+	<div class="sticky top-0 z-50 flex items-center gap-2 bg-amber-100 px-4 py-1.5 text-xs font-semibold text-amber-900">
+		Vista previa <span class="ml-auto font-medium">Así se verá con tus cambios</span>
+	</div>
+	<div id="ficha">
+		{
+			negocio ? (
+				<Ficha n={negocio} vista />
+			) : (
+				<p class="px-5 py-10 text-center text-sm text-slate-500">Cargando la vista previa…</p>
+			)
+		}
+	</div>
+
+	<script is:inline define:vars={{ origenes: ORIGENES_APP }}>
+		(function () {
+			var ficha = document.getElementById('ficha');
+			var ultimo = 0;
+
+			// Lo que llega de la app: el borrador. Se pide la ficha a esta misma página.
+			window.addEventListener('message', function (evento) {
+				if (origenes.indexOf(evento.origin) === -1) return;
+				var mensaje = evento.data;
+				if (!mensaje || mensaje.tipo !== 'vyva:borrador') return;
+				var turno = ++ultimo;
+				fetch(location.pathname, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					credentials: 'same-origin',
+					body: JSON.stringify(mensaje.datos || {}),
+				})
+					.then(function (respuesta) {
+						return respuesta.ok ? respuesta.text() : Promise.reject(new Error('sin ficha'));
+					})
+					.then(function (html) {
+						if (turno !== ultimo) return; // llegó otra más nueva
+						var nuevo = new DOMParser().parseFromString(html, 'text/html').getElementById('ficha');
+						if (nuevo) ficha.innerHTML = nuevo.innerHTML;
+					})
+					.catch(function () {
+						/* se queda la última ficha buena */
+					});
+			});
+
+			// "Agregar" en un bloque vacío: la app abre ese campo. El resto de enlaces no navega.
+			document.addEventListener('click', function (evento) {
+				var objetivo = evento.target;
+				var editar = objetivo.closest && objetivo.closest('[data-editar]');
+				if (editar) {
+					evento.preventDefault();
+					origenes.forEach(function (origen) {
+						parent.postMessage({ tipo: 'vyva:editar', campo: editar.getAttribute('data-editar') }, origen);
+					});
+					return;
+				}
+				if (objetivo.closest && objetivo.closest('a[href]')) evento.preventDefault();
+			});
+
+			// Aviso a la app de que ya puede mandar el borrador.
+			origenes.forEach(function (origen) {
+				parent.postMessage({ tipo: 'vyva:listo' }, origen);
+			});
+		})();
+	</script>
+</VistaPrevia>

@@ -1,0 +1,27 @@
+---
+/**
+ * Marco mínimo de la vista previa de "Mi negocio": mismos estilos que la ficha
+ * pública, pero sin menú, pie, analítica ni animaciones, y sin indexar.
+ */
+import '../styles/landing.css';
+
+interface Props {
+	title?: string;
+}
+
+const { title = 'Vista previa | Vyva' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="icon" href="/brand/Vyva_favicon.svg" type="image/svg+xml" />
+	</head>
+	<body class="bg-white text-ink antialiased">
+		<slot />
+	</body>
+</html>
