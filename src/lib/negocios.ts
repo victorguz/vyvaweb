@@ -656,10 +656,10 @@ export function derivados(n: Negocio): Derivados {
 	const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([n.nombre, dir?.ciudad].filter(Boolean).join(' ') || dir?.texto || '')}`;
 	const waUrl = n.whatsapp ? `https://wa.me/${n.whatsapp}` : '';
 	const telefonoVisible = n.telefono.replace(/^(\+?57)?(\d{3})(\d{3})(\d{4})$/, '$2 $3 $4');
-	// Mapa sin llave de API: OpenStreetMap con un recuadro de ~400 m alrededor del punto.
+	// Mapa de Google, el mismo que usa el perfil en la app (zoom 16), incrustado sin llave de API.
 	const mapa =
 		dir?.lat !== undefined && dir?.lng !== undefined
-			? `https://www.openstreetmap.org/export/embed.html?bbox=${dir.lng - 0.004},${dir.lat - 0.0025},${dir.lng + 0.004},${dir.lat + 0.0025}&layer=mapnik&marker=${dir.lat},${dir.lng}`
+			? `https://www.google.com/maps?q=${dir.lat},${dir.lng}&z=16&output=embed`
 			: '';
 	const redes = [
 		{ clave: 'instagram', etiqueta: 'Instagram', href: n.instagram },
