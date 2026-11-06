@@ -108,6 +108,8 @@ export interface Negocio {
 	tiktok: string;
 	agendaEnLinea: boolean;
 	tiendaEnLinea: boolean;
+	/** Enlace a las opiniones del negocio en Google Maps (vacío si no puso uno). */
+	opinionesUrl: string;
 	servicios: Servicio[];
 }
 
@@ -232,7 +234,14 @@ export interface Ficha {
 	publicProfile: boolean;
 	onlineBooking: boolean;
 	onlineStore: boolean;
+	reviewsUrl: string;
 }
+
+/** Solo una dirección web (http o https); cualquier otra cosa se descarta. */
+const soloHttp = (valor: unknown): string => {
+	const url = String(valor ?? '').trim();
+	return /^https?:\/\/\S+$/i.test(url) ? url : '';
+};
 
 /** Misma lectura que `parseBusinessPublicProfile` de la app. */
 async function ficha(idBusiness: string): Promise<Ficha> {
@@ -242,6 +251,7 @@ async function ficha(idBusiness: string): Promise<Ficha> {
 		publicProfile: valor?.publicProfile !== false,
 		onlineBooking: valor?.onlineBooking !== false,
 		onlineStore: valor?.onlineStore === true,
+		reviewsUrl: soloHttp(valor?.reviewsUrl),
 	};
 }
 
@@ -447,6 +457,7 @@ export function armar(b: Record<string, any>, f: Ficha, lista: Servicio[]): Nego
 		tiktok: enlace(b.tiktok, 'https://tiktok.com/@'),
 		agendaEnLinea: f.onlineBooking,
 		tiendaEnLinea: f.onlineStore,
+		opinionesUrl: f.reviewsUrl,
 		servicios: lista,
 	};
 }
@@ -631,7 +642,12 @@ export async function negocioDeBorrador(borrador: Record<string, unknown>): Prom
 		: [];
 	const lista = b.id ? await servicios(b.id).catch(() => [] as Servicio[]) : [];
 	// La vista previa no depende de ningún interruptor: enseña cómo quedaría la ficha publicada.
-	const f: Ficha = { publicProfile: true, onlineBooking: borrador.onlineBooking !== false, onlineStore: false };
+	const f: Ficha = {
+		publicProfile: true,
+		onlineBooking: borrador.onlineBooking !== false,
+		onlineStore: false,
+		reviewsUrl: soloHttp(borrador.reviewsUrl),
+	};
 	return armar(b, f, lista);
 }
 
