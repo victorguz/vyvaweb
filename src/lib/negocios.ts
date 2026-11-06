@@ -653,7 +653,15 @@ export function derivados(n: Negocio): Derivados {
 	const zona = [dir?.barrio, dir?.ciudad].filter(Boolean).join(', ');
 	const precios = n.servicios.map((s) => s.precio);
 	const desde = precios.length ? Math.min(...precios) : 0;
-	const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([n.nombre, dir?.ciudad].filter(Boolean).join(' ') || dir?.texto || '')}`;
+	// «Cómo llegar» va directo a la dirección: a las coordenadas si el negocio las tiene y, si no, al texto
+	// de la dirección. Nunca por el nombre del negocio: muchos no están en Google Maps.
+	const destino =
+		dir?.lat !== undefined && dir?.lng !== undefined
+			? `${dir.lat},${dir.lng}`
+			: [[dir?.calle, dir?.barrio].filter(Boolean).join(', ') || dir?.texto, dir?.ciudad, dir?.region, dir?.pais]
+					.filter(Boolean)
+					.join(', ');
+	const mapsUrl = destino ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destino)}` : '';
 	const waUrl = n.whatsapp ? `https://wa.me/${n.whatsapp}` : '';
 	const telefonoVisible = n.telefono.replace(/^(\+?57)?(\d{3})(\d{3})(\d{4})$/, '$2 $3 $4');
 	// Mapa de Google, el mismo que usa el perfil en la app (zoom 16), incrustado sin llave de API.

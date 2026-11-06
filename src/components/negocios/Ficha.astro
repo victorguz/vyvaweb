@@ -170,9 +170,11 @@ const soloLlamar = !n.agendaEnLinea && !waUrl && llamar;
 									<p class="font-semibold text-ink">{[dir.calle, dir.barrio].filter(Boolean).join(', ') || dir.texto}</p>
 									<p class="text-sm text-slate-500">{[dir.ciudad, dir.region].filter(Boolean).join(', ')}</p>
 								</div>
-								<a href={mapsUrl} target="_blank" rel="noopener" class="btn-press rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink">
-									Cómo llegar
-								</a>
+								{mapsUrl && (
+									<a href={mapsUrl} target="_blank" rel="noopener" class="btn-press rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-ink">
+										Cómo llegar
+									</a>
+								)}
 							</div>
 						</section>
 					) : (
